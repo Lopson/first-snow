@@ -1451,7 +1451,9 @@ screen extras_scenes():
                                         selected_idle Composite((353, 44), (0, 0), "#fbf9ec", (2, 2), sceneshot)
                                         selected_hover Composite((353, 44), (0, 0), "#fbf9ec", (2, 2), sceneshot)
                                         xysize (353, 44)
-                                        action [SetScreenVariable('current_act', act), SetScreenVariable('current_scene', i)]
+                                        action [
+                                            SetLocalVariable('current_act', act),
+                                            SetLocalVariable('current_scene', i)]
 
                                     text "{}. {}".format(i, store.rabbl.get_title(scene_label)):
                                         size 21
