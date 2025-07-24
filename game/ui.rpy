@@ -2506,24 +2506,30 @@ screen say(what, who, doublespeak=False):
 
                 if sprite is not None:
                     pos = renpy.get_placement(sprite)
-                    if pos.ypos < 0.0 or pos.ypos > 1.0:
-                        bg = bg_base + 'default.webp'
-                    elif pos.xpos >= 0.80:
-                        bg = bg_base + 'farright.webp'
-                    elif pos.xpos >= 0.70:
-                        bg = bg_base + 'midright.webp'
-                    elif pos.xpos > 0.5:
-                        bg = bg_base + 'right.webp'
-                    elif pos.xpos <= 0.20:
-                        bg = bg_base + 'farleft.webp'
-                    elif pos.xpos <= 0.30:
-                        bg = bg_base + 'midleft.webp'
-                    elif pos.xpos < 0.5:
-                        bg = bg_base + 'left.webp'
-                    elif 'flip' in attributes:
-                        bg = bg_base + 'right.webp'
-                    else:
-                        bg = bg_base + 'left.webp'
+                    xpos = (pos.xpos.relative if isinstance(pos.xpos, position) else
+                            pos.xpos)
+                    ypos = (pos.ypos.relative if isinstance(pos.ypos, position) else
+                            pos.ypos)
+                    
+                    if xpos is not None and ypos is not None:
+                        if ypos < 0.0 or ypos > 1.0:
+                            bg = bg_base + 'default.webp'
+                        elif xpos >= 0.80:
+                            bg = bg_base + 'farright.webp'
+                        elif xpos >= 0.70:
+                            bg = bg_base + 'midright.webp'
+                        elif xpos > 0.5:
+                            bg = bg_base + 'right.webp'
+                        elif xpos <= 0.20:
+                            bg = bg_base + 'farleft.webp'
+                        elif xpos <= 0.30:
+                            bg = bg_base + 'midleft.webp'
+                        elif xpos < 0.5:
+                            bg = bg_base + 'left.webp'
+                        elif 'flip' in attributes:
+                            bg = bg_base + 'right.webp'
+                        else:
+                            bg = bg_base + 'left.webp'
                 elif phone:
                     bg = bg_base + 'phone.webp'
         if not bg:

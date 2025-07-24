@@ -877,7 +877,7 @@ play sound "sfx/door_close.ogg"
 
 $ renpy.music.set_volume(1.0, delay=2.0)
 show bg buildingart art dusk siren
-show caprice indoors_handonhip even closedhappy neutral at left2:
+show caprice indoors_handonhip even closedhappy neutral at left2
 hide eileen
 $ renpy.transition(dissolve, layer='master')
 stop sound fadeout 1.0

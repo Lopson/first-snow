@@ -184,7 +184,7 @@ play music "music/ringtone.ogg" fadein 1.0
 play loopsfx "sfx/cell_phone_vibrate.ogg"
 window show
 "Just as I'm about to settle in and watch the passing crowds, the phone in my pocket begins to vibrate and ring."
-show bg downtown city blurred3:
+show bg downtown city blurred3
 $ renpy.transition(dissolve, layer='master')
 $ phone.show('call-in')
 "Not sure who it could be, I quickly grab for it."

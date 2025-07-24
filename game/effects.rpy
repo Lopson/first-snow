@@ -232,6 +232,7 @@ init python:
     import random
     import math
 
+
     class SpriteLayer(object):
         def __init__(self, child, prefill=False, spawn_tries=3, spawn_rate=0.02, xmargin=0.05 * config.screen_width, ymargin=0.08 * config.screen_height, **kwargs):
             super(SpriteLayer, self).__init__()
@@ -248,7 +249,7 @@ init python:
                     if random.random() < self.spawn_rate:
                         self.flakes.append(self.spawn_flake(prefill=True))
 
-        def to_concrete(self, x):
+        def to_concrete(self, x) -> Function:
             if isinstance(x, tuple):
                 if hasattr(x[0], '__call__'):
                     args = [self.to_concrete(a) for a in x[1:]]
@@ -258,7 +259,8 @@ init python:
 
         def update(self, st):
             # Update existing flakes.
-            self.flakes[:] = [flake for flake in self.flakes if self.update_flake(flake)]
+            self.flakes[:] = [
+                flake for flake in self.flakes if self.update_flake(flake)]
 
             # Create new flakes if desired!
             for _ in range(self.spawn_tries):
@@ -269,30 +271,44 @@ init python:
 
         def spawn_flake(self, prefill=True):
             return self.manager.create(self.child)
-        
+
         def update_flake(self, flake):
-            if flake.x < -self.xmargin(flake) or flake.x > config.screen_width + self.xmargin(flake):
+            if (flake.x < -self.xmargin(flake) or
+                    flake.x > config.screen_width + self.xmargin(flake)):
                 flake.destroy()
                 return False
-            if flake.y < -self.ymargin(flake) or flake.y > config.screen_height + self.ymargin(flake):
+            if (flake.y < -self.ymargin(flake) or
+                    flake.y > config.screen_height + self.ymargin(flake)):
                 flake.destroy()
                 return False
             return True
 
+
     class SnowLayer(SpriteLayer):
         def __init__(self, *args, **kwargs):
-            self.dir_rate = self.to_concrete(kwargs.pop('dir_rate', 0.005))
-            self.xspeed = self.to_concrete(kwargs.pop('xspeed', (0, 0.0005 * config.screen_width)))
-            self.xmult = self.to_concrete(kwargs.pop('xmult', 1))
-            self.xvar = self.to_concrete(kwargs.pop('xvar', (0, 0.0002 * config.screen_width)))
-            self.yspeed = self.to_concrete(kwargs.pop('yspeed', 0.0015 * config.screen_height))
-            self.ymult = self.to_concrete(kwargs.pop('ymult', 1))
-            self.yvar = self.to_concrete(kwargs.pop('yvar', (0, 0.0002 * config.screen_width)))
+            self.dir_rate = self.to_concrete(
+                kwargs.pop('dir_rate', 0.005))
+            self.xspeed = self.to_concrete(
+                kwargs.pop('xspeed', (0, 0.0005 * config.screen_width)))
+            self.xmult = self.to_concrete(
+                kwargs.pop('xmult', 1))
+            self.xvar = self.to_concrete(
+                kwargs.pop('xvar', (0, 0.0002 * config.screen_width)))
+            self.yspeed = self.to_concrete(
+                kwargs.pop('yspeed', 0.0015 * config.screen_height))
+            self.ymult = self.to_concrete(
+                kwargs.pop('ymult', 1))
+            self.yvar = self.to_concrete(
+                kwargs.pop('yvar', (0, 0.0002 * config.screen_width)))
+
             super(SnowLayer, self).__init__(*args, **kwargs)
 
         def spawn_flake(self, prefill=False):
             if prefill:
-                yinit = random.uniform(-self.ymargin(None), config.screen_height + self.ymargin(None))
+                yinit = random.uniform(
+                    -self.ymargin(None),
+                    config.screen_height + self.ymargin(None)
+                )
             else:
                 yinit = -50
 
@@ -305,18 +321,22 @@ init python:
             return flake
 
         def update_flake(self, flake):
-            flake.xdir *= -1 if self.dir_rate and random.random() < self.dir_rate else 1
-            flake.x += (self.xspeed(flake) * flake.xmult + self.xvar(flake)) * flake.xdir
+            flake.xdir *= -1 if self.dir_rate(None) and random.random() < self.dir_rate(None) else 1
+            flake.x += (self.xspeed(flake) * flake.xmult +
+                        self.xvar(flake)) * flake.xdir
             flake.y += self.yspeed(flake) * flake.ymult + self.yvar(flake)
             return super(SnowLayer, self).update_flake(flake)
+
 
     class SmokeLayer(SpriteLayer):
         def __init__(self, *args, **kwargs):
             self.xorigin = self.to_concrete(kwargs.pop('xorigin', 500))
             self.yorigin = self.to_concrete(kwargs.pop('yorigin', 300))
             self.angle = self.to_concrete(kwargs.pop('angle', (-30, 30)))
-            self.growth_speed = self.to_concrete(kwargs.pop('growth_speed', (0.05, 0.1)))
-            self.rotate_speed = self.to_concrete(kwargs.pop('rotate_speed', (0.05, 0.1)))
+            self.growth_speed = self.to_concrete(
+                kwargs.pop('growth_speed', (0.05, 0.1)))
+            self.rotate_speed = self.to_concrete(
+                kwargs.pop('rotate_speed', (0.05, 0.1)))
             super(SmokeLayer, self).__init__(*args, **kwargs)
 
         def spawn_flake(self, prefill=False):
@@ -325,7 +345,7 @@ init python:
             flake.y = self.yorigin(flake)
             flake.angle = self.angle(flake)
             flake.size = 0.1
-            flake.growth_speed= self.growth_speed(flake)
+            flake.growth_speed = self.growth_speed(flake)
             flake.rotation = 0
             flake.rotation_speed = self.rotate_speed(flake)
             return flake
@@ -338,20 +358,39 @@ init python:
             flake.rotation = (flake.rotation + flake.rotation_speed) % 1.0
             return super(SmokeLayer, self).update_flake(flake)
 
+
     def sin(flake, period):
-        return math.sin((flake.y / float(period)) * 2 * math.pi) - (flake.x - flake.xinit) / flake.xmult
+        return (math.sin((flake.y / float(period)) * 2 * math.pi) -
+                (flake.x - flake.xinit) / flake.xmult)
+
 
     def LightSnow(prefill=False):
-        return LiveComposite((config.screen_width, config.screen_height),
-                             (0, 0), SnowLayer("vfx/smallflake.webp", prefill=prefill, spawn_rate=0.10, xspeed=(sin, 100), xmult=5,  xvar=0, ymult=0.5, dir_rate=0).manager,
-                             (0, 0), SnowLayer("vfx/medflake.webp",   prefill=prefill, spawn_rate=0.04, xspeed=(sin, 200), xmult=20, xvar=0, ymult=0.7, dir_rate=0).manager,
-                             (0, 0), SnowLayer("vfx/bigflake.webp",   prefill=prefill, spawn_rate=0.02, xspeed=(sin, 500), xmult=60, xvar=0, dir_rate=0).manager)
+        return LiveComposite(
+            (config.screen_width, config.screen_height),
+            (0, 0), SnowLayer(
+                "vfx/smallflake.webp", prefill=prefill, spawn_rate=0.10,
+                xspeed=(sin, 100), xmult=5,  xvar=0, ymult=0.5, dir_rate=0).manager,
+            (0, 0), SnowLayer(
+                "vfx/medflake.webp", prefill=prefill, spawn_rate=0.04,
+                xspeed=(sin, 200), xmult=20, xvar=0, ymult=0.7, dir_rate=0).manager,
+            (0, 0), SnowLayer(
+                "vfx/bigflake.webp", prefill=prefill, spawn_rate=0.02,
+                xspeed=(sin, 500), xmult=60, xvar=0, dir_rate=0).manager)
+
 
     def LightSnowSepia(prefill=False):
-        return LiveComposite((config.screen_width, config.screen_height),
-                             (0, 0), SnowLayer(im.Sepia("vfx/smallflake.webp"), prefill=prefill, spawn_rate=0.10, xspeed=(sin, 100), xmult=5,  xvar=0, ymult=0.5, dir_rate=0).manager,
-                             (0, 0), SnowLayer(im.Sepia("vfx/medflake.webp"),   prefill=prefill, spawn_rate=0.04, xspeed=(sin, 200), xmult=20, xvar=0, ymult=0.7, dir_rate=0).manager,
-                             (0, 0), SnowLayer(im.Sepia("vfx/bigflake.webp"),   prefill=prefill, spawn_rate=0.02, xspeed=(sin, 500), xmult=60, xvar=0, dir_rate=0).manager)
+        return LiveComposite(
+            (config.screen_width, config.screen_height),
+            (0, 0), SnowLayer(
+                im.Sepia("vfx/smallflake.webp"), prefill=prefill, spawn_rate=0.10,
+                xspeed=(sin, 100), xmult=5,  xvar=0, ymult=0.5, dir_rate=0).manager,
+            (0, 0), SnowLayer(
+                im.Sepia("vfx/medflake.webp"), prefill=prefill, spawn_rate=0.04,
+                xspeed=(sin, 200), xmult=20, xvar=0, ymult=0.7, dir_rate=0).manager,
+            (0, 0), SnowLayer(
+                im.Sepia("vfx/bigflake.webp"), prefill=prefill, spawn_rate=0.02,
+                xspeed=(sin, 500), xmult=60, xvar=0, dir_rate=0).manager)
+
 
 image snow light starting = LightSnow(prefill=False)
 image snow light = LightSnow(prefill=True)

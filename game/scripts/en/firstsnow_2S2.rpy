@@ -647,7 +647,7 @@ show rose outdoors_smokingmouth halfclosed laugh at right2 as rose2:
     ease 1.2 xpos 1.25
 "I let out a long breath to steady myself as my heart slowly returns to its normal pace. Rose just grins churlishly as she walks off to hang up her coat."
 
-show bg aptallison livingroom blurred2:
+show bg aptallison livingroom blurred2
 $ renpy.transition(fastDissolve, layer='master')
 $ phone.show('messages', who='eileen')
 pause 1.0
