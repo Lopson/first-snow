@@ -87,37 +87,29 @@ init 1 python:
 
     def ukm_restore_bindings():
         if not persistent._ukm_default_keymap:
-            # persistent._ukm_default_keymap = copy.deepcopy(config.keymap)
             persistent._ukm_default_keymap = {
                 k : list(v) for k, v in config.keymap.items() }
  
         if persistent._ukm_user_keymap:
-            # config.keymap = copy.deepcopy(persistent._ukm_user_keymap)
             config.keymap = {
                 k : _keymap_list(v) for k, v in persistent._ukm_user_keymap.items() }
 
         if not persistent._ukm_default_joymap:
-            # persistent._ukm_default_joymap = copy.deepcopy(config.pad_bindings)
             persistent._ukm_default_joymap = {
                 k : list(v) for k, v in config.pad_bindings.items() }
         if persistent._ukm_user_joymap:
-            # config.pad_bindings = copy.deepcopy(persistent._ukm_user_joymap)
             config.pad_bindings = {
                 k : _keymap_list(v) for k, v in persistent._ukm_user_joymap.items() }
 
     def ukm_save_bindings():
-        # persistent._ukm_user_keymap = copy.deepcopy(config.keymap)
         persistent._ukm_user_keymap = {
                 k : list(v) for k, v in config.keymap.items() }
-        # persistent._ukm_user_joymap = copy.deepcopy(config.pad_bindings)
         persistent._ukm_user_joymap = {
                 k : list(v) for k, v in config.pad_bindings.items() }
 
     def ukm_reset_bindings():
-        # config.keymap = copy.deepcopy(persistent._ukm_default_keymap)
         config.keymap = {
                 k : _keymap_list(v) for k, v in persistent._ukm_user_keymap.items() }
-        # config.pad_bindings = copy.deepcopy(persistent._ukm_default_joymap)
         config.pad_bindings = {
                 k : _keymap_list(v) for k, v in persistent._ukm_user_joymap.items() }
 
