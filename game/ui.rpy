@@ -2626,7 +2626,7 @@ transform phone_anim:
 screen phone(mode, who=None, time=None, temperature=None):
     python:
         emoji = {
-            '\o/': 'yay',
+            '\\o/': 'yay',
             ';)': 'wink',
             ':>': 'smug',
             ':)': 'smile',

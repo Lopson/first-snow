@@ -3,7 +3,7 @@ init -1 python:
     import re
     import itertools
 
-    AUTO_IMAGE_REGEXP = re.compile('\.(jpe?g|png|gif|bmp|webp)$')
+    AUTO_IMAGE_REGEXP = re.compile(r'\.(jpe?g|png|gif|bmp|webp)$')
 
     # Load all images from a certain directory.
     def define_image(name, image, **transforms):

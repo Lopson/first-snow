@@ -158,7 +158,7 @@ $ phone.wait()
 $ phone.message('dad', '11:07 AM', 'Sounds like you\'re having fun')
 $ phone.wait()
 
-$ phone.message('dad', '11:07 AM', 'yup \o/', to=True)
+$ phone.message('dad', '11:07 AM', 'yup \\o/', to=True)
 $ phone.wait()
 $ phone.message('dad', '11:08 AM', 'how are things there?', to=True)
 $ phone.wait()

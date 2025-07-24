@@ -38,8 +38,8 @@ window show dissolve
 
 "A quick glance at my phone as I walk to get my coat and bag confirms her to be right, the morning's message from a friend still showing on the screen."
 
-$ phone.message('caprice', '8:17 AM', "BIG NEWS allie!!! :):):)\o/\o/\o/")
-$ phone.message('caprice', '8:17 AM', "tell you later in bio!!!!!! ;)\o/\o/<3<3")
+$ phone.message('caprice', '8:17 AM', "BIG NEWS allie!!! :):):)\\o/\\o/\\o/")
+$ phone.message('caprice', '8:17 AM', "tell you later in bio!!!!!! ;)\\o/\\o/<3<3")
 $ phone.show('messages', who='caprice')
 show bg aptallison livingroom blurred2:
     xalign 0.5 yalign 0.5

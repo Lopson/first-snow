@@ -39,8 +39,8 @@ python early:
                 self.size = self.given_size
                 self.data = [ (None, None, None) for i in xrange(self.size) ]
 
-            self.block_regexp = re.compile('(' + '|'.join(u'\{%s\}|\{%s=.*?\}|\{/%s\}' % (tag, tag, tag) for tag in config.text_log_blocked_tags) + ')')
-            self.filter_regexp = re.compile('(' + '|'.join('\{%s\}|\{%s=.*?\}|\{/%s\}' % (tag, tag, tag) for tag in config.text_log_filtered_tags) + ')')
+            self.block_regexp = re.compile('(' + '|'.join(r'\{%s\}|\{%s=.*?\}|\{/%s\}' % (tag, tag, tag) for tag in config.text_log_blocked_tags) + ')')
+            self.filter_regexp = re.compile('(' + '|'.join(r'\{%s\}|\{%s=.*?\}|\{/%s\}' % (tag, tag, tag) for tag in config.text_log_filtered_tags) + ')')
 
         def add_dialogue(self, who, what):
             if not what or self.block_regexp.search(what):
