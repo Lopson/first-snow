@@ -1570,7 +1570,7 @@ init python:
                 r[k] = v
         return r
 
-screen extras_art_gallery:
+screen extras_art_gallery():
     python:
         import math
         import collections
@@ -2451,7 +2451,7 @@ screen choice(items):
                     bottom_padding 20
 
 # The saybox.
-screen say(what, who, doublespeak=False):
+screen say(what, who, double_speak=False):
     if config.developer or config.testing:
         key "t" action ToggleVariable('editing')
     if store.editing:
@@ -2467,7 +2467,7 @@ screen say(what, who, doublespeak=False):
         speaking = speaking_flavour = False
 
         if who:
-            if not doublespeak:
+            if not double_speak:
                 if who in character_tags:
                     tag = character_tags[who]
                 else:
@@ -2487,7 +2487,7 @@ screen say(what, who, doublespeak=False):
                         speaking_flavour = True
 
                 who = who.split('{', 1)[0]
-            if doublespeak:
+            if double_speak:
                 bg = bg_base + 'double.webp'
                 tb = tb_base + '_'.join(who) + '.webp'
             elif bg_base + who.lower() + '.webp' in renpy.list_files():
@@ -2583,7 +2583,7 @@ screen say(what, who, doublespeak=False):
             ypadding 15
             xmaximum 1100
 
-            if doublespeak:
+            if double_speak:
                 text what[0]:
                     id "what"
                     color dialogue_color

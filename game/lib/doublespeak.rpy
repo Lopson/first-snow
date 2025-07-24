@@ -42,7 +42,7 @@ python early:
         longest = sorted(info['messages'], key=len, reverse=True)[0]
 
         renpy.shown_window()
-        renpy.show_screen('say', doublespeak=True, who=info['evaluated_chars'], what=info['messages'])
+        renpy.show_screen('say', double_speak=True, who=info['evaluated_chars'], what=info['messages'])
 
         ui.saybehavior(afm=longest)
         result = ui.interact(roll_forward=renpy.roll_forward_info(), type='say')
