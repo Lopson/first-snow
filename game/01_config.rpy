@@ -27,7 +27,7 @@ init -1 python hide:
     config.framerate = 60
 
     # Capabilities.
-    config.gl_resize = False
+    config.gl_resize = True
     config.has_sound = True
     config.has_music = True
     config.has_voice = True
