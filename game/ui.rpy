@@ -1570,7 +1570,7 @@ init python:
                 r[k] = v
         return r
 
-screen extras_art_gallery():
+screen extras_art_gallery(pieces, type, show_info=False):
     python:
         import math
         import collections
@@ -1582,9 +1582,6 @@ screen extras_art_gallery():
         if not rp.display.predict.predicting and type == 'guest':
             achievement.grant('art_guest_viewed')
 
-    default pieces = []
-    default show_info = False
-    default type = None
     default current_piece = pieces[0]
 
     hbox:
@@ -1627,7 +1624,7 @@ screen extras_art_gallery():
                                         selected_idle  Composite((208, 122), (0, 0), "#fbf9ec", (4, 4), thumb)
                                         selected_hover Composite((208, 122), (0, 0), "#fbf9ec", (4, 4), thumb)
                                         selected (current_piece == piece)
-                                        action SetScreenVariable('current_piece', piece)
+                                        action SetLocalVariable('current_piece', piece)
 
                                     if len(piece['file']) > 1:
                                         textbutton str(len(piece['file'])):
