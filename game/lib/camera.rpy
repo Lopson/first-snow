@@ -489,7 +489,7 @@ screen _action_editor(tab="images", layer="master", name="", time=0):
                         if p not in _viewers.transform_viewer.force_float and ((state[name][p] is None and isinstance(d, int)) or isinstance(state[name][p], int)):
                             hbox:
                                 style_group "action_editor"
-                                textbutton "[p]" action [SensitiveIf((name, layer, p) in _viewers.all_keyframes), SelectedIf(_viewers.keyframes_exist((name, layer, p))), Show("_edit_keyframe", k=(name, layer, p), int=True, loop=name+"_"+layer+"_"+p+"_loop")]
+                                textbutton "[p]" action [SensitiveIf((name, layer, p) in _viewers.all_keyframes), SelectedIf(_viewers.keyframes_exist((name, layer, p))), Show("_edit_keyframe", k=(name, layer, p), is_int=True, loop=name+"_"+layer+"_"+p+"_loop")]
                                 textbutton "[prop]" action Function(_viewers.transform_viewer.edit_value, f, True, default=prop) alternate Function(_viewers.transform_viewer.reset, name, layer, p)
                                 bar adjustment ui.adjustment(range=_viewers.transform_viewer.int_range*2, value=prop+_viewers.transform_viewer.int_range, page=1, changed=f) xalign 1. yalign .5
                         else:
@@ -655,7 +655,7 @@ screen _move_keyframes():
 
 # _edit_keyframe((name, layer), "xpos")
 # _edit_keyframe(_camera_x)
-screen _edit_keyframe(k, int=False, loop=None):
+screen _edit_keyframe(k, is_int=False, loop=None):
     $check_points = _viewers.all_keyframes[k]
     modal True
     key "game_menu" action Hide("_edit_keyframe")
@@ -668,7 +668,7 @@ screen _edit_keyframe(k, int=False, loop=None):
             if t != 0:
                 hbox:
                     textbutton _("x") action [Function(_viewers.remove_keyframe, remove_time=t, k=k), renpy.restart_interaction] background None
-                    textbutton _("{}".format(v)) action Function(_viewers.edit_the_value, check_points=check_points, old=t, value_org=v, int=int)
+                    textbutton _("{}".format(v)) action Function(_viewers.edit_the_value, check_points=check_points, old=t, value_org=v, is_int=is_int)
                     textbutton _("{}".format(w)) action Function(_viewers.edit_the_warper, check_points=check_points, old=t, value_org=w)
                     textbutton _("[t:>.2f] s") action Function(_viewers.edit_moved_time, check_points=check_points, old=t)
                     bar adjustment ui.adjustment(range=7.0, value=t, changed=renpy.curry(_viewers.move_keyframe)(old=t, check_points=check_points)) xalign 1. yalign .5
@@ -949,11 +949,11 @@ init -1600 python in _viewers:
             else:
                 renpy.notify(__('Putted \n"%s"\n on clipboard') % string)
 
-        def edit_value(self, function, int=False, default=""):
+        def edit_value(self, function, is_int=False, default=""):
             v = renpy.invoke_in_new_context(renpy.call_screen, "_input_screen", default=default)
             if v:
                 try:
-                    if int:
+                    if is_int:
                         v = renpy.python.py_eval(v) + self.int_range
                     else:
                         v = renpy.python.py_eval(v) + self.float_range
@@ -1248,11 +1248,11 @@ init -1600 python in _viewers:
             renpy.notify(_("This isn't valid expression"))
         renpy.restart_interaction()
 
-    def edit_the_value(check_points, old, value_org, int=False):
+    def edit_the_value(check_points, old, value_org, is_int=False):
         value = renpy.invoke_in_new_context(renpy.call_screen, "_input_screen", default=value_org)
         try:
             value = renpy.python.py_eval(value)
-            if int:
+            if is_int:
                 value = int(value)
             else:
                 value = float(value)
