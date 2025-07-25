@@ -122,7 +122,7 @@ init 2 python:
         return src
 
     for img in sepia_images:
-        renpy.image(img + ' sepia', im.Sepia(get_base_image(img)))
+        renpy.image(img + ' sepia', Transform(get_base_image(img), matrixcolor=SepiaMatrix()))
 
     for img, amount in blur_images:
         renpy.image(img + ' blurred{}'.format(int(amount)), im.Blur(get_base_image(img), amount))
@@ -138,72 +138,72 @@ init:
 layeredimage eileen_sepia:
     group bodies:
         attribute indoors_crossed default:
-            im.Sepia("sprites/eileen/bodies/indoors_crossed.webp")
+            Transform("sprites/eileen/bodies/indoors_crossed.webp", matrixcolor=SepiaMatrix())
         attribute indoors_fists:
-            im.Sepia("sprites/eileen/bodies/indoors_fists.webp")
+            Transform("sprites/eileen/bodies/indoors_fists.webp", matrixcolor=SepiaMatrix())
         attribute indoors_onhip:
-            im.Sepia("sprites/eileen/bodies/indoors_onhip.webp")
+            Transform("sprites/eileen/bodies/indoors_onhip.webp", matrixcolor=SepiaMatrix())
         attribute outdoors_crossed:
-            im.Sepia("sprites/eileen/bodies/outdoors_crossed.webp")
+            Transform("sprites/eileen/bodies/outdoors_crossed.webp", matrixcolor=SepiaMatrix())
         attribute outdoors_fists:
-            im.Sepia("sprites/eileen/bodies/outdoors_fists.webp")
+            Transform("sprites/eileen/bodies/outdoors_fists.webp", matrixcolor=SepiaMatrix())
         attribute outdoors_onhip:
-            im.Sepia("sprites/eileen/bodies/outdoors_onhip.webp")
+            Transform("sprites/eileen/bodies/outdoors_onhip.webp", matrixcolor=SepiaMatrix())
         attribute outdoorsnoscarf_crossed:
-            im.Sepia("sprites/eileen/bodies/outdoorsnoscarf_crossed.webp")
+            Transform("sprites/eileen/bodies/outdoorsnoscarf_crossed.webp", matrixcolor=SepiaMatrix())
         attribute outdoorsnoscarf_fists:
-            im.Sepia("sprites/eileen/bodies/outdoorsnoscarf_fists.webp")
+            Transform("sprites/eileen/bodies/outdoorsnoscarf_fists.webp", matrixcolor=SepiaMatrix())
         attribute outdoorsnoscarf_onhip:
-            im.Sepia("sprites/eileen/bodies/outdoorsnoscarf_onhip.webp")
+            Transform("sprites/eileen/bodies/outdoorsnoscarf_onhip.webp", matrixcolor=SepiaMatrix())
         attribute hiking_onhip:
-            im.Sepia("sprites/eileen/bodies/hiking_onhip.webp")
+            Transform("sprites/eileen/bodies/hiking_onhip.webp", matrixcolor=SepiaMatrix())
         attribute naked_towel:
-            im.Sepia("sprites/eileen/bodies/naked_towel.webp")
+            Transform("sprites/eileen/bodies/naked_towel.webp", matrixcolor=SepiaMatrix())
         attribute pjs_onhip:
-            im.Sepia("sprites/eileen/bodies/pjs_onhip.webp")
+            Transform("sprites/eileen/bodies/pjs_onhip.webp", matrixcolor=SepiaMatrix())
         attribute pjs_crossed:
-            im.Sepia("sprites/eileen/bodies/pjs_crossed.webp")
+            Transform("sprites/eileen/bodies/pjs_crossed.webp", matrixcolor=SepiaMatrix())
 
     group eyes:
         attribute normal default:
-            im.Sepia("sprites/eileen/eyes/normal.webp")
+            Transform("sprites/eileen/eyes/normal.webp", matrixcolor=SepiaMatrix())
         attribute annoyed:
-            im.Sepia("sprites/eileen/eyes/annoyed.webp")
+            Transform("sprites/eileen/eyes/annoyed.webp", matrixcolor=SepiaMatrix())
         attribute closed:
-            im.Sepia("sprites/eileen/eyes/closed.webp")
+            Transform("sprites/eileen/eyes/closed.webp", matrixcolor=SepiaMatrix())
         attribute disbelief:
-            im.Sepia("sprites/eileen/eyes/disbelief.webp")
+            Transform("sprites/eileen/eyes/disbelief.webp", matrixcolor=SepiaMatrix())
         attribute frowning:
-            im.Sepia("sprites/eileen/eyes/frowning.webp")
+            Transform("sprites/eileen/eyes/frowning.webp", matrixcolor=SepiaMatrix())
         attribute lookaway:
-            im.Sepia("sprites/eileen/eyes/lookaway.webp")
+            Transform("sprites/eileen/eyes/lookaway.webp", matrixcolor=SepiaMatrix())
         attribute lookawaynarrow:
-            im.Sepia("sprites/eileen/eyes/lookawaynarrow.webp")
+            Transform("sprites/eileen/eyes/lookawaynarrow.webp", matrixcolor=SepiaMatrix())
         attribute narrow:
-            im.Sepia("sprites/eileen/eyes/narrow.webp")
+            Transform("sprites/eileen/eyes/narrow.webp", matrixcolor=SepiaMatrix())
         attribute sad:
-            im.Sepia("sprites/eileen/eyes/sad.webp")
+            Transform("sprites/eileen/eyes/sad.webp", matrixcolor=SepiaMatrix())
 
     group faces:
         attribute neutral default:
-            im.Sepia("sprites/eileen/faces/neutral.webp")
+            Transform("sprites/eileen/faces/neutral.webp", matrixcolor=SepiaMatrix())
         attribute angry:
-            im.Sepia("sprites/eileen/faces/angry.webp")
+            Transform("sprites/eileen/faces/angry.webp", matrixcolor=SepiaMatrix())
         attribute frown:
-            im.Sepia("sprites/eileen/faces/frown.webp")
+            Transform("sprites/eileen/faces/frown.webp", matrixcolor=SepiaMatrix())
         attribute grumble:
-            im.Sepia("sprites/eileen/faces/grumble.webp")
+            Transform("sprites/eileen/faces/grumble.webp", matrixcolor=SepiaMatrix())
         attribute open:
-            im.Sepia("sprites/eileen/faces/open.webp")
+            Transform("sprites/eileen/faces/open.webp", matrixcolor=SepiaMatrix())
         attribute sadmouth:
-            im.Sepia("sprites/eileen/faces/sadmouth.webp")
+            Transform("sprites/eileen/faces/sadmouth.webp", matrixcolor=SepiaMatrix())
         attribute smile:
-            im.Sepia("sprites/eileen/faces/smile.webp")
+            Transform("sprites/eileen/faces/smile.webp", matrixcolor=SepiaMatrix())
         
     group _misc:
         attribute none default:
-            im.Sepia("sprites/eileen/_misc/none.webp")
+            Transform("sprites/eileen/_misc/none.webp", matrixcolor=SepiaMatrix())
         attribute blush:
-            im.Sepia("sprites/eileen/_misc/blush.webp")
+            Transform("sprites/eileen/_misc/blush.webp", matrixcolor=SepiaMatrix())
         attribute tears:
-            im.Sepia("sprites/eileen/_misc/tears.webp")
+            Transform("sprites/eileen/_misc/tears.webp", matrixcolor=SepiaMatrix())

@@ -382,14 +382,18 @@ init python:
         return LiveComposite(
             (config.screen_width, config.screen_height),
             (0, 0), SnowLayer(
-                im.Sepia("vfx/smallflake.webp"), prefill=prefill, spawn_rate=0.10,
-                xspeed=(sin, 100), xmult=5,  xvar=0, ymult=0.5, dir_rate=0).manager,
+                Transform("vfx/smallflake.webp", matrixcolor=SepiaMatrix()),
+                prefill=prefill, spawn_rate=0.10, xspeed=(sin, 100), xmult=5,
+                xvar=0, ymult=0.5, dir_rate=0).manager,
             (0, 0), SnowLayer(
-                im.Sepia("vfx/medflake.webp"), prefill=prefill, spawn_rate=0.04,
-                xspeed=(sin, 200), xmult=20, xvar=0, ymult=0.7, dir_rate=0).manager,
+                Transform("vfx/medflake.webp", matrixcolor=SepiaMatrix()),
+                prefill=prefill, spawn_rate=0.04, xspeed=(sin, 200), xmult=20,
+                xvar=0, ymult=0.7, dir_rate=0).manager,
             (0, 0), SnowLayer(
-                im.Sepia("vfx/bigflake.webp"), prefill=prefill, spawn_rate=0.02,
-                xspeed=(sin, 500), xmult=60, xvar=0, dir_rate=0).manager)
+                Transform("vfx/bigflake.webp", matrixcolor=SepiaMatrix()),
+                prefill=prefill, spawn_rate=0.02, xspeed=(sin, 500), xmult=60,
+                xvar=0, dir_rate=0).manager
+        )
 
 
 image snow light starting = LightSnow(prefill=False)
