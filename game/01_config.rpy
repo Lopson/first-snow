@@ -41,6 +41,7 @@ init -1 python hide:
     config.default_text_cps = 25
     config.thumbnail_width = 193
     config.thumbnail_height = 108
+    config.check_conflicting_properties = True
 
     # Theme.
     theme.marker(
