@@ -475,7 +475,7 @@ allison "Hah, come on. I'm sure you'd be a natural at it."
 show eileen pjs_crossed disbelief open at offcenterleft:
     xpos 0.47
 $ renpy.transition(dissolve, layer='master')
-eileen "No way. Your roommmate's crazy for using it as her only transportation."
+eileen "No way. Your roommate's crazy for using it as her only transportation."
 
 show eileen neutral at offcenterleft:
     xpos 0.47

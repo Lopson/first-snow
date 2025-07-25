@@ -170,7 +170,7 @@ show shadow:
 "Swallowing the lump in my throat as I push the thoughts aside, I begin to walk once more."
 
 play loopsfx "music/ringtone.ogg" fadein 2.0
-"It's then, that my phone begins to buzz in my pocket. Did dad forget to say something?"
+"It's then, that my phone begins to buzz in my pocket. Did Dad forget to say something?"
 
 show bg downtown square night blurred2 as bg2:
     xalign 0.5 yalign 0.5 alpha 0
