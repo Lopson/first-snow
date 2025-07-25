@@ -1555,12 +1555,12 @@ screen extras_art():
 screen extras_art_firstsnow():
     tag extraartmenu
 
-    use extras_art_gallery(pieces=store.cg_art, type='cg')
+    use extras_art_gallery(pieces=store.cg_art, art_type='cg')
 
 screen extras_art_extra():
     tag extraartmenu
 
-    use extras_art_gallery(pieces=store.guest_art, type='guest', show_info=True)
+    use extras_art_gallery(pieces=store.guest_art, art_type='guest', show_info=True)
 
 init python:
     def eval_piece(p):
@@ -1572,7 +1572,7 @@ init python:
                 r[k] = v
         return r
 
-screen extras_art_gallery(pieces, type, show_info=False):
+screen extras_art_gallery(pieces, art_type, show_info=False):
     python:
         import math
         import collections
@@ -1581,7 +1581,7 @@ screen extras_art_gallery(pieces, type, show_info=False):
         rows = int(math.ceil(len(pieces) / 2.0))
 
         import renpy as rp
-        if not rp.display.predict.predicting and type == 'guest':
+        if not rp.display.predict.predicting and art_type == 'guest':
             achievement.grant('art_guest_viewed')
 
     default current_piece = pieces[0]
