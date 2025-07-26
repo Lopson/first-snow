@@ -7,8 +7,11 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from renpy import store, config
 
-# Get git version.
+
 def git_version() -> str:
+    """
+    Get git version of the repository of the game.
+    """
     if hasattr(store, "git_revision"):
         return store.git_revision
 

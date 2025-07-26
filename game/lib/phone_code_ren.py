@@ -9,6 +9,7 @@ from renpy.exports.statementexports import pause
 
 PhoneEntry: TypeAlias = list[tuple[bool, str, str]]
 
+
 class Phone:
     def __init__(self):
         self.messages: dict[str, PhoneEntry] = {}
