@@ -13,7 +13,7 @@ class ResettableDisplayable(Displayable):
     """
     # Thanks to Asceai on Freenode.
 
-    def __init__(self, child, **kwargs):
+    def __init__(self, child, **kwargs) -> None:
         super(ResettableDisplayable, self).__init__(**kwargs)
         self.base = child
         self.child = displayable(self.base())
@@ -34,7 +34,7 @@ class ResettableDisplayable(Displayable):
     def Reset(self):
         return SetField(self, "reset", True)
 
-    def visit(self):
+    def visit(self) -> list:
         return [ self.child ]
 
 def ResetDisplayable(disp):
