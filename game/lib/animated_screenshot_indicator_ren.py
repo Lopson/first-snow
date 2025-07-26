@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 store._screenshot_taken = 0.0
 
 
-def screenshot_callback(_) -> None:
+def screenshot_callback(filename: str) -> None:
     store._screenshot_taken = time()
     restart_interaction()
 
