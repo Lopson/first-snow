@@ -10,7 +10,7 @@ if TYPE_CHECKING:
     from renpy import store
     from renpy import config
 
-store._screenshot_taken = 0
+store._screenshot_taken = 0.0
 
 
 def screenshot_callback(_) -> None:
@@ -26,7 +26,7 @@ def screenshot_overlay() -> None:
     elif (screen.get_screen('screenshot_indicator') and
             time() - store._screenshot_taken > 4.0):
         screen.hide_screen('screenshot_indicator')
-        store._screenshot_taken = 0
+        store._screenshot_taken = 0.0
 
 
 config.screenshot_callback = screenshot_callback # pyright: ignore[reportAttributeAccessIssue]
