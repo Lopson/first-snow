@@ -20,6 +20,8 @@ screen cue(active, name, message):
 
 init python:
     import collections
+    from time import time
+    from threading import Timer
 
     CUE_DEFAULT_SCREEN = 'cue'
     store._cues = []
@@ -28,14 +30,14 @@ init python:
         def __init__(self, name, args, timeout):
             self.name = name
             self.args = args
-            self.until = time.time() + timeout
+            self.until = time() + timeout
 
         def is_active(self):
-            return time.time() < self.until
+            return time() < self.until
 
     def cue(name, timeout, **args):
         show_cue(name, timeout, args)
-        t = threading.Timer(timeout, renpy.restart_interaction)
+        t = Timer(timeout, renpy.restart_interaction)
         t.start()
         renpy.restart_interaction()
 
