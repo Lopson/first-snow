@@ -2,6 +2,8 @@
 init python:
 """
 
+# TODO This doesn't seem to be used anywhere, delete.
+
 from typing import Any, TYPE_CHECKING
 if TYPE_CHECKING:
     from renpy import config
