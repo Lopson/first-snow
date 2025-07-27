@@ -19,28 +19,22 @@
 python early:
 """
 
-from renpy.display.behavior import Keymap
-from renpy.defaultstore import main_menu
-from renpy.defaultstore import adv
-from renpy.text.extras import filter_text_tags
-from renpy.exports.menuexports import display_menu
-from renpy.exports.persistentexports import is_seen
-from renpy.character import ADVCharacter
+
 import re
 from typing import Callable, TypeAlias, Optional
 from renpy.rollback import NoRollback
 from renpy import config
 from renpy import store
-TextLogDataEntry: TypeAlias = tuple[Optional[str],
-                                    Optional[str], Optional[str]]
+TextLogDataEntry: TypeAlias = tuple[Optional[str], Optional[str], Optional[str]]
 TextLogData: TypeAlias = list[TextLogDataEntry]
+
 
 # Create configuration variables.
 locked: bool = config.locked
 config.locked = False
-config.text_log_size = 100  # pyright: ignore[reportAttributeAccessIssue]
-config.text_log_blocked_tags = ['nw'] # pyright: ignore[reportAttributeAccessIssue]
-config.text_log_filtered_tags = ['', 'w', 'fast', 'cps', 'p'] # pyright: ignore[reportAttributeAccessIssue]
+config.text_log_size = 100 # pyright: ignore[reportAttributeAccessIssue]
+config.text_log_blocked_tags = [ 'nw' ] # pyright: ignore[reportAttributeAccessIssue]
+config.text_log_filtered_tags = [ '', 'w', 'fast', 'cps', 'p' ] # pyright: ignore[reportAttributeAccessIssue]
 config.locked = locked
 
 
@@ -58,25 +52,25 @@ class TextLog(NoRollback):
             self.data: TextLogData = []
         else:
             self.size = self.given_size
-            self.data = [(None, None, None) for _ in range(self.size)]
+            self.data = [ (None, None, None) for _ in range(self.size) ]
 
         self.block_regexp: re.Pattern = re.compile(
             '(' +
             '|'.join(r'\{%s\}|\{%s=.*?\}|\{/%s\}' % (
                 tag, tag, tag
-            ) for tag in config.text_log_blocked_tags) + # pyright: ignore[reportAttributeAccessIssue]
+                ) for tag in config.text_log_blocked_tags) + # pyright: ignore[reportAttributeAccessIssue]
             ')')
         self.filter_regexp: re.Pattern = re.compile(
-            '(' +
+            '(' + 
             '|'.join(r'\{%s\}|\{%s=.*?\}|\{/%s\}' % (
                 tag, tag, tag
-            ) for tag in config.text_log_filtered_tags) + # pyright: ignore[reportAttributeAccessIssue]
+                ) for tag in config.text_log_filtered_tags) + # pyright: ignore[reportAttributeAccessIssue]
             ')')
 
     def add_dialogue(self, who: str, what: str) -> None:
         if not what or self.block_regexp.search(what):
             return
-        fwho: str | None = self.filter_regexp.sub('', who) if who else None
+        fwho : str | None = self.filter_regexp.sub('', who) if who else None
         fwhat: str = self.filter_regexp.sub('', what)
         if self.data and self.data[-1] == ('dialogue', fwho, fwhat):
             return
@@ -121,13 +115,19 @@ class TextLog(NoRollback):
 init -1501 python:
 """
 
+from renpy.character import ADVCharacter
+from renpy.exports.persistentexports import is_seen
+from renpy.exports.menuexports import display_menu
+from renpy import store
+from renpy.text.extras import filter_text_tags
+from renpy.defaultstore import adv
+
 
 class LoggingADVCharacter(ADVCharacter):
     """
     Replace character classes with logging ones.
     """
-
-    def do_done(self, who: str, what: str, multiple=None) -> None:
+    def do_done(self, who: str, what: str, multiple = None) -> None:
         if not is_seen(ever=False):
             store.text_log.add_dialogue(who, what)
         super(LoggingADVCharacter, self).do_done(who, what)
@@ -135,7 +135,7 @@ class LoggingADVCharacter(ADVCharacter):
 
 ADVCharacter = LoggingADVCharacter
 # Straight outta Ren'Py.
-adv = ADVCharacter(None, kind=adv)
+adv = ADVCharacter(None, kind = adv)
 
 
 def menu(items: list[tuple], *args, **kwargs):
@@ -162,16 +162,19 @@ def remove_text_tags(s: str):
 init -1500 python hide:
 """
 
+from renpy import config
+
 config.keymap['text_log'] = ['l']
 
 """renpy
 init -1000 python hide:
 """
 
+from renpy.defaultstore import main_menu
+from renpy.display.behavior import Keymap
 
 def toggle_text_log():
     if not main_menu:
-        ToggleScreen('text_log', dissolve)()  # type: ignore
-
+        ToggleScreen('text_log', dissolve)() # type: ignore
 
 config.underlay.append(Keymap(text_log=toggle_text_log))
