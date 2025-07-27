@@ -19,6 +19,9 @@
 # This file adds a custom Ren'Py statement: make sure it appears before the files in which you use the statement, filename-wise.
 # You can achieve this by renaming the file to 00_doublespeak.rpy or something similar.
 
+# TODO Replace all of this with "Multiple Character Dialogue"
+# https://www.renpy.org/doc/html/multiple.html
+
 python early:
     import collections
 

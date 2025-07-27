@@ -15,6 +15,9 @@
 #   - config.text_log_filtered_tags:
 #     Tags to filter for the log.
 
+# TODO Unclear why the game relies on this implementation vs the default
+# Ren'Py history implementation!
+
 """renpy
 python early:
 """
