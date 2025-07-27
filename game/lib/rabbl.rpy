@@ -126,7 +126,7 @@ python early:
             return { 'name': label, 'explicit': explicit }
 
         def choose_predict(self, info):
-             return []
+            return []
 
         def choose_lint(self, info):
             info['menu'] = True
