@@ -10,7 +10,7 @@ from renpy.audio import music
 from renpy.exports.displayexports import restart_interaction
 if TYPE_CHECKING:
     from renpy import game
-    from renpy import persistent
+    from renpy.game import persistent
 
 was_playing: bool = False
 
