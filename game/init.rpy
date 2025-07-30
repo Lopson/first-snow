@@ -15,6 +15,7 @@ default persistent.finished_story = False
 default editing = False
 
 default preferences.afm_time = 15
+default preferences.emphasize_audio = True
 
 init -1 python hide:
     # fast skip is so fast that with our directing it crashes Ren'Py lol
