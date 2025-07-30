@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from typing import Optional, TYPE_CHECKING, TypeVar
 from renpy.audio import music
 from renpy.exports.displayexports import restart_interaction
+from renpy.preferences import Preference
 if TYPE_CHECKING:
     from renpy import game
     from renpy.game import persistent
@@ -81,7 +82,7 @@ def JukeboxStop(fadeout=None) -> Stop:
 
 
 def JukeboxVolume() -> Preference:
-    return Preference('jukebox volume')
+    return Preference('jukebox volume', 1.0)
 
 
 def jukebox_is_paused() -> bool:
