@@ -4,10 +4,9 @@ init python:
 
 # TODO This doesn't seem to be used anywhere, delete.
 
-from typing import Any, TYPE_CHECKING
-if TYPE_CHECKING:
-    from renpy import config
-    from renpy.text.textsupport import TAG as TEXT_TAG # pyright: ignore[reportMissingImports]
+from typing import Any
+from renpy import config
+from renpy.text.textsupport import TAG as TEXT_TAG # pyright: ignore[reportMissingImports]     
 
 
 def url_tag(
