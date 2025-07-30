@@ -390,16 +390,20 @@ def ukm_extract_binding(event: pygame.event.Event) -> tuple[bool, str | None] | 
         return (True, str(event.controller))
 
 
-def ukm_get_bindings(command):
-    syms = [(sym, ukm_binding_to_friendly(sym), False)
-            for sym in config.keymap.get(command, [])]
+def ukm_get_bindings(command: str) -> list[tuple[str, str | None, bool]]:
+    syms: list[tuple[str, str | None, bool]] = [
+        (sym, ukm_binding_to_friendly(sym), False) for
+        sym in config.keymap.get(command, [])]
+    
+    sym: str
+    commands: list[str]
     for sym, commands in config.pad_bindings.items():
         if command in commands:
             syms.append((sym, ukm_binding_to_friendly(sym), True))
     return syms
 
 
-def ukm_add_binding(event, binding, joy):
+def ukm_add_binding(event: str, binding: str, joy: bool) -> None:
     if joy:
         config.pad_bindings.setdefault(binding, [])
         config.pad_bindings[binding].append(event)
@@ -412,7 +416,7 @@ def ukm_add_binding(event, binding, joy):
     restart_interaction()
 
 
-def ukm_remove_binding(event, binding, joy):
+def ukm_remove_binding(event: str, binding: str, joy: bool) -> None:
     if joy:
         if binding in config.pad_bindings and event in config.pad_bindings[binding]:
             config.pad_bindings[binding].remove(event)
@@ -425,7 +429,7 @@ def ukm_remove_binding(event, binding, joy):
     restart_interaction()
 
 
-def ukm_reset_all_bindings():
+def ukm_reset_all_bindings() -> None:
     ukm_reset_bindings()
     ukm_save_bindings()
     clear_keymap_cache()
@@ -434,13 +438,19 @@ def ukm_reset_all_bindings():
 
 
 class KeyBindingGrabBehaviour(Null): # pyright: ignore[reportUndefinedVariable]
-    def __init__(self, target, excludes=[], exclude_displayables=[], **kwargs):
+    def __init__(self,
+                 target: str,
+                 excludes: list[str]=[],
+                 exclude_displayables: list[str]=[],
+                 **kwargs) -> None:
         super(KeyBindingGrabBehaviour, self).__init__(**kwargs)
-        self.target = target
-        self.excludes = excludes
-        self.exclude_displayables = exclude_displayables
+        self.target: str = target
+        self.excludes: list[str] = excludes
+        self.exclude_displayables: list[str] = exclude_displayables
 
-    def event(self, ev, x, y, st):
+    def event(self, ev: pygame.event.Event, x: int, y: int, st: str) -> None:
+        # NOTE I believe the "st" argument stands for style.
+
         # Check event types.
         if ev.type not in UKM_INPUT_EVENT_TYPES:
             return
@@ -452,10 +462,14 @@ class KeyBindingGrabBehaviour(Null): # pyright: ignore[reportUndefinedVariable]
 
         # Check for a mouse event in excludes displayables.
         if ev.type in UKM_MOUSE_EVENT_TYPES:
+            evx: int
+            evy: int
             evx, evy = ev.pos
 
             for displayable in self.excludes:
                 if (result := get_image_bounds(displayable)) is not None:
+                    width: int
+                    height: int
                     x, y, width, height = result
                     # Within bounds?
                     if (evx >= x and evy >= y and evx <= x + width and evy <= y + height):
@@ -473,28 +487,28 @@ class KeyBindingGrabBehaviour(Null): # pyright: ignore[reportUndefinedVariable]
 
 
 class AddUserKeyBinding(object):
-    def __init__(self, command, binding, joy):
-        self.command = command
-        self.binding = binding
-        self.joy = joy
+    def __init__(self, command: str, binding: str, joy: bool) -> None:
+        self.command: str = command
+        self.binding: str = binding
+        self.joy: bool = joy
 
-    def __call__(self):
+    def __call__(self) -> None:
         if self.binding:
             ukm_add_binding(self.command, self.binding, self.joy)
 
 
 class RemoveUserKeyBinding(object):
-    def __init__(self, command, binding, joy):
-        self.command = command
-        self.binding = binding
-        self.joy = joy
+    def __init__(self, command: str, binding: str, joy: bool) -> None:
+        self.command: str = command
+        self.binding: str = binding
+        self.joy: bool = joy
 
-    def __call__(self):
+    def __call__(self) -> None:
         ukm_remove_binding(self.command, self.binding, self.joy)
 
 
 class ResetUserKeyBindings(Action):
-    def __call__(self):
+    def __call__(self) -> None:
         ukm_reset_all_bindings()
 
 
