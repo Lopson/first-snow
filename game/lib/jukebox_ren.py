@@ -9,10 +9,10 @@ from dataclasses import dataclass
 from typing import Optional, TYPE_CHECKING, TypeVar
 from renpy.audio import music
 from renpy.exports.displayexports import restart_interaction
-from renpy.preferences import Preference
 if TYPE_CHECKING:
     from renpy import game
     from renpy.game import persistent
+    from renpy.preferences import Preference
 
 was_playing: bool = False
 
