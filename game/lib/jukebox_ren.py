@@ -4,6 +4,7 @@ init python:
 
 # Jukebox support functions.
 
+from collections import OrderedDict
 from dataclasses import dataclass
 from typing import Optional, TYPE_CHECKING, TypeVar
 from renpy.audio import music
@@ -113,7 +114,7 @@ class JukeboxState:
 
 def update_jukebox_state(
         new_track: str | None = None,
-        tracks: dict = {},
+        tracks: OrderedDict[str, str] = OrderedDict(),
         needs_unlock: bool = False) -> JukeboxState:
     """
     The function that updates the jukebox's state.
