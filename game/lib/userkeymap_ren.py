@@ -93,6 +93,7 @@ from renpy.minstore import _
 from renpy.ui import Action
 from renpy.display.core import IgnoreEvent, EVENTNAME
 from renpy.display.behavior import map_event, clear_keymap_cache
+from renpy.display.layout import Null
 from renpy.exports.displayexports import restart_interaction, get_image_bounds
 # _keymap_list is impossible to import as it resides in 00keymap.rpy
 
@@ -437,7 +438,7 @@ def ukm_reset_all_bindings() -> None:
 
 
 
-class KeyBindingGrabBehaviour(Null): # pyright: ignore[reportUndefinedVariable]
+class KeyBindingGrabBehaviour(Null):
     def __init__(self,
                  target: str,
                  excludes: list[str]=[],
