@@ -33,7 +33,8 @@ def animation_from_folder(name: str,
     we're creating these objects via the Animation function, these automatically
     get set to None.
     """
-    frame_duration = 1.0 / fps
+    frame_duration: float = 1.0 / fps
+    frames: list[tuple[str | Transform, float]]
     if kwargs:
         frames = [(Transform(filename, **kwargs), frame_duration)
                   for filename in sorted(renpy_listdir(folder, full_path=True))]
