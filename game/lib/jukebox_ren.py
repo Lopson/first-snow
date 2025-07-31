@@ -6,13 +6,14 @@ init python:
 
 from collections import OrderedDict
 from dataclasses import dataclass
-from typing import Optional, TYPE_CHECKING, TypeVar
+from typing import Any, Optional, TYPE_CHECKING
 from renpy.audio import music
 from renpy.exports.displayexports import restart_interaction
 if TYPE_CHECKING:
     from renpy import game
     from renpy.game import persistent
-    from renpy.preferences import Preference
+    # The `Preference` mentioned here is the function found in
+    # renpy.common.00preferences.
 
 was_playing: bool = False
 
@@ -81,8 +82,8 @@ def JukeboxStop(fadeout=None) -> Stop:
     return Stop('jukebox', fadeout=None)
 
 
-def JukeboxVolume() -> Preference:
-    return Preference('jukebox volume', 1.0)
+def JukeboxVolume() -> Any:
+    return Preference('jukebox volume')
 
 
 def jukebox_is_paused() -> bool:
