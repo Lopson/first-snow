@@ -14,7 +14,7 @@ if TYPE_CHECKING:
     from renpy.minstore import __
 
 # Called to make a screenshot happen.
-def _screenshot():
+def _screenshot() -> None:
     """
     _screenshot variant that tries multiple directories before giving up,
     in case the user has no permission to write to the game directory.
