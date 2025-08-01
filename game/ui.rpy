@@ -1429,7 +1429,9 @@ screen extras_scenes():
                 vbox:
                     spacing 1
                     for act in range(1, max_act):
-                        $ act_scenes = collections.OrderedDict([(scene, store.rabbl.get_title(scene)) for scene in scenes if scene.startswith(str(act) + 'S')])
+                        python:
+                            from collections import OrderedDict
+                            act_scenes = OrderedDict([(scene, store.rabbl.get_title(scene)) for scene in scenes if scene.startswith(str(act) + 'S')])
                         text ("Act {}".format(store.rabbl.get_act_title(act)) if act > cutoff_act else " "):
                             size 65
                             xoffset 3
@@ -1967,20 +1969,38 @@ screen extras_music():
 
 screen extras_music_main():
     tag extramusicmenu
-    use extras_music_player(tracks=collections.OrderedDict(
-        (track, track_titles[track]) for track in tracks if track_categories.get(track, 'main') == 'main'
-    ))
+    
+    python:
+        from collections import OrderedDict
+        tracks: OrderedDict[str, str] = OrderedDict(
+            (track, track_titles[track]) for track in tracks if \
+                track_categories.get(track, 'main') == 'main'
+        )
+    
+    use extras_music_player(tracks=tracks)
+
 
 screen extras_music_event():
     tag extramusicmenu
-    use extras_music_player(tracks=collections.OrderedDict(
-        (track, track_titles[track]) for track in tracks if track_categories.get(track, 'main') == 'event'
-    ), needs_unlock=True)
+
+    python:
+        from collections import OrderedDict
+        tracks: OrderedDict[str, str] = OrderedDict(
+            (track, track_titles[track]) for track in tracks if \
+                track_categories.get(track, 'main') == 'event'
+        )
+
+    use extras_music_player(tracks=tracks, needs_unlock=True)
 
 
-screen extras_music_player(tracks={}, needs_unlock=False):
+screen extras_music_player(tracks=None, needs_unlock=False):
     on "replaced" action JukeboxStop(fadeout=1.0)
     on "hide" action JukeboxStop(fadeout=1.0)
+
+    if tracks is None:
+        python:
+            from collections import OrderedDict
+            tracks: OrderedDict = OrderedDict()
 
     default jukebox_state = update_jukebox_state(tracks=tracks, needs_unlock=needs_unlock)
     
