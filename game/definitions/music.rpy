@@ -9,11 +9,16 @@ init python:
 
     TrackDetails = namedtuple("TrackDetails", ["title", "type"])
 
+define fadeout_music_room = 1.0
+define fadein_music_room = 2.0
+
 define standard_music_room = MusicRoom(
-    channel='jukebox', fadeout=1.0, fadein=2.0, single_track=True)
+    channel='jukebox', fadeout=fadeout_music_room,
+    fadein=fadein_music_room, single_track=True)
 
 define event_music_room = MusicRoom(
-    channel='jukebox', fadeout=1.0, fadein=2.0, single_track=True)
+    channel='jukebox', fadeout=fadeout_music_room,
+    fadein=fadein_music_room, single_track=True)
 
 define tracks = {
     'music/snow.ogg': TrackDetails(__('Snowy City'), MusicType.MAIN),
@@ -44,13 +49,14 @@ define tracks = {
     'music/night_2_r2.ogg': TrackDetails(__('Warm-Hearted World'), MusicType.EXCLUDE)
 }
 
-# Add all of the tracks to the music room.
 init python:
+    # Add all of the tracks to the music room.
     for track in (i for i in tracks if tracks[i].type == MusicType.MAIN):
         standard_music_room.add(track, always_unlocked=True)
 
     for track in (i for i in tracks if tracks[i].type == MusicType.EVENT):
         event_music_room.add(track)
+
 
     def get_current_mr_track_index(music_room: MusicRoom) -> int:
         if music_room.last_playing is None:
@@ -64,12 +70,14 @@ init python:
         
         return idx
 
+
     def get_current_mr_track_file(music_room: MusicRoom) -> str:
         idx: int = get_current_mr_track_index(music_room)
 
         if idx >= 0:
             return music_room.playlist[idx]
         return ""
+
 
     def is_current_mr_playing(music_room: MusicRoom) -> bool:
         if get_current_mr_track_index(music_room) < 0:
