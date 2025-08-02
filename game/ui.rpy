@@ -1878,7 +1878,8 @@ screen extras_music():
             selected "ui/extras/jukebox/album-switch-click.webp"
             action [
                 SetScreenVariable('current_album', 'event' if current_album == 'main' else 'main'),
-                ShowMenu('extras_music_event' if current_album == 'main' else 'extras_music_main')
+                ShowMenu('extras_music_event' if current_album == 'main' else 'extras_music_main'),
+                Function(renpy.music.stop, "jukebox")
             ]
 
             xpos 710
@@ -1891,7 +1892,8 @@ screen extras_music():
                 hover "ui/extras/jukebox/album-event.webp"
                 action [
                     SetScreenVariable('current_album', 'event'),
-                    ShowMenu('extras_music_event')
+                    ShowMenu('extras_music_event'),
+                    Function(renpy.music.stop, "jukebox")
                 ]
 
                 xpos 355
@@ -1911,7 +1913,8 @@ screen extras_music():
                     hover "ui/extras/jukebox/album-standard.webp"
                     action [
                         SetScreenVariable('current_album', 'main'),
-                        ShowMenu('extras_music_main')
+                        ShowMenu('extras_music_main'),
+                        Function(renpy.music.stop, "jukebox")
                     ]
 
                     xalign 0.5
@@ -1923,7 +1926,8 @@ screen extras_music():
                 hover "ui/extras/jukebox/album-standard.webp"
                 action [
                     SetScreenVariable('current_album', 'main'),
-                    ShowMenu('extras_music_main')
+                    ShowMenu('extras_music_main'),
+                    Function(renpy.music.stop, "jukebox")
                 ]
 
                 xpos 355
@@ -1943,7 +1947,8 @@ screen extras_music():
                     hover "ui/extras/jukebox/album-event.webp"
                     action [
                         SetScreenVariable('current_album', 'event'),
-                        ShowMenu('extras_music_event')
+                        ShowMenu('extras_music_event'),
+                        Function(renpy.music.stop, "jukebox")
                     ]
 
                     xalign 0.5
@@ -1980,11 +1985,6 @@ screen extras_music_event():
 
 
 screen extras_music_player(music_room, needs_unlock=False):
-    on "replace" action [
-        music_room.TogglePause() if renpy.music.get_pause(music_room.channel) else None,
-        music_room.Stop()
-    ]
-
     frame:
         background "ui/extras/jukebox/list-bg.webp"
         xpos 830
@@ -2001,7 +2001,8 @@ screen extras_music_player(music_room, needs_unlock=False):
                 hbox:
                     spacing -2
                     ysize 32
-                    if is_current_mr_playing(music_room) and get_current_mr_track_index(music_room) == i - 1:
+                    if (is_current_mr_playing(music_room) and
+                            get_current_mr_track_index(music_room) == i - 1):
                         frame:
                             xoffset 10
                             yoffset 1
@@ -2020,7 +2021,7 @@ screen extras_music_player(music_room, needs_unlock=False):
                             ysize 32
                         
                         add "ui/extras/jukebox/selected-track-tail.webp":
-                            xoffset -2
+                            xoffset 2
                             yoffset -3
                     elif needs_unlock and not music_room.is_unlocked(track):
                         textbutton "[i].":
@@ -2067,7 +2068,8 @@ screen extras_music_player(music_room, needs_unlock=False):
         add "ui/extras/jukebox/current-song.webp":
             ypos 5
 
-        text (tracks[get_current_mr_track_file(music_room)].title if is_current_mr_playing(music_room) else __("Nothing playing")):
+        text (tracks[get_current_mr_track_file(music_room)].title if
+                is_current_mr_playing(music_room) else __("Nothing playing")):
             size 24
             xpos 32
             ypos 5
@@ -2091,10 +2093,21 @@ screen extras_music_player(music_room, needs_unlock=False):
                 hover "ui/extras/jukebox/ctrl-back.webp"
                 insensitive Transform("ui/extras/jukebox/ctrl-back.webp", alpha=0.5)
                 xpos 0
-                action [music_room.Previous()]
+                
+                if not is_current_mr_playing(music_room):
+                    action [music_room.Previous()]
+                else:
+                    action [
+                        SetField(music_room, "fadeout", 0.0),
+                        SetField(music_room, "fadein", 0.0),
+                        music_room.Previous(),
+                        SetField(music_room, "fadeout", fadeout_music_room),
+                        SetField(music_room, "fadein", fadein_music_room)
+                    ]
 
             imagebutton:
-                if is_current_mr_playing(music_room) and not renpy.music.get_pause(music_room.channel):
+                if (is_current_mr_playing(music_room) and
+                        not renpy.music.get_pause(music_room.channel)):
                     idle Transform("ui/extras/jukebox/ctrl-pause.webp", alpha=0.8)
                     hover "ui/extras/jukebox/ctrl-pause.webp"
                 else:
@@ -2113,7 +2126,17 @@ screen extras_music_player(music_room, needs_unlock=False):
                 hover "ui/extras/jukebox/ctrl-forward.webp"
                 insensitive Transform("ui/extras/jukebox/ctrl-forward.webp", alpha=0.5)
                 xpos 100
-                action [music_room.Next()]
+                
+                if not is_current_mr_playing(music_room):
+                    action [music_room.Next()]
+                else:
+                    action [
+                        SetField(music_room, "fadeout", 0.0),
+                        SetField(music_room, "fadein", 0.0),
+                        music_room.Next(),
+                        SetField(music_room, "fadeout", fadeout_music_room),
+                        SetField(music_room, "fadein", fadein_music_room)
+                    ]
 
             imagebutton:
                 sensitive is_current_mr_playing(music_room)
@@ -2121,10 +2144,7 @@ screen extras_music_player(music_room, needs_unlock=False):
                 hover "ui/extras/jukebox/ctrl-stop.webp"
                 insensitive Transform("ui/extras/jukebox/ctrl-stop.webp", alpha=0.5)
                 xpos 150
-                action [
-                    music_room.TogglePause() if renpy.music.get_pause(music_room.channel) else None,
-                    music_room.Stop()
-                ]
+                action [music_room.Stop()]
 
             bar value MixerValue("jukebox"):
                 xpos 0
