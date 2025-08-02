@@ -1861,9 +1861,9 @@ screen extras_art_single_overlay(piece):
 ## Music gallery.
 
 screen extras_music():
-    on "replace" action [JukeboxEnter(), Show('extras_music_main')]
-    on "replaced" action [JukeboxLeave(), Play('music', get_menu_theme(), fadein=1.0), Hide('extramusicmenu')]
-    on "hide" action [JukeboxLeave(), Play('music', get_menu_theme(), fadein=1.0), Hide('extramusicmenu')]
+    on "replace" action [Stop("music", fadeout=1.0), Show('extras_music_main')]
+    on "replaced" action [Stop("jukebox", fadeout=1.0), Play('music', get_menu_theme(), fadein=1.0), Hide('extramusicmenu')]
+    on "hide" action [Stop("jukebox", fadeout=1.0), Play('music', get_menu_theme(), fadein=1.0), Hide('extramusicmenu')]
 
     tag extramenu
 
@@ -1970,50 +1970,20 @@ screen extras_music():
 screen extras_music_main():
     tag extramusicmenu
     
-    python:
-        from collections import OrderedDict
-        tracks: OrderedDict[str, str] = OrderedDict(
-            (track, track_titles[track]) for track in tracks if \
-                track_categories.get(track, 'main') == 'main'
-        )
-    
-    use extras_music_player(tracks=tracks)
+    use extras_music_player(music_room=standard_music_room)
 
 
 screen extras_music_event():
     tag extramusicmenu
 
-    python:
-        from collections import OrderedDict
-        tracks: OrderedDict[str, str] = OrderedDict(
-            (track, track_titles[track]) for track in tracks if \
-                track_categories.get(track, 'main') == 'event'
-        )
-
-    use extras_music_player(tracks=tracks, needs_unlock=True)
+    use extras_music_player(music_room=event_music_room, needs_unlock=True)
 
 
-screen extras_music_player(tracks=None, needs_unlock=False):
-    on "replaced" action JukeboxStop(fadeout=1.0)
-    on "hide" action JukeboxStop(fadeout=1.0)
-
-    if tracks is None:
-        python:
-            from collections import OrderedDict
-            tracks: OrderedDict = OrderedDict()
-
-    default jukebox_state = update_jukebox_state(tracks=tracks, needs_unlock=needs_unlock)
-    
-    showif config.developer:
-        vbox:
-            xpos 0.1
-            ypos 0.1
-
-            text "[jukebox_state.startidx]"
-            text "[jukebox_state.current]"
-            text "[jukebox_state.curridx]"
-            text "[jukebox_state.previdx]"
-            text "[jukebox_state.nextidx]"
+screen extras_music_player(music_room, needs_unlock=False):
+    on "replace" action [
+        music_room.TogglePause() if renpy.music.get_pause(music_room.channel) else None,
+        music_room.Stop()
+    ]
 
     frame:
         background "ui/extras/jukebox/list-bg.webp"
@@ -2024,12 +1994,14 @@ screen extras_music_player(tracks=None, needs_unlock=False):
             xpos 0
             ypos 20
             spacing 1
-            for entry in enumerate(tracks.items(), 1):
-                $ i, (track, title) = entry
+            for entry in enumerate(music_room.playlist, 1):
+                $ i, track = entry
+                $ title = tracks[track].title
+
                 hbox:
                     spacing -2
                     ysize 32
-                    if jukebox_state.curridx == i - 1:
+                    if is_current_mr_playing(music_room) and get_current_mr_track_index(music_room) == i - 1:
                         frame:
                             xoffset 10
                             yoffset 1
@@ -2050,7 +2022,7 @@ screen extras_music_player(tracks=None, needs_unlock=False):
                         add "ui/extras/jukebox/selected-track-tail.webp":
                             xoffset -2
                             yoffset -3
-                    elif needs_unlock and track not in persistent.played_tracks:
+                    elif needs_unlock and not music_room.is_unlocked(track):
                         textbutton "[i].":
                             xsize 50
                             ysize 32
@@ -2065,6 +2037,8 @@ screen extras_music_player(tracks=None, needs_unlock=False):
                             color "#faf6e780"
                             outlines [(2, "#292d3480", 0, 0)]
                     else:
+                        python:
+                            button_actions = [music_room.Play(track)]
                         textbutton "[i].":
                             xsize 50
                             ysize 32
@@ -2072,15 +2046,7 @@ screen extras_music_player(tracks=None, needs_unlock=False):
                             background None
                             text_color "#faf6e7"
                             text_outlines [(2, "#292d34", 0, 0)]
-                            action [
-                                JukeboxPlay(track),
-                                SetLocalVariable(
-                                    "jukebox_state",
-                                    update_jukebox_state(
-                                        new_track=track,
-                                        tracks=tracks,
-                                        needs_unlock=needs_unlock))
-                            ]
+                            action button_actions
                             bottom_padding -5
         
                         textbutton "[title]":
@@ -2090,15 +2056,7 @@ screen extras_music_player(tracks=None, needs_unlock=False):
                             text_outlines [(2, "#292d34", 0, 0)]
                             text_hover_outlines [(3, "#4b565f", 0, 0)]
                             hover_xoffset -1
-                            action [
-                                JukeboxPlay(track),
-                                SetLocalVariable(
-                                    "jukebox_state",
-                                    update_jukebox_state(
-                                        new_track=track,
-                                        tracks=tracks,
-                                        needs_unlock=needs_unlock))
-                            ]
+                            action button_actions
                             bottom_padding -5
 
     fixed:
@@ -2109,14 +2067,14 @@ screen extras_music_player(tracks=None, needs_unlock=False):
         add "ui/extras/jukebox/current-song.webp":
             ypos 5
 
-        text (jukebox_state.current or _("Nothing playing")):
+        text (tracks[get_current_mr_track_file(music_room)].title if is_current_mr_playing(music_room) else __("Nothing playing")):
             size 24
             xpos 32
             ypos 5
-            color ("#faf6e7" if jukebox_state.current else "#faf6e780")
+            color ("#faf6e7" if is_current_mr_playing(music_room) else "#faf6e780")
 
         fixed:
-            bar value JukeboxPosition():
+            bar value AudioPositionValue(channel='jukebox'):
                 xpos 0
                 ypos 40
                 xmaximum 305
@@ -2128,87 +2086,47 @@ screen extras_music_player(tracks=None, needs_unlock=False):
             xpos 330
     
             imagebutton:
-                sensitive (jukebox_state.previdx is not None)
+                sensitive len(music_room.unlocked_playlist()) > 1
                 idle Transform("ui/extras/jukebox/ctrl-back.webp", alpha=0.8)
                 hover "ui/extras/jukebox/ctrl-back.webp"
                 insensitive Transform("ui/extras/jukebox/ctrl-back.webp", alpha=0.5)
                 xpos 0
-                action [
-                    jukebox_state.previdx is not None and JukeboxPlay(
-                        list(tracks.keys())[jukebox_state.previdx]),
-                    jukebox_state.previdx is not None and SetLocalVariable(
-                        "jukebox_state",
-                        update_jukebox_state(
-                            new_track=list(tracks.keys())[jukebox_state.previdx],
-                            tracks=tracks,
-                            needs_unlock=needs_unlock))
-                ]
-
-            if jukebox_is_paused():
-                imagebutton:
-                    idle Transform("ui/extras/jukebox/ctrl-play.webp", alpha=0.8)
-                    hover "ui/extras/jukebox/ctrl-play.webp"
-                    xpos 50
-                    action JukeboxToggle()
-            elif jukebox_is_playing():
-                imagebutton:
-                    idle Transform("ui/extras/jukebox/ctrl-pause.webp", alpha=0.8)
-                    hover "ui/extras/jukebox/ctrl-pause.webp"
-                    xpos 50
-                    action JukeboxToggle()
-            else:
-                imagebutton:
-                    sensitive (jukebox_state.startidx is not None)
-                    idle Transform("ui/extras/jukebox/ctrl-play.webp", alpha=0.8)
-                    hover "ui/extras/jukebox/ctrl-play.webp"
-                    insensitive Transform("ui/extras/jukebox/ctrl-play.webp", alpha=0.5)
-                    xpos 50
-                    action [
-                        jukebox_state.startidx is not None and JukeboxPlay(
-                            list(tracks.keys())[jukebox_state.startidx]),
-                        jukebox_state.startidx is not None and SetLocalVariable(
-                            "jukebox_state",
-                            update_jukebox_state(
-                                new_track=list(tracks.keys())[jukebox_state.startidx],
-                                tracks=tracks,
-                                needs_unlock=needs_unlock))
-                    ]
+                action [music_room.Previous()]
 
             imagebutton:
-                sensitive (jukebox_state.nextidx is not None)
+                if is_current_mr_playing(music_room) and not renpy.music.get_pause(music_room.channel):
+                    idle Transform("ui/extras/jukebox/ctrl-pause.webp", alpha=0.8)
+                    hover "ui/extras/jukebox/ctrl-pause.webp"
+                else:
+                    idle Transform("ui/extras/jukebox/ctrl-play.webp", alpha=0.8)
+                    hover "ui/extras/jukebox/ctrl-play.webp"
+                
+                xpos 50
+                if not is_current_mr_playing(music_room):
+                    action [music_room.Play()]
+                else:
+                    action [music_room.TogglePause()]
+
+            imagebutton:
+                sensitive len(music_room.unlocked_playlist()) > 1
                 idle Transform("ui/extras/jukebox/ctrl-forward.webp", alpha=0.8)
                 hover "ui/extras/jukebox/ctrl-forward.webp"
                 insensitive Transform("ui/extras/jukebox/ctrl-forward.webp", alpha=0.5)
                 xpos 100
-                action [
-                    jukebox_state.nextidx is not None and JukeboxPlay(
-                        list(tracks.keys())[jukebox_state.nextidx]),
-                    jukebox_state.nextidx is not None and SetLocalVariable(
-                            "jukebox_state",
-                            update_jukebox_state(
-                                new_track=list(tracks.keys())[jukebox_state.nextidx],
-                                tracks=tracks,
-                                needs_unlock=needs_unlock))
-                ]
+                action [music_room.Next()]
 
             imagebutton:
-                sensitive (jukebox_state.curridx is not None)
+                sensitive is_current_mr_playing(music_room)
                 idle Transform("ui/extras/jukebox/ctrl-stop.webp", alpha=0.8)
                 hover "ui/extras/jukebox/ctrl-stop.webp"
                 insensitive Transform("ui/extras/jukebox/ctrl-stop.webp", alpha=0.5)
                 xpos 150
                 action [
-                    JukeboxStop(),
-                    SetLocalVariable(
-                        "jukebox_state",
-                        update_jukebox_state(
-                            new_track=None,
-                            tracks=tracks,
-                            needs_unlock=needs_unlock)),
-                    renpy.restart_interaction
+                    music_room.TogglePause() if renpy.music.get_pause(music_room.channel) else None,
+                    music_room.Stop()
                 ]
 
-            bar value JukeboxVolume():
+            bar value MixerValue("jukebox"):
                 xpos 0
                 ypos 40
                 xmaximum 185
@@ -2216,15 +2134,15 @@ screen extras_music_player(tracks=None, needs_unlock=False):
                 right_bar 'ui/extras/jukebox/vol-slider.webp'
                 thumb 'ui/extras/jukebox/vol-handle.webp'
 
-            if jukebox_volume() > 0:
+            if preferences.get_mixer("jukebox") > 0.0:
                 add "ui/extras/jukebox/volume1.webp":
                     xpos 193
                     ypos 35
-            if jukebox_volume() > 0.33:
+            if preferences.get_mixer("jukebox") > 0.333:
                 add "ui/extras/jukebox/volume2.webp":
                     xpos 200
                     ypos 23
-            if jukebox_volume() > 0.66:
+            if preferences.get_mixer("jukebox") > 0.666:
                 add "ui/extras/jukebox/volume3.webp":
                     xpos 203
                     ypos 13
