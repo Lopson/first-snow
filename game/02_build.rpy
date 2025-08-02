@@ -45,6 +45,7 @@ init -1 python hide:
     build.classify('game/ui/**', 'resources')
     build.classify('game/voice/**', 'resources')
     build.classify('game/vfx/**', 'resources')
+    build.classify('game/definitions/**', 'resources')
 
     # What to pack as the story.
     build.archive('story', 'all')
