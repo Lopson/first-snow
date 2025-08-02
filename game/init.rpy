@@ -42,10 +42,11 @@ init python hide:
     persistent.patch_version = config.patch_version
 
     # Register appropriate extra channels.
-    renpy.music.register_channel('sound2', 'sfx', False, tight=True)
-    renpy.music.register_channel('loopsfx', 'sfx', True, tight=True)
-    renpy.music.register_channel('ambiance', 'ambiance', True, tight=True)
-    renpy.music.register_channel('ambiance2', 'ambiance', True, tight=True)
+    renpy.music.register_channel(name='sound2', mixer='sfx', loop=False, tight=True)
+    renpy.music.register_channel(name='loopsfx', mixer='sfx', loop=True, tight=True)
+    renpy.music.register_channel(name='ambiance', mixer='ambiance', loop=True, tight=True)
+    renpy.music.register_channel(name='ambiance2', mixer='ambiance', loop=True, tight=True)
+    renpy.music.register_channel(name='jukebox', mixer='jukebox', loop=False, tight=True)
 
     # Sync progress.
     achievement.sync()
