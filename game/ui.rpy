@@ -7,20 +7,7 @@
 #
 ###
 
-init python:
-    animation_from_folder('menu_newgame', 'ui/side/menu_new', wrapper=ResettableDisplayable)
-    animation_from_folder('menu_savegame', 'ui/side/menu_save', wrapper=ResettableDisplayable)
-    animation_from_folder('menu_savegame_back', 'ui/side/menu_back1', wrapper=ResettableDisplayable)
-    animation_from_folder('menu_loadgame', 'ui/side/menu_load', wrapper=ResettableDisplayable)
-    animation_from_folder('menu_loadgame_back', 'ui/side/menu_back2', wrapper=ResettableDisplayable)
-    animation_from_folder('menu_options', 'ui/side/menu_options', wrapper=ResettableDisplayable)
-    animation_from_folder('menu_options_back', 'ui/side/menu_back3', wrapper=ResettableDisplayable)
-    animation_from_folder('menu_extras', 'ui/side/menu_extras', wrapper=ResettableDisplayable)
-    animation_from_folder('menu_extras_back', 'ui/side/menu_back4', wrapper=ResettableDisplayable)
-    animation_from_folder('menu_mainmenu', 'ui/side/menu_main', wrapper=ResettableDisplayable)
-    animation_from_folder('menu_quit_normal',  'ui/side/menu_quit', fps=18, loop_frames=1, wrapper=ResettableDisplayable)
-    animation_from_folder('menu_quit_reverse', 'ui/side/menu_quit', reverse=True, fps=18, loop_frames=1, wrapper=ResettableDisplayable)
-    
+init python:    
     def lang_img(fn):
         # TODO This needs to be removed.
         """
@@ -41,97 +28,6 @@ init python:
 # Screens.
 #
 ###
-
-
-########################################################################################
-# Cues.
-########################################################################################
-
-image cue bg = Composite(
-    (config.screen_width, 29),
-    (0, 3), "ui/hud/cue/bg.webp",
-    (226, 3), "#2b3038"
-)
-
-screen cue_icon(active, which, txt):
-    python:
-        season = get_cue_season()
-        text_color = {
-            'fall':   '#352114',
-            'winter': '#424351'
-        }[season]
-        outline_color = {
-            'fall':   '#f9f8d1',
-            'winter': '#faf6e7'
-        }[season]
-        icon = "ui/hud/cue/icon-{}-{}.webp".format(which, season)
-        bg = Frame("ui/hud/cue/bg-{}.webp".format(season), tile=True, padding=(0, 0), margin=(0, 0))
-
-    frame:
-        background "cue bg"
-        ysize 32
-        xpos 1.0
-        xanchor 1.0
-        margin (0, 0)
-        padding (0, 0)
-
-        if active:
-            hbox:
-                xminimum 200
-
-                add icon
-
-                label txt:
-                    background bg
-                    text_size 20
-                    xminimum 160
-                    ymaximum 32
-                    text_color text_color
-                    text_outlines [(2, outline_color, 0, 0)]
-                    text_yoffset 3
-                    margin (0, 0)
-                    padding (0, 0, 5, 0)
-        else:
-            null width 0
-
-init python hide:
-    def friendly_name(fn):
-        return (fn
-            # remove directory
-            .rsplit('/', 1)[-1]
-            # remove extension
-            .rsplit('.', 1)[0]
-            # remove separators
-            .replace('_', ' ')
-            .replace('-', ' ')
-            # remove differentiatiors
-            .rstrip('1234567890')
-        )
-
-    def on_music(fn):
-        if not persistent.cue_music:
-            return
-        if fn and store.rabbl.in_playthrough():
-            name: str
-            if tracks.get(fn):
-                name = tracks.get(fn).title
-            else:
-                name = friendly_name(fn)
-            cue('icon', 4.0, which='music', txt=name)
-
-    def on_sound(fn):
-        if not persistent.cue_sfx:
-            return
-        if fn and store.rabbl.in_playthrough():
-            name = friendly_name(fn)
-            cue('icon', 4.0, which='sfx', txt=name)
-
-    add_audio_callback('music',   on_music)
-    add_audio_callback('sound',   on_sound)
-    add_audio_callback('sound2',  on_sound)
-    add_audio_callback('loopsfx', on_sound)
-
-
 
 ########################################################################################
 # Main screens.
