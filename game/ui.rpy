@@ -20,19 +20,17 @@ init python:
     animation_from_folder('menu_mainmenu', 'ui/side/menu_main', wrapper=ResettableDisplayable)
     animation_from_folder('menu_quit_normal',  'ui/side/menu_quit', fps=18, loop_frames=1, wrapper=ResettableDisplayable)
     animation_from_folder('menu_quit_reverse', 'ui/side/menu_quit', reverse=True, fps=18, loop_frames=1, wrapper=ResettableDisplayable)
-
-    def get_ui_season():
-        return persistent.ui_season or store.ui_season
-
-    def get_cue_season():
-        return persistent.cue_season or store.ui_season
-
-    def get_language():
-        return store.rabbl.current_language or 'en'
     
     def lang_img(fn):
+        # TODO This needs to be removed.
+        """
+        Tries to see if there's a file whose name ends with "-" + get_language().
+        If there is, then that means that the image that should be loaded is the
+        one belonging to the language obtained; if not, simply return the given
+        argument.
+        """
         base, ext = fn.rsplit('.', 1)
-        lfn = base + '-' + get_language() + '.' + ext
+        lfn = base + '-' + GameContext.get_language() + '.' + ext
         if renpy.loadable(lfn):
             return lfn
         else:
@@ -114,7 +112,11 @@ init python hide:
         if not persistent.cue_music:
             return
         if fn and store.rabbl.in_playthrough():
-            name = store.track_titles.get(fn, friendly_name(fn))
+            name: str
+            if tracks.get(fn):
+                name = tracks.get(fn).title
+            else:
+                name = friendly_name(fn)
             cue('icon', 4.0, which='music', txt=name)
 
     def on_sound(fn):
@@ -166,7 +168,7 @@ screen pause_menu():
     python:
         # Fetch current song.
         trackfile = renpy.music.get_playing('music')
-        track = store.track_titles.get(trackfile)
+        track = tracks.get(trackfile).title
 
         # Fetch current scene.
         title = store.rabbl.get_title(store.rabbl_playthrough.current_scene)
@@ -2450,7 +2452,7 @@ screen say(what, who, double_speak=False):
         bg = None
         tb = Null()
         bg_base = 'ui/textbar/' + get_ui_season() + '/'
-        tb_base = 'ui/textbar/names/' + get_language() + '/'
+        tb_base = 'ui/textbar/names/' + GameContext.get_language() + '/'
 
         vinfo = store._get_voice_info()
         speaking = speaking_flavour = False

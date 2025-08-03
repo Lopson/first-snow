@@ -4,7 +4,7 @@
 label scene_init:
     python:
         all_languages = []
-        ui_season = 'winter'
+        store.ui_season = 'winter'
 
 label scene_start:
     $ text_log = TextLog()

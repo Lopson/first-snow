@@ -37,3 +37,10 @@ class GameContext:
 
     def in_replay(self) -> bool:
         return self.in_playthrough() and self.oneshot
+
+    @staticmethod
+    def get_language() -> str | None:
+        # TODO Once we've moved the english script away from the "en" folder,
+        # this will have to be changed.
+        # return _preferences.language
+        return 'en'
