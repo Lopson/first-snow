@@ -69,7 +69,7 @@ screen pause_menu():
         # Fetch current scene.
         title = store.rabbl.get_title(store.rabbl_playthrough.current_scene)
 
-        if store.rabbl_playthrough.oneshot:
+        if game_context.oneshot:
             title = '{color=#faf6e780}' + _('Replay:') + '{/color} ' + title
 
         # Fetch current running time.
