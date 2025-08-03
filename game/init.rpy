@@ -1,29 +1,12 @@
 # init.rpy
 # Initialization code for the game, and for when a new game is started.
 
-init -9999 python:
-    store.dlc_packages = []
-
-# Persistence initialization, if ran for the first time.
-default persistent.cue_music = False
-default persistent.cue_sfx = False
-default persistent.h = True
-default persistent.font_mode = 'standard'
-default persistent.high_contrast = False
-default persistent.finished_story = False
-
+# TODO Delete alongside Ren'Edit.
 default editing = False
-
-default preferences.afm_time = 15
-default preferences.emphasize_audio = True
 
 init -1 python hide:
     # fast skip is so fast that with our directing it crashes Ren'Py lol
     config.keymap['fast_skip'] = []
-
-init 999 python hide:
-    store.h_available = ('h' in store.dlc_packages)
-    store.rabbl.allow_explicit = store.h_available and persistent.h
 
 init python hide:
     # Cheater cheater cheateerrrrr
@@ -50,17 +33,6 @@ init python hide:
 
     # Sync progress.
     achievement.sync()
-
-
-# Setup audio playback log.
-default persistent.played_tracks = set()
-
-init -1 python hide:
-    def log_playback(track):
-        persistent.played_tracks.add(track)
-
-    add_audio_callback('music', log_playback)
-    add_audio_callback('loopsfx', log_playback)
 
 
 label splashscreen:

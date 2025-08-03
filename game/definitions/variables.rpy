@@ -1,5 +1,28 @@
-# This object contains data about the player's overall progress.
-default game_context = GameContext()
+##################
+# DLC Management #
+##################
+
+# This variable is meant to be altered by DLC packages, such as the "H" one.
+# Packages are expected to add a string identifying them. This way, we know
+# which DLC packages are present in the game.
+init -999:
+    define store.dlc_packages = []
+
+# This variable is the setting that the users can control to state whether
+# or not they want to play the adult content.
+default persistent.h = True
+
+# This flag is meant to control whether or not to show adult content
+# in the current playthrough.
+default store.allow_explicit = True
+
+init 999:
+    define store.h_available = ('h' in store.dlc_packages)
+    store.allow_explicit = store.h_available and persistent.h
+
+###############
+# UI Settings #
+###############
 
 # These variables control the season that we want for the theming
 # of the in-game UI. The default should be to let the gameplay
@@ -31,3 +54,43 @@ init python:
             raise ValueError
 
         return persistent.cue_season or store.ui_season
+
+# This variable sets whether or not to show music cues during gameplay.
+default persistent.cue_music = False
+
+# This variable sets whether or not to show sound cues during gameplay.
+default persistent.cue_sfx = False
+
+# This one sets the font to use during gameplay.
+# Possible values: 'standard', 'dyslexia', 'sans'.
+default persistent.font_mode = 'standard'
+
+# This one defines whether to use High Contrast mode.
+default persistent.high_contrast = False
+
+##################
+# Other Settings #
+##################
+
+# This one controls the speed of auto-forward mode.
+default preferences.afm_time = 15
+
+# This one controls whether we want to emphasize the voice audio.
+default preferences.emphasize_audio = True
+
+#########################
+# Game State Management #
+#########################
+
+# This variable keeps track of the current scene's ID during gameplay.
+default store.current_scene = None
+
+# This one tells us whether or not we're in a one-shot playthrough,
+# i.e. we're playing through one specific chapter selected by the player.
+default store.oneshot = False
+
+# This object contains data about the player's overall progress.
+default store.game_context = GameContext() # TODO should ideally be a define!
+
+# This variable tells us whether or not the game has been finished at least once.
+default persistent.finished_story = False
