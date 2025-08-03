@@ -222,11 +222,3 @@ init -25 python:
 
 init -10:
     call script_init
-
-init 1 python:
-    # Define characters.
-    # The characters dict is defined in scripts/init.rpy,
-    # the names in scripts/<lang>/init.rpy
-    for short, meta in characters.iteritems():
-        name = character_names[short]
-        globals()[short] = Character(name, image=short, voice_tag=short, **meta)
