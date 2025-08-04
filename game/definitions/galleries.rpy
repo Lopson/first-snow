@@ -270,7 +270,7 @@ define cg_art = [
         title=__('Voiced'),
         file=['cgs/act4_vacg{}.webp'.format(i)for i in range(1, 5)],
         thumb=['cgs/act4_vacg{}_thumb.webp'.format(i)for i in range(1, 5)],
-        locked=lambda: not store.rabbl.seen_scene('4S2')
+        locked=lambda: not game_context.seen_scene('4S2')
     )
 ]
 

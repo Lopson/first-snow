@@ -426,7 +426,7 @@ $ renpy.music.set_volume(1.0)
 play sound "sfx/rustle-clothes.ogg"
 scene black with midDissolve
 $ camera_reset()
-if not store.rabbl.allow_explicit:
+if not store.allow_explicit:
     "I want to say that I'm fine, but I can't quite get over the stumbling block of being bared in front of someone. Meeting halfway will have to do, for now."
 
     "As Eileen sets her previous painting on the kitchen counter, I pop into the bathroom."
@@ -435,7 +435,7 @@ else:
     "As Eileen sets her previous painting on the kitchen counter, I start taking my clothes off, my heart practically in my mouth by now."
 
 play music "music/romance_2_m.ogg" fadein 2.0
-if not store.rabbl.allow_explicit:
+if not store.allow_explicit:
     scene cg act2 nudepainting embarrassed
     $camera_move(-2800,1500,750,2,0,'dissolve')
     with midDissolve
@@ -464,7 +464,7 @@ allison "Like... like this?"
 eileen "Yeah, just stay like that."
 
 play loopsfx "sfx/ambiance/painting.ogg" fadein 1.5
-if not store.rabbl.allow_explicit:
+if not store.allow_explicit:
     show cg act2 nudepainting
 else:
     show cg act2 boobpainting
@@ -479,7 +479,7 @@ $camera_move(0,0,0,0,12,'ease')
 
 "I can't see much at all with my head slightly down like this, but at least this position is easy to keep. Without anything in particular to focus my eyes on, I can't help but turn my thoughts inward."
 
-if not store.rabbl.allow_explicit:
+if not store.allow_explicit:
     show cg act2 nudepainting blurred4
 else:
     show cg act2 boobpainting blurred4
@@ -487,7 +487,7 @@ $ renpy.transition(midlongDissolve, layer='master')
 show shadow:
     alpha 0
     ease 2.0 alpha 0.45
-if not store.rabbl.allow_explicit:
+if not store.allow_explicit:
     show cg act2 nudepainting allison2 as cg2:
         alpha 0
         ease 2.0 alpha 1
@@ -502,13 +502,13 @@ else:
 "I wonder how I look to her right now. Am I gross? Compared to Eileen, I probably look plain at best."
 
 stop loopsfx
-if not store.rabbl.allow_explicit:
+if not store.allow_explicit:
     scene cg act2 nudepainting embarrassed with vpunch
 else:
     scene cg act2 boobpainting embarrassed with vpunch
 eileen "Hey, I know it's not easy, but can you try not to tense up so much?"
 
-if not store.rabbl.allow_explicit:
+if not store.allow_explicit:
     scene cg act2 nudepainting with midDissolve
 else:
     scene cg act2 boobpainting with midDissolve
@@ -519,7 +519,7 @@ allison "Sorry."
 eileen "It's okay. Not too much longer."
 
 play loopsfx "sfx/ambiance/painting.ogg"
-if not store.rabbl.allow_explicit:
+if not store.allow_explicit:
     show cg act2 nudepainting blurred4
 else:
     show cg act2 boobpainting blurred4
@@ -527,7 +527,7 @@ $ renpy.transition(verylongDissolve, layer='master')
 show bg texture:
     alpha 0
     ease 5.0 alpha 0.05
-if not store.rabbl.allow_explicit:
+if not store.allow_explicit:
     show cg act2 nudepainting allison1 as cg2:
         alpha 0
         ease 5.0 alpha 1
@@ -537,7 +537,7 @@ else:
         ease 5.0 alpha 1
 "Her expression was so focused and analytical. I sometimes forget that serious artwork can take so much knowledge and logic as well as creativity. I really am just an art prop for her."
 
-if not store.rabbl.allow_explicit:
+if not store.allow_explicit:
     show cg act2 nudepainting allison3 as cg3:
         alpha 0
         ease 2.0 alpha 1
@@ -552,7 +552,7 @@ else:
 stop loopsfx fadeout 4.0
 "It makes me feel a little special that she's looking at me this way. While she's no doubt done life drawing before, this is something different."
 
-if not store.rabbl.allow_explicit:
+if not store.allow_explicit:
     scene cg act2 nudepainting smile with midDissolve
 else:
     scene cg act2 boobpainting smile with midDissolve
@@ -562,7 +562,7 @@ else:
 
 eileen "Alright, you can move now."
 
-if not store.rabbl.allow_explicit:
+if not store.allow_explicit:
     scene cg act2 nudepainting smile
     $camera_move(-2800,1500,750,2,0,'dissolve')
     with midDissolve
@@ -575,7 +575,7 @@ else:
 scene black with dissolve
 $ camera_reset()
 scene bg apteileen livingroom messy with dissolve
-if not store.rabbl.allow_explicit:
+if not store.allow_explicit:
     "Thankful that my duty has been fulfilled, I adjust the towel a little to ensure it doesn't slip off. My first thought is to go to where I've carefully placed my clothes, but on the way I'm distracted by the sight of it."
 else:
     "Thankful that my duty has been fulfilled, I immediately move my hands to cover myself. My first thought is to go to where I've carefully placed my clothes, but on the way I'm distracted by the sight of it."
