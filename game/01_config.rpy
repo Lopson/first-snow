@@ -6,10 +6,6 @@ python early:
     config.testing = False
     config.patch_version = None
 
-init -1 python:
-    def get_menu_theme():
-        return 'music/snow-eileen.ogg' if persistent.finished_story else 'music/snow.ogg'
-
 init -1 python hide:
     # Basic settings.
     config.name = "First Snow"
