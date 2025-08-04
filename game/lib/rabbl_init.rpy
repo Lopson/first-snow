@@ -1,7 +1,7 @@
 ## RABBL support code.
 
 # Start of a new game.
-label start:
+label start_old:
     $ store.rabbl_playthrough = RABBLPlaythrough()
     $ renpy.block_rollback()
 

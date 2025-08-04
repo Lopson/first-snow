@@ -1,6 +1,8 @@
-label scene_1S1_en:
+label scene_1S1:
 ######################
 # Act 1, Scene 1
+
+call scene_start
 
 window hide
 play ambiance "sfx/ambiance/winter.ogg" fadein 2.0
@@ -1013,4 +1015,8 @@ $ achievement.grant('story_act1')
 scene title act1 with menuFade
 $ renpy.pause(5.0, hard=True)
 
+call scene_end
+
+if not store.store.oneshot:
+    jump scene_1S2
 return

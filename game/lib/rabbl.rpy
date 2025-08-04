@@ -201,15 +201,6 @@ python early:
 init -999 python:
     RABBL.setup_init()
 
-init -25 python hide:
-    # Register save game callback.
-    def store_scene(info):
-        if store.rabbl_playthrough:
-            info['scene'] = store.rabbl_playthrough.current_scene
-        info['playtime'] = renpy.get_game_runtime()
-        return info
-    config.save_json_callbacks.append(store_scene)
-
 init -25 python:
     # Register PlayScene() action.
     class PlayScene(Action):

@@ -90,7 +90,7 @@ default store.current_scene = None
 default store.oneshot = False
 
 # This object contains data about the player's overall progress.
-default store.game_context = GameContext() # TODO should ideally be a define!
+define store.game_context = GameContext()
 
 # This variable tells us whether or not the game has been finished at least once.
 default persistent.finished_story = False
