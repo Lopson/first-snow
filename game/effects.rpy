@@ -365,7 +365,7 @@ init python:
 
 
     def LightSnow(prefill=False):
-        return LiveComposite(
+        return Composite(
             (config.screen_width, config.screen_height),
             (0, 0), SnowLayer(
                 "vfx/smallflake.webp", prefill=prefill, spawn_rate=0.10,
@@ -379,7 +379,7 @@ init python:
 
 
     def LightSnowSepia(prefill=False):
-        return LiveComposite(
+        return Composite(
             (config.screen_width, config.screen_height),
             (0, 0), SnowLayer(
                 Transform("vfx/smallflake.webp", matrixcolor=SepiaMatrix()),
