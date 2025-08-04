@@ -1,31 +1,59 @@
 """renpy
-python early:
+init -26 python:
 """
 
 _constant = True
 
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
+from renpy.exports.contextexports import get_game_runtime
+from renpy.exports.persistentexports import seen_label
+from renpy.exports.scriptexports import get_all_labels
 if TYPE_CHECKING:
-    from renpy import game, store, persistent
+    from renpy import game, store
     from renpy.defaultstore import main_menu
     from renpy.python import NoRollback
 
 @dataclass
 class GameContext(NoRollback):
-    seen_scenes: set[str] = set() # TODO We can auto-populate this based on `renpy.seen_label()`'s results.
+    @staticmethod
+    def scenes_seen() -> list[str]:
+        result: list[str] = []
+        scene_labels: list[str] = [
+            i for i in get_all_labels() if i.startswith(store.SCENE_LABEL_PREFIX)
+        ]
 
-    def scene_seen(self, scene_name: str) -> bool:
-        # TODO Can we somehow turn this into a staticmethod?
-        return False if scene_name not in self.seen_scenes else True
+        for scene_id in store.scene_titles:
+            # NOTE A scene may have been broken up into multiple sub-scenes
+            # due to the adult content.
+            specific_scene_labels: list[str] = [
+                i for i in scene_labels if i.startswith("scene_{}".format(scene_id))
+            ]
 
-    def update_seen_scenes(self, scene: str) -> None:
-        # TODO Can we somehow turn this into a staticmethod?
-        if (not isinstance(scene, str) or
-                scene not in store.scene_descriptions.keys()):
-            raise ValueError
+            for scene_label in specific_scene_labels:
+                if seen_label(scene_label):
+                    result.append(scene_id)
+                    break
         
-        self.seen_scenes.add(scene)
+        return result
+    
+    @classmethod
+    def scene_seen(cls, scene_id: str) -> bool:
+        return scene_id in cls.scenes_seen()
+
+    @classmethod
+    def acts_seen(cls) -> set[int]:
+        result: set[int] = set()
+        scenes_seen: list[str] = cls.scenes_seen()
+        
+        for scene_seen in scenes_seen:
+            result.add(int(scene_seen.split(sep="S")[0]))
+        
+        return result
+
+    @classmethod
+    def act_seen(cls, act_id: int) -> bool:
+        return act_id in cls.acts_seen()
     
     @staticmethod
     def explicit_allowed() -> bool:
@@ -38,13 +66,13 @@ class GameContext(NoRollback):
         return store.allow_explicit
 
     @staticmethod
-    def get_act_title(name) -> str:
+    def get_act_title(act_id: int) -> str:
         """
         Returns the name of the given act.
         """
 
         # `act_titles` found in `game/definitions/acts.rpy`
-        return store.act_titles.get(name, str(name))
+        return store.act_titles.get(act_id, str(act_id))
     
     @staticmethod
     def get_scene_title(scene_id: str) -> str:
@@ -74,3 +102,27 @@ class GameContext(NoRollback):
         # this will have to be changed.
         # return _preferences.language
         return 'en'
+
+    @staticmethod
+    def store_scene(info):
+        """
+        Add the current scene and total game runtime to the save file.
+        """
+        info['scene'] = store.current_scene
+        info['playtime'] = get_game_runtime()
+        
+        return info
+
+
+"""renpy
+init -25 python hide:
+"""
+
+_constant = True
+
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from renpy import config
+
+# Add a save callback so that current scene and runtime are saved.
+config.save_json_callbacks.append(GameContext.store_scene)

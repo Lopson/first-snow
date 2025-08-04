@@ -7,7 +7,7 @@ init python:
     @dataclass
     class GalleryItem:
         file: list[str]
-        thumb: list[str]
+        thumb: list[str] | Callable
         title: str | None = None
         locked: Callable | None = None
         visible: Callable | None = None
@@ -15,6 +15,14 @@ init python:
         preview: str | None = None
         author: str | None = None
         url: str | None = None
+
+        def eval_piece(self) -> None:
+            if callable(self.thumb):
+                self.thumb()
+            if callable(self.locked):
+                self.locked()
+            if callable(self.visible):
+                self.visible()
 
 
 define cg_art = [
@@ -73,7 +81,7 @@ define cg_art = [
                 'cgs/act2_nudepainting_smile.webp'
             ]
         ),
-        'thumb': (lambda:
+        thumb= (lambda:
             [
                 'dlc/h/cgs/act2_boobpainting_thumb.webp',
                 'dlc/h/cgs/act2_boobpainting_embarrassed_thumb.webp',
@@ -84,7 +92,7 @@ define cg_art = [
                 'cgs/act2_nudepainting_smile_thumb.webp'
             ]
         ),
-        'locked': lambda: not game_context.scene_seen('2S3')
+        locked=lambda: not game_context.scene_seen('2S3')
     ),
 
     GalleryItem(

@@ -5,16 +5,26 @@ init python:
         "VoiceDetails", ["tag", "character_name", "va_name", "color"])
 
 define store.voices = [
-    VoiceDetails('allison',   __('Allison Merlo'),    __('Elizabeth Quedenfeld'), '#1c2831'),
-    VoiceDetails('eileen',    __('Eileen Turner'),    __('Kira Buckland'),        '#9a9065'),
-    VoiceDetails('rose',      __('Rose Garcia'),      __('Nola Klop'),            '#c7633b'),
-    VoiceDetails('wallace',   __('Wallace Moore'),    __('Steven Kelly'),         '#b2678a'),
-    VoiceDetails('caprice',   __('Caprice Shiften'),  __('Lisa Reimold'),         '#839093'),
-    VoiceDetails('millie',    __('Millie Clarke'),    __('Jill Harris'),          '#925254'),
-    VoiceDetails('hayley',    __('Hayley Curah'),     __('Elissa Park'),          '#cc9351'),
-    VoiceDetails('eve',       __('Eve Turner'),       __('Aimee Smith'),          '#9a9065'),
-    VoiceDetails('elizabeth', __('Elizabeth Turner'), __('Abigail Turner'),       '#9a9065'),
-    VoiceDetails('andrew',    __('Andrew Turner'),    __('Bradley Gareth'),       '#5b4741'),
+    VoiceDetails(
+        'allison',   __('Allison Merlo'),    __('Elizabeth Quedenfeld'), '#1c2831'),
+    VoiceDetails(
+        'eileen',    __('Eileen Turner'),    __('Kira Buckland'),        '#9a9065'),
+    VoiceDetails(
+        'rose',      __('Rose Garcia'),      __('Nola Klop'),            '#c7633b'),
+    VoiceDetails(
+        'wallace',   __('Wallace Moore'),    __('Steven Kelly'),         '#b2678a'),
+    VoiceDetails(
+        'caprice',   __('Caprice Shiften'),  __('Lisa Reimold'),         '#839093'),
+    VoiceDetails(
+        'millie',    __('Millie Clarke'),    __('Jill Harris'),          '#925254'),
+    VoiceDetails(
+        'hayley',    __('Hayley Curah'),     __('Elissa Park'),          '#cc9351'),
+    VoiceDetails(
+        'eve',       __('Eve Turner'),       __('Aimee Smith'),          '#9a9065'),
+    VoiceDetails(
+        'elizabeth', __('Elizabeth Turner'), __('Abigail Turner'),       '#9a9065'),
+    VoiceDetails(
+        'andrew',    __('Andrew Turner'),    __('Bradley Gareth'),       '#5b4741'),
 ]
 
 init python:

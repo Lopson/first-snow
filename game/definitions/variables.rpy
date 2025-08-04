@@ -94,3 +94,12 @@ default store.game_context = GameContext() # TODO should ideally be a define!
 
 # This variable tells us whether or not the game has been finished at least once.
 default persistent.finished_story = False
+
+##################
+# Internal Logic #
+##################
+
+# This variable is used whenever we're trying to figure out if the player has
+# already played through a specific part of the game. Make sure that the name
+# of all of the scripting labels for the story start with this value!
+define store.SCENE_LABEL_PREFIX = "scene_"
