@@ -9,20 +9,32 @@ init python:
         file: list[str]
         thumb: list[str] | Callable
         title: str | None = None
-        locked: Callable | None = None
-        visible: Callable | None = None
+        locked: bool | Callable | None = None
+        visible: bool | Callable | None = None
         native: list[str] | None = None
         preview: str | None = None
         author: str | None = None
         url: str | None = None
 
+        def is_visible(self) -> bool:
+            if self.visible is None:
+                return True
+            
+            if isinstance(self.visible, bool):
+                if self.visible:
+                    return True
+                return False
+            
+            if callable(self.visible):
+                return self.visible()
+
         def eval_piece(self) -> None:
             if callable(self.thumb):
-                self.thumb()
+                self.thumb = self.thumb()
             if callable(self.locked):
-                self.locked()
+                self.locked = self.locked()
             if callable(self.visible):
-                self.visible()
+                self.visible = self.visible()
 
 
 define cg_art = [
@@ -75,7 +87,7 @@ define cg_art = [
                 'dlc/h/cgs/act2_boobpainting.webp',
                 'dlc/h/cgs/act2_boobpainting_embarrassed.webp',
                 'dlc/h/cgs/act2_boobpainting_smile.webp'
-            ] if game_context.allow_explicit else [
+            ] if game_context.explicit_allowed() else [
                 'cgs/act2_nudepainting.webp',
                 'cgs/act2_nudepainting_embarrassed.webp',
                 'cgs/act2_nudepainting_smile.webp'
@@ -86,7 +98,7 @@ define cg_art = [
                 'dlc/h/cgs/act2_boobpainting_thumb.webp',
                 'dlc/h/cgs/act2_boobpainting_embarrassed_thumb.webp',
                 'dlc/h/cgs/act2_boobpainting_smile_thumb.webp'
-            ] if game_context.allow_explicit else [
+            ] if game_context.explicit_allowed() else [
                 'cgs/act2_nudepainting_thumb.webp',
                 'cgs/act2_nudepainting_embarrassed_thumb.webp',
                 'cgs/act2_nudepainting_smile_thumb.webp'
@@ -146,7 +158,7 @@ define cg_art = [
             'dlc/h/cgs/act2_finger_end_thumb.webp'
         ],
         locked=lambda: not game_context.scene_seen('2S8_b'),
-        visible=lambda: game_context.allow_explicit,
+        visible=lambda: game_context.explicit_allowed(),
     ),
 
     GalleryItem(
@@ -162,7 +174,7 @@ define cg_art = [
             'dlc/h/cgs/act2_cunnilingus_end_thumb.webp'
         ],
         locked=lambda: not game_context.scene_seen('2S8_b'),
-        visible=lambda: game_context.allow_explicit,
+        visible=lambda: game_context.explicit_allowed(),
     ),
 
     GalleryItem(
@@ -235,7 +247,7 @@ define cg_art = [
         file=['dlc/h/cgs/act3_mast{}.webp'.format(i) for i in range(1, 8)],
         thumb=['dlc/h/cgs/act3_mast{}_thumb.webp'.format(i) for i in range(1, 8)],
         locked=lambda: not game_context.scene_seen('3S3_b'),
-        visible=lambda: game_context.allow_explicit,
+        visible=lambda: game_context.explicit_allowed(),
     ),
 
     GalleryItem(
@@ -270,7 +282,7 @@ define cg_art = [
         title=__('Voiced'),
         file=['cgs/act4_vacg{}.webp'.format(i)for i in range(1, 5)],
         thumb=['cgs/act4_vacg{}_thumb.webp'.format(i)for i in range(1, 5)],
-        locked=lambda: not game_context.seen_scene('4S2')
+        locked=lambda: not game_context.scene_seen('4S2')
     )
 ]
 
@@ -324,17 +336,17 @@ define guest_art = [
     GalleryItem(
         author='umujacha',
         url='https://x.com/umujacha',
-        file=['cgs/guest/umujacha.webp'],
-        thumb=['cgs/guest/umujacha_thumb.webp'],
-        native=['cgs/guest/umujacha_native.webp']
+        file=['cgs/guest/umujacha.jpg'],
+        thumb=['cgs/guest/umujacha_thumb.jpg'],
+        native=['cgs/guest/umujacha_native.jpg']
     ),
 
     GalleryItem(
         author='minute',
         url='https://x.com/theominute',
-        file=['cgs/guest/minute.webp'],
-        thumb=['cgs/guest/minute_thumb.webp'],
-        native=['cgs/guest/minute_native.webp']
+        file=['cgs/guest/minute.jpg'],
+        thumb=['cgs/guest/minute_thumb.jpg'],
+        native=['cgs/guest/minute_native.jpg']
     ),
     
     GalleryItem(

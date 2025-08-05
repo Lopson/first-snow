@@ -1341,7 +1341,7 @@ screen extras_scenes():
 
                             if act < cutoff_act or (act == cutoff_act and i < cutoff_scene):
                                 null height 44
-                            elif game_context.seen_scene(scene_label):
+                            elif game_context.scene_seen(scene_label):
                                 fixed:
                                     ysize 44
 
@@ -1465,15 +1465,25 @@ screen extras_art_extra():
 
 screen extras_art_gallery(pieces, art_type, show_info=False):
     python:
+        from copy import deepcopy
         from math import ceil
         from renpy.display.predict import predicting
 
         # Let's have each piece determine on the spot if it's
         # locked/visible and its thumbnails if necessary.
+        pieces = deepcopy(pieces)
         for piece in pieces:
             piece.eval_piece()
         
-        pieces: list = [p for p in pieces if p.visible]
+        # This filters out the "H" DLC pieces.
+        pieces: list = [p for p in pieces if p.is_visible()]
+        try:
+            print(pieces[0])
+            print(pieces[0].visible())
+            print(pieces[0].locked())
+            print("---")
+        except:
+            ...
         rows: int = int(ceil(len(pieces) / 2.0))
 
         if not predicting and art_type == 'guest':
@@ -1511,7 +1521,7 @@ screen extras_art_gallery(pieces, art_type, show_info=False):
                                 xsize 208
                                 ysize 122
 
-                                if piece.get('locked'):
+                                if piece.locked:
                                     pass
                                 else:
                                     $ thumb = piece.preview if piece.preview else piece.thumb[0]
@@ -1523,7 +1533,7 @@ screen extras_art_gallery(pieces, art_type, show_info=False):
                                         selected (current_piece == piece)
                                         action SetLocalVariable('current_piece', piece)
 
-                                    if len(piece['file']) > 1:
+                                    if len(piece.file) > 1:
                                         textbutton str(len(piece.file)):
                                             background Transform("ui/extras/gallery/list-variants.webp", xalign=1.0, xoffset=-5)
                                             xalign 1.0
@@ -1659,7 +1669,7 @@ screen extras_art_gallery(pieces, art_type, show_info=False):
                                 size 24
                                 color "#faf6e7"
                                 outlines [(2, "#292d34", 0, 0)]
-                            text (current_piece.artist if current_piece.artist else __('Anonymous')):
+                            text (current_piece.author if current_piece.author else __('Anonymous')):
                                 size 48
                                 color "#faf6e7"
                                 outlines [(2, "#292d34", 0, 0)]
