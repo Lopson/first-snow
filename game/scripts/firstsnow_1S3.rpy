@@ -1,5 +1,7 @@
-label scene_1S3_en:
+label scene_1S3:
 ######################
+
+call scene_start
 
 stop music fadeout 2.0
 scene black with fadeInOut
@@ -679,4 +681,9 @@ window hide dissolve
 scene black with longDissolve
 $ renpy.sound.set_volume(1.0, channel='loopsfx')
 $ renpy.music.set_volume(1.0, channel='ambiance')
+
+call scene_end
+
+if not store.oneshot:
+    jump scene_1S4
 return

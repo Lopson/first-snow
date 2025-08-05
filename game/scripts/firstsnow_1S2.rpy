@@ -1,6 +1,8 @@
-label scene_1S2_en:
+label scene_1S2:
 ######################
 # Act 1, Scene 2
+
+call scene_start
 
 stop music fadeout 2.0
 scene bg texture with menuFade
@@ -253,4 +255,9 @@ stop ambiance fadeout 3.0
 
 window hide dissolve
 scene black with longDissolve
+
+call scene_end
+
+if not store.oneshot:
+    jump scene_1S3
 return

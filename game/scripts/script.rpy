@@ -3,7 +3,7 @@
 
 # A new game has been started, initialize relevant variables.
 label start:
-    $ store.current_scene = None
+    $ current_scene = None
     
     jump scene_1S1
 

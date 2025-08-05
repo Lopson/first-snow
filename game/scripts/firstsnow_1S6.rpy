@@ -1,6 +1,8 @@
-label scene_1S6_en:
+label scene_1S6:
 ######################
 # Act 1, Scene 6
+
+call scene_start
 
 stop music fadeout 2.0
 scene bg texture with midDissolve
@@ -868,4 +870,9 @@ $ _dismiss_pause = False
 window hide dissolve
 scene black with longDissolve
 $ camera_reset()
+
+call scene_end
+
+if not store.oneshot:
+    jump scene_1S7
 return

@@ -1,6 +1,8 @@
-label scene_1S7_en:
+label scene_1S7:
 ######################
 # Act 1, Scene 7
+
+call scene_start
 
 stop music fadeout 2.0
 scene bg texture with midDissolve
@@ -191,7 +193,7 @@ with midDissolve
 eileen "Damn, they're fast here."
 
 show eileen neutral at center:
-   xpos 0.485
+    xpos 0.485
 show caprice indoors_pumped closedhappy at rightside:
     xpos 0.84 yoffset -30
     easein .15 yoffset -48
@@ -204,13 +206,13 @@ caprice "Best pizza place in the city!"
 show wallace indoors even open smile at leftside:
     xpos 0.18
 show eileen indoors_crossed lookawaynarrow smile at center:
-   xpos 0.485
+    xpos 0.485
 $ renpy.transition(dissolve, layer='master')
 voice "Eileen_Heh4.ogg"
 eileen "How many have you actually tried?"
 
 show eileen neutral lookaway at center:
-   xpos 0.485
+    xpos 0.485
 show caprice indoors_behindback raised closedhappy grin at rightside:
     xpos 0.84
 $ renpy.transition(dissolve, layer='master')
@@ -224,7 +226,7 @@ show caprice indoors_behindback even opensmile at rightside:
 "She says, busily shoving a slice of pizza into her mouth. Eileen starts on hers, but mine catches the eye of Wallace."
 
 show eileen normal neutral at center:
-   xpos 0.485
+    xpos 0.485
 show caprice indoors_behindback neutral normal even at rightside:
     xpos 0.84
 show wallace indoors frown halfopen even at leftside:
@@ -243,12 +245,12 @@ $ renpy.transition(dissolve, layer='master')
 "The answer satisfies him as he goes to work on his own. The fact it's a meat-lover's pizza is less than surprising."
 
 show eileen indoors_onhip lookaway open at center:
-   xpos 0.485
+    xpos 0.485
 $ renpy.transition(dissolve, layer='master')
 eileen "Think you can take the wallet hit for tonight?"
 
 show eileen indoors_onhip lookaway neutral at center:
-   xpos 0.485
+    xpos 0.485
 show caprice indoors_wave even wink grin at rightside:
     xpos 0.84
 $ renpy.transition(dissolve, layer='master')
@@ -273,7 +275,7 @@ show wallace upturned forward mopen at leftside:
 show caprice indoors_behindback even normal grumble at rightside:
     xpos 0.84
 show eileen indoors_onhip normal neutral at center:
-   xpos 0.485
+    xpos 0.485
 $ renpy.transition(dissolve, layer='master')
 voice "Wallace_Sigh7.ogg"
 wallace "Such is life of a struggling college student."
@@ -294,7 +296,7 @@ allison "I'm planning to get one."
 show wallace indoors neutral open even at leftside:
     xpos 0.18
 show eileen indoors_crossed narrow open at center:
-   xpos 0.485
+    xpos 0.485
 $ renpy.transition(dissolve, layer='master')
 voice "Eileen_Hmm2.ogg"
 eileen "And when will you?"
@@ -302,14 +304,14 @@ voice "Allison_HuhAndUm.ogg"
 allison "...Soon."
 
 show eileen closed open at center:
-   xpos 0.485
+    xpos 0.485
 show caprice even normal neutral at rightside:
     xpos 0.84
 $ renpy.transition(dissolve, layer='master')
 "Eileen just grimaces. She got me."
 
 show eileen closed neutral at center:
-   xpos 0.485
+    xpos 0.485
 $ renpy.transition(dissolve, layer='master')
 allison "How's working at the store, Wallace?"
 
@@ -319,7 +321,7 @@ $ renpy.transition(dissolve, layer='master')
 wallace "Not exactly riveting, but it's a living."
 
 show eileen indoors_onhip lookaway angry at center:
-   xpos 0.485
+    xpos 0.485
 $ renpy.transition(dissolve, layer='master')
 "As I turn to Eileen, she just shrugs as she pulls out another slice."
 
@@ -344,7 +346,7 @@ show wallace indoors neutral halfopen heightened at leftside:
 $camera_move(3050,200,600,0,4,'ease')
 play sound "sfx/rustle-clothes.ogg"
 show eileen indoors_onhip lookawaynarrow frown at center:
-   xpos 0.485
+    xpos 0.485
 show wallace indoors neutral forward heightened at leftside:
     xpos 0.18
 show caprice indoors_chintap even normal pout at rightside:
@@ -368,7 +370,7 @@ $camera_move(0,0,0,0,3,'ease')
 caprice "Let's exchange phone numbers! As a club, we have to stay in contact."
 
 show eileen indoors_onhip closed frown at center:
-   xpos 0.485
+    xpos 0.485
 show caprice indoors_behindback even closedhappy neutral at rightside:
     xpos 0.84
 show wallace even halfsmall frown at leftside:
@@ -387,27 +389,27 @@ $ renpy.music.set_volume(0.0, delay=12.0)
 show wallace even forward neutral at leftside:
     xpos 0.18
 show eileen indoors_crossed narrow frown at center:
-   xpos 0.485
+    xpos 0.485
 show caprice indoors_behindback raised normal frown at rightside:
     xpos 0.84
 $ renpy.transition(dissolve, layer='master')
 "She just shrugs. I feel myself deflate a little from the excitement of earlier, having overestimated how close we'd managed to become."
 
 show eileen indoors_crossed narrow open at center:
-   xpos 0.485
+    xpos 0.485
 $ renpy.transition(dissolve, layer='master')
 voice "Eileen_Hmm2.ogg"
 eileen "I don't really use it much."
 
 show eileen indoors_crossed lookaway grumble at center:
-   xpos 0.485
+    xpos 0.485
 $ renpy.transition(dissolve, layer='master')
 "Reading the room as she glances about, she reluctantly pulls out an ancient-looking flip phone. I can't help but stare in stunned silence at such a relic."
 
 show wallace heightened halfforward neutral at leftside:
     xpos 0.18
 show eileen indoors_fists sad neutral at center:
-   xpos 0.485
+    xpos 0.485
 show caprice indoors_behindback raised normal flat at rightside:
     xpos 0.84
 $ renpy.transition(dissolve, layer='master')
@@ -421,7 +423,7 @@ voice "Caprice_Hmm1.ogg"
 caprice "It's definitely weird. I was gonna try to get everyone on this group messaging app, too!"
 
 show eileen lookawaynarrow frown at center:
-   xpos 0.485
+    xpos 0.485
 $ renpy.transition(dissolve, layer='master')
 eileen "What's wrong with calling? You know, that thing phones were made for?"
 
@@ -429,7 +431,7 @@ show shadow:
     alpha 0
     ease 1.0 alpha 0.4
 show eileen indoors_onhip closed frown at center:
-   xpos 0.485
+    xpos 0.485
 $ renpy.transition(dissolve, layer='master')
 "Thoughts I had of possibly messaging Eileen start to vanish. I can't imagine her actually wanting to text anyone with that thing, and even the idea of calling somebody fills me with anxiety."
 
@@ -457,13 +459,13 @@ $ renpy.transition(dissolve, layer='master')
 "At least Caprice's endless enthusiasm and bright nature come in useful sometimes, the mood instantly lifting."
 
 show eileen indoors_crossed normal open at center:
-   xpos 0.485
+    xpos 0.485
 $ renpy.transition(dissolve, layer='master')
 voice "Eileen_Grumble3.ogg"
 eileen "You were right."
 
 show eileen indoors_crossed normal neutral at center:
-   xpos 0.485
+    xpos 0.485
 show wallace even open smile at leftside:
     xpos 0.18
 show caprice indoors_handonhip even wink neutral at rightside:
@@ -483,7 +485,7 @@ caprice "Alright! Listen up everybody! My first executive decision as club presi
 show wallace even forward neutral at leftside:
     xpos 0.18
 show eileen narrow at center:
-   xpos 0.485
+    xpos 0.485
 $ renpy.transition(dissolve, layer='master')
 voice "Eileen_No1.ogg"
 eileen "Don't try your luck. You've got my art room and a warm body for the numbers you needed. That's it."
@@ -656,4 +658,9 @@ stop ambiance fadeout 3.0
 window hide dissolve
 scene black with longDissolve
 stop sound fadeout 1.0
+
+call scene_end
+
+if not store.oneshot:
+    jump scene_2S1
 return

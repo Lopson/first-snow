@@ -1,5 +1,7 @@
-label scene_1S4_en:
+label scene_1S4:
 ######################
+
+call scene_start
 
 stop music fadeout 2.0
 scene bg texture with midDissolve
@@ -559,4 +561,11 @@ $ _dismiss_pause = False
 
 window hide dissolve
 scene black with longDissolve
+
+call scene_end
+
+call scene_end
+
+if not store.oneshot:
+    jump scene_1S5
 return
