@@ -2,7 +2,7 @@ label scene_1S1:
 ######################
 # Act 1, Scene 1
 
-call scene_start
+call scene_start("1S1")
 
 window hide
 play ambiance "sfx/ambiance/winter.ogg" fadein 2.0

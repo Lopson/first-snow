@@ -1,5 +1,5 @@
 """renpy
-init python:
+init -1 python:
 """
 
 from time import time

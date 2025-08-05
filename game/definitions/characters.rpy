@@ -1,5 +1,5 @@
 init python:
-    from collection import namedtuple
+    from collections import namedtuple
 
     CharacterDetails = namedtuple("CharacterDetails", ["name", "properties"])
 

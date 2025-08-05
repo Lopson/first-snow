@@ -95,6 +95,8 @@ define game_context = GameContext()
 # This variable tells us whether or not the game has been finished at least once.
 default persistent.finished_story = False
 
+default text_log = None
+
 ##################
 # Internal Logic #
 ##################

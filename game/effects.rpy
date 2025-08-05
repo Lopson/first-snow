@@ -111,13 +111,14 @@ transform delayed(delay):
     time delay
     alpha 1
 
-transform showrepeat(first, firstdur, then, thendur):
-    first
-    time firstdur
-    block:
-        then
-        time thendur
-        repeat
+init -2:
+    transform showrepeat(first, firstdur, then, thendur):
+        first
+        time firstdur
+        block:
+            then
+            time thendur
+            repeat
 
 transform moveto(t, x):
     subpixel True

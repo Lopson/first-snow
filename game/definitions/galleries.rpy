@@ -11,7 +11,7 @@ init python:
         title: str | None = None
         locked: Callable | None = None
         visible: Callable | None = None
-        native_file: list[str] | None = None
+        native: list[str] | None = None
         preview: str | None = None
         author: str | None = None
         url: str | None = None

@@ -71,12 +71,14 @@ screen pause_menu():
     python:
         # Fetch current song.
         trackfile = renpy.music.get_playing('music')
-        track = tracks.get(trackfile).title
+        track = tracks.get(trackfile)
+        if track:
+            track = track.title
 
         # Fetch current scene.
         title = game_context.get_scene_title(store.current_scene)
 
-        if game_context.oneshot:
+        if store.oneshot:
             title = '{color=#faf6e780}' + _('Replay:') + '{/color} ' + title
 
         # Fetch current running time.
@@ -2352,8 +2354,8 @@ screen say(what, who, double_speak=False):
                 if who in character_tags:
                     tag = character_tags[who]
                 else:
-                    for c, n in character_names.items():
-                        if n == who:
+                    for c in characters:
+                        if characters[c] == who:
                             tag = c
                             break
                     else:
@@ -2690,8 +2692,8 @@ screen text_log():
                     for (type, who, what) in store.text_log.all():
                         $ who = who or ''
                         python:
-                            for char, n in character_names.items():
-                                if remove_text_tags(n) == who:
+                            for char in characters:
+                                if remove_text_tags(characters[char]) == who:
                                     break
                             else:
                                 char = ''
