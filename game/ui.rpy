@@ -1326,10 +1326,11 @@ screen extras_scenes():
 
                 vbox:
                     spacing 1
-                    for act in range(1, max_act):
+                    for act in range(1, (max_act + 1)):
                         python:
                             from collections import OrderedDict
-                            act_scenes = OrderedDict([(scene, game_context.get_scene_title(scene)) for scene in scenes if scene.startswith(str(act) + 'S')])
+                            act_scenes = OrderedDict([(scene, game_context.get_scene_title(scene)) for scene in scene_titles if scene.startswith(str(act) + 'S')])
+                            print(act_scenes)
                         text (__("Act") + " {}".format(game_context.get_act_title(act)) if act > cutoff_act else " "):
                             size 65
                             xoffset 3
@@ -1395,6 +1396,7 @@ screen extras_scenes():
             xmaximum 30
             top_gutter 25
             bottom_gutter 25
+            unscrollable "hide"
             yoffset 25
             xoffset -5
 
@@ -1406,7 +1408,11 @@ screen extras_scenes():
             imagebutton:
                 idle Transform("ui/extras/scenes/read.webp", xoffset=4, yoffset=7)
                 hover Composite((102, 65), (0, 0), "ui/extras/scenes/read-hover.webp", (4, 7), "ui/extras/scenes/read.webp")
-                action [Stop('music', fadeout=1.0), PlayScene(current_label)]
+                action [
+                    Stop('music', fadeout=1.0),
+                    SetVariable("oneshot", True),
+                    Start("scene_" + current_label)
+                ]
                 xpos 328
                 ypos 473
             

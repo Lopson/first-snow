@@ -2,7 +2,7 @@ label scene_1S2:
 ######################
 # Act 1, Scene 2
 
-call scene_start
+call scene_start("1S2")
 
 stop music fadeout 2.0
 scene bg texture with menuFade
