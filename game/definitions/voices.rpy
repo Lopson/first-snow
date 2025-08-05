@@ -4,7 +4,7 @@ init python:
     VoiceDetails = namedtuple(
         "VoiceDetails", ["tag", "character_name", "va_name", "color"])
 
-define store.voices = [
+define voices = [
     VoiceDetails(
         'allison',   __('Allison Merlo'),    __('Elizabeth Quedenfeld'), '#1c2831'),
     VoiceDetails(

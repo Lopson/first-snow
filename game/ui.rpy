@@ -1657,7 +1657,7 @@ screen extras_art_gallery(pieces, art_type, show_info=False):
                                 size 24
                                 color "#faf6e7"
                                 outlines [(2, "#292d34", 0, 0)]
-                            text current_piece.artist if current_piece.artist else __('Anonymous'):
+                            text (current_piece.artist if current_piece.artist else __('Anonymous')):
                                 size 48
                                 color "#faf6e7"
                                 outlines [(2, "#292d34", 0, 0)]

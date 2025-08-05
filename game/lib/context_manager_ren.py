@@ -121,6 +121,7 @@ init -25 python hide:
 _constant = True
 
 from typing import TYPE_CHECKING
+from renpy import config
 if TYPE_CHECKING:
     from renpy import config
 

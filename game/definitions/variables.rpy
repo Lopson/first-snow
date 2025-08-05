@@ -6,7 +6,7 @@
 # Packages are expected to add a string identifying them. This way, we know
 # which DLC packages are present in the game.
 init -999:
-    define store.dlc_packages = []
+    define dlc_packages = []
 
 # This variable is the setting that the users can control to state whether
 # or not they want to play the adult content.
@@ -14,11 +14,11 @@ default persistent.h = True
 
 # This flag is meant to control whether or not to show adult content
 # in the current playthrough.
-default store.allow_explicit = True
+default allow_explicit = True
 
 init 999:
-    define store.h_available = ('h' in store.dlc_packages)
-    store.allow_explicit = store.h_available and persistent.h
+    define h_available = ('h' in dlc_packages)
+    $ allow_explicit = (h_available and persistent.h)
 
 ###############
 # UI Settings #
@@ -31,14 +31,14 @@ init 999:
 #
 # Possible values: 'fall', 'winter', None (don't override).
 default persistent.ui_season = None
-default store.ui_season = 'winter'
+default ui_season = 'winter'
 
 init python:
     def get_ui_season() -> str:
-        if persistent.ui_season is None and store.ui_season is None:
+        if persistent.ui_season is None and ui_season is None:
             raise ValueError
         
-        return persistent.ui_season or store.ui_season
+        return persistent.ui_season or ui_season
 
 # These variables control the season that we want for the theming
 # of the notifications (cues). The default should be to let the gameplay
@@ -50,10 +50,10 @@ default persistent.cue_season = None
 
 init python:
     def get_cue_season() -> str:
-        if persistent.cue_season is None and store.ui_season is None:
+        if persistent.cue_season is None and ui_season is None:
             raise ValueError
 
-        return persistent.cue_season or store.ui_season
+        return persistent.cue_season or ui_season
 
 # This variable sets whether or not to show music cues during gameplay.
 default persistent.cue_music = False
@@ -83,14 +83,14 @@ default preferences.emphasize_audio = True
 #########################
 
 # This variable keeps track of the current scene's ID during gameplay.
-default store.current_scene = None
+default current_scene = None
 
 # This one tells us whether or not we're in a one-shot playthrough,
 # i.e. we're playing through one specific chapter selected by the player.
-default store.oneshot = False
+default oneshot = False
 
 # This object contains data about the player's overall progress.
-define store.game_context = GameContext()
+define game_context = GameContext()
 
 # This variable tells us whether or not the game has been finished at least once.
 default persistent.finished_story = False
@@ -102,4 +102,4 @@ default persistent.finished_story = False
 # This variable is used whenever we're trying to figure out if the player has
 # already played through a specific part of the game. Make sure that the name
 # of all of the scripting labels for the story start with this value!
-define store.SCENE_LABEL_PREFIX = "scene_"
+define SCENE_LABEL_PREFIX = "scene_"
