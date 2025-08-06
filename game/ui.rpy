@@ -1305,7 +1305,12 @@ screen extras_scenes():
 
     $ current_label = '{}S{}'.format(current_act, current_scene)
     $ yadj = ui.adjustment(changed=calculate_extra_cutoffs)
-    $ max_act = max(game_context.acts_seen())
+    python:
+        acts_seen = game_context.acts_seen()
+        if acts_seen:
+            max_act = max(acts_seen)
+        else:
+            max_act = 0
 
     hbox:
         xpos 355
@@ -1330,7 +1335,6 @@ screen extras_scenes():
                         python:
                             from collections import OrderedDict
                             act_scenes = OrderedDict([(scene, game_context.get_scene_title(scene)) for scene in scene_titles if scene.startswith(str(act) + 'S')])
-                            print(act_scenes)
                         text (__("Act") + " {}".format(game_context.get_act_title(act)) if act > cutoff_act else " "):
                             size 65
                             xoffset 3
@@ -1400,29 +1404,30 @@ screen extras_scenes():
             yoffset 25
             xoffset -5
 
-        frame:
-            background ("scripts/sceneshots/" + current_label + "_full.webp")
-            xsize 482
-            ysize 521
+        if game_context.scene_seen("scene_{}".format(current_label)):
+            frame:
+                background ("scripts/sceneshots/" + current_label + "_full.webp")
+                xsize 482
+                ysize 521
 
-            imagebutton:
-                idle Transform("ui/extras/scenes/read.webp", xoffset=4, yoffset=7)
-                hover Composite((102, 65), (0, 0), "ui/extras/scenes/read-hover.webp", (4, 7), "ui/extras/scenes/read.webp")
-                action [
-                    Stop('music', fadeout=1.0),
-                    SetVariable("oneshot", True),
-                    Start("scene_" + current_label)
-                ]
-                xpos 328
-                ypos 473
-            
-            text scene_descriptions[current_label]:
-                ypos 430
-                xpos 20
-                size 21
-                xmaximum 300
-                color "#fbf9ec"
-                outlines [(2, "#292d35", 0, 0)]
+                imagebutton:
+                    idle Transform("ui/extras/scenes/read.webp", xoffset=4, yoffset=7)
+                    hover Composite((102, 65), (0, 0), "ui/extras/scenes/read-hover.webp", (4, 7), "ui/extras/scenes/read.webp")
+                    action [
+                        Stop('music', fadeout=1.0),
+                        SetVariable("oneshot", True),
+                        Start("scene_" + current_label)
+                    ]
+                    xpos 328
+                    ypos 473
+                
+                text scene_descriptions[current_label]:
+                    ypos 430
+                    xpos 20
+                    size 21
+                    xmaximum 300
+                    color "#fbf9ec"
+                    outlines [(2, "#292d35", 0, 0)]
 
 ## Art gallery.
 
@@ -1495,7 +1500,7 @@ screen extras_art_gallery(pieces, art_type, show_info=False):
         if not predicting and art_type == 'guest':
             achievement.grant('art_guest_viewed')
 
-    default current_piece = pieces[0]
+    default current_piece = pieces[0] if not pieces[0].locked else None
 
     hbox:
         xpos 351
