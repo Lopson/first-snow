@@ -2356,11 +2356,6 @@ screen choice(items):
 
 # The saybox.
 screen say(what, who, double_speak=False):
-    if config.developer or config.testing:
-        key "t" action ToggleVariable('editing')
-    if store.editing:
-        use renedit_overlay
-
     python:
         bg = None
         tb = Null()

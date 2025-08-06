@@ -5,11 +5,14 @@ python early:
     config.save_directory = "FirstSnow"
     config.testing = False
     config.patch_version = None
+    config.save_dump = False
+    config.log = None
+    config.log_events = False
 
 init -1 python hide:
     # Basic settings.
     config.name = "First Snow"
-    config.version = "1.3.1"
+    # config.version = "1.3.1"
     config.patch_version = 4
     config.developer = "auto"
 

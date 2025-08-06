@@ -1,9 +1,6 @@
 # init.rpy
 # Initialization code for the game, and for when a new game is started.
 
-# TODO Delete alongside Ren'Edit.
-default editing = False
-
 init -1 python hide:
     # fast skip is so fast that with our directing it crashes Ren'Py lol
     config.keymap['fast_skip'] = []

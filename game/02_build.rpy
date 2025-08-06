@@ -22,8 +22,6 @@ init -1 python hide:
     build.classify('game/saves/**', None)
     build.classify('patches/**', None)
     build.classify('installer/**', None)
-    if not config.developer and not config.testing:
-        build.classify('game/lib/renedit/**', None)
 
     # Need this outside the archives.
     build.classify('game/presplash.png', 'all')
