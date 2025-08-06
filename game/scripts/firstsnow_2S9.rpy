@@ -1,5 +1,7 @@
-label scene_2S9_en:
+label scene_2S9:
 ######################
+
+call scene_start("2S9")
 
 stop music fadeout 2.0
 scene bg texture with midDissolve
@@ -783,4 +785,11 @@ $ camera_reset()
 window hide dissolve
 scene black with longDissolve
 stop sound fadeout 1.0
-return
+
+call scene_end
+
+if store.oneshot:
+    $ store.oneshot = False
+    return
+else:
+    jump scene_3S1

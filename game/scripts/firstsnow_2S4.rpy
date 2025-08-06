@@ -1,5 +1,7 @@
-label scene_2S4_en:
+label scene_2S4:
 ######################
+
+call scene_start("2S4")
 
 stop music fadeout 2.0
 scene bg texture with menuFade
@@ -900,4 +902,11 @@ allison "Rose!"
 window hide dissolve
 scene black with longDissolve
 $ camera_reset()
-return
+
+call scene_end
+
+if store.oneshot:
+    $ store.oneshot = False
+    return
+else:
+    jump scene_2S5

@@ -1,6 +1,8 @@
-label scene_3S8_en:
+label scene_3S8:
 ######################
 # Act 3, Scene 8
+
+call scene_start("3S8")
 
 stop music fadeout 2.0
 scene bg texture with midDissolve
@@ -459,4 +461,11 @@ allison "It's okay, Eileen. Welcome home."
 
 window hide midDissolve
 # note: please don't do anything further here because of the credits transition!
-return
+
+call scene_end
+
+if store.oneshot:
+    $ store.oneshot = False
+    return
+else:
+    jump scene_4S1

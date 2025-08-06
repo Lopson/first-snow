@@ -2,7 +2,7 @@ label scene_1S5:
 ######################
 # Act 1, Scene 5
 
-call scene_start
+call scene_start("1S5")
 
 stop music fadeout 2.0
 scene bg texture with midDissolve
@@ -336,6 +336,8 @@ $ renpy.sound.set_volume(1.0, channel="ambiance")
 
 call scene_end
 
-if not store.oneshot:
+if store.oneshot:
+    $ store.oneshot = False
+    return
+else:
     jump scene_1S6
-return

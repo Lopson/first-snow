@@ -1,5 +1,7 @@
-label scene_2S2_en:
+label scene_2S2:
 ######################
+
+call scene_start("2S2")
 
 stop music fadeout 2.0
 scene bg texture with midDissolve
@@ -713,4 +715,11 @@ rose "Nothin'. Gonna come eat, or play with your phone all day?"
 
 window hide dissolve
 scene black with longDissolve
-return
+
+call scene_end
+
+if store.oneshot:
+    $ store.oneshot = False
+    return
+else:
+    jump scene_2S3

@@ -1,13 +1,8 @@
-label scene_3S3_en:
+label scene_3S3_a:
 ######################
 # Act 3, Scene 3
 
-    perform "3S3_a"
-    perform "3S3_b" explicit
-    perform "3S3_c"
-    return
-
-label scene_3S3_a_en:
+call scene_start("3S3")
 
 stop music fadeout 2.0
 scene bg texture with midDissolve
@@ -224,12 +219,17 @@ eileen "...It'll wake us up."
 scene black with vpunch
 "I'm not given a chance to respond as she presses her lips to mine, not that I particularly wanted to argue the fact. This'll likely be the last time we can share a moment like this for a good while."
 
-return
+if not allow_explicit:
+    jump scene_3S3_b_clean
+else:
+    jump scene_3S3_b
 
-label scene_3S3_b_clean_en:
-    return
 
-label scene_3S3_b_en:
+label scene_3S3_b_clean:
+    jump scene_3S3_c
+
+
+label scene_3S3_b:
 
 $ renpy.music.set_volume(1.0)
 $ renpy.sound.set_volume(0.3, channel="ambiance", delay=4.0)
@@ -293,9 +293,10 @@ show white:
     ease 3.0 alpha 0
 "All we do, all we want to do, is hold each other as the afterglow wears off."
 
-return
+jump scene_3S3_c
 
-label scene_3S3_c_en:
+
+label scene_3S3_c:
 
 stop ambiance fadeout 4.0
 scene black with longDissolve
@@ -589,4 +590,11 @@ eileen "I swear, you're worse than her sometimes."
 
 window hide dissolve
 scene black with longDissolve
-return
+
+call scene_end
+
+if store.oneshot:
+    $ store.oneshot = False
+    return
+else:
+    jump scene_3S4

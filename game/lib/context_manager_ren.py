@@ -5,14 +5,17 @@ init -26 python:
 _constant = True
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from typing import TypeAlias, TYPE_CHECKING
 from renpy.exports.contextexports import get_game_runtime
 from renpy.exports.persistentexports import seen_label
 from renpy.exports.scriptexports import get_all_labels
+from renpy import game
 if TYPE_CHECKING:
-    from renpy import game, store
+    from renpy import store
     from renpy.defaultstore import main_menu
     from renpy.python import NoRollback
+
+SaveFileInfo: TypeAlias = dict[str, int | float | str | list[int]]
 
 @dataclass
 class GameContext(NoRollback):
@@ -104,14 +107,23 @@ class GameContext(NoRollback):
         return 'en'
 
     @staticmethod
-    def store_scene(info):
+    def store_scene(info: SaveFileInfo):
         """
-        Add the current scene and total game runtime to the save file.
+        Adds the current scene and total game runtime to the save file.
         """
+        
         info['scene'] = store.current_scene
         info['playtime'] = get_game_runtime()
         
         return info
+    
+    @staticmethod
+    def store_patch_version(info: SaveFileInfo):
+        """
+        Adds the current patch version number to the save file.
+        """
+
+        info['patch_version'] = config.patch_version # pyright: ignore[reportAttributeAccessIssue]
 
 
 """renpy
@@ -125,5 +137,6 @@ from renpy import config
 if TYPE_CHECKING:
     from renpy import config
 
-# Add a save callback so that current scene and runtime are saved.
+# Add save callbacks.
 config.save_json_callbacks.append(GameContext.store_scene)
+config.save_json_callbacks.append(GameContext.store_patch_version)

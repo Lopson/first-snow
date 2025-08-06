@@ -2,7 +2,7 @@ label scene_1S7:
 ######################
 # Act 1, Scene 7
 
-call scene_start
+call scene_start("1S7")
 
 stop music fadeout 2.0
 scene bg texture with midDissolve
@@ -661,6 +661,8 @@ stop sound fadeout 1.0
 
 call scene_end
 
-if not store.oneshot:
+if store.oneshot:
+    $ store.oneshot = False
+    return
+else:
     jump scene_2S1
-return

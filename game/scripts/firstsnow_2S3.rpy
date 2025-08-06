@@ -1,5 +1,7 @@
-label scene_2S3_en:
+label scene_2S3:
 ######################
+
+call scene_start("2S3")
 
 stop music fadeout 2.0
 scene bg texture with midDissolve
@@ -608,4 +610,11 @@ allison "It's beautiful."
 
 window hide dissolve
 scene black with longDissolve
-return
+
+call scene_end
+
+if store.oneshot:
+    $ store.oneshot = False
+    return
+else:
+    jump scene_2S4

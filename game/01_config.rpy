@@ -11,7 +11,7 @@ init -1 python hide:
     config.name = "First Snow"
     config.version = "1.3.1"
     config.patch_version = 4
-    config.developer = True
+    config.developer = "auto"
 
     # Window.
     config.screen_width = 1280

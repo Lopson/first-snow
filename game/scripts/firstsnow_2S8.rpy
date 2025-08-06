@@ -1,12 +1,6 @@
-label scene_2S8_en:
-######################
-    perform "2S8_a"
-    perform "2S8_b" explicit
-    perform "2S8_c"
-    return
+label scene_2S8_a:
 
-
-label scene_2S8_a_en:
+call scene_start("2S8")
 
 stop music fadeout 2.0
 scene bg texture with midDissolve
@@ -625,14 +619,19 @@ show eileen naked_towel lookawaynarrow at center:
 $ renpy.transition(dissolve, layer='master')
 eileen "It looked like you didn't get it, so I decided to be more blunt."
 
-return
+if not allow_explicit:
+    jump scene_2S8_b_clean
+else:
+    jump scene_2S8_b
 
-label scene_2S8_b_clean_en:
+
+label scene_2S8_b_clean:
     # zip
     scene black with longDissolve
-    return
+    jump scene_2S8_c
 
-label scene_2S8_b_en:
+
+label scene_2S8_b:
 
 stop ambiance fadeout 8.0
 play music "music/romance_2_m.ogg" fadein 8.0
@@ -789,10 +788,10 @@ $camera_move(-3900,-850,900,2,0,'dissolve')
 with midDissolve
 "All I can do is wearily look down at Eileen, her face with those emerald eyes silently staring up at mine."
 
-return
+jump scene_2S8_c
 
 
-label scene_2S8_c_en:
+label scene_2S8_c:
 
 stop ambiance fadeout 4.0
 scene black with midDissolve
@@ -886,4 +885,11 @@ $ _dismiss_pause = False
 
 window hide dissolve
 scene black with longDissolve
-return
+
+call scene_end
+
+if store.oneshot:
+    $ store.oneshot = False
+    return
+else:
+    jump scene_2S9

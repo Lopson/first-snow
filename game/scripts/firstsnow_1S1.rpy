@@ -1017,6 +1017,8 @@ $ renpy.pause(5.0, hard=True)
 
 call scene_end
 
-if not store.oneshot:
+if store.oneshot:
+    $ store.oneshot = False
+    return
+else:
     jump scene_1S2
-return

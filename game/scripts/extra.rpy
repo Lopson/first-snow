@@ -1,5 +1,7 @@
-label scene_4S2_en:
+label scene_4S2:
 ######################
+
+call scene_start("4S2")
 
 $ ui_season = 'fall'
 scene black with midDissolve
@@ -363,4 +365,9 @@ $ renpy.pause()
 scene black with longDissolve
 $ camera_reset()
 $ renpy.music.set_volume(1.0, delay=2.0)
+
+call scene_end
+
+if store.oneshot:
+    $ store.oneshot = False
 return

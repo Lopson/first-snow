@@ -29,6 +29,8 @@ init python:
                 return self.visible()
 
         def eval_piece(self) -> None:
+            if callable(self.file):
+                self.file = self.file()
             if callable(self.thumb):
                 self.thumb = self.thumb()
             if callable(self.locked):

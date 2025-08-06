@@ -1,6 +1,8 @@
-label scene_3S1_en:
+label scene_3S1:
 ######################
 # Act 3, Scene 1
+
+call scene_start("3S1")
 
 stop music fadeout 2.0
 $ achievement.grant('story_act3')
@@ -232,4 +234,10 @@ scene black with midDissolve
 $ renpy.sound.set_volume(1.0, channel="ambiance2")
 $ achievement.grant('story_act3_roadtrip')
 
-return
+call scene_end
+
+if store.oneshot:
+    $ store.oneshot = False
+    return
+else:
+    jump scene_3S2

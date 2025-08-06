@@ -1,5 +1,7 @@
-label scene_4S1_en:
+label scene_4S1:
 ##############################
+    call scene_start("4S1")
+
     # Credits.
     # Congratulations!
     $ achievement.grant('story_done')
@@ -21,4 +23,11 @@ label scene_4S1_en:
 
     stop music fadeout 4.0
     scene black with longDissolve
-    return
+
+    call scene_end
+
+    if store.oneshot:
+        $ store.oneshot = False
+        return
+    else:
+        jump scene_4S2

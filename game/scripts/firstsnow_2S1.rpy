@@ -1,5 +1,8 @@
-label scene_2S1_en:
+label scene_2S1:
 ######################
+
+call scene_start("2S1")
+
 $ achievement.grant('story_act2')
 stop music fadeout 2.0
 stop ambiance fadeout 2.0
@@ -961,4 +964,11 @@ $ _dismiss_pause = False
 
 window hide dissolve
 scene black with longDissolve
-return
+
+call scene_end
+
+if store.oneshot:
+    $ store.oneshot = False
+    return
+else:
+    jump scene_2S2

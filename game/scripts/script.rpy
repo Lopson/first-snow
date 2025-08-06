@@ -17,7 +17,6 @@ label scene_start(scene_id):
 
 # This label is meant to be called at the end of all scripts.
 label scene_end:
+    # TODO Is this scene statement really necessary?
     scene black with dissolve
-    if store.oneshot:
-        $ store.oneshot = False
     return

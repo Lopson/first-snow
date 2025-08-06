@@ -1,5 +1,7 @@
-label scene_2S7_en:
+label scene_2S7:
 ######################
+
+call scene_start("2S7")
 
 stop music fadeout 2.0
 scene bg texture with midDissolve
@@ -631,4 +633,11 @@ window hide dissolve
 scene black with longDissolve
 $ renpy.music.set_volume(1.0)
 $ camera_reset()
-return
+
+call scene_end
+
+if store.oneshot:
+    $ store.oneshot = False
+    return
+else:
+    jump scene_2S8_a

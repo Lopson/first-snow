@@ -14,10 +14,6 @@ init python hide:
         achievement.grant('h')
 
     # Patch version management
-    def store_patch_version(info):
-        info['patch_version'] = config.patch_version
-    config.save_json_callbacks.append(store_patch_version)
-
     if (persistent.patch_version or 1) < config.patch_version:
         store.patch_updated = True
     else:

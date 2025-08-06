@@ -1,6 +1,8 @@
-label scene_3S4_en:
+label scene_3S4:
 ######################
 # Act 3, Scene 4
+
+call scene_start("3S4")
 
 stop music fadeout 2.0
 scene bg texture with midDissolve
@@ -613,4 +615,11 @@ $ renpy.music.set_volume(1.0)
 $ renpy.sound.set_volume(1.0, channel='ambiance', delay=2.0)
 $ renpy.sound.set_volume(1.0, channel='ambiance2', delay=2.0)
 $ renpy.sound.set_volume(1.0, channel='loopsfx')
-return
+
+call scene_end
+
+if store.oneshot:
+    $ store.oneshot = False
+    return
+else:
+    jump scene_3S5

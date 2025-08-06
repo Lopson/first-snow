@@ -258,6 +258,8 @@ scene black with longDissolve
 
 call scene_end
 
-if not store.oneshot:
+if store.oneshot:
+    $ store.oneshot = False
+    return
+else:
     jump scene_1S3
-return
