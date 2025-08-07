@@ -95,6 +95,10 @@ define game_context = GameContext()
 # This variable tells us whether or not the game has been finished at least once.
 default persistent.finished_story = False
 
+# This variable is used for displaying phone messages.
+default phone = Phone()
+
+# TODO Fully figure this out.
 default text_log = None
 
 ##################
