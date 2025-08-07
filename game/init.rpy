@@ -41,11 +41,6 @@ label splashscreen:
         scene black with dissolve
         $ renpy.quit()
 
-    # Force Ren'Py to pin vital menus.
-    $ renpy.cache_pin(*renpy_listdir('ui/main', full_path=True, recursive=True))
-    $ renpy.cache_pin(*renpy_listdir('ui/pause', full_path=True, recursive=True))
-    $ renpy.cache_pin(*renpy_listdir('ui/side', full_path=True, recursive=True))
-
     # Show a nice intro video.
     $ renpy.movie_cutscene("vfx/intro.ogv")
     $ renpy.transition(dissolve)
