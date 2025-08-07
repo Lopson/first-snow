@@ -1404,7 +1404,7 @@ screen extras_scenes():
             yoffset 25
             xoffset -5
 
-        if game_context.scene_seen("scene_{}".format(current_label)):
+        if game_context.scene_seen(current_label):
             frame:
                 background ("scripts/sceneshots/" + current_label + "_full.webp")
                 xsize 482
@@ -1869,7 +1869,7 @@ screen extras_music():
                     xalign 0.5
                     yalign 0.5
 
-        text (_("Unlockable Tracks") if current_album == 'main' else _("Standard Tracks")):
+        text (__("Unlockable Tracks") if current_album == 'main' else __("Standard Tracks")):
             color "#faf6e750"
             size 36
             xpos 705
@@ -1877,7 +1877,7 @@ screen extras_music():
             ypos 190
             yalign 1.0
 
-        text (_("Standard Tracks") if current_album == 'main' else _("Unlockable Tracks")):
+        text (__("Standard Tracks") if current_album == 'main' else __("Unlockable Tracks")):
             color "#faf6e7"
             size 36
             outlines [(4, "#292d34", 0, 0)]
@@ -2059,7 +2059,18 @@ screen extras_music_player(music_room, needs_unlock=False):
                 hover "ui/extras/jukebox/ctrl-stop.webp"
                 insensitive Transform("ui/extras/jukebox/ctrl-stop.webp", alpha=0.5)
                 xpos 150
-                action [music_room.Stop()]
+                if not renpy.music.get_pause(music_room.channel):
+                    action [
+                        music_room.Stop(),
+                        Delayed(music_room.fadeout, renpy.restart_interaction)
+                    ]
+                else:
+                    action [
+                        SetField(music_room, "fadeout", 0.0),
+                        music_room.Stop(),
+                        SetField(music_room, "fadeout", fadeout_music_room),
+                        Function(renpy.restart_interaction)
+                    ]
 
             bar value MixerValue("jukebox"):
                 xpos 0
