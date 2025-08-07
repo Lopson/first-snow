@@ -1486,15 +1486,8 @@ screen extras_art_gallery(pieces, art_type, show_info=False):
         for piece in pieces:
             piece.eval_piece()
         
-        # This filters out the "H" DLC pieces.
-        pieces: list = [p for p in pieces if p.is_visible()]
-        try:
-            print(pieces[0])
-            print(pieces[0].visible())
-            print(pieces[0].locked())
-            print("---")
-        except:
-            ...
+        # This filters out the "H" DLC pieces and locked pieces.
+        pieces: list = [p for p in pieces if p.is_visible and not p.locked]
         rows: int = int(ceil(len(pieces) / 2.0))
 
         if not predicting and art_type == 'guest':
@@ -1569,6 +1562,7 @@ screen extras_art_gallery(pieces, art_type, show_info=False):
                     xmaximum 30
                     top_gutter 10
                     bottom_gutter 10
+                    unscrollable "hide"
                     xalign 1.0
                     xoffset 10
                     ypos 30
@@ -1642,6 +1636,7 @@ screen extras_art_gallery(pieces, art_type, show_info=False):
                             xmaximum 30
                             top_gutter 10
                             bottom_gutter 10
+                            unscrollable "hide"
                             xalign 1.0
                             xoffset 10
                             ypos 60
