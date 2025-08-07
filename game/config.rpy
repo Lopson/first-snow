@@ -13,7 +13,7 @@ init -1 python hide:
     # Basic settings.
     config.name = "First Snow"
     config.version = "1.3.1"
-    config.patch_version = 4
+    config.patch_version = 5
     config.developer = "auto"
 
     # Window.

@@ -86,8 +86,8 @@ init 1 python:
 
 from collections import OrderedDict
 from sys import platform
+from typing import TYPE_CHECKING
 import pygame_sdl2 as pygame  # pyright: ignore[reportMissingImports]
-from renpy.game import persistent
 from renpy import config, store
 from renpy.minstore import _
 from renpy.ui import Action
@@ -95,6 +95,8 @@ from renpy.display.core import IgnoreEvent, EVENTNAME
 from renpy.display.behavior import map_event, clear_keymap_cache
 from renpy.display.layout import Null
 from renpy.exports.displayexports import restart_interaction, get_image_bounds
+if TYPE_CHECKING:
+    from renpy.game import persistent
 # _keymap_list is impossible to import as it resides in 00keymap.rpy
 
 

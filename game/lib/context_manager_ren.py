@@ -2,8 +2,6 @@
 init -26 python:
 """
 
-_constant = True
-
 from dataclasses import dataclass
 from typing import TypeAlias, TYPE_CHECKING
 from renpy.exports.contextexports import get_game_runtime
@@ -113,9 +111,8 @@ class GameContext(NoRollback):
         """
         
         info['scene'] = store.current_scene
+        # TODO Do we even need this? This is already stored in "_game_runtime".
         info['playtime'] = get_game_runtime()
-        
-        return info
     
     @staticmethod
     def store_patch_version(info: SaveFileInfo):
@@ -130,12 +127,7 @@ class GameContext(NoRollback):
 init -25 python hide:
 """
 
-_constant = True
-
-from typing import TYPE_CHECKING
 from renpy import config
-if TYPE_CHECKING:
-    from renpy import config
 
 # Add save callbacks.
 config.save_json_callbacks.append(GameContext.store_scene)

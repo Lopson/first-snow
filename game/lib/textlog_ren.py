@@ -181,3 +181,11 @@ def toggle_text_log():
         ToggleScreen('text_log', dissolve)() # type: ignore
 
 config.underlay.append(Keymap(text_log=toggle_text_log))
+
+"""renpy
+python:
+"""
+
+from renpy import store
+
+store._text_log_close = False
