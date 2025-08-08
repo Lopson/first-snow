@@ -4,6 +4,7 @@ init -26 python:
 
 from dataclasses import dataclass
 from typing import TypeAlias, TYPE_CHECKING
+from renpy.audio.music import play
 from renpy.exports.contextexports import get_game_runtime
 from renpy.exports.persistentexports import seen_label
 from renpy.exports.scriptexports import get_all_labels
@@ -28,7 +29,8 @@ class GameContext(NoRollback):
             # NOTE A scene may have been broken up into multiple sub-scenes
             # due to the adult content.
             specific_scene_labels: list[str] = [
-                i for i in scene_labels if i.startswith("scene_{}".format(scene_id))
+                i for i in scene_labels if i.startswith(
+                    "{}{}".format(SCENE_LABEL_PREFIX, scene_id)) # pyright: ignore[reportUndefinedVariable]
             ]
 
             for scene_label in specific_scene_labels:
@@ -95,7 +97,7 @@ class GameContext(NoRollback):
 
     @classmethod
     def in_replay(cls) -> bool:
-        return cls.in_playthrough() and store.oneshot
+        return cls.in_playthrough() and store._in_replay
 
     @staticmethod
     def get_language() -> str | None:
@@ -105,7 +107,7 @@ class GameContext(NoRollback):
         return 'en'
 
     @staticmethod
-    def store_scene(info: SaveFileInfo):
+    def store_scene(info: SaveFileInfo) -> None:
         """
         Adds the current scene and total game runtime to the save file.
         """
@@ -115,12 +117,31 @@ class GameContext(NoRollback):
         info['playtime'] = get_game_runtime()
     
     @staticmethod
-    def store_patch_version(info: SaveFileInfo):
+    def store_patch_version(info: SaveFileInfo) -> None:
         """
         Adds the current patch version number to the save file.
         """
 
         info['patch_version'] = config.patch_version # pyright: ignore[reportAttributeAccessIssue]
+    
+    @staticmethod
+    def replay_end_callback() -> None:
+        """
+        Actions to take after replay ends.
+        """
+        play(get_menu_theme(), if_changed=True) # pyright: ignore[reportUndefinedVariable]
+    
+    @classmethod
+    def replay_start_callback(cls) -> None:
+        """
+        Actions to take when the script invoked by the replay is ran.
+
+        This is necessary because, in our case, `store._game_menu_screen` is
+        set to `pause_menu`, but replays set that to `preferences` by default.
+        We therefore need to override that default.
+        """
+        if cls.in_replay():
+            store._game_menu_screen = "pause_menu"
 
 
 """renpy
@@ -132,3 +153,4 @@ from renpy import config
 # Add save callbacks.
 config.save_json_callbacks.append(GameContext.store_scene)
 config.save_json_callbacks.append(GameContext.store_patch_version)
+config.after_replay_callback = GameContext.replay_end_callback

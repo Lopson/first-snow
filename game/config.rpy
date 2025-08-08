@@ -12,7 +12,7 @@ python early:
 init -1 python hide:
     # Basic settings.
     config.name = "First Snow"
-    config.version = "1.4.0"
+    config.version = "1.4.1"
     config.patch_version = 5
     config.developer = "auto"
 
@@ -72,6 +72,7 @@ init -1 python hide:
     config.after_load_transition = dissolve
     config.window_show_transition = None
     config.window_hide_transition = None
+    config.exit_replay_transition = dissolve
 
     # Customizations/hacks.
     config.image_cache_size = 16

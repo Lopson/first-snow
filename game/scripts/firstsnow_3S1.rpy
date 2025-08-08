@@ -235,9 +235,4 @@ $ renpy.sound.set_volume(1.0, channel="ambiance2")
 $ achievement.grant('story_act3_roadtrip')
 
 call scene_end
-
-if store.oneshot:
-    $ store.oneshot = False
-    return
-else:
-    jump scene_3S2
+jump scene_3S2

@@ -1016,9 +1016,4 @@ scene title act1 with menuFade
 $ renpy.pause(5.0, hard=True)
 
 call scene_end
-
-if store.oneshot:
-    $ store.oneshot = False
-    return
-else:
-    jump scene_1S2
+jump scene_1S2

@@ -463,9 +463,4 @@ window hide midDissolve
 # note: please don't do anything further here because of the credits transition!
 
 call scene_end
-
-if store.oneshot:
-    $ store.oneshot = False
-    return
-else:
-    jump scene_4S1
+jump scene_4S1
