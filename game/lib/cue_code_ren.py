@@ -2,12 +2,14 @@
 init python:
 """
 
-from typing import Final
+from typing import Final, TYPE_CHECKING
 from time import time
 from threading import Timer
-from renpy import store, config
+from renpy import config
 from renpy.exports.displayexports import restart_interaction
 from renpy.display.screen import has_screen, get_screen, show_screen, hide_screen
+if TYPE_CHECKING:
+    from renpy import store
 
 CUE_DEFAULT_SCREEN: Final[str] = 'cue'
 store._cues = []

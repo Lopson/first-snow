@@ -24,13 +24,13 @@ python early:
 
 
 import re
-from typing import Callable, TypeAlias, Optional
+from typing import Callable, TypeAlias, Optional, TYPE_CHECKING
 from renpy.rollback import NoRollback
 from renpy import config
-from renpy import store
 TextLogDataEntry: TypeAlias = tuple[Optional[str], Optional[str], Optional[str]]
 TextLogData: TypeAlias = list[TextLogDataEntry]
-
+if TYPE_CHECKING:
+    from renpy import store
 
 # Create configuration variables.
 locked: bool = config.locked
@@ -118,10 +118,12 @@ class TextLog(NoRollback):
 init -1501 python:
 """
 
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from renpy import store
 from renpy.character import ADVCharacter
 from renpy.exports.persistentexports import is_seen
 from renpy.exports.menuexports import display_menu
-from renpy import store
 from renpy.text.extras import filter_text_tags
 from renpy.defaultstore import adv
 
@@ -186,6 +188,8 @@ config.underlay.append(Keymap(text_log=toggle_text_log))
 python:
 """
 
-from renpy import store
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from renpy import store
 
 store._text_log_close = False

@@ -179,3 +179,4 @@ CubismSdkForNative-4-*.zip
 
 # Project-specific files.
 clean.sh
+error.json

@@ -46,7 +46,7 @@ define character_tags = {
     __('Tall guy{=wallace}'): 'wallace_tallguy'
 }
 
-init python:
+init 1 python:
     # Define characters based on the contents of the `characters` dictionary.
     for character, details in characters.items():
         # NOTE `globals()` is a built-in Python function.    

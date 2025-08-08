@@ -1,6 +1,4 @@
 init python:
-    _constant = True
-
     from dataclasses import dataclass
     from typing import Callable
 
