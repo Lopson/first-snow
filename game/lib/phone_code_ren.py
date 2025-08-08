@@ -25,7 +25,7 @@ class Phone:
         restart_interaction()
 
     def show(self, mode: str, **kwargs) -> None:
-        if isinstance(mode, str) and mode not in ["unlock", "messages", "call-in"]:
+        if not isinstance(mode, str) or mode not in ["unlock", "messages", "call-in"]:
             raise ValueError
         
         show_screen('phone', mode=mode, **kwargs)
