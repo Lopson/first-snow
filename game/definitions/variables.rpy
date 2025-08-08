@@ -83,12 +83,15 @@ default preferences.emphasize_audio = True
 default current_scene = None
 
 # This object contains data about the player's overall progress.
+# TODO This is not necessary, we can replace all references to this variable
+# for direct calls of the class.
 define game_context = GameContext()
 
 # This variable tells us whether or not the game has been finished at least once.
 default persistent.finished_story = False
 
 # This variable is used for displaying phone messages.
+# TODO We shouldn't have to default this, make it a static class!
 default phone = Phone()
 
 # TODO Fully figure this out.

@@ -1419,7 +1419,7 @@ screen extras_scenes():
                     hover Composite((102, 65), (0, 0), "ui/extras/scenes/read-hover.webp", (4, 7), "ui/extras/scenes/read.webp")
                     action [
                         Stop('music', fadeout=1.0),
-                        Replay("scene_" + current_label)
+                        Replay(SCENE_LABEL_PREFIX + current_label)
                     ]
                     xpos 328
                     ypos 473

@@ -29,7 +29,8 @@ class GameContext(NoRollback):
             # NOTE A scene may have been broken up into multiple sub-scenes
             # due to the adult content.
             specific_scene_labels: list[str] = [
-                i for i in scene_labels if i.startswith("scene_{}".format(scene_id))
+                i for i in scene_labels if i.startswith(
+                    "{}{}".format(SCENE_LABEL_PREFIX, scene_id)) # pyright: ignore[reportUndefinedVariable]
             ]
 
             for scene_label in specific_scene_labels:
