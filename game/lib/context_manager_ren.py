@@ -20,6 +20,9 @@ SaveFileInfo: TypeAlias = dict[str, int | float | str | list[int]]
 class GameContext(NoRollback):
     @staticmethod
     def scenes_seen() -> list[str]:
+        """
+        Gives a list of scene IDs [x]S[y] that have been seen by the player.
+        """
         result: list[str] = []
         scene_labels: list[str] = [
             i for i in get_all_labels() if i.startswith(store.SCENE_LABEL_PREFIX)
@@ -42,10 +45,17 @@ class GameContext(NoRollback):
     
     @classmethod
     def scene_seen(cls, scene_id: str) -> bool:
+        """
+        True if a given scene with ID [x]S[y] has been seen by the player;
+        False otherwise.
+        """
         return scene_id in cls.scenes_seen()
 
     @classmethod
     def acts_seen(cls) -> set[int]:
+        """
+        Gives a list of acts seen by the player.
+        """
         result: set[int] = set()
         scenes_seen: list[str] = cls.scenes_seen()
         
@@ -93,10 +103,17 @@ class GameContext(NoRollback):
 
     @staticmethod
     def in_playthrough() -> bool:
+        """
+        Returns True if in gameplay state; False otherwise.
+        Note that gameplay means both regular and replays.
+        """
         return not game.context().init_phase and not main_menu
 
     @classmethod
     def in_replay(cls) -> bool:
+        """
+        Returns True if in replay; False otherwise.
+        """
         return cls.in_playthrough() and store._in_replay
 
     @staticmethod

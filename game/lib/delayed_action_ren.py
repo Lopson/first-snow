@@ -3,6 +3,7 @@ init python:
 """
 
 from threading import Timer
+from typing import Callable
 from renpy.ui import Action
 
 
@@ -12,9 +13,12 @@ class Delayed(Action):
     Useful for scheduling an action for execution later in a screen.
     """
 
-    def __init__(self, delay: float, callback) -> None:
+    def __init__(
+            self,
+            delay: float,
+            callback: Callable | list[Callable]) -> None:
         self.delay: float = delay
-        self.callback = callback
+        self.callback: Callable | list[Callable]  = callback
         self.timer: Timer | None = None
 
     def __call__(self) -> None:
@@ -22,7 +26,7 @@ class Delayed(Action):
         self.timer.start()
 
     def do(self) -> None:
-        try:
+        if isinstance(self.callback, list):
             for callback in self.callback:
                 try:
                     callback()
@@ -30,7 +34,7 @@ class Delayed(Action):
                     raise
                 except:
                     pass
-        except TypeError:
+        else:
             try:
                 self.callback()
             except:
