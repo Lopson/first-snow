@@ -2279,23 +2279,27 @@ screen yesno_prompt(message, yes_action, no_action):
             xalign 0.5
             color "#24282d"
 
-        imagebutton:
-            idle "ui/yesno/yes.webp"
-            hover "ui/yesno/yes_hover.webp"
-            focus_mask True
+        hbox:
             xoffset 455
             yoffset 181
-            action yes_action
+            
+            imagebutton:
+                idle "ui/yesno/yes.webp"
+                hover "ui/yesno/yes_hover.webp"
+                focus_mask True
+                action yes_action
 
-        imagebutton:
-            idle "ui/yesno/no.webp"
-            hover "ui/yesno/no_hover.webp"
-            focus_mask True
-            xoffset 588
-            yoffset 180
-            action no_action
+            imagebutton:
+                idle "ui/yesno/no.webp"
+                hover "ui/yesno/no_hover.webp"
+                focus_mask True
+                action no_action
+    
+    key "game_menu" action no_action
+
 
 screen yesno_saveload():
+    # NOTE As far as I can tell we never use this?
     frame:
         background "ui/saveload/prompt.webp"
 
@@ -2331,9 +2335,8 @@ screen yesno_saveload():
             xmaximum 40
             ymaximum 40
             action [FileSave(i, confirm=False), Hide('yesno_saveload') ]
-
-
-
+    
+    key "game_menu" action Hide('yesno_saveload')
 
 
 ########################################################################################
