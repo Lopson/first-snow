@@ -367,7 +367,4 @@ $ camera_reset()
 $ renpy.music.set_volume(1.0, delay=2.0)
 
 call scene_end
-
-if store.oneshot:
-    $ store.oneshot = False
 return

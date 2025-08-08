@@ -787,9 +787,4 @@ scene black with longDissolve
 stop sound fadeout 1.0
 
 call scene_end
-
-if store.oneshot:
-    $ store.oneshot = False
-    return
-else:
-    jump scene_3S1
+jump scene_3S1

@@ -95,7 +95,7 @@ class GameContext(NoRollback):
 
     @classmethod
     def in_replay(cls) -> bool:
-        return cls.in_playthrough() and store.oneshot
+        return cls.in_playthrough() and store._in_replay
 
     @staticmethod
     def get_language() -> str | None:

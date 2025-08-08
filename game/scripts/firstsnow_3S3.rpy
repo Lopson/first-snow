@@ -592,9 +592,4 @@ window hide dissolve
 scene black with longDissolve
 
 call scene_end
-
-if store.oneshot:
-    $ store.oneshot = False
-    return
-else:
-    jump scene_3S4
+jump scene_3S4

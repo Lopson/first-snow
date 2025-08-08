@@ -904,9 +904,4 @@ scene black with longDissolve
 $ camera_reset()
 
 call scene_end
-
-if store.oneshot:
-    $ store.oneshot = False
-    return
-else:
-    jump scene_2S5
+jump scene_2S5

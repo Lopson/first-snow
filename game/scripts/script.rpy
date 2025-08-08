@@ -21,4 +21,5 @@ label scene_start(scene_id):
 label scene_end:
     # TODO Is this scene statement really necessary?
     scene black with dissolve
+    $ renpy.end_replay()
     return

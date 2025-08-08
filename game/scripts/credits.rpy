@@ -25,9 +25,4 @@ label scene_4S1:
     scene black with longDissolve
 
     call scene_end
-
-    if store.oneshot:
-        $ store.oneshot = False
-        return
-    else:
-        jump scene_4S2
+    jump scene_4S2

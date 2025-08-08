@@ -82,10 +82,6 @@ default preferences.emphasize_audio = True
 # This variable keeps track of the current scene's ID during gameplay.
 default current_scene = None
 
-# This one tells us whether or not we're in a one-shot playthrough,
-# i.e. we're playing through one specific chapter selected by the player.
-default oneshot = False
-
 # This object contains data about the player's overall progress.
 define game_context = GameContext()
 

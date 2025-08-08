@@ -78,7 +78,7 @@ screen pause_menu():
         # Fetch current scene.
         title = game_context.get_scene_title(store.current_scene)
 
-        if store.oneshot:
+        if _in_replay:
             title = '{color=#faf6e780}' + _('Replay:') + '{/color} ' + title
 
         # Fetch current running time.
@@ -115,7 +115,7 @@ screen pause_menu():
                 ypos 292
                 size 31
                 outlines [(6, '#292d34', 0, 0)]
-                color ("#faf6e7" if not store.oneshot else "#faf6e780")
+                color ("#faf6e7" if not _in_replay else "#faf6e780")
 
             textbutton _("View History"):
                 xpos 920
@@ -203,7 +203,7 @@ screen side_menu():
             ]
             activate_sound "sfx/turning-pages.ogg"
     else:
-        if store.oneshot:
+        if _in_replay:
             add Transform(lang_img("ui/side/menu_save.webp"), alpha=0.5):
                 xpos 110
                 ypos 193
@@ -1415,8 +1415,7 @@ screen extras_scenes():
                     hover Composite((102, 65), (0, 0), "ui/extras/scenes/read-hover.webp", (4, 7), "ui/extras/scenes/read.webp")
                     action [
                         Stop('music', fadeout=1.0),
-                        SetVariable("oneshot", True),
-                        Start("scene_" + current_label)
+                        Replay("scene_" + current_label)
                     ]
                     xpos 328
                     ypos 473

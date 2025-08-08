@@ -352,9 +352,4 @@ $ renpy.music.set_volume(1.0)
 $ renpy.sound.set_volume(1.0, channel='ambiance2', delay=3.0)
 
 call scene_end
-
-if store.oneshot:
-    $ store.oneshot = False
-    return
-else:
-    jump scene_3S7
+jump scene_3S7
