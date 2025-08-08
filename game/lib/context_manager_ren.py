@@ -4,6 +4,7 @@ init -26 python:
 
 from dataclasses import dataclass
 from typing import TypeAlias, TYPE_CHECKING
+from renpy.audio.music import play
 from renpy.exports.contextexports import get_game_runtime
 from renpy.exports.persistentexports import seen_label
 from renpy.exports.scriptexports import get_all_labels
@@ -105,7 +106,7 @@ class GameContext(NoRollback):
         return 'en'
 
     @staticmethod
-    def store_scene(info: SaveFileInfo):
+    def store_scene(info: SaveFileInfo) -> None:
         """
         Adds the current scene and total game runtime to the save file.
         """
@@ -115,12 +116,19 @@ class GameContext(NoRollback):
         info['playtime'] = get_game_runtime()
     
     @staticmethod
-    def store_patch_version(info: SaveFileInfo):
+    def store_patch_version(info: SaveFileInfo) -> None:
         """
         Adds the current patch version number to the save file.
         """
 
         info['patch_version'] = config.patch_version # pyright: ignore[reportAttributeAccessIssue]
+    
+    @staticmethod
+    def replay_end_callback() -> None:
+        """
+        Actions to take after replay ends.
+        """
+        play(get_menu_theme(), if_changed=True) # pyright: ignore[reportUndefinedVariable]
 
 
 """renpy
@@ -132,3 +140,4 @@ from renpy import config
 # Add save callbacks.
 config.save_json_callbacks.append(GameContext.store_scene)
 config.save_json_callbacks.append(GameContext.store_patch_version)
+config.after_replay_callback = GameContext.replay_end_callback
