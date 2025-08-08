@@ -130,6 +130,18 @@ class GameContext(NoRollback):
         Actions to take after replay ends.
         """
         play(get_menu_theme(), if_changed=True) # pyright: ignore[reportUndefinedVariable]
+    
+    @classmethod
+    def replay_start_callback(cls) -> None:
+        """
+        Actions to take when the script invoked by the replay is ran.
+
+        This is necessary because, in our case, `store._game_menu_screen` is
+        set to `pause_menu`, but replays set that to `preferences` by default.
+        We therefore need to override that default.
+        """
+        if cls.in_replay():
+            store._game_menu_screen = "pause_menu"
 
 
 """renpy

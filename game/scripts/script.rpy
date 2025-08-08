@@ -14,6 +14,7 @@ label start:
 label scene_start(scene_id):
     $ text_log = TextLog()
     $ current_scene = scene_id
+    $ GameContext.replay_start_callback()
     return
 
 
