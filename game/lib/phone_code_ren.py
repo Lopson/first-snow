@@ -24,7 +24,10 @@ class Phone:
         self.messages[who] = []
         restart_interaction()
 
-    def show(self, mode, **kwargs) -> None:
+    def show(self, mode: str, **kwargs) -> None:
+        if isinstance(mode, str) and mode not in ["unlock", "messages", "call-in"]:
+            raise ValueError
+        
         show_screen('phone', mode=mode, **kwargs)
         if showing('phone', layer='screens'):
             transition(dissolve, layer='screens') # pyright: ignore[reportUndefinedVariable]
