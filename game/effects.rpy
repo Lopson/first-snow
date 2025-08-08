@@ -111,13 +111,14 @@ transform delayed(delay):
     time delay
     alpha 1
 
-transform showrepeat(first, firstdur, then, thendur):
-    first
-    time firstdur
-    block:
-        then
-        time thendur
-        repeat
+init -2:
+    transform showrepeat(first, firstdur, then, thendur):
+        first
+        time firstdur
+        block:
+            then
+            time thendur
+            repeat
 
 transform moveto(t, x):
     subpixel True
@@ -365,7 +366,7 @@ init python:
 
 
     def LightSnow(prefill=False):
-        return LiveComposite(
+        return Composite(
             (config.screen_width, config.screen_height),
             (0, 0), SnowLayer(
                 "vfx/smallflake.webp", prefill=prefill, spawn_rate=0.10,
@@ -379,7 +380,7 @@ init python:
 
 
     def LightSnowSepia(prefill=False):
-        return LiveComposite(
+        return Composite(
             (config.screen_width, config.screen_height),
             (0, 0), SnowLayer(
                 Transform("vfx/smallflake.webp", matrixcolor=SepiaMatrix()),

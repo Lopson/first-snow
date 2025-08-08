@@ -1,3 +1,11 @@
+init -2 python:
+    from typing import TYPE_CHECKING
+    if TYPE_CHECKING:
+        from renpy import persistent
+
+    def get_menu_theme() -> str:
+        return 'music/snow-eileen.ogg' if persistent.finished_story else 'music/snow.ogg'
+
 init python:
     from collections import namedtuple
     from enum import StrEnum

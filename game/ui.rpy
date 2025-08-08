@@ -3,36 +3,28 @@
 
 ###
 #
-# Animation definitions.
+# Auxiliary Python code.
 #
 ###
 
 init python:
-    animation_from_folder('menu_newgame', 'ui/side/menu_new', wrapper=ResettableDisplayable)
-    animation_from_folder('menu_savegame', 'ui/side/menu_save', wrapper=ResettableDisplayable)
-    animation_from_folder('menu_savegame_back', 'ui/side/menu_back1', wrapper=ResettableDisplayable)
-    animation_from_folder('menu_loadgame', 'ui/side/menu_load', wrapper=ResettableDisplayable)
-    animation_from_folder('menu_loadgame_back', 'ui/side/menu_back2', wrapper=ResettableDisplayable)
-    animation_from_folder('menu_options', 'ui/side/menu_options', wrapper=ResettableDisplayable)
-    animation_from_folder('menu_options_back', 'ui/side/menu_back3', wrapper=ResettableDisplayable)
-    animation_from_folder('menu_extras', 'ui/side/menu_extras', wrapper=ResettableDisplayable)
-    animation_from_folder('menu_extras_back', 'ui/side/menu_back4', wrapper=ResettableDisplayable)
-    animation_from_folder('menu_mainmenu', 'ui/side/menu_main', wrapper=ResettableDisplayable)
-    animation_from_folder('menu_quit_normal',  'ui/side/menu_quit', fps=18, loop_frames=1, wrapper=ResettableDisplayable)
-    animation_from_folder('menu_quit_reverse', 'ui/side/menu_quit', reverse=True, fps=18, loop_frames=1, wrapper=ResettableDisplayable)
+    def set_screen_var(n, v):
+        renpy.current_screen().scope[n] = v
+        renpy.restart_interaction()
 
-    def get_ui_season():
-        return persistent.ui_season or store.ui_season
+    def get_screen_var(n):
+        return renpy.current_screen().scope[n]
 
-    def get_cue_season():
-        return persistent.cue_season or store.ui_season
-
-    def get_language():
-        return store.rabbl.current_language or 'en'
-    
     def lang_img(fn):
+        # TODO This needs to be removed.
+        """
+        Tries to see if there's a file whose name ends with "-" + get_language().
+        If there is, then that means that the image that should be loaded is the
+        one belonging to the language obtained; if not, simply return the given
+        argument.
+        """
         base, ext = fn.rsplit('.', 1)
-        lfn = base + '-' + get_language() + '.' + ext
+        lfn = base + '-' + GameContext.get_language() + '.' + ext
         if renpy.loadable(lfn):
             return lfn
         else:
@@ -43,93 +35,6 @@ init python:
 # Screens.
 #
 ###
-
-
-########################################################################################
-# Cues.
-########################################################################################
-
-image cue bg = Composite(
-    (config.screen_width, 29),
-    (0, 3), "ui/hud/cue/bg.webp",
-    (226, 3), "#2b3038"
-)
-
-screen cue_icon(active, which, txt):
-    python:
-        season = get_cue_season()
-        text_color = {
-            'fall':   '#352114',
-            'winter': '#424351'
-        }[season]
-        outline_color = {
-            'fall':   '#f9f8d1',
-            'winter': '#faf6e7'
-        }[season]
-        icon = "ui/hud/cue/icon-{}-{}.webp".format(which, season)
-        bg = Frame("ui/hud/cue/bg-{}.webp".format(season), tile=True, padding=(0, 0), margin=(0, 0))
-
-    frame:
-        background "cue bg"
-        ysize 32
-        xpos 1.0
-        xanchor 1.0
-        margin (0, 0)
-        padding (0, 0)
-
-        if active:
-            hbox:
-                xminimum 200
-
-                add icon
-
-                label txt:
-                    background bg
-                    text_size 20
-                    xminimum 160
-                    ymaximum 32
-                    text_color text_color
-                    text_outlines [(2, outline_color, 0, 0)]
-                    text_yoffset 3
-                    margin (0, 0)
-                    padding (0, 0, 5, 0)
-        else:
-            null width 0
-
-init python hide:
-    def friendly_name(fn):
-        return (fn
-            # remove directory
-            .rsplit('/', 1)[-1]
-            # remove extension
-            .rsplit('.', 1)[0]
-            # remove separators
-            .replace('_', ' ')
-            .replace('-', ' ')
-            # remove differentiatiors
-            .rstrip('1234567890')
-        )
-
-    def on_music(fn):
-        if not persistent.cue_music:
-            return
-        if fn and store.rabbl.in_playthrough():
-            name = store.track_titles.get(fn, friendly_name(fn))
-            cue('icon', 4.0, which='music', txt=name)
-
-    def on_sound(fn):
-        if not persistent.cue_sfx:
-            return
-        if fn and store.rabbl.in_playthrough():
-            name = friendly_name(fn)
-            cue('icon', 4.0, which='sfx', txt=name)
-
-    add_audio_callback('music',   on_music)
-    add_audio_callback('sound',   on_sound)
-    add_audio_callback('sound2',  on_sound)
-    add_audio_callback('loopsfx', on_sound)
-
-
 
 ########################################################################################
 # Main screens.
@@ -166,12 +71,14 @@ screen pause_menu():
     python:
         # Fetch current song.
         trackfile = renpy.music.get_playing('music')
-        track = store.track_titles.get(trackfile)
+        track = tracks.get(trackfile)
+        if track:
+            track = track.title
 
         # Fetch current scene.
-        title = store.rabbl.get_title(store.rabbl_playthrough.current_scene)
+        title = game_context.get_scene_title(store.current_scene)
 
-        if store.rabbl_playthrough.oneshot:
+        if store.oneshot:
             title = '{color=#faf6e780}' + _('Replay:') + '{/color} ' + title
 
         # Fetch current running time.
@@ -208,7 +115,7 @@ screen pause_menu():
                 ypos 292
                 size 31
                 outlines [(6, '#292d34', 0, 0)]
-                color ("#faf6e7" if not store.rabbl_playthrough.oneshot else "#faf6e780")
+                color ("#faf6e7" if not store.oneshot else "#faf6e780")
 
             textbutton _("View History"):
                 xpos 920
@@ -276,7 +183,7 @@ screen side_menu():
         unhovered ResetDisplayable('menu_quit_reverse')
         action Quit(confirm=True)
 
-    if not store.rabbl.in_playthrough():
+    if not game_context.in_playthrough():
         add lang_img("ui/side/menu_new.webp"):
             xpos 110
             ypos 193
@@ -287,10 +194,16 @@ screen side_menu():
             xpos 110
             ypos 193
             hovered ResetDisplayable('menu_newgame')
-            action [ JukeboxLeave(), Play('music', get_menu_theme(), fadein=1.0, if_changed=True), Hide('menu'), Hide('side_menu', transition=dissolve), Start() ]
+            action [
+                Stop('jukebox', fadeout=1.0),
+                Play('music', get_menu_theme(), fadein=1.0, if_changed=True),
+                Hide('menu'),
+                Hide('side_menu', transition=dissolve),
+                Start()
+            ]
             activate_sound "sfx/turning-pages.ogg"
     else:
-        if store.rabbl_playthrough.oneshot:
+        if store.oneshot:
             add Transform(lang_img("ui/side/menu_save.webp"), alpha=0.5):
                 xpos 110
                 ypos 193
@@ -314,7 +227,10 @@ screen side_menu():
                 selected_hover "menu_savegame_back"
                 xpos 110
                 ypos 193
-                hovered [ResetDisplayable('menu_savegame'), ResetDisplayable('menu_savegame_back')]
+                hovered [
+                    ResetDisplayable('menu_savegame'),
+                    ResetDisplayable('menu_savegame_back')
+                ]
                 action ToggleScreen('save', fastDissolve)
 
     imagebutton:
@@ -331,7 +247,10 @@ screen side_menu():
         selected_hover "menu_loadgame_back"
         xpos 8
         ypos 310
-        hovered [ResetDisplayable('menu_loadgame'), ResetDisplayable('menu_loadgame_back')]
+        hovered [
+            ResetDisplayable('menu_loadgame'),
+            ResetDisplayable('menu_loadgame_back')
+        ]
         action ToggleScreen('load', fastDissolve)
 
     imagebutton:
@@ -348,10 +267,13 @@ screen side_menu():
         selected_hover "menu_options_back"
         xpos 109
         ypos 420
-        hovered [ResetDisplayable('menu_options'), ResetDisplayable('menu_options_back')]
+        hovered [
+            ResetDisplayable('menu_options'),
+            ResetDisplayable('menu_options_back')
+        ]
         action ToggleScreen('preferences', fastDissolve)
 
-    if store.rabbl.in_playthrough():
+    if game_context.in_playthrough():
         add lang_img("ui/side/menu_main.webp"):
             xpos -7
             ypos 530
@@ -378,7 +300,10 @@ screen side_menu():
             selected_hover "menu_extras_back"
             xpos -7
             ypos 530
-            hovered [ResetDisplayable('menu_extras'), ResetDisplayable('menu_extras_back')]
+            hovered [
+                ResetDisplayable('menu_extras'),
+                ResetDisplayable('menu_extras_back')
+            ]
             action ToggleScreen('extras', fastDissolve)
 
     add "ui/side/pins.webp"
@@ -405,7 +330,7 @@ screen preferences():
             xoffset 10
             ypos 50
 
-        textbutton _("General"):
+        textbutton __("General"):
             text_size 30
             xpos 680
             ypos 52
@@ -418,7 +343,7 @@ screen preferences():
             text_selected_hover_outlines []
             action Show('preferences_general', fastDissolve)
 
-        textbutton _("Keybinds"):
+        textbutton __("Keybinds"):
             text_size 30
             xpos 810
             ypos 52
@@ -431,7 +356,7 @@ screen preferences():
             text_selected_hover_outlines []
             action Show('preferences_keymap', fastDissolve)
 
-        textbutton _("Voices"):
+        textbutton __("Voices"):
             text_size 30
             xpos 950
             ypos 52
@@ -444,7 +369,7 @@ screen preferences():
             text_selected_hover_outlines []
             action Show('preferences_voices', fastDissolve)
 
-        textbutton _("Accessibility"):
+        textbutton __("Accessibility"):
             text_size 30
             xpos 1060
             ypos 52
@@ -463,7 +388,7 @@ screen preferences():
         xpos 165
         ypos 82
 
-    text _("Options") at trotate(-10):
+    text __("Options") at trotate(-10):
         size 72
         color "#faf6e7"
         xpos 240
@@ -484,7 +409,7 @@ screen preferences_general():
                 xpos 45
                 ypos 190
 
-            text _("Adult content"):
+            text __("Adult content"):
                 color "#faf6e7"
                 size 24
                 xpos 85
@@ -500,13 +425,17 @@ screen preferences_general():
                 selected_xpos 724
                 ypos 188
                 selected persistent.h
-                action [SetVariable('persistent.h', not persistent.h), SetVariable('store.rabbl.allow_explicit', not persistent.h), renpy.partial(achievement.grant, 'h')]
+                action [
+                    SetVariable('persistent.h', not persistent.h),
+                    SetVariable('store.allow_explicit', not persistent.h),
+                    renpy.partial(achievement.grant, 'h')
+                ]
 
         add "ui/preferences/icons/fullscreen.webp":
             xpos 45
             ypos 225
 
-        text _("Fullscreen"):
+        text __("Fullscreen"):
             color "#faf6e7"
             size 24
             xpos 85
@@ -528,13 +457,13 @@ screen preferences_general():
             xpos 45
             ypos 260
 
-        text _("Theme"):
+        text __("Theme"):
             color "#faf6e7"
             size 24
             xpos 85
             ypos 260
 
-        textbutton _("Story"):
+        textbutton __("Story"):
             xpos 527
             ypos 258
             text_size 24
@@ -551,7 +480,7 @@ screen preferences_general():
             selected_hover_yoffset 0
             action SetField(persistent, 'ui_season', None)
 
-        textbutton _("Fall"):
+        textbutton __("Fall"):
             xpos 617
             ypos 258
             text_size 24
@@ -568,7 +497,7 @@ screen preferences_general():
             selected_hover_yoffset 0
             action SetField(persistent, 'ui_season', 'fall')
 
-        textbutton _("Winter"):
+        textbutton __("Winter"):
             xpos 675
             ypos 254
             text_size 24
@@ -594,7 +523,7 @@ screen preferences_general():
             xpos 45
             ypos 320
 
-        text _("Text speed"):
+        text __("Text speed"):
             color "#faf6e7"
             size 24
             xpos 85
@@ -616,7 +545,7 @@ screen preferences_general():
             xpos 45
             ypos 355
 
-        text _("Skip unseen dialogue"):
+        text __("Skip unseen dialogue"):
             color "#faf6e7"
             size 24
             xpos 85
@@ -637,7 +566,7 @@ screen preferences_general():
             xpos 45
             ypos 390
 
-        text _("Auto-continue"):
+        text __("Auto-continue"):
             color "#faf6e7"
             size 24
             xpos 85
@@ -658,7 +587,7 @@ screen preferences_general():
             xpos 45
             ypos 425
 
-        text _("Auto-continue wait time"):
+        text __("Auto-continue wait time"):
             color "#faf6e7"
             size 24
             xpos 85
@@ -684,7 +613,7 @@ screen preferences_general():
             xpos 45
             ypos 480
 
-        text _("Music"):
+        text __("Music"):
             color "#faf6e7"
             size 24
             xpos 85
@@ -706,7 +635,7 @@ screen preferences_general():
             xpos 45
             ypos 515
 
-        text _("Ambience"):
+        text __("Ambience"):
             color "#faf6e7"
             size 24
             xpos 85
@@ -728,7 +657,7 @@ screen preferences_general():
             xpos 45
             ypos 550
 
-        text _("Sound effects"):
+        text __("Sound effects"):
             color "#faf6e7"
             size 24
             xpos 85
@@ -764,7 +693,7 @@ screen preferences_keymap():
         xpos 1040
         ypos 125
     
-    textbutton _("Reset all"):
+    textbutton __("Reset all"):
         background Null()
         text_color "#faf6e7"
         text_size 32
@@ -877,7 +806,7 @@ screen preferences_keymap_add(event):
 
         add KeyBindingGrabBehaviour('_keymap_captured_key', exclude_displayables=['keymap_add_ok', 'keymap_add_cancel'])
 
-        text _("Please press the keys or buttons you want to bind."):
+        text __("Please press the keys or buttons you want to bind."):
             yoffset 50
             size 30
             xmaximum 680
@@ -899,7 +828,11 @@ screen preferences_keymap_add(event):
             focus_mask True
             xoffset 455
             yoffset 181
-            action [ AddUserKeyBinding(event, binding, joy), Hide('preferences_keymap_add', fastDissolve), Delayed(0.5, SetVariable('_keymap_captured_key', None)) ]
+            action [
+                AddUserKeyBinding(event, binding, joy),
+                Hide('preferences_keymap_add', fastDissolve),
+                Delayed(0.5, SetVariable('_keymap_captured_key', None))
+            ]
 
         imagebutton id "keymap_add_cancel":
             idle lang_img("ui/yesno/no.webp")
@@ -907,26 +840,10 @@ screen preferences_keymap_add(event):
             focus_mask True
             xoffset 588
             yoffset 180
-            action [ Hide('preferences_keymap_add', fastDissolve), Delayed(0.5, SetVariable('_keymap_captured_key', None)) ]
-
-init python:
-    def play_vo_test(voice, sample):
-        act = PlayCharacterVoice(voice, sample, selected=True)
-        if not act.get_selected():
-            renpy.run(act)
-
-    def stop_vo_test(voice):
-        renpy.music.stop('voice', fadeout=1.0)
-
-    def sustain_vo_test(e, voice, amount, volume):
-        if e.has_ended():
-            e.interval = amount
-            e.start()
-        else:
-            e.extend(amount)
-        renpy.run(SetCharacterVolume(voice, volume))
-        renpy.music.set_volume(volume, channel='voice')
-        renpy.restart_interaction()
+            action [
+                Hide('preferences_keymap_add', fastDissolve),
+                Delayed(0.5, SetVariable('_keymap_captured_key', None))
+            ]
 
 init python:
     def update_h_val(new_y):
@@ -938,18 +855,6 @@ screen preferences_voices():
     default h_val = 0
 
     python:
-        voices = [
-            ('allison',   'Allison Merlo',    'Elizabeth Quedenfeld', '#1c2831'),
-            ('eileen',    'Eileen Turner',    'Kira Buckland',        '#9a9065'),
-            ('rose',      'Rose Garcia',      'Nola Klop',            '#c7633b'),
-            ('wallace',   'Wallace Moore',    'Steven Kelly',         '#b2678a'),
-            ('caprice',   'Caprice Shiften',  'Lisa Reimold',         '#839093'),
-            ('millie',    'Millie Clarke',    'Jill Harris',          '#925254'),
-            ('hayley',    'Hayley Curah',     'Elissa Park',          '#cc9351'),
-            ('eve',       'Eve Turner',       'Aimee Smith',          '#9a9065'),
-            ('elizabeth', 'Elizabeth Turner', 'Abigail Turner',       '#9a9065'),
-            ('andrew',    'Andrew Turner',    'Bradley Gareth',       '#5b4741'),
-        ]
         adj = ui.adjustment(changed=update_h_val)
 
     vbox:
@@ -969,7 +874,7 @@ screen preferences_voices():
                 mousewheel "horizontal"
 
                 hbox:
-                    for (tag, name, vo, color) in voices:
+                    for (tag, name, vo, color) in store.voices:
                         python:
                             sample = 'voice/test_' + tag + '.mp3'
                             event = ExtendableEvent(1.0,
@@ -979,7 +884,7 @@ screen preferences_voices():
                             voice_adj = ui.adjustment(range=1.0, value=GetCharacterVolume(tag),
                                 changed=renpy.partial(sustain_vo_test, event, tag, 1.0)
                             )
-                            topbar = LiveComposite((160, 346),
+                            topbar = Composite((160, 346),
                                 (0, 0), "ui/preferences/voices/bar_{}.webp".format(tag),
                                 (0, 0), Transform("ui/preferences/voices/bar.webp", alpha=0.6)
                             )
@@ -1026,7 +931,7 @@ screen preferences_voices():
             right_bar 'ui/preferences/voices/slider-bg.webp'
             thumb 'ui/preferences/voices/slider-handle.webp'
 
-    text _("Volume Settings"):
+    text __("Volume Settings"):
         size 48
         color "#faf6e7"
         outlines [(5, "#292d34", 0, 0)]
@@ -1044,7 +949,7 @@ screen preferences_voices():
         selected_xpos 963
         action Preference('emphasize audio', 'toggle')
 
-    text _("Emphasize voices"):
+    text __("Emphasize voices"):
         color "#faf6e7"
         outlines [(1, "#292d34", 0, 0)]
         ypos 210
@@ -1058,7 +963,7 @@ screen preferences_accessibility():
         background Null()
         xpos 300
 
-        text _("* Changes only apply to textbox and pop-ups"):
+        text __("* Changes only apply to textbox and pop-ups"):
             color "#faf6e7"
             size 16
             xpos 750
@@ -1069,13 +974,13 @@ screen preferences_accessibility():
             xpos 45
             ypos 225
 
-        text _("Text color"):
+        text __("Text color"):
             color "#faf6e7"
             size 24
             xpos 85
             ypos 225
 
-        textbutton _("Standard"):
+        textbutton __("Standard"):
             xpos 547
             ypos 223
             text_size 24
@@ -1091,7 +996,7 @@ screen preferences_accessibility():
             selected_hover_yoffset 0
             action SetField(persistent, 'high_contrast', False)
 
-        textbutton _("Black"):
+        textbutton __("Black"):
             xpos 690
             ypos 223
             text_size 24
@@ -1112,13 +1017,13 @@ screen preferences_accessibility():
             xpos 45
             ypos 260
 
-        text _("Text font"):
+        text __("Text font"):
             color "#faf6e7"
             size 24
             xpos 85
             ypos 260
 
-        textbutton _("Standard"):
+        textbutton __("Standard"):
             xpos 330
             ypos 258
             text_size 24
@@ -1134,7 +1039,7 @@ screen preferences_accessibility():
             selected_hover_yoffset 0
             action SetField(persistent, 'font_mode', 'standard')
 
-        textbutton _("Sans-serif"):
+        textbutton __("Sans-serif"):
             xpos 460
             ypos 257
             text_size 28
@@ -1153,7 +1058,7 @@ screen preferences_accessibility():
             selected_hover_yoffset 0
             action SetField(persistent, 'font_mode', 'sans')
 
-        textbutton _("OpenDyslexic"):
+        textbutton __("OpenDyslexic"):
             xpos 595
             ypos 258
             text_size 20
@@ -1180,7 +1085,7 @@ screen preferences_accessibility():
             xpos 45
             ypos 320
 
-        text _("Music Cues"):
+        text __("Music Cues"):
             color "#faf6e7"
             size 24
             xpos 85
@@ -1201,7 +1106,7 @@ screen preferences_accessibility():
             xpos 45
             ypos 355
 
-        text _("Sound Cues"):
+        text __("Sound Cues"):
             color "#faf6e7"
             size 24
             xpos 85
@@ -1222,7 +1127,7 @@ screen preferences_accessibility():
             xpos 45
             ypos 390
 
-        text _("Text-to-speech"):
+        text __("Text-to-speech"):
             color "#faf6e7"
             size 24
             xpos 85
@@ -1247,13 +1152,13 @@ screen preferences_accessibility():
             xpos 45
             ypos 444
 
-        text _("Cues Theme"):
+        text __("Cues Theme"):
             color "#faf6e7"
             size 24
             xpos 85
             ypos 444
 
-        textbutton _("Story"):
+        textbutton __("Story"):
             xpos 527
             ypos 442
             text_size 24
@@ -1270,7 +1175,7 @@ screen preferences_accessibility():
             selected_hover_yoffset 0
             action SetField(persistent, 'cue_season', None)
 
-        textbutton _("Fall"):
+        textbutton __("Fall"):
             xpos 617
             ypos 442
             text_size 24
@@ -1287,7 +1192,7 @@ screen preferences_accessibility():
             selected_hover_yoffset 0
             action SetField(persistent, 'cue_season', 'fall')
 
-        textbutton _("Winter"):
+        textbutton __("Winter"):
             xpos 675
             ypos 438
             text_size 24
@@ -1382,13 +1287,6 @@ screen extras():
 ## Scenes.
 
 init python:
-    def set_screen_var(n, v):
-        renpy.current_screen().scope[n] = v
-        renpy.restart_interaction()
-
-    def get_screen_var(n):
-        return renpy.current_screen().scope[n]
-
     def calculate_extra_cutoffs(new_y):
         act_cutoffs = [(1345, 4), (900, 3), (410, 2), (0, 1)]
         act_y, act_cutoff = [(y, a) for (y, a) in act_cutoffs if new_y >= y][0]
@@ -1407,7 +1305,12 @@ screen extras_scenes():
 
     $ current_label = '{}S{}'.format(current_act, current_scene)
     $ yadj = ui.adjustment(changed=calculate_extra_cutoffs)
-    $ max_act = next(i for i in range(hidden_act_cutoff, 1000) if not store.rabbl.seen_scene('{}S1'.format(i)))
+    python:
+        acts_seen = game_context.acts_seen()
+        if acts_seen:
+            max_act = max(acts_seen)
+        else:
+            max_act = 0
 
     hbox:
         xpos 355
@@ -1428,21 +1331,22 @@ screen extras_scenes():
 
                 vbox:
                     spacing 1
-                    for act in range(1, max_act):
+                    for act in range(1, (max_act + 1)):
                         python:
                             from collections import OrderedDict
-                            act_scenes = OrderedDict([(scene, store.rabbl.get_title(scene)) for scene in scenes if scene.startswith(str(act) + 'S')])
-                        text ("Act {}".format(store.rabbl.get_act_title(act)) if act > cutoff_act else " "):
+                            act_scenes = OrderedDict([(scene, game_context.get_scene_title(scene)) for scene in scene_titles if scene.startswith(str(act) + 'S')])
+                        text (__("Act") + " {}".format(game_context.get_act_title(act)) if act > cutoff_act else " "):
                             size 65
                             xoffset 3
                             outlines [(4, "#292d34", 0, 0)]
                         for x in enumerate(act_scenes, 1):
+                            # NOTE The variable "scene_label" actually contains the xSy identifier and not the scripting label.
                             $ i, scene_label = x
                             $ sceneshot = "scripts/sceneshots/" + scene_label + ".webp"
 
                             if act < cutoff_act or (act == cutoff_act and i < cutoff_scene):
                                 null height 44
-                            elif store.rabbl.seen_scene(scene_label):
+                            elif game_context.scene_seen(scene_label):
                                 fixed:
                                     ysize 44
 
@@ -1457,7 +1361,7 @@ screen extras_scenes():
                                             SetLocalVariable('current_act', act),
                                             SetLocalVariable('current_scene', i)]
 
-                                    text "{}. {}".format(i, store.rabbl.get_title(scene_label)):
+                                    text "{}. {}".format(i, game_context.get_scene_title(scene_label)):
                                         size 21
                                         color "#fbf9ec"
                                         outlines [(2, "#4b565f", 0, 0)]
@@ -1476,7 +1380,7 @@ screen extras_scenes():
                     
                     null height 40
 
-            text _("Act ") + str(cutoff_act):
+            text __("Act ") + str(cutoff_act):
                 size 65
                 outlines [(4, "#292d34", 0, 0)]
                 xoffset 5
@@ -1496,28 +1400,34 @@ screen extras_scenes():
             xmaximum 30
             top_gutter 25
             bottom_gutter 25
+            unscrollable "hide"
             yoffset 25
             xoffset -5
 
-        frame:
-            background ("scripts/sceneshots/" + current_label + "_full.webp")
-            xsize 482
-            ysize 521
+        if game_context.scene_seen(current_label):
+            frame:
+                background ("scripts/sceneshots/" + current_label + "_full.webp")
+                xsize 482
+                ysize 521
 
-            imagebutton:
-                idle Transform("ui/extras/scenes/read.webp", xoffset=4, yoffset=7)
-                hover Composite((102, 65), (0, 0), "ui/extras/scenes/read-hover.webp", (4, 7), "ui/extras/scenes/read.webp")
-                action [Stop('music', fadeout=1.0), PlayScene(current_label)]
-                xpos 328
-                ypos 473
-            
-            text scene_descriptions[current_label]:
-                ypos 430
-                xpos 20
-                size 21
-                xmaximum 300
-                color "#fbf9ec"
-                outlines [(2, "#292d35", 0, 0)]
+                imagebutton:
+                    idle Transform("ui/extras/scenes/read.webp", xoffset=4, yoffset=7)
+                    hover Composite((102, 65), (0, 0), "ui/extras/scenes/read-hover.webp", (4, 7), "ui/extras/scenes/read.webp")
+                    action [
+                        Stop('music', fadeout=1.0),
+                        SetVariable("oneshot", True),
+                        Start("scene_" + current_label)
+                    ]
+                    xpos 328
+                    ypos 473
+                
+                text scene_descriptions[current_label]:
+                    ypos 430
+                    xpos 20
+                    size 21
+                    xmaximum 300
+                    color "#fbf9ec"
+                    outlines [(2, "#292d35", 0, 0)]
 
 ## Art gallery.
 
@@ -1532,7 +1442,7 @@ screen extras_art():
         background Null()
         xpos 300
         
-        textbutton _("CGs"):
+        textbutton __("CGs"):
             background Transform("ui/extras/gallery/tab-cg.webp", yoffset=5)
             action Show('extras_art_firstsnow', fastDissolve)
             ypos 93
@@ -1543,7 +1453,7 @@ screen extras_art():
             text_hover_outlines [(1, "#4b565f", 0, 0)]
             text_selected_hover_outlines []
 
-        textbutton _("Guest Art"):
+        textbutton __("Guest Art"):
             background Transform("ui/extras/gallery/tab-guest.webp", yoffset=8)
             action Show('extras_art_extra', fastDissolve)
             ypos 93
@@ -1564,29 +1474,26 @@ screen extras_art_extra():
 
     use extras_art_gallery(pieces=store.guest_art, art_type='guest', show_info=True)
 
-init python:
-    def eval_piece(p):
-        r = {}
-        for k,v in p.items():
-            if callable(v):
-                r[k] = v()
-            else:
-                r[k] = v
-        return r
-
 screen extras_art_gallery(pieces, art_type, show_info=False):
     python:
-        import math
-        import collections
-        pieces = [eval_piece(p) for p in pieces]
-        pieces = [p for p in pieces if p.get('visible', True)]
-        rows = int(math.ceil(len(pieces) / 2.0))
+        from copy import deepcopy
+        from math import ceil
+        from renpy.display.predict import predicting
 
-        import renpy as rp
-        if not rp.display.predict.predicting and art_type == 'guest':
+        # Let's have each piece determine on the spot if it's
+        # locked/visible and its thumbnails if necessary.
+        pieces = deepcopy(pieces)
+        for piece in pieces:
+            piece.eval_piece()
+        
+        # This filters out the "H" DLC pieces and locked pieces.
+        pieces: list = [p for p in pieces if p.is_visible and not p.locked]
+        rows: int = int(ceil(len(pieces) / 2.0))
+
+        if not predicting and art_type == 'guest':
             achievement.grant('art_guest_viewed')
 
-    default current_piece = pieces[0]
+    default current_piece = pieces[0] if not pieces[0].locked else None
 
     hbox:
         xpos 351
@@ -1618,10 +1525,10 @@ screen extras_art_gallery(pieces, art_type, show_info=False):
                                 xsize 208
                                 ysize 122
 
-                                if piece.get('locked'):
+                                if piece.locked:
                                     pass
                                 else:
-                                    $ thumb = piece.get('preview', piece['thumb'][0] if len(piece['thumb']) > 1 else piece['thumb'])
+                                    $ thumb = piece.preview if piece.preview else piece.thumb[0]
                                     imagebutton:
                                         idle           Composite((208, 122), (4, 4), thumb)
                                         hover          Composite((208, 122), (0, 0), "#4b565f", (4, 4), thumb)
@@ -1630,8 +1537,8 @@ screen extras_art_gallery(pieces, art_type, show_info=False):
                                         selected (current_piece == piece)
                                         action SetLocalVariable('current_piece', piece)
 
-                                    if len(piece['file']) > 1:
-                                        textbutton str(len(piece['file'])):
+                                    if len(piece.file) > 1:
+                                        textbutton str(len(piece.file)):
                                             background Transform("ui/extras/gallery/list-variants.webp", xalign=1.0, xoffset=-5)
                                             xalign 1.0
                                             yalign 0.0
@@ -1655,6 +1562,7 @@ screen extras_art_gallery(pieces, art_type, show_info=False):
                     xmaximum 30
                     top_gutter 10
                     bottom_gutter 10
+                    unscrollable "hide"
                     xalign 1.0
                     xoffset 10
                     ypos 30
@@ -1673,7 +1581,7 @@ screen extras_art_gallery(pieces, art_type, show_info=False):
                 background Transform("ui/extras/gallery/info-bg.webp", yoffset=40, xalign=0.5)
 
                 if not show_info:
-                    textbutton _("Variants"):
+                    textbutton __("Variants"):
                         background Transform("ui/extras/gallery/info-header.webp", xoffset=5, yoffset=15)
                         xalign 0.5
                         text_size 48
@@ -1693,7 +1601,7 @@ screen extras_art_gallery(pieces, art_type, show_info=False):
 
                             null height 27
 
-                            for i, f in enumerate(current_piece['thumb']):
+                            for i, f in enumerate(current_piece.thumb):
                                 $ zf = Transform(f, zoom=0.75, subpixel=True)
                                 frame:
                                     background None
@@ -1718,7 +1626,7 @@ screen extras_art_gallery(pieces, art_type, show_info=False):
 
                             null height 40
 
-                    if len(current_piece['thumb']) > 4:
+                    if len(current_piece.thumb) > 4:
                         vbar value YScrollValue('extras_art_preview'):
                             top_bar "ui/extras/scrollbar.webp"
                             bottom_bar "ui/extras/scrollbar.webp"
@@ -1728,11 +1636,12 @@ screen extras_art_gallery(pieces, art_type, show_info=False):
                             xmaximum 30
                             top_gutter 10
                             bottom_gutter 10
+                            unscrollable "hide"
                             xalign 1.0
                             xoffset 10
                             ypos 60
                 else:
-                    textbutton _("Info"):
+                    textbutton __("Info"):
                         background Transform("ui/extras/gallery/info-header.webp", xoffset=-40, yoffset=15)
                         text_size 48
                         text_color "#faf6e7"
@@ -1746,8 +1655,9 @@ screen extras_art_gallery(pieces, art_type, show_info=False):
                         xsize 208
                         ysize 120
                         imagebutton:
-                            idle  Composite((204, 118), (2, 2), current_piece['thumb'])
-                            hover Composite((204, 118), (0, 0), "#fbf9ec", (2, 2), current_piece['thumb'])
+                            # NOTE Suspicious access of thumb, keep an eye on it.
+                            idle  Composite((204, 118), (2, 2), current_piece.thumb)
+                            hover Composite((204, 118), (0, 0), "#fbf9ec", (2, 2), current_piece.thumb)
                             align (0.5, 0.5)
                             action Show('extras_art_single', dissolve, current_piece, 0)
                         add "ui/extras/gallery/zoom.webp":
@@ -1761,23 +1671,23 @@ screen extras_art_gallery(pieces, art_type, show_info=False):
                         xsize 208
 
                         vbox:
-                            text _("Artist"):
+                            text __("Artist"):
                                 size 24
                                 color "#faf6e7"
                                 outlines [(2, "#292d34", 0, 0)]
-                            text current_piece['info'].get('artist', _('Anonymous')):
+                            text (current_piece.author if current_piece.author else __('Anonymous')):
                                 size 48
                                 color "#faf6e7"
                                 outlines [(2, "#292d34", 0, 0)]
 
-                        if current_piece['info'].get('url'):
+                        if current_piece.url:
                             imagebutton:
                                 idle "ui/extras/gallery/info-socialmedia.webp"
                                 hover "ui/extras/gallery/info-socialmedia-hover.webp"
-                                xoffset -30 # i don't even care anymore
+                                xoffset -30 # "i don't even care anymore" - preserved as a historical artifact.
                                 hover_xoffset -29
                                 hover_yoffset 1
-                                action OpenURL(current_piece['info']['url'])
+                                action OpenURL(current_piece.url)
 
 screen extras_art_single(piece, index=0):
     modal True
@@ -1801,14 +1711,14 @@ screen extras_art_single(piece, index=0):
         xinitial 0.5
         yinitial 0.5
 
-        if show_native and 'native' in piece:
-            add piece['native'][index]
+        if show_native and piece.native:
+            add piece.native[index]
         else:
             fixed:
                 xminimum config.screen_width
                 ymaximum config.screen_height
                 imagebutton:
-                    idle piece['file'][index]
+                    idle piece.file[index]
                     xalign 0.5
                     yalign 0.5
                     action ToggleScreenVariable('show_native')
@@ -1821,21 +1731,21 @@ screen extras_art_single(piece, index=0):
 screen extras_art_single_overlay(piece):
     add "ui/extras/gallery/overlay.webp"
 
-    text _("tab/back to toggle menu"):
+    text __("tab/back to toggle menu"):
         xpos 100
         ypos 633
         color "#faf6e7"
         size 13
 
-    if piece['title']:
-        text '"{}"'.format(piece['title']):
+    if piece.title:
+        text '"{}"'.format(piece.title):
             xpos 95
             ypos 649
             color "#faf6e7"
             size 32
 
-    if 'native' in piece:
-        text _("space/start to toggle zoom"):
+    if piece.native:
+        text __("space/start to toggle zoom"):
             xpos 100
             ypos 690
             color "#faf6e7"
@@ -1954,7 +1864,7 @@ screen extras_music():
                     xalign 0.5
                     yalign 0.5
 
-        text (_("Unlockable Tracks") if current_album == 'main' else _("Standard Tracks")):
+        text (__("Unlockable Tracks") if current_album == 'main' else __("Standard Tracks")):
             color "#faf6e750"
             size 36
             xpos 705
@@ -1962,7 +1872,7 @@ screen extras_music():
             ypos 190
             yalign 1.0
 
-        text (_("Standard Tracks") if current_album == 'main' else _("Unlockable Tracks")):
+        text (__("Standard Tracks") if current_album == 'main' else __("Unlockable Tracks")):
             color "#faf6e7"
             size 36
             outlines [(4, "#292d34", 0, 0)]
@@ -2144,7 +2054,18 @@ screen extras_music_player(music_room, needs_unlock=False):
                 hover "ui/extras/jukebox/ctrl-stop.webp"
                 insensitive Transform("ui/extras/jukebox/ctrl-stop.webp", alpha=0.5)
                 xpos 150
-                action [music_room.Stop()]
+                if not renpy.music.get_pause(music_room.channel):
+                    action [
+                        music_room.Stop(),
+                        Delayed(music_room.fadeout, renpy.restart_interaction)
+                    ]
+                else:
+                    action [
+                        SetField(music_room, "fadeout", 0.0),
+                        music_room.Stop(),
+                        SetField(music_room, "fadeout", fadeout_music_room),
+                        Function(renpy.restart_interaction)
+                    ]
 
             bar value MixerValue("jukebox"):
                 xpos 0
@@ -2193,7 +2114,7 @@ screen saveload(save):
                 for i, (name, extra_info, screenshot, time) in enumerate(saves):
                     $ extra = renpy.slot_json(name)
                     $ outdated = extra.get('patch_version', 1) < config.patch_version
-                    $ ttitle = store.rabbl.get_title(extra['scene'])
+                    $ ttitle = game_context.get_scene_title(extra['scene'])
                     $ ttime = int(extra['playtime']) // 60
                     frame:
                         background "ui/saveload/slot.webp"
@@ -2262,7 +2183,7 @@ screen saveload(save):
                         background "ui/saveload/slot-empty.webp"
                         xysize (654, 125)
 
-                        text _("No saves here..."):
+                        text __("No saves here..."):
                             xalign 0.5
                             yalign 0.5
                             yoffset -18
@@ -2347,7 +2268,7 @@ screen yesno_prompt(message, yes_action, no_action):
         xpadding 284
         ypadding 192
 
-        text _(message):
+        text __(message):
             yoffset 50
             size 30
             xmaximum 680
@@ -2378,7 +2299,7 @@ screen yesno_saveload():
         xpos 94
         ypos y
 
-        text _("Are you sure you want to overwrite?"):
+        text __("Are you sure you want to overwrite?"):
             xanchor 0.5
             xpos 236
             ypos 20
@@ -2441,16 +2362,11 @@ screen choice(items):
 
 # The saybox.
 screen say(what, who, double_speak=False):
-    if config.developer or config.testing:
-        key "t" action ToggleVariable('editing')
-    if store.editing:
-        use renedit_overlay
-
     python:
         bg = None
         tb = Null()
         bg_base = 'ui/textbar/' + get_ui_season() + '/'
-        tb_base = 'ui/textbar/names/' + get_language() + '/'
+        tb_base = 'ui/textbar/names/' + GameContext.get_language() + '/'
 
         vinfo = store._get_voice_info()
         speaking = speaking_flavour = False
@@ -2460,8 +2376,8 @@ screen say(what, who, double_speak=False):
                 if who in character_tags:
                     tag = character_tags[who]
                 else:
-                    for c, n in character_names.items():
-                        if n == who:
+                    for c in characters:
+                        if characters[c] == who:
                             tag = c
                             break
                     else:
@@ -2615,17 +2531,17 @@ transform phone_anim:
 screen phone(mode, who=None, time=None, temperature=None):
     python:
         emoji = {
-            '\\o/': 'yay',
-            ';)': 'wink',
-            ':>': 'smug',
-            ':)': 'smile',
-            '|(': 'sleepy',
-            ':(': 'sad',
-            '<3': 'heart',
-            ':s': 'confused',
-            'owo': 'blush',
-            '>:|': 'angry',
-            ':o': 'surprised',
+            '\\o/': __('yay'),
+            ';)': __('wink'),
+            ':>': __('smug'),
+            ':)': __('smile'),
+            '|(': __('sleepy'),
+            ':(': __('sad'),
+            '<3': __('heart'),
+            ':s': __('confused'),
+            'owo': __('blush'),
+            '>:|': __('angry'),
+            ':o': __('surprised'),
         }
 
     frame at phone_anim:
@@ -2798,8 +2714,8 @@ screen text_log():
                     for (type, who, what) in store.text_log.all():
                         $ who = who or ''
                         python:
-                            for char, n in character_names.items():
-                                if remove_text_tags(n) == who:
+                            for char in characters:
+                                if remove_text_tags(characters[char]) == who:
                                     break
                             else:
                                 char = ''
