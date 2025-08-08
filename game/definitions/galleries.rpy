@@ -27,6 +27,18 @@ init python:
             
             if callable(self.visible):
                 return self.visible()
+        
+        def is_locked(self) -> bool:
+            if self.locked is None:
+                return True
+            
+            if isinstance(self.locked, bool):
+                if self.locked:
+                    return True
+                return False
+            
+            if callable(self.locked):
+                return self.locked()
 
         def eval_piece(self) -> None:
             if callable(self.file):

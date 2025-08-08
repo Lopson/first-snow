@@ -4,6 +4,8 @@
 # A new game has been started, initialize relevant variables.
 label start:
     $ current_scene = None
+    $ text_log = None
+    $ phone = Phone()
     
     jump scene_1S1
 
