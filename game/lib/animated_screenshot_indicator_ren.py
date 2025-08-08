@@ -7,8 +7,7 @@ from time import time
 from renpy.exports.displayexports import restart_interaction
 from renpy.display import screen
 if TYPE_CHECKING:
-    from renpy import store
-    from renpy import config
+    from renpy import store, config
 
 store._screenshot_taken = 0.0
 

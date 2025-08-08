@@ -31,7 +31,7 @@ def run_audio_callbacks() -> None:
     if _audio_ctr:
         return
 
-    new_state = {c: music.get_playing(c) for c in _audio_callbacks}
+    new_state: dict[str, str | None] = {c: music.get_playing(c) for c in _audio_callbacks}
 
     for channel, fn in new_state.items():
         if _audio_state.get(channel) == fn:
