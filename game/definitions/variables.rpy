@@ -82,11 +82,6 @@ default preferences.emphasize_audio = True
 # This variable keeps track of the current scene's ID during gameplay.
 default current_scene = None
 
-# This object contains data about the player's overall progress.
-# TODO This is not necessary, we can replace all references to this variable
-# for direct calls of the class.
-define game_context = GameContext()
-
 # This variable tells us whether or not the game has been finished at least once.
 default persistent.finished_story = False
 

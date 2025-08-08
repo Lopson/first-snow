@@ -54,42 +54,42 @@ define cg_art = [
         title=__('Balcony'),
         file=['cgs/act1_balcony_morning.webp'],
         thumb=['cgs/act1_balcony_morning_thumb.webp'],
-        locked=lambda: not game_context.scene_seen('1S1')
+        locked=lambda: not GameContext.scene_seen('1S1')
     ),
 
     GalleryItem(
         title=__('Art Matters'),
         file=['vfx/title/act1.webp'],
         thumb=['vfx/title/act1_thumb.webp'],
-        locked=lambda: not game_context.scene_seen('1S2')
+        locked=lambda: not GameContext.scene_seen('1S2')
     ),
 
     GalleryItem(
         title=__('The Painter'),
         file=['cgs/act1_eileenpainting.webp'],
         thumb=['cgs/act1_eileenpainting_thumb.webp'],
-        locked=lambda: not game_context.scene_seen('1S5')
+        locked=lambda: not GameContext.scene_seen('1S5')
     ),
 
     GalleryItem(
         title=__('Cooking'),
         file=['cgs/act1_cooking.webp', 'cgs/act1_cooking_happy.webp'],
         thumb=['cgs/act1_cooking_thumb.webp', 'cgs/act1_cooking_happy_thumb.webp'],
-        locked=lambda: not game_context.scene_seen('1S6')
+        locked=lambda: not GameContext.scene_seen('1S6')
     ),
 
     GalleryItem(
         title=__('Toast!'),
         file=['cgs/act1_clubtoast.webp'],
         thumb=['cgs/act1_clubtoast_thumb.webp'],
-        locked=lambda: not game_context.scene_seen('1S7')
+        locked=lambda: not GameContext.scene_seen('1S7')
     ),
 
     GalleryItem(
         title=__('Falling Snow'),
         file=['vfx/title/act2.webp'],
         thumb=['vfx/title/act2_thumb.webp'],
-        locked=lambda: not game_context.scene_seen('2S1')
+        locked=lambda: not GameContext.scene_seen('2S1')
     ),
 
     GalleryItem(
@@ -99,7 +99,7 @@ define cg_art = [
                 'dlc/h/cgs/act2_boobpainting.webp',
                 'dlc/h/cgs/act2_boobpainting_embarrassed.webp',
                 'dlc/h/cgs/act2_boobpainting_smile.webp'
-            ] if game_context.explicit_allowed() else [
+            ] if GameContext.explicit_allowed() else [
                 'cgs/act2_nudepainting.webp',
                 'cgs/act2_nudepainting_embarrassed.webp',
                 'cgs/act2_nudepainting_smile.webp'
@@ -110,13 +110,13 @@ define cg_art = [
                 'dlc/h/cgs/act2_boobpainting_thumb.webp',
                 'dlc/h/cgs/act2_boobpainting_embarrassed_thumb.webp',
                 'dlc/h/cgs/act2_boobpainting_smile_thumb.webp'
-            ] if game_context.explicit_allowed() else [
+            ] if GameContext.explicit_allowed() else [
                 'cgs/act2_nudepainting_thumb.webp',
                 'cgs/act2_nudepainting_embarrassed_thumb.webp',
                 'cgs/act2_nudepainting_smile_thumb.webp'
             ]
         ),
-        locked=lambda: not game_context.scene_seen('2S3')
+        locked=lambda: not GameContext.scene_seen('2S3')
     ),
 
     GalleryItem(
@@ -140,21 +140,21 @@ define cg_art = [
             'cgs/act2_balconychat_talk_4_thumb.webp',
             'cgs/act2_balconychat_talk_5_thumb.webp'
             ],
-        locked=lambda: not game_context.scene_seen('2S4')
+        locked=lambda: not GameContext.scene_seen('2S4')
     ),
 
     GalleryItem(
         title=__('Kiss'),
         file=['cgs/act2_kiss_surprise.webp', 'cgs/act2_kiss_after.webp'],
         thumb=['cgs/act2_kiss_surprise_thumb.webp', 'cgs/act2_kiss_after_thumb.webp'],
-        locked=lambda: not game_context.scene_seen('2S6')
+        locked=lambda: not GameContext.scene_seen('2S6')
     ),
 
     GalleryItem(
         title=__('Zoo'),
         file=['cgs/act2_zoo_smile.webp', 'cgs/act2_zoo_bird.webp'],
         thumb=['cgs/act2_zoo_smile_thumb.webp', 'cgs/act2_zoo_bird_thumb.webp'],
-        locked=lambda: not game_context.scene_seen('2S8')
+        locked=lambda: not GameContext.scene_seen('2S8')
     ),
 
     GalleryItem(
@@ -169,8 +169,8 @@ define cg_art = [
             'dlc/h/cgs/act2_finger_mid_thumb.webp',
             'dlc/h/cgs/act2_finger_end_thumb.webp'
         ],
-        locked=lambda: not game_context.scene_seen('2S8_b'),
-        visible=lambda: game_context.explicit_allowed(),
+        locked=lambda: not GameContext.scene_seen('2S8_b'),
+        visible=lambda: GameContext.explicit_allowed(),
     ),
 
     GalleryItem(
@@ -185,8 +185,8 @@ define cg_art = [
             'dlc/h/cgs/act2_cunnilingus_mid_thumb.webp',
             'dlc/h/cgs/act2_cunnilingus_end_thumb.webp'
         ],
-        locked=lambda: not game_context.scene_seen('2S8_b'),
-        visible=lambda: game_context.explicit_allowed(),
+        locked=lambda: not GameContext.scene_seen('2S8_b'),
+        visible=lambda: GameContext.explicit_allowed(),
     ),
 
     GalleryItem(
@@ -199,35 +199,35 @@ define cg_art = [
             'cgs/act2_pillowtalk_eyesclosed_thumb.webp',
             'cgs/act2_pillowtalk_talk_thumb.webp'
         ],
-        locked=lambda: not game_context.scene_seen('2S8_c')
+        locked=lambda: not GameContext.scene_seen('2S8_c')
     ),
 
     GalleryItem(
         title=__('Photo'),
         file=['cgs/act2_photo.webp'],
         thumb=['cgs/act2_photo_thumb.webp'],
-        locked=lambda: not game_context.scene_seen('2S9')
+        locked=lambda: not GameContext.scene_seen('2S9')
     ),
 
     GalleryItem(
         title=__('A World Away'),
         file=['vfx/title/act3.webp'],
         thumb=['vfx/title/act3_thumb.webp'],
-        locked=lambda: not game_context.scene_seen('3S1')
+        locked=lambda: not GameContext.scene_seen('3S1')
     ),
 
     GalleryItem(
         title=__('Roadtrip'),
         file=['cgs/act3_roadtrip_{}.webp'.format(i) for i in range(1, 7)],
         thumb=['cgs/act3_roadtrip_{}_thumb.webp'.format(i) for i in range(1, 7)],
-        locked=lambda: not game_context.scene_seen('3S1')
+        locked=lambda: not GameContext.scene_seen('3S1')
     ),
 
     GalleryItem(
         title=__('Family Dinner'),
         file=['cgs/act3_familydinner_{}.webp'.format(i) for i in range(1, 11)],
         thumb=['cgs/act3_familydinner_{}_thumb.webp'.format(i) for i in range(1, 11)],
-        locked=lambda: not game_context.scene_seen('3S2')
+        locked=lambda: not GameContext.scene_seen('3S2')
     ),
 
     GalleryItem(
@@ -244,57 +244,57 @@ define cg_art = [
             'cgs/act3_pinned_shocked_thumb.webp',
             'cgs/act3_pinned_kiss_thumb.webp'
         ],
-        locked=lambda: not game_context.scene_seen('3S2')
+        locked=lambda: not GameContext.scene_seen('3S2')
     ),
 
     GalleryItem(
         title=__('Kitchen'),
         file=['cgs/act3_kitchen.webp'],
         thumb=['cgs/act3_kitchen_thumb.webp'],
-        locked=lambda: not game_context.scene_seen('3S3_a')
+        locked=lambda: not GameContext.scene_seen('3S3_a')
     ),
 
     GalleryItem(
         title=__('Unison'),
         file=['dlc/h/cgs/act3_mast{}.webp'.format(i) for i in range(1, 8)],
         thumb=['dlc/h/cgs/act3_mast{}_thumb.webp'.format(i) for i in range(1, 8)],
-        locked=lambda: not game_context.scene_seen('3S3_b'),
-        visible=lambda: game_context.explicit_allowed(),
+        locked=lambda: not GameContext.scene_seen('3S3_b'),
+        visible=lambda: GameContext.explicit_allowed(),
     ),
 
     GalleryItem(
         title=__('Snowmen'),
         file=['cgs/act3_snowmen.webp'],
         thumb=['cgs/act3_snowmen_thumb.webp'],
-        locked=lambda: not game_context.scene_seen('3S3_c')
+        locked=lambda: not GameContext.scene_seen('3S3_c')
     ),
 
     GalleryItem(
         title=__('Overlook'),
         file=['cgs/act3_swings.webp'],
         thumb=['cgs/act3_swings_thumb.webp'],
-        locked=lambda: not game_context.scene_seen('3S6')
+        locked=lambda: not GameContext.scene_seen('3S6')
     ),
 
     GalleryItem(
         title=__('Sleeping Sisters'),
         file=['cgs/act3_sleepingsisters.webp'],
         thumb=['cgs/act3_sleepingsisters_thumb.webp'],
-        locked=lambda: not game_context.scene_seen('3S7')
+        locked=lambda: not GameContext.scene_seen('3S7')
     ),
 
     GalleryItem(
         title=__('Together'),
         file=['cgs/act3_hug_run.webp', 'cgs/act3_hug_end.webp'],
         thumb=['cgs/act3_hug_run_thumb.webp', 'cgs/act3_hug_end_thumb.webp'],
-        locked=lambda: not game_context.scene_seen('3S8')
+        locked=lambda: not GameContext.scene_seen('3S8')
     ),
 
     GalleryItem(
         title=__('Voiced'),
         file=['cgs/act4_vacg{}.webp'.format(i)for i in range(1, 5)],
         thumb=['cgs/act4_vacg{}_thumb.webp'.format(i)for i in range(1, 5)],
-        locked=lambda: not game_context.scene_seen('4S2')
+        locked=lambda: not GameContext.scene_seen('4S2')
     )
 ]
 

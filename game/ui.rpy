@@ -76,7 +76,7 @@ screen pause_menu():
             track = track.title
 
         # Fetch current scene.
-        title = game_context.get_scene_title(store.current_scene)
+        title = GameContext.get_scene_title(store.current_scene)
 
         if GameContext.in_replay():
             title = '{color=#faf6e780}' + _('Replay:') + '{/color} ' + title
@@ -183,7 +183,7 @@ screen side_menu():
         unhovered ResetDisplayable('menu_quit_reverse')
         action Quit(confirm=True)
 
-    if not game_context.in_playthrough():
+    if not GameContext.in_playthrough():
         add lang_img("ui/side/menu_new.webp"):
             xpos 110
             ypos 193
@@ -273,7 +273,7 @@ screen side_menu():
         ]
         action ToggleScreen('preferences', fastDissolve)
 
-    if game_context.in_playthrough():
+    if GameContext.in_playthrough():
         add lang_img("ui/side/menu_main.webp"):
             xpos -7
             ypos 530
@@ -1310,7 +1310,7 @@ screen extras_scenes():
     $ current_label = '{}S{}'.format(current_act, current_scene)
     $ yadj = ui.adjustment(changed=calculate_extra_cutoffs)
     python:
-        acts_seen = game_context.acts_seen()
+        acts_seen = GameContext.acts_seen()
         if acts_seen:
             max_act = max(acts_seen)
         else:
@@ -1338,8 +1338,8 @@ screen extras_scenes():
                     for act in range(1, (max_act + 1)):
                         python:
                             from collections import OrderedDict
-                            act_scenes = OrderedDict([(scene, game_context.get_scene_title(scene)) for scene in scene_titles if scene.startswith(str(act) + 'S')])
-                        text (__("Act") + " {}".format(game_context.get_act_title(act)) if act > cutoff_act else " "):
+                            act_scenes = OrderedDict([(scene, GameContext.get_scene_title(scene)) for scene in scene_titles if scene.startswith(str(act) + 'S')])
+                        text (__("Act") + " {}".format(GameContext.get_act_title(act)) if act > cutoff_act else " "):
                             size 65
                             xoffset 3
                             outlines [(4, "#292d34", 0, 0)]
@@ -1350,7 +1350,7 @@ screen extras_scenes():
 
                             if act < cutoff_act or (act == cutoff_act and i < cutoff_scene):
                                 null height 44
-                            elif game_context.scene_seen(scene_label):
+                            elif GameContext.scene_seen(scene_label):
                                 fixed:
                                     ysize 44
 
@@ -1365,7 +1365,7 @@ screen extras_scenes():
                                             SetLocalVariable('current_act', act),
                                             SetLocalVariable('current_scene', i)]
 
-                                    text "{}. {}".format(i, game_context.get_scene_title(scene_label)):
+                                    text "{}. {}".format(i, GameContext.get_scene_title(scene_label)):
                                         size 21
                                         color "#fbf9ec"
                                         outlines [(2, "#4b565f", 0, 0)]
@@ -1408,7 +1408,7 @@ screen extras_scenes():
             yoffset 25
             xoffset -5
 
-        if game_context.scene_seen(current_label):
+        if GameContext.scene_seen(current_label):
             frame:
                 background ("scripts/sceneshots/" + current_label + "_full.webp")
                 xsize 482
@@ -2117,7 +2117,7 @@ screen saveload(save):
                 for i, (name, extra_info, screenshot, time) in enumerate(saves):
                     $ extra = renpy.slot_json(name)
                     $ outdated = extra.get('patch_version', 1) < config.patch_version
-                    $ ttitle = game_context.get_scene_title(extra['scene'])
+                    $ ttitle = GameContext.get_scene_title(extra['scene'])
                     $ ttime = int(extra['playtime']) // 60
                     frame:
                         background "ui/saveload/slot.webp"
