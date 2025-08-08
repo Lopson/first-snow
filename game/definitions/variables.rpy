@@ -86,7 +86,8 @@ default current_scene = None
 default persistent.finished_story = False
 
 # This variable is used for displaying phone messages.
-# TODO We shouldn't have to default this, make it a static class!
+# We need to keep this as a default because we don't want to lose the state of
+# the phone between saves.
 default phone = Phone()
 
 # TODO Fully figure this out.

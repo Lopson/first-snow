@@ -12,8 +12,9 @@ label start:
 
 # This label is meant to be called at the start of all scripts.
 label scene_start(scene_id):
-    $ text_log = TextLog()
     $ current_scene = scene_id
+    $ text_log = TextLog()
+    $ phone = Phone()
     $ GameContext.replay_start_callback()
     return
 
