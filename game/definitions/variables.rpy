@@ -14,11 +14,8 @@ default persistent.h = True
 
 # This flag is meant to control whether or not to show adult content
 # in the current playthrough.
-default allow_explicit = True
-
-init 999:
-    define h_available = ('h' in dlc_packages)
-    $ allow_explicit = (h_available and persistent.h)
+define h_available = ('h' in dlc_packages)
+default allow_explicit = (h_available and persistent.h)
 
 ###############
 # UI Settings #
