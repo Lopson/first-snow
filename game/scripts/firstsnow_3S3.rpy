@@ -500,7 +500,8 @@ show eve outdoors grin normal at right2:
     xzoom -1 xpos 0.775
     linear 0.7 xzoom 1 xpos 0.79
     bounce
-doublespeak allison eve "Making snowmen!"
+allison "Making snowmen!" (multiple=2)
+eve "Making snowmen!" (multiple=2)
 
 show eileen indoors_crossed narrow angry at leftside:
     xpos 0.15
