@@ -2534,7 +2534,6 @@ screen say(what, who):
                             pos.ypos)
                     
                     if xpos is not None and ypos is not None:
-                        print(xpos)
                         if ypos < 0.0 or ypos > 1.0:
                             bg = bg_base + 'default.webp'
                         elif xpos >= 0.80:
