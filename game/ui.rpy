@@ -2366,8 +2366,122 @@ screen choice(items):
                     left_padding 30
                     bottom_padding 20
 
+
+screen multiple_say(what, who, multiple):
+    # NOTE Multiple is a tuple. The first component of the tuple is the block
+    # number, and the second is the total number of screens.
+    
+    python:
+        block_number = multiple[0]
+        number_screens = multiple[1]
+
+        bg = None
+        tb = Null()
+        bg_base = 'ui/textbar/' + get_ui_season() + '/'
+        tb_base = 'ui/textbar/names/' + GameContext.get_language() + '/'
+
+        vinfo = store._get_voice_info()
+        speaking = speaking_flavour = False
+
+        if who:
+            if who in character_tags:
+                tag = character_tags[who]
+            else:
+                for c in characters:
+                    if characters[c].name == who:
+                        tag = c
+                        break
+                else:
+                    tag = who.lower()
+            sprite_tag = tag.split('_', 1)[0]
+
+            if vinfo.filename and vinfo.tag.rstrip('u') in (tag, sprite_tag):
+                voice_file = vinfo.filename.rsplit('/', 1)[1]
+                if voice_file.startswith('scene_') or voice_file[0].isdigit():
+                    speaking = True
+                else:
+                    speaking_flavour = True
+
+            who = who.split('{', 1)[0]
+
+            if number_screens == 2:
+                if block_number == 1:
+                    # We only want this rendered once.
+                    bg = bg_base + 'double.webp'
+                tb = tb_base + who.lower() + '.webp'
+
+        dialogue_color = {
+            'fall':   '#352114',
+            'winter': '#424351'
+        }[get_ui_season()]
+        if persistent.high_contrast:
+            dialogue_color = "#000000"
+
+        if persistent.font_mode == 'dyslexia':
+            dialogue_font = "ui/OpenDyslexic3.ttf"
+            dialogue_size = 18
+            dialogue_yoffset = -15
+            dialogue_spacing = 0
+        elif persistent.font_mode == 'sans':
+            dialogue_font = "ui/BalooTamma2-Medium.ttf"
+            dialogue_size = 22
+            dialogue_yoffset = -7
+            dialogue_spacing = -5
+        else:
+            dialogue_font = "ui/SetFireToTheRain.ttf"
+            dialogue_size = 22
+            dialogue_yoffset = 0
+            dialogue_spacing = 0
+        
+    window id "window":
+        background bg
+        yoffset 456
+
+        frame:
+
+            background Null()
+            add tb:
+                if number_screens == 2 and block_number == 1:
+                    xpos 143
+                    ypos 28
+                elif number_screens == 2 and block_number == 2:
+                    xpos 1040
+                    ypos 87
+            if speaking:
+                add "ui/textbar/voice.webp":
+                    xpos (160 + 11 * len(who))
+                    ypos 0
+            elif speaking_flavour:
+                add "ui/textbar/voice-flavour.webp":
+                    xpos (160 + 11 * len(who))
+                    ypos 0
+
+        frame:
+            background Null()
+            yminimum 262
+            xpadding 135
+            ypadding 15
+            xmaximum 1100
+
+            text what:
+                id "what"
+                color dialogue_color
+                slow (not renpy.in_rollback())
+                font dialogue_font
+                size dialogue_size
+                yoffset dialogue_yoffset
+                line_spacing dialogue_spacing
+                
+                if number_screens == 2 and block_number == 1:
+                    xpos 75
+                    ypos 100
+                elif number_screens == 2 and block_number == 2:
+                    xpos 530
+                    ypos 100
+
+
 # The saybox.
-screen say(what, who, double_speak=False):
+screen say(what, who):
     python:
         bg = None
         tb = Null()
@@ -2378,30 +2492,27 @@ screen say(what, who, double_speak=False):
         speaking = speaking_flavour = False
 
         if who:
-            if not double_speak:
-                if who in character_tags:
-                    tag = character_tags[who]
+            if who in character_tags:
+                tag = character_tags[who]
+            else:
+                for c in characters:
+                    if characters[c].name == who:
+                        tag = c
+                        break
                 else:
-                    for c in characters:
-                        if characters[c] == who:
-                            tag = c
-                            break
-                    else:
-                        tag = who.lower()
-                sprite_tag = tag.split('_', 1)[0]
+                    tag = who.lower()
+            sprite_tag = tag.split('_', 1)[0]
 
-                if vinfo.filename and vinfo.tag.rstrip('u') in (tag, sprite_tag):
-                    voice_file = vinfo.filename.rsplit('/', 1)[1]
-                    if voice_file.startswith('scene_') or voice_file[0].isdigit():
-                        speaking = True
-                    else:
-                        speaking_flavour = True
+            if vinfo.filename and vinfo.tag.rstrip('u') in (tag, sprite_tag):
+                voice_file = vinfo.filename.rsplit('/', 1)[1]
+                if voice_file.startswith('scene_') or voice_file[0].isdigit():
+                    speaking = True
+                else:
+                    speaking_flavour = True
 
-                who = who.split('{', 1)[0]
-            if double_speak:
-                bg = bg_base + 'double.webp'
-                tb = tb_base + '_'.join(who) + '.webp'
-            elif bg_base + who.lower() + '.webp' in renpy.list_files():
+            who = who.split('{', 1)[0]
+
+            if bg_base + who.lower() + '.webp' in renpy.list_files():
                 bg = bg_base + who.lower() + '.webp'
                 tb = tb_base + who.lower() + '.webp'
             else:
@@ -2423,6 +2534,7 @@ screen say(what, who, double_speak=False):
                             pos.ypos)
                     
                     if xpos is not None and ypos is not None:
+                        print(xpos)
                         if ypos < 0.0 or ypos > 1.0:
                             bg = bg_base + 'default.webp'
                         elif xpos >= 0.80:
@@ -2494,37 +2606,15 @@ screen say(what, who, double_speak=False):
             ypadding 15
             xmaximum 1100
 
-            if double_speak:
-                text what[0]:
-                    id "what"
-                    color dialogue_color
-                    xpos 75
-                    ypos 100
-                    slow (not renpy.in_rollback())
-                    font dialogue_font
-                    size dialogue_size
-                    yoffset dialogue_yoffset
-                    line_spacing dialogue_spacing
-                text what[1]:
-                    id "what"
-                    color dialogue_color
-                    xpos 530
-                    ypos 100
-                    slow (not renpy.in_rollback())
-                    font dialogue_font
-                    size dialogue_size
-                    yoffset dialogue_yoffset
-                    line_spacing dialogue_spacing
-            else:
-                text what:
-                    id "what"
-                    color dialogue_color
-                    xpos 75
-                    ypos 100
-                    font dialogue_font
-                    size dialogue_size
-                    yoffset dialogue_yoffset
-                    line_spacing dialogue_spacing
+            text what:
+                id "what"
+                color dialogue_color
+                xpos 75
+                ypos 100
+                font dialogue_font
+                size dialogue_size
+                yoffset dialogue_yoffset
+                line_spacing dialogue_spacing
 
 # ugh
 transform phone_anim:
