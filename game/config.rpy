@@ -10,6 +10,8 @@ python early:
     config.log_events = False
 
 init -1 python hide:
+    from math import ceil
+
     # Basic settings.
     config.name = "First Snow"
     config.version = "1.4.2"
@@ -23,7 +25,7 @@ init -1 python hide:
     config.window_icon = "ui/icon.png"
     config.windows_icon = "ui/icon-win.png"
     config.default_fullscreen = False
-    config.framerate = 60
+    config.framerate = ceil(int(renpy.get_refresh_rate()))
 
     # Capabilities.
     config.gl_resize = True
