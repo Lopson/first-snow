@@ -2438,7 +2438,6 @@ screen multiple_say(what, who, multiple):
         yoffset 456
 
         frame:
-
             background Null()
             add tb:
                 if number_screens == 2 and block_number == 1:
@@ -2819,7 +2818,7 @@ screen text_log():
                                 who = ''
                             
                             what: str = renpy.filter_text_tags(
-                                entry.what, allow=config.history_blocked_tags)
+                                entry.what, allow=gui.history_blocked_tags)
 
                             who_color: dict[str, str] = {'color': '#ffffff'}
                             if who:

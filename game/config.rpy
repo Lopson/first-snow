@@ -11,6 +11,8 @@ python early:
 
 init -1 python hide:
     from math import ceil
+    from renpy.defaultstore import main_menu
+    from renpy.display.behavior import Keymap
 
     # Basic settings.
     config.name = "First Snow"
@@ -35,10 +37,6 @@ init -1 python hide:
     config.main_menu_music = get_menu_theme()
     config.has_autosave = False
     config.has_quicksave = False
-
-    # History
-    config.history_length = 100
-    config.history_blocked_tags = [ 'nw' ]
 
     # Misc.
     config.auto_voice = "voice/{id}.ogg"
@@ -67,6 +65,16 @@ init -1 python hide:
     # Keymap.
     config.keymap['choose_renderer'] = []
     config.keymap['text_log'] = ['l']
+
+    # History
+    config.history_length = 100
+    gui.history_blocked_tags = [ 'nw' ]
+
+    def toggle_text_log():
+        if not main_menu:
+            ToggleScreen('text_log', dissolve)() # type: ignore
+
+    config.underlay.append(Keymap(text_log=toggle_text_log))
 
     # Default transitions.
     config.enter_transition = None
