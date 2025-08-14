@@ -90,9 +90,6 @@ default persistent.finished_story = False
 # the phone between saves.
 default phone = Phone()
 
-# TODO Fully figure this out.
-default text_log = None
-
 ##################
 # Internal Logic #
 ##################
