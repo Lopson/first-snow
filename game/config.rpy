@@ -36,6 +36,10 @@ init -1 python hide:
     config.has_autosave = False
     config.has_quicksave = False
 
+    # History
+    config.history_length = 100
+    config.history_blocked_tags = [ 'nw' ]
+
     # Misc.
     config.auto_voice = "voice/{id}.ogg"
     config.voice_filename_format = "voice/{filename}"
@@ -62,6 +66,7 @@ init -1 python hide:
 
     # Keymap.
     config.keymap['choose_renderer'] = []
+    config.keymap['text_log'] = ['l']
 
     # Default transitions.
     config.enter_transition = None
