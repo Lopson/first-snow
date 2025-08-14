@@ -1,4 +1,4 @@
-label scene_2S8_a:
+label scene_2S8:
 
 call scene_start("2S8")
 

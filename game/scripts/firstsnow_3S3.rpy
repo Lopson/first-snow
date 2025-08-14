@@ -1,4 +1,4 @@
-label scene_3S3_a:
+label scene_3S3:
 ######################
 # Act 3, Scene 3
 
