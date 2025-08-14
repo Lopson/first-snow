@@ -4,7 +4,7 @@
 # A new game has been started, initialize relevant variables.
 label start:
     $ current_scene = None
-    $ text_log = None
+    $ _history_list = []
     $ phone = Phone()
     
     jump scene_1S1
@@ -13,7 +13,7 @@ label start:
 # This label is meant to be called at the start of all scripts.
 label scene_start(scene_id):
     $ current_scene = scene_id
-    $ text_log = TextLog()
+    $ _history_list = []
     $ phone = Phone()
     $ GameContext.replay_start_callback()
     return

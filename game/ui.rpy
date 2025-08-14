@@ -2438,7 +2438,6 @@ screen multiple_say(what, who, multiple):
         yoffset 456
 
         frame:
-
             background Null()
             add tb:
                 if number_screens == 2 and block_number == 1:
@@ -2806,30 +2805,41 @@ screen text_log():
 
                 vbox:
                     spacing 10
-                    for (type, who, what) in store.text_log.all():
-                        $ who = who or ''
+                    for entry in _history_list:
                         python:
+                            who: str = entry.who or ''
+                            print(entry.who)
+
                             for char in characters:
-                                if remove_text_tags(characters[char]) == who:
+                                if (renpy.filter_text_tags(
+                                        characters[char].name, allow=[])) == who:
                                     break
                             else:
-                                char = ''
+                                who = ''
+                            
+                            what: str = renpy.filter_text_tags(
+                                entry.what, allow=gui.history_blocked_tags)
 
-                        if type == 'dialogue':
-                            hbox:
-                                spacing 12
-                                label who:
-                                    xsize 100
-                                    xalign 1.0
-                                    text_xalign 1.0
-                                    text_color (characters.get(char.lower(), {'color': '#ffffff'})['color'])
-                                    text_bold True
-                                    text_outlines [(2, '#292d34', 0, 0)]
-                                    yoffset -2
-                                label what:
-                                    text_font dialogue_font
-                                    text_size dialogue_size
-                                    yoffset dialogue_yoffset
+                            who_color: dict[str, str] = {'color': '#ffffff'}
+                            if who:
+                                who_color = characters[char].properties
+
+                        hbox:
+                            spacing 12
+                            label who:
+                                xsize 100
+                                xalign 1.0
+                                text_xalign 1.0
+                                text_color who_color['color']
+                                text_bold True
+                                text_outlines [(2, '#292d34', 0, 0)]
+                                yoffset -2
+                                substitute False
+                            label what:
+                                text_font dialogue_font
+                                text_size dialogue_size
+                                yoffset dialogue_yoffset
+                                substitute False
 
             vbar value YScrollValue('text_log_view'):
                 xpos 5

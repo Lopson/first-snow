@@ -7,13 +7,13 @@ define characters = {
     # Main
     'allison':   CharacterDetails(__('Allison'), {'color': '#eef0f1'}),
     'eileen':    CharacterDetails(__('Eileen'), {'color': '#9a9065'}),
-    'eileenu':   CharacterDetails(__('Mad girl{=eileen}'), {'color': '#9a9065'}),
+    'eileenu':   CharacterDetails(__('Mad girl'), {'color': '#9a9065'}),
     
     # Side
     'caprice':   CharacterDetails(__('Caprice'), {'color': '#6e9aa1'}),
     'millie':    CharacterDetails(__('Millie'), {'color': '#ba5a4d'}),
     'wallace':   CharacterDetails(__('Wallace'), {'color': '#b2678a'}),
-    'wallaceu':  CharacterDetails(__('Tall guy{=wallace}'), {'color': '#b2678a'}),
+    'wallaceu':  CharacterDetails(__('Tall guy'), {'color': '#b2678a'}),
     'rose':      CharacterDetails(__('Rose'), {'color': '#c7633b'}),
     'eve':       CharacterDetails(__('Eve'), {'color': '#f5ecc1'}),
     'dad':       CharacterDetails(__('Dad'), {'color': '#eef0f1'}),
@@ -42,8 +42,8 @@ define characters = {
 }
 
 define character_tags = {
-    __('Mad girl{=eileen}'):  'eileen_madgirl',
-    __('Tall guy{=wallace}'): 'wallace_tallguy'
+    __('Mad girl'):  'eileen_madgirl',
+    __('Tall guy'): 'wallace_tallguy'
 }
 
 init 1 python:

@@ -635,4 +635,4 @@ $ renpy.music.set_volume(1.0)
 $ camera_reset()
 
 call scene_end
-jump scene_2S8_a
+jump scene_2S8

@@ -919,4 +919,4 @@ scene black with longDissolve
 $ renpy.sound.set_volume(1.0, channel='ambiance')
 
 call scene_end
-jump scene_3S3_a
+jump scene_3S3
