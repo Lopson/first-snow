@@ -1,7 +1,4 @@
 init python:
-    # TODO Try to break these back into regular images or SpriteManager objects.
-    # Only handle this once you've gotten the game back to stable post-RABBL removal.
-
     animation_from_folder(
         'menu_newgame', 'ui/side/menu_new', wrapper=ResettableDisplayable)
     

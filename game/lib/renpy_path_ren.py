@@ -1,7 +1,8 @@
 """renpy
 init -100 python:
 """
-# Functions for trivial I/O inspection in Ren'Py as a replacement for the ones in os.path.
+# Functions for trivial I/O inspection in Ren'Py as a
+# replacement for the ones in os.path.
 
 from renpy.exports.loaderexports import list_files
 
