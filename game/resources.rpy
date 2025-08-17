@@ -2,21 +2,6 @@
 # Contains all resources: sprites, backgrounds, characters...
 
 # Dynamically load sprites and backgrounds.
-init -1 python:
-    sprite_offsets = {
-        'rose': 410,
-        'rose_right': 410,
-        'eileen': 380,
-        'eileen_right': 380,
-        'caprice': 450,
-        'millie': 420,
-        'millie_right': 420,
-        'michael': 380,
-        'eve': 300,
-        'wallace': 370,
-        'wallace_right': 370
-    }
-
 init python:
     for package in [None] + store.dlc_packages:
         if package:
