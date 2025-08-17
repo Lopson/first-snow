@@ -18,7 +18,7 @@ init -1 python hide:
     build.classify('**/thumbs.db', None)
     build.classify('**/.DS_Store', None)
     build.classify('**.rpy', None)
-    build.classify('game/01_build.rpyc', None)  # VIRTUAL SELF
+    build.classify('game/build.rpyc', None)  # VIRTUAL SELF
     build.classify('game/saves/**', None)
     build.classify('patches/**', None)
     build.classify('installer/**', None)
@@ -38,8 +38,9 @@ init -1 python hide:
     build.classify('game/cgs/**', 'resources')
     build.classify('game/music/**', 'resources')
     build.classify('game/sfx/**', 'resources')
-    build.classify('game/sprites/**', 'resources')
-    build.classify('game/sprites-static/**', 'resources')
+    # NOTE This character doesn't show up in the game.
+    build.classify('game/images/sprites/michael/**', None)
+    build.classify('game/images/**', 'resources')
     build.classify('game/ui/**', 'resources')
     build.classify('game/voice/**', 'resources')
     build.classify('game/vfx/**', 'resources')
