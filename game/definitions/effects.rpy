@@ -235,7 +235,17 @@ image snow sepia = LightSnowSepia(prefill=True)
 
 # Image effects
 init python:
-    def vblur(name, img):
+    def vblur(name: str, img):
+        """
+        Returns a displayable with the blur effect applied to it.
+
+        @param name: The name of the displayable that's to be manipulated. This
+        is here so that we can specifically apply a different blur value to
+        Eileen's sprites.
+        @param img: The displayable that we want blurred.
+        @return: A blurred displayable.
+        """
+        
         # fixes the scary eyes
         if name.startswith('eileen'):
             radius = 2.2
