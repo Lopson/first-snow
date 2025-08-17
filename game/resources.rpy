@@ -1,10 +1,6 @@
 # resources.rpy
 # Contains all resources: sprites, backgrounds, characters...
 
-# Characters.
-define adv = Character(None, ctc=DynamicDisplayable(ctc), ctc_position="fixed")
-define narrator = Character(None, what_style='say_thought')
-
 # Dynamically load sprites and backgrounds.
 init python:
     sprite_offsets = {
@@ -135,6 +131,9 @@ init:
     image cg title = "ui/main/bg.webp"
 
 # Eileen Flashback Layered Image
+# init 2:
+#     image eileen_sepia = LayeredImageProxy(
+#         name="eileen", transform=Transform(matrixcolor=SepiaMatrix()))
 layeredimage eileen_sepia:
     group bodies:
         attribute indoors_crossed default:

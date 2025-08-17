@@ -53,3 +53,7 @@ init 1 python:
         globals()[character] = Character(
             details.name, image=character, voice_tag=character, **details.properties
         )
+
+# Let's also define some basic characters for gameplay.
+define adv = Character(None, ctc=DynamicDisplayable(ctc), ctc_position="fixed")
+define narrator = Character(None, what_style='say_thought')
