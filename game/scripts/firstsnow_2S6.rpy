@@ -35,8 +35,7 @@ play music "music/touching.ogg" fadein 1.5
 scene bg downtown park sepia:
     xalign 1.0
 show snow sepia
-show eileen_sepia outdoors_fists lookawaynarrow sadmouth blush at center:
-    ypos 1.525
+show eileen_sepia outdoors_fists lookawaynarrow sadmouth blush at center
 with flash
 "Just thinking about what happened last night makes my heart race, but I have no idea what's supposed to happen after something like that."
 
