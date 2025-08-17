@@ -106,6 +106,7 @@ def define_dynamic_images(dir: str,
     # in them and each folder in `dir` represents a different character or
     # version of a character.
     for base in renpy_listdir(dir):
+        print(base)
         bpath: str = renpy_join(dir, base)
         if not renpy_isdir(bpath):
             continue

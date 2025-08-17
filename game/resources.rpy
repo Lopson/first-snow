@@ -2,7 +2,7 @@
 # Contains all resources: sprites, backgrounds, characters...
 
 # Dynamically load sprites and backgrounds.
-init python:
+init -1 python:
     sprite_offsets = {
         'rose': 410,
         'rose_right': 410,
@@ -17,13 +17,14 @@ init python:
         'wallace_right': 370
     }
 
+init python:
     for package in [None] + store.dlc_packages:
         if package:
             pfx = 'dlc/' + package + '/'
         else:
             pfx = ''
 
-        define_dynamic_images(pfx + 'sprites', yanchor=0.5, variants={'blur': vblur})
+        # define_dynamic_images(pfx + 'sprites', yanchor=0.5, variants={'blur': vblur})
         define_images(pfx + 'sprites-static')
 
         define_images(pfx + 'bgs', ['bg'], xalign=0.5, yalign=0.5, variants={'blur': vblur})
