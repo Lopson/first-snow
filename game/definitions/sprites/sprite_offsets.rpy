@@ -14,17 +14,3 @@ init -1:
         'wallace': 370,
         'wallace_right': 370
     }
-
-    define sprite_blurs = {
-        'rose': 30.0,
-        'rose_right': 30.0,
-        'eileen': 12.5,
-        'eileen_right': 12.5,
-        'caprice': 30.0,
-        'millie': 30.0,
-        'millie_right': 30.0,
-        'michael': 30.0,
-        'eve': 30.0,
-        'wallace': 30.0,
-        'wallace_right': 30.0
-    }
