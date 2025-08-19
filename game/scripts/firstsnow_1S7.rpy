@@ -163,7 +163,7 @@ show eileen indoors_onhip annoyed frown at center:
 
 show wallace even open neutral blur at leftside:
     xpos 0.18
-show eileen normal neutral blur at center:
+show eileen_blur normal neutral at center:
     xzoom -1 xpos 0.485
 show caprice indoors_behindback raised normal open blur at rightside:
     xpos 0.84

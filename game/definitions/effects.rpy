@@ -227,6 +227,13 @@ transform nod2_repeat:
     ease 0.2 xoffset 0
     repeat
 
+transform box_blur:
+    shader "shaders.box_blur"
+    mesh True
+
+    u_size 1
+    u_separation 0.0
+
 
 image snow light starting = LightSnow(prefill=False)
 image snow light = LightSnow(prefill=True)
