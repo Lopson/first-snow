@@ -5,3 +5,5 @@ layeredimage eve:
     group bodies auto
     group eyes auto
     group faces auto
+
+image eve_blur = LayeredImageProxy(name="eve", transform=box_blur)

@@ -231,8 +231,8 @@ transform box_blur:
     shader "shaders.box_blur"
     mesh True
 
-    u_size 1
-    u_separation 0.0
+    u_size 5
+    u_separation 2.5
 
 
 image snow light starting = LightSnow(prefill=False)

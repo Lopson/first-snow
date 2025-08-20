@@ -16,3 +16,5 @@ layeredimage wallace_right:
     group eyebrows auto
     group eyes auto
     group faces auto
+
+image wallace_blur = LayeredImageProxy(name="wallace", transform=box_blur)

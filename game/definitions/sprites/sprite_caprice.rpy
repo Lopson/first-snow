@@ -6,3 +6,5 @@ layeredimage caprice:
     group eyebrows auto
     group eyes auto
     group faces auto
+
+image caprice_blur = LayeredImageProxy(name="caprice", transform=box_blur)
