@@ -14,3 +14,5 @@ layeredimage rose_right:
     group bodies auto
     group eyes auto
     group faces auto
+
+image rose_blur = LayeredImageProxy(name="rose", transform=box_blur)
