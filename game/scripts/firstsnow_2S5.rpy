@@ -170,7 +170,7 @@ play sound "sfx/cell_phone_vibrate.ogg"
 show bg downtown city blurred3 behind rose, allison as bg2:
     xalign 1.0 yalign 0.5 alpha 0
     ease 1.0 alpha 0.9
-show rose outdoors_handonhip halfclosed puzzled blur at right2 as rose2
+show rose_blur outdoors_handonhip halfclosed puzzled at right2 as rose2
 $ renpy.transition(dissolve, layer='master')
 $ phone.show('unlock')
 "A little sheepish, I take my phone from my pocket to check what the message is."
