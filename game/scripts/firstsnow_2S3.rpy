@@ -274,7 +274,7 @@ show misc cutins bunny:
 show eileen indoors_crossed frown narrow at rightish:
     zoom 0.6 yoffset -310
     xpos 0.85 alpha 0
-show eileen indoors_crossed frown narrow blur at rightside as eileen2:
+show eileen_blur indoors_crossed frown narrow at rightside as eileen2:
     zoom 0.6 yoffset -310
     xpos 1.1
     ease 1.5 xpos 0.85
@@ -289,8 +289,8 @@ show misc cutins bunny:
 show eileen indoors_crossed frown narrow at rightish:
     zoom 0.6 yoffset -310
     xpos 0.85 alpha 0
-    ease 1.0 alpha 1
-show eileen indoors_crossed frown narrow blur at rightside as eileen2:
+    ease 0.5 alpha 1
+show eileen_blur indoors_crossed frown narrow at rightside as eileen2:
     zoom 0.6 yoffset -310
     xpos 0.85 alpha 1
     ease 1.5 alpha 0
