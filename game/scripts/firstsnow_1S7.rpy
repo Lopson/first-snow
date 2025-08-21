@@ -161,12 +161,18 @@ show eileen indoors_onhip annoyed frown at center:
     linear 0.7 xzoom -1 xpos 0.485
 "The look of pure and unrelenting disdain Eileen gives her at being reminded of the wait goes gleefully ignored, which is probably for the best."
 
-show wallace even open neutral blur at leftside:
-    xpos 0.18
-show eileen_blur normal neutral at center:
-    xzoom -1 xpos 0.485
-show caprice indoors_behindback raised normal open blur at rightside:
-    xpos 0.84
+show wallace:
+    alpha 0.0
+show wallace_blur indoors even open neutral at leftside:
+    zoom 0.9 xpos 0.18 xzoom -1 yoffset -80
+show eileen:
+    alpha 0.0
+show eileen_blur indoors_onhip normal neutral at center:
+    zoom 0.9 xzoom -1 xpos 0.485 yoffset -80
+show caprice:
+    alpha 0.0
+show caprice_blur indoors_behindback raised normal open at rightside:
+    zoom 0.9 xpos 0.84 yoffset -80
 show bg downtown pizzeria blurred2
 $ renpy.transition(midDissolve, layer='master')
 show misc cutins pizzas:
@@ -183,11 +189,17 @@ with None
 show bg downtown pizzeria
 $ renpy.transition(dissolve, layer='master')
 pause 0.5
+hide wallace_blur
 show wallace indoors even closed smile at leftside:
+    alpha 1.0
     xpos 0.18
+hide eileen_blur
 show eileen indoors_onhip normal open at center:
+    alpha 1.0
     xzoom -1 xpos 0.485
+hide caprice_blur
 show caprice indoors_behindback raised normal open at rightside:
+    alpha 1.0
     xpos 0.84
 with midDissolve
 eileen "Damn, they're fast here."
