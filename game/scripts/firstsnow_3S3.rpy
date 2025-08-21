@@ -45,7 +45,7 @@ scene bg colorado house livingroom fire blurred2:
 show eve outdoors normal grin at centerright:
     zoom 1.4 yoffset 150
     xzoom -1 xpos 0.625
-show eileen pjs_onhip neutral normal blur at leftside as eileen2:
+show eileen_blur pjs_onhip neutral normal at leftside as eileen2:
     zoom 0.67 yoffset -235
     xpos 0.155
 with fadeInOut
@@ -53,7 +53,10 @@ $ camera_reset()
 "I take a seat beside the oversized hamster, Eve barely acknowledging my presence, before Eileen pops in from the kitchen and calls out to me. Looks like the coffee in her hand hasn't kicked in quite yet."
 
 show bg colorado house livingroom fire
-show eve outdoors normal grin blur at centerright:
+show eve outdoors normal grin at centerright:
+    zoom 1.4 yoffset 150
+    xzoom -1 xpos 0.625
+show eve_blur outdoors normal grin at centerright:
     zoom 1.4 yoffset 150
     xzoom -1 xpos 0.625
 show eileen pjs_onhip open normal at leftside:
@@ -80,7 +83,9 @@ $camera_move(-4000,-150,680,0,5,'ease')
 "Despite settling down to watch Eve's cartoons with her, I can't help but eavesdrop as the conversation between Eileen and her mother can be heard from the other room."
 
 stop ambiance fadeout 4.0
-scene black with midDissolve
+hide eve_blur
+scene black
+with midDissolve
 scene cg act3 kitchen
 $camera_move(2500,250,650,0,0,'dissolve')
 with midDissolve
