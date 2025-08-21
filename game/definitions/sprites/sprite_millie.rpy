@@ -18,3 +18,5 @@ layeredimage millie_right:
     group eyes auto
     group misc auto
     group mouths auto
+
+image millie_blur = LayeredImageProxy(name="millie", transform=box_blur)
