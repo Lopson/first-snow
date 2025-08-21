@@ -2,7 +2,7 @@ label scene_3S5:
 ######################
 # Act 3, Scene 5
 
-call scene_start("3S6")
+call scene_start("3S5")
 
 stop music fadeout 2.0
 scene bg texture with midDissolve
@@ -83,7 +83,7 @@ show eve outdoors normal surprised at left2:
 
 $ renpy.music.set_volume(0.5, delay=1.0)
 show bg colorado town HD blurred4
-show eve outdoors blurry at left2 as eve2:
+show eve_blur outdoors neutral normal at left2 as eve2:
     zoom 1.4 yoffset 150
     xzoom -1 xpos 0.18
 $ renpy.transition(dissolve, layer='master')
@@ -110,7 +110,7 @@ show eve outdoors normal surprised2 at left2:
     ease 0.5 yoffset 155
     ease 0.5 yoffset 145
     ease 0.2 yoffset 150
-show eve outdoors blurry at left2 as eve2:
+show eve_blur outdoors neutral normal at left2 as eve2:
     xpos 0.18 alpha 1.0
     ease 1.0 alpha 0
 with None
@@ -144,7 +144,7 @@ with flash
 
 $ renpy.music.set_volume(0.5, delay=3.0)
 $camera_move(2000,-600,-850,0,3,'ease')
-show eve outdoors blurry at left2 as eve2:
+show eve_blur outdoors at left2 as eve2:
     xpos 0.18 alpha 0.0
     ease 4.0 alpha 1.0
 with None
@@ -187,7 +187,7 @@ $ phone.hide()
 $ renpy.music.set_volume(0.65, delay=1.0)
 show eve outdoors normal neutral at left2:
     xpos 0.18
-show eve outdoors blurry at left2 as eve2:
+show eve_blur outdoors at left2 as eve2:
     xpos 0.18 alpha 1.0
     ease 1.0 alpha 0
 with None
