@@ -12,6 +12,7 @@ init python hide:
 
     # Patch version management
     if (persistent.patch_version or 1) < config.patch_version:
+        # TODO Remove unnecessary variables from previous patch version.
         store.patch_updated = True
     else:
         store.patch_updated = False
