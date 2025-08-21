@@ -361,12 +361,12 @@ caprice "That's why I'm working on the posters!"
 
 # Cutin of art club poster
 show bg buildingart art dusk blurred2
-show eileen indoors_crossed annoyed angry blur at left2 as eileen3:
+show eileen_blur indoors_crossed annoyed angry at left2 as eileen3:
     zoom 0.9 yoffset -80
     xzoom -1 xpos 0.28 yoffset -80
 show eileen indoors_crossed frown narrow at left2 as eileen2:
     xzoom -1 alpha 0 xpos 0.28
-show caprice indoors_chintap even normal neutral blur at rightside as caprice2:
+show caprice_blur indoors_chintap even normal neutral at rightside as caprice2:
     zoom 0.9 yoffset -80
     xpos 0.8 yoffset -30 rotate 0
 show caprice indoors_chintap even normal neutral at rightside:
@@ -449,7 +449,7 @@ show eileen closed at left2 as eileen2:
 play music "music/whimsical_faster_m.ogg" fadein 4.0
 scene bg buildingart art dusk blurred2:
     xalign 1.0
-show eileen indoors_crossed frown narrow blur at centerleft:
+show eileen_blur indoors_crossed frown narrow at centerleft:
     zoom 0.6 yoffset -350
     xpos 0.38
 show caprice indoors_behindback neutral normal even at right2:
@@ -480,7 +480,7 @@ scene bg buildingart art dusk:
 show eileen indoors_crossed narrow grumble at centerleft:
     zoom 0.6 yoffset -350
     xpos 0.38
-show caprice indoors_chintap opensmile closedhappy raised blur at right2:
+show caprice_blur indoors_chintap opensmile closedhappy raised at right2:
     zoom 1.4 yoffset 315
     xpos 0.75
 $camera_move(600,-400,250,0,0,'dissolve')
@@ -489,7 +489,7 @@ with midDissolve
 
 scene bg buildingart art dusk blurred2:
     xalign 1.0 yalign 0.5
-show eileen indoors_crossed frown narrow blur at centerleft:
+show eileen_blur indoors_crossed frown narrow at centerleft:
     zoom 0.6 yoffset -350
     xpos 0.38
 show caprice indoors_pumped grin normal raised at right2:
@@ -517,7 +517,7 @@ scene bg buildingart art dusk:
 show eileen indoors_crossed closed neutral at centerleft:
     zoom 0.6 yoffset -350
     xpos 0.38
-show caprice indoors_behindback pout closedhappy raised blur at right2:
+show caprice_blur indoors_behindback pout closedhappy raised at right2:
     zoom 1.4 yoffset 315
     xzoom -1 xpos 0.7
 $camera_move(600,-400,250,0,0,'dissolve')
