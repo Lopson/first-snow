@@ -12,7 +12,6 @@ stop sound fadeout 0.1
 play ambiance "sfx/ambiance/crowd_inner.ogg" fadein 4.0
 $camera_move(2500,-950,800,0,6,'ease')
 pause 2.0
-window show dissolve
 $ _dismiss_pause = True
 
 play music "music/relaxing.ogg" fadein 4.0
@@ -21,6 +20,7 @@ show bg buildingart hallway2f dusk HD blurred2 as bg2:
     xalign 0.5 yalign 0.5 alpha 0.5
 $camera_move(2500,-3000,800,0,0,'dissolve')
 with fadeInOut
+window show dissolve
 show eileen outdoors_onhip narrow neutral at centerright:
     subpixel True
     zoom 0.42 ypos 0.05 xpos 0.8 alpha 0
