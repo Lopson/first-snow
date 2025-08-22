@@ -219,7 +219,8 @@ eileen "Welcome to the family."
 $ renpy.music.set_volume(0.85)
 scene black with circlewipe
 play music "music/eileen_5_m.ogg" fadein 3.5
-scene cg act3 familydinner 1 HD
+scene cg act3 familydinner 1hd:
+    align (0.5, 0.5)
 $camera_move(600,5200,380,-2,0,'dissolve')
 with circlewipe
 "The smell of freshly-cooked chicken wafts in the air, the skin still steaming away with an appetizing glint. The line of plates down the center of the table hardly lacks for sides, either, with potato salad, coleslaw, lettuce, and other greens."

@@ -9,11 +9,12 @@ init python:
         else:
             pfx = ''
 
-        # define_dynamic_images(pfx + 'sprites', yanchor=0.5, variants={'blur': vblur})
         define_images(pfx + 'sprites-static')
 
         define_images(pfx + 'bgs', ['bg'], xalign=0.5, yalign=0.5, variants={'blur': vblur})
-        define_images(pfx + 'cgs', ['cg'], xalign=0.5, yalign=0.5)
+        
+        if pfx:
+            define_images(pfx + 'cgs', ['cg'], xalign=0.5, yalign=0.5)
 
         define_images(pfx + 'vfx', ['misc'])
         define_images(pfx + 'vfx/cutins', ['cutin'])

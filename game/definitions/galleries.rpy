@@ -52,8 +52,8 @@ init python:
 define cg_art = [
     GalleryItem(
         title=__('Balcony'),
-        file=['cgs/act1_balcony_morning.webp'],
-        thumb=['cgs/act1_balcony_morning_thumb.webp'],
+        file=['cg act1 balcony morning'],
+        thumb=['cg act1 balcony morning thumb'],
         locked=lambda: not GameContext.scene_seen('1S1')
     ),
 
@@ -66,22 +66,28 @@ define cg_art = [
 
     GalleryItem(
         title=__('The Painter'),
-        file=['cgs/act1_eileenpainting.webp'],
-        thumb=['cgs/act1_eileenpainting_thumb.webp'],
+        file=['cg act1 eileenpainting'],
+        thumb=['cg act1 eileenpainting thumb'],
         locked=lambda: not GameContext.scene_seen('1S5')
     ),
 
     GalleryItem(
         title=__('Cooking'),
-        file=['cgs/act1_cooking.webp', 'cgs/act1_cooking_happy.webp'],
-        thumb=['cgs/act1_cooking_thumb.webp', 'cgs/act1_cooking_happy_thumb.webp'],
+        file=[
+            'cg act1 cooking',
+            'cg act1 cooking happy'
+        ],
+        thumb=[
+            'cg act1 cooking thumb',
+            'cg act1 cooking happy thumb'
+        ],
         locked=lambda: not GameContext.scene_seen('1S6')
     ),
 
     GalleryItem(
         title=__('Toast!'),
-        file=['cgs/act1_clubtoast.webp'],
-        thumb=['cgs/act1_clubtoast_thumb.webp'],
+        file=['cg act1 clubtoast'],
+        thumb=['cg act1 clubtoast thumb'],
         locked=lambda: not GameContext.scene_seen('1S7')
     ),
 
@@ -100,9 +106,9 @@ define cg_art = [
                 'dlc/h/cgs/act2_boobpainting_embarrassed.webp',
                 'dlc/h/cgs/act2_boobpainting_smile.webp'
             ] if GameContext.explicit_allowed() else [
-                'cgs/act2_nudepainting.webp',
-                'cgs/act2_nudepainting_embarrassed.webp',
-                'cgs/act2_nudepainting_smile.webp'
+                'cg act2 nudepainting',
+                'cg act2 nudepainting embarrassed',
+                'cg act2 nudepainting smile'
             ]
         ),
         thumb= (lambda:
@@ -111,9 +117,9 @@ define cg_art = [
                 'dlc/h/cgs/act2_boobpainting_embarrassed_thumb.webp',
                 'dlc/h/cgs/act2_boobpainting_smile_thumb.webp'
             ] if GameContext.explicit_allowed() else [
-                'cgs/act2_nudepainting_thumb.webp',
-                'cgs/act2_nudepainting_embarrassed_thumb.webp',
-                'cgs/act2_nudepainting_smile_thumb.webp'
+                'cg act2 nudepainting thumb',
+                'cg act2 nudepainting embarrassed thumb',
+                'cg act2 nudepainting smile thumb'
             ]
         ),
         locked=lambda: not GameContext.scene_seen('2S3')
@@ -121,39 +127,51 @@ define cg_art = [
 
     GalleryItem(
         title=__('Balcony Chat'),
-        preview='cgs/act2_balconychat_talk_thumb.webp',
+        preview='cg act2 balconychat talk thumb',
         file=[
-            'cgs/act2_balconychat_alone.webp',
-            'cgs/act2_balconychat_rose.webp',
-            'cgs/act2_balconychat_talk.webp',
-            'cgs/act2_balconychat_talk_2.webp',
-            'cgs/act2_balconychat_talk_3.webp',
-            'cgs/act2_balconychat_talk_4.webp',
-            'cgs/act2_balconychat_talk_5.webp'
+            'cg act2 balconychat alone',
+            'cg act2 balconychat rose',
+            'cg act2 balconychat talk',
+            'cg act2 balconychat talk 2',
+            'cg act2 balconychat talk 3',
+            'cg act2 balconychat talk 4',
+            'cg act2 balconychat talk 5'
         ],
         thumb=[
-            'cgs/act2_balconychat_alone_thumb.webp',
-            'cgs/act2_balconychat_rose_thumb.webp',
-            'cgs/act2_balconychat_talk_thumb.webp',
-            'cgs/act2_balconychat_talk_2_thumb.webp',
-            'cgs/act2_balconychat_talk_3_thumb.webp',
-            'cgs/act2_balconychat_talk_4_thumb.webp',
-            'cgs/act2_balconychat_talk_5_thumb.webp'
+            'cg act2 balconychat alone thumb',
+            'cg act2 balconychat rose thumb',
+            'cg act2 balconychat talk thumb',
+            'cg act2 balconychat talk 2 thumb',
+            'cg act2 balconychat talk 3 thumb',
+            'cg act2 balconychat talk 4 thumb',
+            'cg act2 balconychat talk 5 thumb'
             ],
         locked=lambda: not GameContext.scene_seen('2S4')
     ),
 
     GalleryItem(
         title=__('Kiss'),
-        file=['cgs/act2_kiss_surprise.webp', 'cgs/act2_kiss_after.webp'],
-        thumb=['cgs/act2_kiss_surprise_thumb.webp', 'cgs/act2_kiss_after_thumb.webp'],
+        file=[
+            'cg act2 kiss surprise',
+            'cg act2 kiss after'
+        ],
+        thumb=[
+            'cg act2 kiss surprise thumb',
+            'cg act2 kiss after thumb'
+        ],
         locked=lambda: not GameContext.scene_seen('2S6')
     ),
 
     GalleryItem(
         title=__('Zoo'),
-        file=['cgs/act2_zoo_smile.webp', 'cgs/act2_zoo_bird.webp'],
-        thumb=['cgs/act2_zoo_smile_thumb.webp', 'cgs/act2_zoo_bird_thumb.webp'],
+        file=[
+            'cg act2 zoo smile',
+            'cg act2 zoo bird'
+        ],
+        thumb=[
+            'cg act2 zoo smile thumb',
+            'cg act2 zoo bird thumb'
+        ],
         locked=lambda: not GameContext.scene_seen('2S8')
     ),
 
@@ -192,20 +210,20 @@ define cg_art = [
     GalleryItem(
         title=__('Pillowtalk'),
         file=[
-            'cgs/act2_pillowtalk_eyesclosed.webp',
-            'cgs/act2_pillowtalk_talk.webp'
+            'cg act2 pillowtalk eyesclosed',
+            'cg act2 pillowtalk talk'
         ],
         thumb=[
-            'cgs/act2_pillowtalk_eyesclosed_thumb.webp',
-            'cgs/act2_pillowtalk_talk_thumb.webp'
+            'cg act2 pillowtalk eyesclosed thumb',
+            'cg act2 pillowtalk talk thumb'
         ],
         locked=lambda: not GameContext.scene_seen('2S8_c')
     ),
 
     GalleryItem(
         title=__('Photo'),
-        file=['cgs/act2_photo.webp'],
-        thumb=['cgs/act2_photo_thumb.webp'],
+        file=['cg act2 photo'],
+        thumb=['cg act2 photo thumb'],
         locked=lambda: not GameContext.scene_seen('2S9')
     ),
 
@@ -218,40 +236,40 @@ define cg_art = [
 
     GalleryItem(
         title=__('Roadtrip'),
-        file=['cgs/act3_roadtrip_{}.webp'.format(i) for i in range(1, 7)],
-        thumb=['cgs/act3_roadtrip_{}_thumb.webp'.format(i) for i in range(1, 7)],
+        file=['cg act3 roadtrip {}.webp'.format(i) for i in range(1, 7)],
+        thumb=['cg act3 roadtrip {} thumb'.format(i) for i in range(1, 7)],
         locked=lambda: not GameContext.scene_seen('3S1')
     ),
 
     GalleryItem(
         title=__('Family Dinner'),
-        file=['cgs/act3_familydinner_{}.webp'.format(i) for i in range(1, 11)],
-        thumb=['cgs/act3_familydinner_{}_thumb.webp'.format(i) for i in range(1, 11)],
+        file=['cg act3 familydinner {}'.format(i) for i in range(1, 11)],
+        thumb=['cg act3 familydinner {} thumb'.format(i) for i in range(1, 11)],
         locked=lambda: not GameContext.scene_seen('3S2')
     ),
 
     GalleryItem(
         title=__('Pinned!'),
         file=[
-            'cgs/act3_pinned_allisontalk.webp',
-            'cgs/act3_pinned_eileentalk.webp',
-            'cgs/act3_pinned_shocked.webp',
-            'cgs/act3_pinned_kiss.webp'
+            'cg act3 pinned allisontalk',
+            'cg act3 pinned eileentalk',
+            'cg act3 pinned shocked',
+            'cg act3 pinned kiss'
         ],
         thumb=[
-            'cgs/act3_pinned_allisontalk_thumb.webp',
-            'cgs/act3_pinned_eileentalk_thumb.webp',
-            'cgs/act3_pinned_shocked_thumb.webp',
-            'cgs/act3_pinned_kiss_thumb.webp'
+            'cg act3 pinned allisontalk thumb',
+            'cg act3 pinned eileentalk thumb',
+            'cg act3 pinned shocked thumb',
+            'cg act3 pinned kiss thumb'
         ],
         locked=lambda: not GameContext.scene_seen('3S2')
     ),
 
     GalleryItem(
         title=__('Kitchen'),
-        file=['cgs/act3_kitchen.webp'],
-        thumb=['cgs/act3_kitchen_thumb.webp'],
-        locked=lambda: not GameContext.scene_seen('3S3_a')
+        file=['cg act3 kitchen'],
+        thumb=['cg act3 kitchen thumb'],
+        locked=lambda: not GameContext.scene_seen('3S3')
     ),
 
     GalleryItem(
@@ -264,36 +282,42 @@ define cg_art = [
 
     GalleryItem(
         title=__('Snowmen'),
-        file=['cgs/act3_snowmen.webp'],
-        thumb=['cgs/act3_snowmen_thumb.webp'],
+        file=['cg act3 snowmen'],
+        thumb=['cg act3 snowmen thumb'],
         locked=lambda: not GameContext.scene_seen('3S3_c')
     ),
 
     GalleryItem(
         title=__('Overlook'),
-        file=['cgs/act3_swings.webp'],
-        thumb=['cgs/act3_swings_thumb.webp'],
+        file=['cg act3 swings'],
+        thumb=['cg act3 swings thumb'],
         locked=lambda: not GameContext.scene_seen('3S6')
     ),
 
     GalleryItem(
         title=__('Sleeping Sisters'),
-        file=['cgs/act3_sleepingsisters.webp'],
-        thumb=['cgs/act3_sleepingsisters_thumb.webp'],
+        file=['cg act3 sleepingsisters'],
+        thumb=['cg act3 sleepingsisters thumb'],
         locked=lambda: not GameContext.scene_seen('3S7')
     ),
 
     GalleryItem(
         title=__('Together'),
-        file=['cgs/act3_hug_run.webp', 'cgs/act3_hug_end.webp'],
-        thumb=['cgs/act3_hug_run_thumb.webp', 'cgs/act3_hug_end_thumb.webp'],
+        file=[
+            'cg act3 hug run',
+            'cg act3 hug end'
+        ],
+        thumb=[
+            'cg act3 hug run thumb',
+            'cg act3 hug end thumb'
+        ],
         locked=lambda: not GameContext.scene_seen('3S8')
     ),
 
     GalleryItem(
         title=__('Voiced'),
-        file=['cgs/act4_vacg{}.webp'.format(i)for i in range(1, 5)],
-        thumb=['cgs/act4_vacg{}_thumb.webp'.format(i)for i in range(1, 5)],
+        file=['cg act4 vacg{}'.format(i)for i in range(1, 5)],
+        thumb=['cg act4 vacg{} thumb'.format(i)for i in range(1, 5)],
         locked=lambda: not GameContext.scene_seen('4S2')
     )
 ]
@@ -302,138 +326,138 @@ define guest_art = [
     GalleryItem(
         author='Szmitten',
         url='https://x.com/szmitten',
-        file=['cgs/guest/szmitten.webp'],
-        thumb=['cgs/guest/szmitten_thumb.webp'],
-        native=['cgs/guest/szmitten_native.webp']
+        file=['cg guest szmitten'],
+        thumb=['cg guest szmitten thumb'],
+        native=['cg guest szmitten native']
     ),
 
     GalleryItem(
         author='Lilium',
-        file=['cgs/guest/lilium.webp'],
-        thumb=['cgs/guest/lilium_thumb.webp'],
-        native=['cgs/guest/lilium_native.webp']
+        file=['cg guest lilium'],
+        thumb=['cg guest lilium thumb'],
+        native=['cg guest lilium native']
     ),
 
     GalleryItem(
         author='adirosa',
         url='https://x.com/adirosette',
-        file=['cgs/guest/adirosa.webp'],
-        thumb=['cgs/guest/adirosa_thumb.webp'],
-        native=['cgs/guest/adirosa_native.webp']
+        file=['cg guest adirosa'],
+        thumb=['cg guest adirosa thumb'],
+        native=['cg guest adirosa native']
     ),
 
     GalleryItem(
         author='Anon',
-        file=['cgs/guest/anon.webp'],
-        thumb=['cgs/guest/anon_thumb.webp'],
-        native=['cgs/guest/anon_native.webp']
+        file=['cg guest anon'],
+        thumb=['cg guest anon thumb'],
+        native=['cg guest anon native']
     ),
     
     GalleryItem(
         author='VCR',
         url='https://x.com/Hachisame',
-        file=['cgs/guest/vcr.webp'],
-        thumb=['cgs/guest/vcr_thumb.webp'],
-        native=['cgs/guest/vcr_native.webp']
+        file=['cg guest vcr'],
+        thumb=['cg guest vcr thumb'],
+        native=['cg guest vcr native']
     ),
     
     GalleryItem(
         author='rtil',
         url='https://x.com/rtil',
-        file=['cgs/guest/rtil.webp'],
-        thumb=['cgs/guest/rtil_thumb.webp'],
-        native=['cgs/guest/rtil_native.webp']
+        file=['cg guest rtil'],
+        thumb=['cg guest rtil thumb'],
+        native=['cg guest rtil native']
     ),
     
     GalleryItem(
         author='umujacha',
         url='https://x.com/umujacha',
-        file=['cgs/guest/umujacha.jpg'],
-        thumb=['cgs/guest/umujacha_thumb.jpg'],
-        native=['cgs/guest/umujacha_native.jpg']
+        file=['cg guest umujacha'],
+        thumb=['cg guest umujacha thumb'],
+        native=['cg guest umujacha native']
     ),
 
     GalleryItem(
         author='minute',
         url='https://x.com/theominute',
-        file=['cgs/guest/minute.jpg'],
-        thumb=['cgs/guest/minute_thumb.jpg'],
-        native=['cgs/guest/minute_native.jpg']
+        file=['cg guest minute'],
+        thumb=['cg guest minute thumb'],
+        native=['cg guest minute native']
     ),
     
     GalleryItem(
         author='TopHat',
         url='https://x.com/ToppeHatte',
-        file=['cgs/guest/tophat.webp'],
-        thumb=['cgs/guest/tophat_thumb.webp'],
-        native=['cgs/guest/tophat_native.webp']
+        file=['cg guest tophat'],
+        thumb=['cg guest tophat thumb'],
+        native=['cg guest tophat native']
     ),
 
     GalleryItem(
         author='AcoTan',
         url='https://x.com/AcoTan2194',
-        file=['cgs/guest/acotan.webp'],
-        thumb=['cgs/guest/acotan_thumb.webp'],
-        native=['cgs/guest/acotan_native.webp']
+        file=['cg guest acotan'],
+        thumb=['cg guest acotan thumb'],
+        native=['cg guest acotan native']
     ),
 
     GalleryItem(
         author='Skrats',
         url='https://x.com/Skratsu',
-        file=['cgs/guest/skrats.webp'],
-        thumb=['cgs/guest/skrats_thumb.webp'],
-        native=['cgs/guest/skrats_native.webp']
+        file=['cg guest skrats'],
+        thumb=['cg guest skrats thumb'],
+        native=['cg guest skrats native']
     ),
 
     GalleryItem(
         author='tentakl',
         file=[
             Animation(
-                'cgs/guest/tentakl-1.webp',
+                'cg guest tentakl 1',
                 0.5,
-                'cgs/guest/tentakl-2.webp',
+                'cg guest tentakl 2',
                 0.5
             )
         ],
-        thumb=['cgs/guest/tentakl_thumb.webp'],
+        thumb=['cg guest tentakl thumb'],
     ),
 
     GalleryItem(
         author='Chiru',
         url='https://x.com/guy_kun',
-        file=['cgs/guest/chiru.webp'],
-        thumb=['cgs/guest/chiru_thumb.webp'],
-        native=['cgs/guest/chiru_native.webp']
+        file=['cg guest chiru'],
+        thumb=['cg guest chiru thumb'],
+        native=['cg guest chiru native']
     ),
 
     GalleryItem(
         author='renessia',
-        file=['cgs/guest/renessia.webp'],
-        thumb=['cgs/guest/renessia_thumb.webp'],
-        native=['cgs/guest/renessia_native.webp']
+        file=['cg guest renessia'],
+        thumb=['cg guest renessia thumb'],
+        native=['cg guest renessia native']
     ),
 
     GalleryItem(
         author='Anna',
         url='https://x.com/ripandtir',
-        file=['cgs/guest/anna.webp'],
-        thumb=['cgs/guest/anna_thumb.webp'],
-        native=['cgs/guest/anna_native.webp']
+        file=['cg guest anna'],
+        thumb=['cg guest anna thumb'],
+        native=['cg guest anna native']
     ),
 
     GalleryItem(
         author='Cura & tentakl',
         url='https://x.com/cura_chan',
-        file=['cgs/guest/cura__tentakl.webp'],
-        thumb=['cgs/guest/cura__tentakl_thumb.webp'],
-        native=['cgs/guest/cura__tentakl_native.webp']
+        file=['cg guest cura tentakl'],
+        thumb=['cg guest cura tentakl thumb'],
+        native=['cg guest cura tentakl native']
     ),
 
     GalleryItem(
         author='All-Maker',
         url='https://x.com/AllMaker',
-        file=['cgs/guest/all-maker.webp'],
-        thumb=['cgs/guest/all-maker_thumb.webp'],
-        native=['cgs/guest/all-maker_native.webp']
+        file=['cg guest all-maker'],
+        thumb=['cg guest all-maker thumb'],
+        native=['cg guest all-maker native']
     )
 ]
