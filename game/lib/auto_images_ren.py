@@ -2,18 +2,12 @@
 init -1 python:
 """
 
-# NOTE This file is also a prime candidate for deletion.
-# While this is a really smart way of initializing images,
-# it's also incredibly obscure and undocumented. Instead of
-# doing this, let's instead use Ren'Py's default behaviors or
-# create our own LayeredImages. That way, everything is explicit
-# and easy to modify moving forward.
-
 # Helper function to automatically define images from a folder.
 
 from itertools import product
 from re import compile, Pattern
 from typing import Any, Callable, TYPE_CHECKING
+from renpy.display.displayable import Displayable
 from renpy.display.image import list_images, ImageReference
 from renpy.display.transform import Transform
 from renpy.exports.displayexports import image
@@ -189,3 +183,34 @@ def apply_image_variants(name: str,
         image_ref: ImageReference = ImageReference(image_name)
         variant = func(image_name, image_ref)
         image(image_name + ' ' + name, variant)
+
+
+def get_base_image(image_name: str) -> Displayable | None:
+    """
+    This function gets the root displayable of a given image that's
+    already been defined.
+
+    @param image_name: The name of an image definition.
+    @return: The displayable that corresponds to the given name.
+    """
+
+    ref: ImageReference = ImageReference(image_name)
+
+    # If we can't find the target of a given displayable, then bail.
+    if not ref.find_target():
+        return None
+    if ref.target is None:
+        return None
+    
+    src: Displayable = ref.target
+    
+    # Let's try to get the actual root displayable that may be nested
+    # within a bunch of `Transform`s.
+    while True:
+        if not isinstance(src, Transform):
+            break
+        if src.child is None:
+            return None
+        src = src.child
+    
+    return src

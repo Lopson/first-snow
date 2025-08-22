@@ -9,17 +9,36 @@ init python:
         else:
             pfx = ''
 
+        # TODO
         define_images(pfx + 'sprites-static')
 
+        # TODO
         define_images(pfx + 'bgs', ['bg'], xalign=0.5, yalign=0.5, variants={'blur': vblur})
         
         if pfx:
             define_images(pfx + 'cgs', ['cg'], xalign=0.5, yalign=0.5)
 
+        # TODO
         define_images(pfx + 'vfx', ['misc'])
+        # TODO
         define_images(pfx + 'vfx/cutins', ['cutin'])
+        # TODO
         define_images(pfx + 'vfx/title', ['title'])
+        # TODO
         define_images(pfx + 'vfx/notes', ['note'])
+    
+    # NOTE This for loop cycle is here to ensure retrocompatibility with the
+    # rest of the game's code base. These images that are not automatically
+    # discovered by Ren'Py were being defined with two specific alignment
+    # transforms; now that we're having Ren'Py define these images on its own,
+    # we still need to apply that transform. This code does just that.
+    #
+    # FWIW the only image that wouldn't play well with not having these
+    # alignments was "cg act3 familydinner 1hd.jpg" to my knowledge.
+    for image_name in [i for i in renpy.list_images() if i.startswith("cg")]:
+        renpy.image(image_name, Transform(
+            get_base_image(image_name), xalign=0.5, yalign=0.5))
+        
 
 # Sepia and blur filters
 init python:
@@ -92,18 +111,7 @@ init python:
 
 init 2 python:
     # different init level to allow DLC to add images in init level 1
-
-    def get_base_image(n):
-        ref = ImageReference(n)
-        if not ref.find_target():
-            return None
-        src = ref.target
-        while True:
-            if not isinstance(src, Transform):
-                break
-            src = src.child
-        return src
-
+    
     for img in sepia_images:
         renpy.image(img + ' sepia', Transform(get_base_image(img), matrixcolor=SepiaMatrix()))
 
