@@ -27,6 +27,7 @@ init:
     ]
 
     # Images for which to create a blurred version with a custom blur value.
+    # TODO With our box blur implementation the values should be x2'd.
     define blur_images = [
         ('bg aptallison outside', 1.0),
         ('bg aptallison outside night', 2.0),
@@ -89,9 +90,6 @@ init python:
             pfx = 'dlc/' + package + '/'
         else:
             pfx = ''
-
-        # TODO We still need to handle the blur variants 🤔
-        # define_images(pfx + 'bgs', ['bg'], xalign=0.5, yalign=0.5, variants={'blur': vblur})
         
         if pfx:
             config.images_directory = 'dlc/' + package + '/images'
@@ -123,17 +121,23 @@ init 2 python:
         renpy.image(image_name, Transform(
             get_base_image(image_name), xalign=0.5, yalign=0.5))
     
-    # Same as above but also we're creating a blurred variant for every
-    # single background image for retrocompatibility reasons.
+    # We're creating a blurred variant for every single background image. For
+    # retrocompatibility reasons, we're doing this to all of the backgrounds,
+    # but in reality we only really need to do this for those that show up in
+    # the scripting with the attribute "blur".
     for image_name in [i for i in renpy.list_images() if i.startswith("bg")]:
         renpy.image(image_name + " blur", At(image_name, box_blur))
 
-    # Generate all of the sepia variants of the images we've selected.    
+    # Generate all of the sepia variants of the images we've selected. Note how
+    # this original piece of code doesn't create these images with align
+    # properties like the rest of the CGs and BGs.
     for img in sepia_images:
         renpy.image(img + ' sepia', Transform(
             get_base_image(img), matrixcolor=SepiaMatrix()))
 
     # Generate all of the custom blur variants of the images we've selected.
+    # Note how this original piece of code doesn't create these images with
+    # align properties like the rest of the CGs and BGs.
     for img, amount in blur_images:
         renpy.image(img + ' blurred{}'.format(
             int(amount)), im.Blur(get_base_image(img), amount))

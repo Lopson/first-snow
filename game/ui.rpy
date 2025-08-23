@@ -881,12 +881,14 @@ screen preferences_voices():
                     for (tag, name, vo, color) in store.voices:
                         python:
                             sample = 'voice/test_' + tag + '.mp3'
-                            event = ExtendableEvent(1.0,
+                            event = ExtendableEvent(
+                                1.0,
                                 start_func=renpy.partial(play_vo_test, tag, sample),
-                                stop_func=renpy.partial(stop_vo_test, tag)
-                            )
-                            voice_adj = ui.adjustment(range=1.0, value=GetCharacterVolume(tag),
-                                changed=renpy.partial(sustain_vo_test, event, tag, 1.0)
+                                stop_func=renpy.partial(stop_vo_test, tag))
+                            voice_adj = ui.adjustment(
+                                range = 1.0,
+                                value=GetCharacterVolume(tag),
+                                changed = renpy.partial(sustain_vo_test, event, tag, 1.0)
                             )
                             topbar = Composite((160, 346),
                                 (0, 0), "ui/preferences/voices/bar_{}.webp".format(tag),
@@ -2060,7 +2062,7 @@ screen extras_music_player(music_room, needs_unlock=False):
                 if not renpy.music.get_pause(music_room.channel):
                     action [
                         music_room.Stop(),
-                        Delayed(music_room.fadeout, renpy.restart_interaction)
+                        Delayed(music_room.fadeout + 0.01, renpy.restart_interaction)
                     ]
                 else:
                     action [
