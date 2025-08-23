@@ -34,21 +34,20 @@ init python:
         define_images(pfx + 'vfx/notes', ['note'])
     
     # NOTE This for loop cycle is here to ensure retrocompatibility with the
-    # rest of the game's code base. These images that are not automatically
-    # discovered by Ren'Py were being defined with two specific alignment
-    # transforms; now that we're having Ren'Py define these images on its own,
-    # we still need to apply that transform. This code does just that.
+    # rest of the game's code base. Images were being defined with two specific
+    # alignment transforms; now that we're having Ren'Py define these images on
+    # its own, we still need to apply that transform. This code does just that.
     #
     # FWIW the only image that wouldn't play well with not having these
     # alignments was "cg act3 familydinner 1hd.jpg" to my knowledge.
     for image_name in [i for i in renpy.list_images() if i.startswith("cg")]:
         renpy.image(image_name, Transform(
             get_base_image(image_name), xalign=0.5, yalign=0.5))
-        
+
 
 # Sepia and blur filters
-init python:
-    sepia_images = [
+init:
+    define sepia_images = [
         'bg downtown park',
         'bg colorado town HD',
         'bg colorado house ext',
@@ -64,7 +63,7 @@ init python:
         'misc rendered eileen leaving colorado',
     ]
 
-    blur_images = [
+    define blur_images = [
         ('bg aptallison outside', 1.0),
         ('bg aptallison outside night', 2.0),
         ('bg aptallison livingroom', 2.0),
@@ -119,10 +118,12 @@ init 2 python:
     # different init level to allow DLC to add images in init level 1
     
     for img in sepia_images:
-        renpy.image(img + ' sepia', Transform(get_base_image(img), matrixcolor=SepiaMatrix()))
+        renpy.image(img + ' sepia', Transform(
+            get_base_image(img), matrixcolor=SepiaMatrix()))
 
     for img, amount in blur_images:
-        renpy.image(img + ' blurred{}'.format(int(amount)), im.Blur(get_base_image(img), amount))
+        renpy.image(img + ' blurred{}'.format(
+            int(amount)), im.Blur(get_base_image(img), amount))
 
 init:
     # Images and effects.
