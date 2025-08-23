@@ -7,10 +7,10 @@ call scene_start("3S3")
 stop music fadeout 2.0
 scene bg texture with midDissolve
 play sound "sfx/ambiance/painting.ogg" fadein 0.1
-scene bg colorado house livingroom sketch HD
+scene bg colorado house livingroom sketch hd
 $camera_move(8500,-2500,-500,0,0,'dissolve')
 with inkfade
-scene bg colorado house livingroom fire HD
+scene bg colorado house livingroom fire hd
 $camera_move(8500,-2500,-500,0,0,'dissolve')
 with inkfade2
 stop sound fadeout 0.1
@@ -19,7 +19,7 @@ $ _dismiss_pause = True
 play music "music/relaxing.ogg" fadein 2.0
 $ renpy.sound.set_volume(0.4, channel='ambiance')
 play ambiance "sfx/ambiance/fire.ogg" fadein 1.0
-scene bg colorado house livingroom fire HD
+scene bg colorado house livingroom fire hd
 $camera_move(8500,-2500,-500,0,0,'dissolve')
 show eve outdoors normal neutral at left2:
     zoom 1.2 yoffset -200

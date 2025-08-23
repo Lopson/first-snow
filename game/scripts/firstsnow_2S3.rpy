@@ -15,8 +15,8 @@ pause 2.0
 $ _dismiss_pause = True
 
 play music "music/relaxing.ogg" fadein 4.0
-scene bg buildingart hallway2f dusk HD
-show bg buildingart hallway2f dusk HD blurred2 as bg2:
+scene bg buildingart hallway2f dusk hd
+show bg buildingart hallway2f dusk hd blurred2 as bg2:
     xalign 0.5 yalign 0.5 alpha 0.5
 $camera_move(2500,-3000,800,0,0,'dissolve')
 with fadeInOut
@@ -347,12 +347,12 @@ eileen "My sister gave it to me to keep me company when I moved out."
 
 scene black with dissolve
 $ camera_reset()
-scene bg apteileen livingroom messy HD:
+scene bg apteileen livingroom messy hd:
     subpixel True
     xalign 0.0 yalign 0.5
     size (1600, 900) crop (1080, 500, 1280, 720)
     linear 12.0 crop (1080, 450, 1280, 720)
-show bg apteileen livingroom messy HD blurred4:
+show bg apteileen livingroom messy hd blurred4:
     subpixel True
     xalign 0.0 yalign 0.5 alpha 0.95
     size (1600, 900) crop (1080, 500, 1280, 720)
@@ -368,10 +368,10 @@ with dissolve
 
 "She takes care to set it down gently, with a quick brush of its fur."
 
-show bg apteileen livingroom messy HD:
+show bg apteileen livingroom messy hd:
     xalign 0.0 yalign 0.5
     size (1600, 900) crop (1080, 450, 1280, 720)
-show bg apteileen livingroom messy HD blurred4:
+show bg apteileen livingroom messy hd blurred4:
     xalign 0.0 yalign 0.5 alpha 0.95
     size (1600, 900) crop (1080, 450, 1280, 720)
 show white:

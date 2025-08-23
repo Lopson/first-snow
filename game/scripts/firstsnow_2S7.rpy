@@ -62,7 +62,7 @@ scene bg cafe inside with circlewipe
 "The rush of warmth as I step through the door makes my shoulders slump in relief. Thank goodness for the interior heating being cranked right up."
 
 window hide dissolve
-scene bg cafe inside HD
+scene bg cafe inside hd
 $camera_move(-8650,-200,-200,0,0,'dissolve')
 show eileen indoors_crossed lookawaynarrow neutral at left2:
     zoom 0.8 yoffset -112

@@ -33,8 +33,8 @@ $camera_move(-3400,-1200,800,0,20,'ease')
 "It's only in a far corner of the room that I catch a familiar face, albeit not necessarily a welcome one."
 window hide dissolve
 
-scene bg buildingmisc library HD
-show bg buildingmisc library HD blurred2 as bg2:
+scene bg buildingmisc library hd
+show bg buildingmisc library hd blurred2 as bg2:
     xalign 0.5 yalign 0.5 alpha 0.65
 $camera_move(-1500,-2750,850,0,0,'dissolve')
 show eileen indoors_fists narrow angry at left2:
@@ -420,7 +420,7 @@ scene bg buildingunion cafeteria counter with longDissolve
 "The cafeteria's little less full than the library, the stocks of food behind the counter already running low on all the usual student favorites. With the line for food moving quickly, I manage to grab the last set of sandwiches and move on."
 window hide dissolve
 
-scene bg buildingunion cafeteria snow HD:
+scene bg buildingunion cafeteria snow hd:
     xalign 0.5 yalign 0.5
 $camera_move(-9800,350,-500,0,0,'dissolve')
 show caprice indoors_behindback even normal neutral at leftedge:

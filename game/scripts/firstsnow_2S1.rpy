@@ -326,7 +326,7 @@ $camera_move(-3050,-1500,750,0,5,'ease')
 play music "music/millie_2.ogg" fadein 5.0
 pause 2.0
 
-scene bg downtown city HD
+scene bg downtown city hd
 show snow light:
     zoom 1.5 xcenter 0.05 ycenter 0.12
 $camera_move(-7500,-3000,-250,0,0,'dissolve')

@@ -7,10 +7,10 @@ call scene_start("3S7")
 stop music fadeout 2.0
 scene bg texture with midDissolve
 play sound "sfx/ambiance/painting.ogg" fadein 0.1
-scene bg colorado town HD sketch
+scene bg colorado town hd sketch
 $camera_move(9000,-2200,0,0,0,'dissolve')
 with inkfade
-scene bg colorado town HD
+scene bg colorado town hd
 $camera_move(9000,-2200,0,0,0,'dissolve')
 with inkfade2
 stop sound fadeout 0.1
@@ -86,7 +86,7 @@ show eileen narrow angry at rightedge as eileen2:
 $ renpy.transition(dissolve, layer='master')
 "Taking Eve's side doesn't win me any favors, but Eileen knows she's been overruled."
 
-scene bg colorado town HD blurred4:
+scene bg colorado town hd blurred4:
     xzoom -1 xalign 0.0 yalign 0.0
 show bg colorado town bench as town_bench
 show eve outdoors normal neutral at right2:
@@ -221,7 +221,7 @@ show eve outdoors normal annoyed at center with dissolve:
 
 show shadow:
     alpha 0.4
-show bg colorado town HD blurred4 as bg2:
+show bg colorado town hd blurred4 as bg2:
     xzoom -1 yanchor -0.55
     size (1280, 270) crop (300, 200, 1280, 270)
 show eileen outdoors_onhip normal sadmouth as eileen2:

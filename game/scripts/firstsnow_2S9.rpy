@@ -268,7 +268,7 @@ caprice "What did you think I was on my phone for? I called over some friends!"
 
 play music "music/diner_2_m2.ogg" fadein 5.5
 play sound "sfx/door_open2.ogg"
-scene bg aptallison livingroom HD
+scene bg aptallison livingroom hd
 $camera_move(-5000,-1650,-250,0,0,'dissolve')
 show millie outdoors_neutral raised normal frown at leftedge:
     zoom 0.85 yoffset -250
@@ -506,7 +506,7 @@ $ renpy.transition(dissolve, layer='master')
 
 allison "Make yourselves at home..."
 
-scene bg aptallison livingroom HD
+scene bg aptallison livingroom hd
 $camera_move(4500,-1000,-650,0,0,'dissolve')
 show wallace indoors neutral open even at leftedge:
     zoom 1.05 yoffset -80

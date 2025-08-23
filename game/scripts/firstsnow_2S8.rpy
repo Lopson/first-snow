@@ -5,10 +5,10 @@ call scene_start("2S8")
 stop music fadeout 2.0
 scene bg texture with midDissolve
 play sound "sfx/ambiance/painting.ogg" fadein 0.1
-scene bg misc zoo HD sketch
+scene bg misc zoo hd sketch
 $camera_move(6500,-3000,500,0,0,'dissolve')
 with inkfade
-scene bg misc zoo HD
+scene bg misc zoo hd
 $camera_move(6500,-3000,500,0,0,'dissolve')
 with inkfade2
 stop sound fadeout 0.1
@@ -153,7 +153,7 @@ $ renpy.transition(dissolve, layer='master')
 eileen "Caprice's speech patterns are rubbing off on you..."
 
 
-scene bg misc zoo HD
+scene bg misc zoo hd
 $camera_move(-2800,-3000,500,0,0,'dissolve')
 show eileen outdoors_onhip lookawaynarrow angry at offcenterright:
     zoom 0.45 yoffset -655
@@ -166,7 +166,7 @@ play sound "sfx/body_prod.ogg"
 with vpunch
 "I practically fall into the hard metal seat, watching the condensation from my breathing rise into the air as I recover myself. If nothing else, at least going out with Eileen will do wonders for my fitness."
 
-scene bg misc zoo HD blurred2:
+scene bg misc zoo hd blurred2:
     xalign 0.5 yalign 0.2
 $camera_move(-1200,1850,200,0,0,'dissolve')
 show eileen outdoors_crossed lookaway angry at centerright:
@@ -178,7 +178,7 @@ $camera_move(-1200,-400,200,0,10,'ease')
 
 "I can't help but let my eyes settle on her as she does; ever since we met, I've noticed how beautiful she is."
 
-scene bg misc zoo HD:
+scene bg misc zoo hd:
     xalign 0.48 yalign 0.2
 $camera_move(-2500,-250,0,0,0,'dissolve')
 show eileen outdoors_onhip normal neutral at offcenterleft:
@@ -313,7 +313,7 @@ eileen "You're a dork."
 
 "I laugh off her jab, before returning to our conversation."
 
-scene bg misc zoo HD:
+scene bg misc zoo hd:
     xalign 0.48 yalign 0.2
 $camera_move(-2500,-250,0,0,0,'dissolve')
 show eileen outdoors_fists lookaway neutral at offcenterleft:
@@ -363,7 +363,7 @@ show eileen normal at centerleft:
     xzoom -1 xpos 0.35
     ease 6.0 zoom 1.3 yoffset 300 xpos 0.35
 with None
-show bg misc zoo HD blurred2
+show bg misc zoo hd blurred2
 $ renpy.transition(verylongDissolve, layer='master')
 "As she picks herself up a little off her chair in order to lean across the table, it becomes obvious what she's doing."
 
@@ -374,7 +374,7 @@ $ renpy.transition(hpunch, layer='master')
 "As the feeling of her tongue hits my cheek, my body suddenly freezes up as a shiver runs down my spine."
 
 $ renpy.music.set_volume(1.0, delay=4.0)
-scene bg misc zoo HD:
+scene bg misc zoo hd:
     xalign 0.48 yalign 0.2
 $camera_move(-2500,-250,0,0,0,'dissolve')
 show eileen outdoors_onhip narrow smile at centerleft:
@@ -548,7 +548,7 @@ pause 2.0
 window hide dissolve
 $ renpy.music.set_volume(1.0)
 play music "music/anxiety_2_m.ogg" fadein 4.0
-scene bg apteileen livingroom HD
+scene bg apteileen livingroom hd
 $camera_move(-8500,-4000,0,0,0,'dissolve')
 show misc letterbox1 as lb1:
     zoom 2.0 xcenter 0.4 ycenter -0.39

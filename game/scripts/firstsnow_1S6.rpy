@@ -395,10 +395,10 @@ show eileen indoors_onhip closed open at leftside:
     nod2
 "Eileen motions for me to come over with her, but the gesture was unnecessary given her commanding tone. Wallace gives a dreary glance as he follows his orders, and I quickly do the same."
 
-scene bg apteileen livingroom HD
+scene bg apteileen livingroom hd
 $camera_move(-8500,-2000,0,0,0,'dissolve')
 with fadeInOut
-show bg apteileen livingroom HD blurred5
+show bg apteileen livingroom hd blurred5
 with midDissolve
 show cutin cutboard:
     xcenter -0.01 ycenter -0.5
@@ -423,7 +423,7 @@ show cutin cutboard:
     xcenter -0.01 ycenter 0.2
     ease 1.0 xcenter -0.15
 with None
-show bg apteileen livingroom HD blurred2:
+show bg apteileen livingroom hd blurred2:
     xalign 0.5 yalign 0.5
 $ renpy.transition(dissolve, layer='master')
 show eileen indoors_crossed annoyed open at right2:
@@ -511,7 +511,7 @@ show cg act1 cooking happy2
 "She sets down her knife in genuine, if depressing, thought."
 
 scene black with midDissolve
-scene bg apteileen livingroom HD
+scene bg apteileen livingroom hd
 $camera_move(-8500,-2000,0,0,0,'dissolve')
 show eileen indoors_crossed frown narrow as eileen2 at leftedge:
     zoom 0.7 yoffset -450

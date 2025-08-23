@@ -10,7 +10,7 @@ init python:
             pfx = ''
 
         # TODO
-        define_images(pfx + 'bgs', ['bg'], xalign=0.5, yalign=0.5, variants={'blur': vblur})
+        # define_images(pfx + 'bgs', ['bg'], xalign=0.5, yalign=0.5, variants={'blur': vblur})
         
         if pfx:
             config.images_directory = 'dlc/' + package + '/images'
@@ -42,7 +42,7 @@ init python:
 init:
     define sepia_images = [
         'bg downtown park',
-        'bg colorado town HD',
+        'bg colorado town hd',
         'bg colorado house ext',
         'bg colorado hiking2',
         'cg act2 kiss after',
@@ -63,22 +63,22 @@ init:
         ('bg aptallison livingroom', 5.0),
         ('bg aptallison road dusk', 4.0),
         ('bg apteileen livingroom', 2.0),
-        ('bg apteileen livingroom HD', 2.0),
-        ('bg apteileen livingroom HD', 5.0),
+        ('bg apteileen livingroom hd', 2.0),
+        ('bg apteileen livingroom hd', 5.0),
         ('bg apteileen livingroom messy', 2.0),
         ('bg apteileen livingroom messy norabbit', 2.0),
-        ('bg apteileen livingroom messy HD', 4.0),
+        ('bg apteileen livingroom messy hd', 4.0),
         ('bg buildingmisc generichall', 2.0),
         ('bg buildingmisc library', 2.0),
-        ('bg buildingmisc library HD', 2.0),
+        ('bg buildingmisc library hd', 2.0),
         ('bg buildingart art dusk', 2.0),
         ('bg buildingart art dusk siren', 1.0),
         ('bg buildingart art dusk womanwip', 1.0),
         ('bg buildingart art dusk bustsketch', 2.0),
-        ('bg buildingart hallway2f dusk HD', 2.0),
+        ('bg buildingart hallway2f dusk hd', 2.0),
         ('bg buildingunion outside snow', 2.0),
         ('bg cafe inside', 2.0),
-        ('bg cafe inside HD', 2.0),
+        ('bg cafe inside hd', 2.0),
         ('bg campus outskirts snow', 2.0),
         ('bg colorado house ext', 4.0),
         ('bg colorado house livingroom fire', 2.0),
@@ -86,7 +86,7 @@ init:
         ('bg colorado house guestbedroom', 4.0),
         ('bg colorado colorado hiking loop', 2.0),
         ('bg colorado hiking2', 4.0),
-        ('bg colorado town HD', 4.0),
+        ('bg colorado town hd', 4.0),
         ('bg colorado park', 2.0),
         ('bg colorado town', 2.0),
         ('bg downtown city', 3.0),
@@ -94,7 +94,7 @@ init:
         ('bg downtown pizzeria', 2.0),
         ('bg downtown square night', 2.0),
         ('bg misc zoo', 2.0),
-        ('bg misc zoo HD', 2.0),
+        ('bg misc zoo hd', 2.0),
         ('cg act1 eileenpainting', 4.0),
         ('cg act1 eileenpainting eileen', 1.0),
         ('cg act2 balconychat talk 4', 2.0),

@@ -124,7 +124,7 @@ $ renpy.sound.set_volume(1.0)
 $ renpy.sound.set_volume(1.0, channel="ambiance")
 $ renpy.music.set_volume(1.0)
 play music "music/eileen_5_m.ogg" fadein 2.0
-scene bg aptallison livingroom HD
+scene bg aptallison livingroom hd
 $camera_move(-1050,-1000,-600,0,0,'dissolve')
 show eileen indoors_crossed normal neutral at left2:
     alpha 0 xzoom -1 xpos 0.2
@@ -385,7 +385,7 @@ $ renpy.sound.set_volume(0.5, channel='loopsfx')
 play ambiance "sfx/ambiance/tv.ogg" fadein 2.0
 $ renpy.sound.set_volume(0.05)
 play sound "sfx/dumptruck.mp3" fadein 1.0
-scene bg aptallison livingroom HD
+scene bg aptallison livingroom hd
 $camera_move(4400,-1050,-250,0,0,'dissolve')
 show eileen indoors_onhip normal neutral at centerleft:
     zoom 0.84 yoffset -160

@@ -237,7 +237,7 @@ eileen "The more life experiences you have, the more inspiration you have; hard 
 eileen "You need input to be able to create output. That's how culture works."
 
 $ renpy.sound.set_volume(0.3, channel='ambiance', delay=2.0)
-scene bg colorado hiking1 HD
+scene bg colorado hiking1 hd
 $camera_move(0,-3000,250,0,0,'dissolve')
 with fadeInOut
 "Thinking on her words as I turn and start moving once more, Eileen's voice calls out."

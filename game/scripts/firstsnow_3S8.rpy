@@ -33,7 +33,7 @@ window show dissolve
 
 "Briefly distracted by the huge Christmas tree - completed just in time for Christmas Eve - I think back to yesterday's events."
 
-# scene bg colorado house ext HD
+# scene bg colorado house ext hd
 # $camera_move(-8000,-2500,400,0,0,'dissolve')
 # show eileen indoors_crossed lookawaynarrow frown at leftedge:
     # zoom 0.7 yoffset -400

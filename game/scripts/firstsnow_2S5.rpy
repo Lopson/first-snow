@@ -195,7 +195,7 @@ $camera_move(-4050,-1500,750,0,5,'ease')
 pause 2.0
 
 play loopsfx "sfx/ambiance/snowwalk.ogg" fadein 1.0
-scene bg downtown city HD
+scene bg downtown city hd
 show snow light:
     zoom 1.5 xcenter 0.05 ycenter 0.12
 $camera_move(-8500,-3000,-250,0,0,'dissolve')

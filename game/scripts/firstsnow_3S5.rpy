@@ -57,7 +57,7 @@ letterbox "Maybe some time away from her is for the best. Even people who like e
 
 letterbox "The old wooden storefronts hardly loom over us, being mostly just a couple of stories tall, themselves dwarfed by the forested hills behind. Strolling around is a much nicer way to take it in than clutching to Rose on the back of her bike."
 
-scene bg colorado town HD
+scene bg colorado town hd
 $camera_move(2000,-600,-850,0,0,'dissolve')
 show eve outdoors neutral normal at left2:
     zoom 1.4 yoffset 150
@@ -82,7 +82,7 @@ show eve outdoors normal surprised at left2:
 "My thinking's interrupted by a ping from my pocket."
 
 $ renpy.music.set_volume(0.5, delay=1.0)
-show bg colorado town HD blurred4
+show bg colorado town hd blurred4
 show eve_blur outdoors neutral normal at left2 as eve2:
     zoom 1.4 yoffset 150
     xzoom -1 xpos 0.18
@@ -114,7 +114,7 @@ show eve_blur outdoors neutral normal at left2 as eve2:
     xpos 0.18 alpha 1.0
     ease 1.0 alpha 0
 with None
-show bg colorado town HD
+show bg colorado town hd
 $ renpy.transition(dissolve, layer='master')
 "As she stands on tiptoes, trying to look over the phone in curiosity, I get an idea."
 
@@ -148,7 +148,7 @@ show eve_blur outdoors at left2 as eve2:
     xpos 0.18 alpha 0.0
     ease 4.0 alpha 1.0
 with None
-show bg colorado town HD blurred4
+show bg colorado town hd blurred4
 $ renpy.transition(longDissolve, layer='master')
 stop sound fadeout 1.0
 $ renpy.pause(3.0, hard=True)
@@ -191,7 +191,7 @@ show eve_blur outdoors at left2 as eve2:
     xpos 0.18 alpha 1.0
     ease 1.0 alpha 0
 with None
-show bg colorado town HD
+show bg colorado town hd
 $ renpy.transition(dissolve, layer='master')
 "I smile and lock the phone once more, slipping it back where it belongs."
 
@@ -224,14 +224,14 @@ show eve outdoors grin normal at center:
     xpos 0.5
     ease 1.5 xpos 1.2
 $camera_move(0,0,0,0,20,'ease')
-show bg colorado town HD sepia as bg2:
+show bg colorado town hd sepia as bg2:
     zoom 0.5 xalign 0.0 yalign 0.5 alpha 0
     ease 8.0 alpha 0.3
 show shadow:
     zoom 2.0 alpha 0
     ease 8.0 alpha 0.5
 with None
-show bg colorado town HD blurred4:
+show bg colorado town hd blurred4:
     zoom 0.5
 $ renpy.transition(thelongestDissolve, layer='master')
 $ renpy.sound.set_volume(0.25, channel='ambiance2')
@@ -258,7 +258,7 @@ with midDissolve
 stop ambiance2 fadeout 4.0
 scene bg colorado town:
     xalign 0.0
-show bg colorado town HD blurred4 as bg2:
+show bg colorado town hd blurred4 as bg2:
     zoom 0.5 xalign 0.0 yalign 0.5 alpha 1
 show eve outdoors normal neutral at center:
     zoom 1.4 yoffset 150

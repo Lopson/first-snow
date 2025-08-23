@@ -7,11 +7,11 @@ call scene_start("1S7")
 stop music fadeout 2.0
 scene bg texture with midDissolve
 play sound "sfx/ambiance/painting.ogg" fadein 0.1
-scene bg downtown pizzeria HD sketch
+scene bg downtown pizzeria hd sketch
 $camera_move(2000,-2000,0,0,0,'dissolve')
 with inkfade
 play ambiance "sfx/ambiance/crowd_cafe.ogg" fadein 5.0
-scene bg downtown pizzeria HD
+scene bg downtown pizzeria hd
 $camera_move(2000,-2000,0,0,0,'dissolve')
 with inkfade2
 stop sound fadeout 0.1
