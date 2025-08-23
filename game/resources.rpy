@@ -10,9 +10,6 @@ init python:
             pfx = ''
 
         # TODO
-        define_images(pfx + 'sprites-static')
-
-        # TODO
         define_images(pfx + 'bgs', ['bg'], xalign=0.5, yalign=0.5, variants={'blur': vblur})
         
         if pfx:
