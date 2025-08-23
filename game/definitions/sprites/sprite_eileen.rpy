@@ -29,17 +29,17 @@ layeredimage eileen right:
     group bodies auto:
         attribute naked_crossed:
             ConditionSwitch(
-                "h_available", "dlc/h/sprites/eileen/bodies/eileen_right_bodies_naked_crossed.webp",
+                "h_available", "dlc/h/images/sprites/eileen/bodies/eileen_right_bodies_naked_crossed.webp",
                 "True", "null"
             )
         attribute naked_fists:
             ConditionSwitch (
-                "h_available", "dlc/h/sprites/eileen/bodies/eileen_right_bodies_naked_fists.webp",
+                "h_available", "dlc/h/images/sprites/eileen/bodies/eileen_right_bodies_naked_fists.webp",
                 "True", "null"
             )
         attribute naked_onhip:
             ConditionSwitch (
-                "h_available", "dlc/h/sprites/eileen/bodies/eileen_right_bodies_naked_onhip.webp",
+                "h_available", "dlc/h/images/sprites/eileen/bodies/eileen_right_bodies_naked_onhip.webp",
                 "True", "null"
             )
     group eyes auto
