@@ -1,45 +1,15 @@
 # resources.rpy
 # Contains all resources: sprites, backgrounds, characters...
 
-# Dynamically load sprites and backgrounds.
-init python:
-    for package in [None] + store.dlc_packages:
-        if package:
-            pfx = 'dlc/' + package + '/'
-        else:
-            pfx = ''
 
-        # TODO
-        # define_images(pfx + 'bgs', ['bg'], xalign=0.5, yalign=0.5, variants={'blur': vblur})
-        
-        if pfx:
-            config.images_directory = 'dlc/' + package + '/images'
-            _scan_images_directory()
-            config.images_directory = 'images'
-
-        # TODO
-        define_images(pfx + 'vfx', ['misc'])
-        # TODO
-        define_images(pfx + 'vfx/cutins', ['cutin'])
-        # TODO
-        define_images(pfx + 'vfx/title', ['title'])
-        # TODO
-        define_images(pfx + 'vfx/notes', ['note'])
-    
-    # NOTE This for loop cycle is here to ensure retrocompatibility with the
-    # rest of the game's code base. Images were being defined with two specific
-    # alignment transforms; now that we're having Ren'Py define these images on
-    # its own, we still need to apply that transform. This code does just that.
-    #
-    # FWIW the only image that wouldn't play well with not having these
-    # alignments was "cg act3 familydinner 1hd.jpg" to my knowledge.
-    for image_name in [i for i in renpy.list_images() if i.startswith("cg")]:
-        renpy.image(image_name, Transform(
-            get_base_image(image_name), xalign=0.5, yalign=0.5))
-
-
-# Sepia and blur filters
 init:
+    # Images and effects.
+    image white = Solid("#ffffff")
+    image creme = Solid("#fffbf4")
+    image shadow = Solid("#000")
+    image cg title = "ui/main/bg.webp"
+
+    # Images for which to create a sepia version.
     define sepia_images = [
         'bg downtown park',
         'bg colorado town hd',
@@ -56,6 +26,7 @@ init:
         'misc rendered eileen leaving colorado',
     ]
 
+    # Images for which to create a blurred version with a custom blur value.
     define blur_images = [
         ('bg aptallison outside', 1.0),
         ('bg aptallison outside night', 2.0),
@@ -107,20 +78,62 @@ init:
         ('cg act3 hug end', 5.0)
     ]
 
+
+init python:
+    # Dynamically load sprites and backgrounds not found in the default
+    # `images` folder. In Ren'Py 8.5 and above, this will no longer be
+    # necessary as you can just alter the variable config.image_directories.
+
+    for package in [None] + store.dlc_packages:
+        if package:
+            pfx = 'dlc/' + package + '/'
+        else:
+            pfx = ''
+
+        # TODO We still need to handle the blur variants 🤔
+        # define_images(pfx + 'bgs', ['bg'], xalign=0.5, yalign=0.5, variants={'blur': vblur})
+        
+        if pfx:
+            config.images_directory = 'dlc/' + package + '/images'
+            _scan_images_directory()
+            config.images_directory = 'images'
+
+        # TODO
+        define_images(pfx + 'vfx', ['misc'])
+        # TODO
+        define_images(pfx + 'vfx/cutins', ['cutin'])
+        # TODO
+        define_images(pfx + 'vfx/title', ['title'])
+        # TODO
+        define_images(pfx + 'vfx/notes', ['note'])
+
+
 init 2 python:
-    # different init level to allow DLC to add images in init level 1
+    # NOTE Init level set to 2 to allow DLCs to add images to some of the lists
+    # defined in this file.
+        
+    # This for loop cycle is here to ensure retrocompatibility with the
+    # rest of the game's code base. Images were being defined with two specific
+    # alignment transforms; now that we're having Ren'Py define these images on
+    # its own, we still need to apply that transform. This code does just that.
+    #
+    # FWIW the only image that wouldn't play well with not having these
+    # alignments was "cg act3 familydinner 1hd.jpg" to my knowledge.
+    for image_name in [i for i in renpy.list_images() if i.startswith(("cg", "bg"))]:
+        renpy.image(image_name, Transform(
+            get_base_image(image_name), xalign=0.5, yalign=0.5))
     
+    # Same as above but also we're creating a blurred variant for every
+    # single background image for retrocompatibility reasons.
+    for image_name in [i for i in renpy.list_images() if i.startswith("bg")]:
+        renpy.image(image_name + " blur", At(image_name, box_blur))
+
+    # Generate all of the sepia variants of the images we've selected.    
     for img in sepia_images:
         renpy.image(img + ' sepia', Transform(
             get_base_image(img), matrixcolor=SepiaMatrix()))
 
+    # Generate all of the custom blur variants of the images we've selected.
     for img, amount in blur_images:
         renpy.image(img + ' blurred{}'.format(
             int(amount)), im.Blur(get_base_image(img), amount))
-
-init:
-    # Images and effects.
-    image white = Solid("#ffffff")
-    image creme = Solid("#fffbf4")
-    image shadow = Solid("#000")
-    image cg title = "ui/main/bg.webp"
