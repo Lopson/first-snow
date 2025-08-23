@@ -102,9 +102,9 @@ define cg_art = [
         title=__('Nude Painting'),
         file=(lambda:
             [
-                'dlc/h/cgs/act2_boobpainting.webp',
-                'dlc/h/cgs/act2_boobpainting_embarrassed.webp',
-                'dlc/h/cgs/act2_boobpainting_smile.webp'
+                'cg act2 boobpainting',
+                'cg act2 boobpainting embarrassed',
+                'cg act2 boobpainting smile'
             ] if GameContext.explicit_allowed() else [
                 'cg act2 nudepainting',
                 'cg act2 nudepainting embarrassed',
@@ -113,9 +113,9 @@ define cg_art = [
         ),
         thumb= (lambda:
             [
-                'dlc/h/cgs/act2_boobpainting_thumb.webp',
-                'dlc/h/cgs/act2_boobpainting_embarrassed_thumb.webp',
-                'dlc/h/cgs/act2_boobpainting_smile_thumb.webp'
+                'cg act2 boobpainting thumb',
+                'cg act2 boobpainting embarrassed thumb',
+                'cg act2 boobpainting smile thumb'
             ] if GameContext.explicit_allowed() else [
                 'cg act2 nudepainting thumb',
                 'cg act2 nudepainting embarrassed thumb',
@@ -178,14 +178,14 @@ define cg_art = [
     GalleryItem(
         title=__('Fingering'),
         file=[
-            'dlc/h/cgs/act2_finger_start.webp',
-            'dlc/h/cgs/act2_finger_mid.webp',
-            'dlc/h/cgs/act2_finger_end.webp'
+            'cg act2 finger start',
+            'cg act2 finger mid',
+            'cg act2 finger end'
         ],
         thumb=[
-            'dlc/h/cgs/act2_finger_start_thumb.webp',
-            'dlc/h/cgs/act2_finger_mid_thumb.webp',
-            'dlc/h/cgs/act2_finger_end_thumb.webp'
+            'cg act2 finger start thumb',
+            'cg act2 finger mid thumb',
+            'cg act2 finger end thumb'
         ],
         locked=lambda: not GameContext.scene_seen('2S8_b'),
         visible=lambda: GameContext.explicit_allowed(),
@@ -194,14 +194,14 @@ define cg_art = [
     GalleryItem(
         title=__('H'),
         file=[
-            'dlc/h/cgs/act2_cunnilingus_start.webp',
-            'dlc/h/cgs/act2_cunnilingus_mid.webp',
-            'dlc/h/cgs/act2_cunnilingus_end.webp'
+            'cg act2 cunnilingus start',
+            'cg act2 cunnilingus mid',
+            'cg act2 cunnilingus end'
         ],
         thumb=[
-            'dlc/h/cgs/act2_cunnilingus_start_thumb.webp',
-            'dlc/h/cgs/act2_cunnilingus_mid_thumb.webp',
-            'dlc/h/cgs/act2_cunnilingus_end_thumb.webp'
+            'cg act2 cunnilingus start thumb',
+            'cg act2 cunnilingus mid thumb',
+            'cg act2 cunnilingus end thumb'
         ],
         locked=lambda: not GameContext.scene_seen('2S8_b'),
         visible=lambda: GameContext.explicit_allowed(),
@@ -236,7 +236,7 @@ define cg_art = [
 
     GalleryItem(
         title=__('Roadtrip'),
-        file=['cg act3 roadtrip {}.webp'.format(i) for i in range(1, 7)],
+        file=['cg act3 roadtrip {}'.format(i) for i in range(1, 7)],
         thumb=['cg act3 roadtrip {} thumb'.format(i) for i in range(1, 7)],
         locked=lambda: not GameContext.scene_seen('3S1')
     ),
@@ -274,8 +274,8 @@ define cg_art = [
 
     GalleryItem(
         title=__('Unison'),
-        file=['dlc/h/cgs/act3_mast{}.webp'.format(i) for i in range(1, 8)],
-        thumb=['dlc/h/cgs/act3_mast{}_thumb.webp'.format(i) for i in range(1, 8)],
+        file=['cg act3 mast{}'.format(i) for i in range(1, 8)],
+        thumb=['cg act3 mast{} thumb'.format(i) for i in range(1, 8)],
         locked=lambda: not GameContext.scene_seen('3S3_b'),
         visible=lambda: GameContext.explicit_allowed(),
     ),
