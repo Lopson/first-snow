@@ -9,20 +9,13 @@ init python:
         else:
             pfx = ''
 
-        # TODO Remove the Eileen DLC sprite explicit definition in her
-        # layered image object once you've gone ahead and implemented this whole
-        # thing using just `_scan_images_directory()` and `config.images_directory`.
-        # Once we get there, I'm guessing the game with automatically populate the
-        # layered image with those components?
-
         # TODO
         define_images(pfx + 'bgs', ['bg'], xalign=0.5, yalign=0.5, variants={'blur': vblur})
         
         if pfx:
-            config.images_directory = 'dlc/' + package + '/images/cgs'
+            config.images_directory = 'dlc/' + package + '/images'
             _scan_images_directory()
             config.images_directory = 'images'
-            # define_images(pfx + 'cgs', ['cg'], xalign=0.5, yalign=0.5)
 
         # TODO
         define_images(pfx + 'vfx', ['misc'])
