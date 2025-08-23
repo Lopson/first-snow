@@ -34,8 +34,6 @@ init -1 python hide:
 
     # What to pack as data.
     build.archive('resources', 'all')
-    build.classify('game/bgs/**', 'resources')
-    build.classify('game/cgs/**', 'resources')
     build.classify('game/music/**', 'resources')
     build.classify('game/sfx/**', 'resources')
     # NOTE This character doesn't show up in the game.
