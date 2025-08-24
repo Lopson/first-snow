@@ -96,15 +96,6 @@ init python:
             _scan_images_directory()
             config.images_directory = 'images'
 
-        # TODO
-        # define_images(pfx + 'vfx', ['misc'])
-        # TODO
-        # define_images(pfx + 'vfx/cutins', ['cutin'])
-        # TODO
-        # define_images(pfx + 'vfx/title', ['title'])
-        # TODO
-        # define_images(pfx + 'vfx/notes', ['note'])
-
 
 init 2 python:
     # NOTE Init level set to 2 to allow DLCs to add images to some of the lists
