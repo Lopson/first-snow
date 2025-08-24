@@ -372,7 +372,7 @@ show caprice_blur indoors_chintap even normal neutral at rightside as caprice2:
 show caprice indoors_chintap even normal neutral at rightside:
     alpha 0 xpos 0.8 rotate 0
 $ renpy.transition(dissolve, layer='master')
-show misc cutins postermulti:
+show cutin postermulti:
     subpixel True
     zoom 0.8 xcenter 0.54 ycenter -0.2
     ease 1.5 ycenter 0.43
@@ -380,7 +380,7 @@ show misc cutins postermulti:
 
 "I walk over and tentatively take a look at the one sitting on top, its sharp graphics and color scheme catching the eye."
 
-show misc cutins postermulti:
+show cutin postermulti:
     subpixel True
     zoom 0.8 xcenter 0.54 ycenter 0.43
     ease 1.5 ycenter -0.2
@@ -929,7 +929,7 @@ $ renpy.music.set_volume(0.4)
 play music "music/touching.ogg" fadein 1.5
 scene black with vpunch
 scene bg buildingart art dusk blur
-show misc cutins hands:
+show cutin hands:
     zoom 0.95 xalign 0.5 yoffset 2
 with longDissolve
 $ camera_reset()

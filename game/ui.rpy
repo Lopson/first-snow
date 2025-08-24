@@ -2627,17 +2627,17 @@ transform phone_anim:
 screen phone(mode, who=None, time=None, temperature=None):
     python:
         emoji = {
-            '\\o/': __('yay'),
-            ';)': __('wink'),
-            ':>': __('smug'),
-            ':)': __('smile'),
-            '|(': __('sleepy'),
-            ':(': __('sad'),
-            '<3': __('heart'),
-            ':s': __('confused'),
-            'owo': __('blush'),
-            '>:|': __('angry'),
-            ':o': __('surprised'),
+            '\\o/': 'yay',
+            ';)': 'wink',
+            ':>': 'smug',
+            ':)': 'smile',
+            '|(': 'sleepy',
+            ':(': 'sad',
+            '<3': 'heart',
+            ':s': 'confused',
+            'owo': 'blush',
+            '>:|': 'angry',
+            ':o': 'surprised'
         }
 
     frame at phone_anim:
@@ -2649,7 +2649,7 @@ screen phone(mode, who=None, time=None, temperature=None):
 
         # old save compatibility: phone may not have `waiting` attribute
         if getattr(phone, 'waiting', False):
-            add "vfx/phone/ui-ctc-bg.webp":
+            add "phone ui ctc bg":
                 yalign 1.0
                 yoffset 6
                 xalign 0.5
@@ -2660,15 +2660,15 @@ screen phone(mode, who=None, time=None, temperature=None):
                 yoffset 2
                 xpos 494
 
-        add "vfx/phone/bg.webp":
+        add "phone bg":
             xpos 50
 
         if mode == 'unlock':
-            add "vfx/phone/ui-unlock.webp":
+            add "phone ui unlock":
                 xpos 60
                 ypos 57
         elif mode == 'messages':
-            add "vfx/phone/ui-msg.webp":
+            add "phone ui msg":
                 xpos 66
                 ypos 57
 
@@ -2699,8 +2699,8 @@ screen phone(mode, who=None, time=None, temperature=None):
                                     sw = 'cont'
                             else:
                                 sw = 'fin'
-                            box = 'vfx/phone/ui-msg-box-{}-{}.webp'.format(sn, sw)
-                            ava = 'vfx/phone/ava' + ('-' + who if not to else '') + '.webp'
+                            box = 'phone ui msg box {} {}'.format(sn, sw)
+                            ava = 'phone ava' + (' ' + who if not to else '')
                             avaalign = 1.0 if to else 0.0
                             textoffset = (20, -85) if to else (95, -85)
                             textcolor = "#665f59" if to else "#ebe3d9"
@@ -2711,7 +2711,7 @@ screen phone(mode, who=None, time=None, temperature=None):
                             alpha = 0.8 if to else -0.8
 
                             for txt, img in emoji.items():
-                                message = message.replace(txt, '{image=vfx/phone/emoji/' + img + '.webp}')
+                                message = message.replace(txt, '{image=phone emoji ' + img + '}')
 
                         frame:
                             background None
@@ -2750,25 +2750,25 @@ screen phone(mode, who=None, time=None, temperature=None):
                                     xalign textalign
 
                     $ renpy.run(Scroll('phone_messages', 'vertical increase', 9999999999))
-                    add "vfx/phone/ui-msg-buttons.webp":
+                    add "phone ui msg buttons":
                         xalign 0.5
                         xoffset -10
                         yoffset -14 # + (10 * i)
 
             if len(messages) > 4:
-                add "vfx/phone/ui-msg-fade.webp":
+                add "phone ui msg fade":
                     xpos 75
                     ypos 105
 
         elif mode == 'call-in':
-            add "vfx/phone/ui-call-in.webp":
+            add "phone ui call in":
                 xpos 60
                 ypos 57
 
-        add "vfx/phone/statusbar.webp":
+        add "phone statusbar":
             xpos 67
             ypos 63
-        add "vfx/phone/cracks.webp":
+        add "phone cracks":
             xpos 67
             ypos 58
 

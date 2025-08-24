@@ -43,6 +43,6 @@ label splashscreen:
         $ renpy.quit()
 
     # Show a nice intro video.
-    $ renpy.movie_cutscene("vfx/intro.ogv")
+    $ renpy.movie_cutscene("images/vfx/intro.ogv")
     $ renpy.transition(dissolve)
     return

@@ -630,7 +630,7 @@ show bg buildingart art dusk siren blurred1:
     xalign 0.5 yalign 0.5
 $camera_move(-200,820,650,0,0,'dissolve')
 with dissolve
-show misc cutins siren:
+show cutin siren:
     subpixel True
     zoom 0.75
     xalign 0.5 yoffset -250

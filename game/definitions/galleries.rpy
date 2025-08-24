@@ -59,8 +59,8 @@ define cg_art = [
 
     GalleryItem(
         title=__('Art Matters'),
-        file=['vfx/title/act1.webp'],
-        thumb=['vfx/title/act1_thumb.webp'],
+        file=['title act1'],
+        thumb=['title act1 thumb'],
         locked=lambda: not GameContext.scene_seen('1S2')
     ),
 
@@ -93,8 +93,8 @@ define cg_art = [
 
     GalleryItem(
         title=__('Falling Snow'),
-        file=['vfx/title/act2.webp'],
-        thumb=['vfx/title/act2_thumb.webp'],
+        file=['title act2'],
+        thumb=['title act2 thumb'],
         locked=lambda: not GameContext.scene_seen('2S1')
     ),
 
@@ -229,8 +229,8 @@ define cg_art = [
 
     GalleryItem(
         title=__('A World Away'),
-        file=['vfx/title/act3.webp'],
-        thumb=['vfx/title/act3_thumb.webp'],
+        file=['title act3'],
+        thumb=['title act3 thumb'],
         locked=lambda: not GameContext.scene_seen('3S1')
     ),
 

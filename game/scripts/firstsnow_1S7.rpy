@@ -175,14 +175,14 @@ show caprice_blur indoors_behindback raised normal open at rightside:
     zoom 0.9 xpos 0.84 yoffset -80
 show bg downtown pizzeria blurred2
 $ renpy.transition(midDissolve, layer='master')
-show misc cutins pizzas:
+show cutin pizzas:
     xalign 0.5 yoffset -600
     ease 1.5 yoffset -50
 "Our chatter is interrupted by the arrival of a waiter, a weedy young man clad in a plain red and black uniform. It's impressive how well he maneuvers all our pizzas and sides onto the table, all our mouths watering as they steam away."
 
 "With a curt 'please enjoy', he leaves us to our feast."
 
-show misc cutins pizzas:
+show cutin pizzas:
     xalign 0.5 yoffset -50
     ease 1.5 yoffset -600
 with None

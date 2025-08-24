@@ -34,12 +34,12 @@ define thelongestDissolve = Dissolve(7.0, old_widget=None, new_widget=None, alph
 define thefinalDissolve = Dissolve(20.0, old_widget=None, new_widget=None, alpha=True)
 define fadeInOut = Fade(1.0, 0, 1.0)
 define menuFade = Fade(2,0,1, color="#f0f0f0")
-define inkfade = ImageDissolve(Tile("vfx/inkfade.webp"), 2.8, 15)
-define inkfade2 = ImageDissolve(Tile("vfx/inkfade.webp"), 2.2, 15)
+define inkfade = ImageDissolve(Tile("images/vfx/inkfade.webp"), 2.8, 15)
+define inkfade2 = ImageDissolve(Tile("images/vfx/inkfade.webp"), 2.2, 15)
 define flash = Fade(0.6, 0.0, 1.0, color="#fff")
-define circlewipe = ImageDissolve("vfx/circlewipe.webp", 2.0, 8)
-define eye_open = ImageDissolve("vfx/eye.webp", .8, ramplen=128, reverse=False, time_warp=eyewarp)
-define eye_shut = ImageDissolve("vfx/eye.webp", .8, ramplen=128, reverse=True, time_warp=eyewarp)
+define circlewipe = ImageDissolve("images/vfx/circlewipe.webp", 2.0, 8)
+define eye_open = ImageDissolve("images/vfx/eye.webp", .8, ramplen=128, reverse=False, time_warp=eyewarp)
+define eye_shut = ImageDissolve("images/vfx/eye.webp", .8, ramplen=128, reverse=True, time_warp=eyewarp)
 
 
 # Sprite position definitions

@@ -250,7 +250,7 @@ $ renpy.transition(midDissolve, layer='master')
 show bg apteileen livingroom messy norabbit blurred2:
     xalign 0.5 yalign 0.5
 $ renpy.transition(midDissolve, layer='master')
-show misc cutins bunny:
+show cutin bunny:
     subpixel True
     zoom 0.6
     xalign 0.68 yoffset -250
@@ -262,7 +262,7 @@ show misc cutins bunny:
 # scene bg apteileen livingroom messy:
     # subpixel True
     # ease 1.5 xalign 1.0
-# show misc cutins bunny:
+# show cutin bunny:
     # subpixel True
     # xalign 0.5 yoffset 35
     # ease 1.5 xalign 0.4
@@ -281,7 +281,7 @@ show eileen_blur indoors_crossed frown narrow at rightside as eileen2:
 "Noticing movement out of the corner of my eye, I turn and look up."
 
 $camera_move(2200,250,600,0,3,'ease')
-show misc cutins bunny:
+show cutin bunny:
     subpixel True
     zoom 0.6
     xalign 0.68 yoffset 155

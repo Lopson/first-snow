@@ -33,7 +33,7 @@ voice "Allison_SoftLaugh.ogg"
 allison "I've never been here with so few people around, usually this is a complete madhouse. It's nice."
 
 scene bg misc zoo blur
-show misc cutins hands:
+show cutin hands:
     zoom 0.95 xalign 0.5 yoffset 2
 with midDissolve
 "As we stroll on, Eileen takes my hand in hers as we walk. It's weird how such a simple gesture can make me feel so warm, my cheeks hurting as I smile."

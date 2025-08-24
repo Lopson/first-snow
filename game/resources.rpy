@@ -97,13 +97,13 @@ init python:
             config.images_directory = 'images'
 
         # TODO
-        define_images(pfx + 'vfx', ['misc'])
+        # define_images(pfx + 'vfx', ['misc'])
         # TODO
-        define_images(pfx + 'vfx/cutins', ['cutin'])
+        # define_images(pfx + 'vfx/cutins', ['cutin'])
         # TODO
-        define_images(pfx + 'vfx/title', ['title'])
+        # define_images(pfx + 'vfx/title', ['title'])
         # TODO
-        define_images(pfx + 'vfx/notes', ['note'])
+        # define_images(pfx + 'vfx/notes', ['note'])
 
 
 init 2 python:
