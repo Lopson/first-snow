@@ -5,6 +5,7 @@ init python:
 from typing import TypeAlias
 from renpy.display.screen import show_screen, hide_screen
 from renpy.exports.displayexports import restart_interaction, showing, transition
+from renpy.exports.rollbackexports import in_rollback
 from renpy.exports.statementexports import pause
 
 PhoneEntry: TypeAlias = list[tuple[bool, str, str]]
@@ -25,6 +26,7 @@ class Phone:
         restart_interaction()
 
     def show(self, mode: str, **kwargs) -> None:
+        # TODO No longer necessary, remove when possible, see 2S1
         if not isinstance(mode, str) or mode not in ["unlock", "messages", "call-in"]:
             raise ValueError
         
@@ -33,7 +35,9 @@ class Phone:
             transition(dissolve, layer='screens') # pyright: ignore[reportUndefinedVariable]
 
     def hide(self) -> None:
-        hide_screen('phone')
+        # TODO No longer necessary, remove when possible
+        if not in_rollback():
+            hide_screen('phone')
 
     def wait(self) -> None:
         self.waiting = True

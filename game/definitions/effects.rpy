@@ -41,9 +41,21 @@ define circlewipe = ImageDissolve("images/vfx/circlewipe.webp", 2.0, 8)
 define eye_open = ImageDissolve("images/vfx/eye.webp", .8, ramplen=128, reverse=False, time_warp=eyewarp)
 define eye_shut = ImageDissolve("images/vfx/eye.webp", .8, ramplen=128, reverse=True, time_warp=eyewarp)
 
+transform phone_anim_enter:
+    yoffset config.screen_height
+    ease 2.0 yoffset 0
+
+transform phone_anim_leave:
+    ease 2.0 yoffset config.screen_height
+
+define phone_transiton = MoveTransition(
+    delay=2.0, enter=phone_anim_enter, leave=phone_anim_leave,
+    layers=['screens'])
+
 
 # Sprite position definitions
 init -2 python:
+    # TODO Convert these to transforms.
     leftoffscreen = Position(xpos=0.0,xanchor=1.0,ypos=1.0,yanchor=1.0)
     leftedge = Position(xpos=0.05,xanchor=0.5,ypos=1.0,yanchor=1.0)
     leftside = Position(xpos=0.15,xanchor=0.5,ypos=1.0,yanchor=1.0)
