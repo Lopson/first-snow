@@ -1,10 +1,3 @@
-image cue bg = Composite(
-    (config.screen_width, 29),
-    (0, 3), "ui/hud/cue/bg.webp",
-    (226, 3), "#2b3038"
-)
-
-
 screen cue_overlay():
     python:
         for i in reversed(range(len(store._cues))):

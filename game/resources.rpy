@@ -7,7 +7,14 @@ init:
     image white = Solid("#ffffff")
     image creme = Solid("#fffbf4")
     image shadow = Solid("#000")
+ 
     image cg title = "ui/main/bg.webp"
+
+    image cue bg = Composite(
+        (config.screen_width, 29),
+        (0, 3), "ui/hud/cue/bg.webp",
+        (226, 3), "#2b3038"
+    )
 
     # Images for which to create a sepia version.
     define sepia_images = [
