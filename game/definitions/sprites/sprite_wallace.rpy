@@ -17,4 +17,5 @@ layeredimage wallace_right:
     group eyes auto
     group faces auto
 
-image wallace_blur = LayeredImageProxy(name="wallace", transform=box_blur)
+image wallace_blur = LayeredImageProxy(
+    name="wallace", transform=box_blur(size=10, separation=0.0))

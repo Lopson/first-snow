@@ -7,4 +7,5 @@ layeredimage caprice:
     group eyes auto
     group faces auto
 
-image caprice_blur = LayeredImageProxy(name="caprice", transform=box_blur)
+image caprice_blur = LayeredImageProxy(
+    name="caprice", transform=box_blur(size=10, separation=0.0))

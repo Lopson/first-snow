@@ -23,4 +23,5 @@ init 1:
     image eileen_sepia = LayeredImageProxy(
         name="eileen", transform=Transform(matrixcolor=SepiaMatrix()))
 
-    image eileen_blur = LayeredImageProxy(name="eileen", transform=box_blur)
+    image eileen_blur = LayeredImageProxy(
+        name="eileen", transform=box_blur(size=10, separation=0.0))

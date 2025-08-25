@@ -6,4 +6,5 @@ layeredimage eve:
     group eyes auto
     group faces auto
 
-image eve_blur = LayeredImageProxy(name="eve", transform=box_blur)
+image eve_blur = LayeredImageProxy(
+    name="eve", transform=box_blur(size=10, separation=0.0))

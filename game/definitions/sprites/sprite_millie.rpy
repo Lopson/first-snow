@@ -19,4 +19,5 @@ layeredimage millie_right:
     group misc auto
     group mouths auto
 
-image millie_blur = LayeredImageProxy(name="millie", transform=box_blur)
+image millie_blur = LayeredImageProxy(
+    name="millie", transform=box_blur(size=10, separation=0.0))
