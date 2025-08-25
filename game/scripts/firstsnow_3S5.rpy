@@ -88,20 +88,20 @@ show eve_blur outdoors neutral normal at left2 as eve2:
     xzoom -1 xpos 0.18
 $ renpy.transition(dissolve, layer='master')
 window show
-$ phone.show('unlock')
+show screen phone (mode='unlock') with phone_transiton
 "As we stop for a moment, I pluck my phone from my pocket and unlock it."
 
 stop sound fadeout 1.0
 window hide
 $ phone.message('dad', '11:02 AM', 'Hi Allison')
 $ phone.message('dad', '11:02 AM', 'How are things going')
-$ phone.show(mode='messages', who='dad')
+show screen phone (mode='messages', who='dad') with dissolve
 window show
 eve "Who is it?"
 
 allison "Just my dad asking how I'm doing."
 
-$ phone.hide()
+hide screen phone with phone_transiton
 window hide
 $ renpy.music.set_volume(0.65, delay=1.0)
 show eve outdoors normal surprised2 at left2:
@@ -153,7 +153,7 @@ $ renpy.transition(longDissolve, layer='master')
 stop sound fadeout 1.0
 $ renpy.pause(3.0, hard=True)
 
-$ phone.show(mode='messages', who='dad')
+show screen phone (mode='messages', who='dad') with phone_transiton
 $ phone.message('dad', '11:05 AM', 'friend\'s sister is showing me around', to=True)
 $ phone.wait()
 
@@ -182,7 +182,7 @@ $ phone.wait()
 $ phone.message('dad', '11:14 AM', 'Take care, enjoy the last of your trip')
 $ phone.wait()
 window show
-$ phone.hide()
+hide screen phone with phone_transiton
 
 $ renpy.music.set_volume(0.65, delay=1.0)
 show eve outdoors normal neutral at left2:

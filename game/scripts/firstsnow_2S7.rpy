@@ -39,14 +39,14 @@ show bg buildingunion outside snow blurred2
 $ renpy.transition(dissolve, layer='master')
 $ phone.clear('eileen')
 $ phone.message('eileen', '2:05 PM', 'Hey, I\'m in the coffee shop if you want to meet.')
-$ phone.show('messages', who='eileen')
+show screen phone (mode='messages', who='eileen') with phone_transiton
 "She hasn't admitted it, but I think Eileen's enjoying playing with her new toy."
 
 stop sound fadeout 1.0
 $ renpy.transition(hpunch, layer='master')
 "I quickly text her in agreement and hit send as I step off the stairs, dodging a student I nearly bump into as I do. If only I had an extra set of eyes so I could use this while walking more easily."
 
-$ phone.hide()
+hide screen phone with phone_transiton
 window hide
 show bg buildingunion outside snow
 $ renpy.transition(dissolve, layer='master')

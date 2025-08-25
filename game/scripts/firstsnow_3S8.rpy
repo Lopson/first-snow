@@ -62,7 +62,7 @@ $ camera_reset()
 show bg downtown square night blurred2 as bg2:
     xalign 0.5 yalign 0.5 alpha 0
     ease 1.0 alpha 0.9
-$ phone.show('call-in')
+show screen phone ('call-in') with phone_transiton
 pause 1.0
 window show dissolve
 "Pulling it from my pocket with my free hand, I'm surprised to see it's dad."
@@ -122,7 +122,7 @@ allison "I know. Bye, dad."
 dad "See you soon, love you."
 
 play sound "sfx/phone-hangup.ogg"
-$ phone.show('unlock')
+show screen phone (mode='unlock') with dissolve
 pause 1.0
 
 "With that, the call ends. I stare blankly at the screen of my phone. I'll be happy to see my family again, not to mention the warmth and liveliness of home. I have to take a deep breath, a lump in my throat forming from homesickness."
@@ -177,7 +177,7 @@ play loopsfx "music/ringtone.ogg" fadein 2.0
 show bg downtown square night blurred2 as bg2:
     xalign 0.5 yalign 0.5 alpha 0
     ease 1.0 alpha 0.9
-$ phone.show('call-in')
+show screen phone (mode='call-in') with phone_transiton
 pause 1.2
 with vpunch
 "Eileen!? Why is she calling me, now of all times? Should I answer? My phone is shaking in my hand."
@@ -201,7 +201,7 @@ allison "I'm... by the Christmas tree, in the city square."
 
 eileen "Okay. Stay where you are."
 
-$ phone.hide()
+hide screen phone with phone_transiton
 play sound "sfx/phone-hangup.ogg"
 show bg downtown square night blurred2 as bg2:
     xalign 0.5 yalign 0.5 alpha 0.9

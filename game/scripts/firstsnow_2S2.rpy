@@ -540,7 +540,7 @@ window show
 "A loud ping comes from beside me, my hand automatically reaching for the phone sitting on the couch in response. Probably Rose saying she'll be late, dooming me to microwave noodles for dinner again."
 
 $ phone.message('eileen', '8:27 PM', 'Is this Allison?')
-$ phone.show('messages', who='eileen')
+show screen phone (mode='messages', who='eileen') with phone_transiton
 show bg aptallison livingroom blurred2
 $ renpy.transition(fastDissolve, layer='master')
 stop sound fadeout 1.0
@@ -626,7 +626,7 @@ window show
 voice "Rose_UhHuh3.ogg"
 rose "I see..."
 
-$ phone.hide()
+hide screen phone with phone_transiton
 show bg aptallison livingroom
 show rose outdoors_smokingmouth smile halfclosed at right2 as rose2:
     xpos 0.75 alpha 1
@@ -651,7 +651,7 @@ show rose outdoors_smokingmouth halfclosed laugh at right2 as rose2:
 
 show bg aptallison livingroom blurred2
 $ renpy.transition(fastDissolve, layer='master')
-$ phone.show('messages', who='eileen')
+show screen phone (mode='messages', who='eileen') with phone_transiton
 pause 1.0
 hide rose2
 hide rose
@@ -663,10 +663,10 @@ $ phone.wait()
 $ phone.message('eileen', '8:55 PM', 'See you.')
 $ phone.wait()
 
-$ phone.show('unlock')
+show screen phone (mode='unlock') with dissolve
 $ renpy.pause(1.0, hard=True)
 window show
-$ phone.hide()
+hide screen phone with phone_transiton
 show bg aptallison livingroom
 $ renpy.transition(dissolve, layer='master')
 

@@ -189,7 +189,7 @@ window show
 "Just as I'm about to settle in and watch the passing crowds, the phone in my pocket begins to vibrate and ring."
 show bg downtown city blurred3
 $ renpy.transition(dissolve, layer='master')
-$ phone.show('call-in')
+show screen phone (mode='call-in') with phone_transiton
 "Not sure who it could be, I quickly grab for it."
 
 allison "Dad..."
@@ -287,7 +287,7 @@ play sound "sfx/phone-hangup.ogg"
 "A few seconds pass, before the familiar beeping of the ended call tone rings in my ear. I just couldn't bring myself to do it."
 
 $ renpy.music.set_volume(1.0, channel='ambiance2')
-$ phone.hide()
+hide screen phone with phone_transiton
 window hide
 show shadow:
     alpha 0

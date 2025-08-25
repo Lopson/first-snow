@@ -538,7 +538,7 @@ $ renpy.sound.set_volume(0.0, channel='ambiance', delay=10.0)
 hide cg with flash
 $ renpy.sound.set_volume(1.0, channel='sound')
 play sound "sfx/phone-call.ogg"
-$ phone.show('call-in')
+show screen phone (mode='call-in') with phone_transiton
 pause 6.0
 window show dissolve
 "It doesn't go answered."
@@ -579,7 +579,7 @@ show shadow:
 with None
 show bg colorado house livingroom night
 $ renpy.transition(dissolve, layer='master')
-$ phone.hide()
+hide screen phone with phone_transiton
 window hide
 "With that, I end the call."
 

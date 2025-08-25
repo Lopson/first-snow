@@ -2616,13 +2616,6 @@ screen say(what, who):
                 yoffset dialogue_yoffset
                 line_spacing dialogue_spacing
 
-# ugh
-transform phone_anim:
-    on show:
-        yoffset config.screen_height
-        ease 2.0 yoffset 0
-    on hide:
-        ease 2.0 yoffset config.screen_height
 
 screen phone(mode, who=None, time=None, temperature=None):
     python:
@@ -2640,7 +2633,7 @@ screen phone(mode, who=None, time=None, temperature=None):
             ':o': 'surprised'
         }
 
-    frame at phone_anim:
+    frame:
         background Null()
         xmaximum 580
         ymaximum 631
