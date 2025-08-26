@@ -34,7 +34,8 @@ init:
     ]
 
     # Images for which to create a blurred version with a custom blur value.
-    # TODO With our box blur implementation the values should be x2'd.
+    # NOTE The blur values are multiplied by 3; these original ones are kept
+    # around due to the scripting relying on them.
     define blur_images = [
         ('bg aptallison outside', 1.0),
         ('bg aptallison outside night', 2.0),
@@ -138,4 +139,10 @@ init 2 python:
     # align properties like the rest of the CGs and BGs.
     for img, amount in blur_images:
         renpy.image(img + ' blurred{}'.format(
-            int(amount)), im.Blur(get_base_image(img), amount))
+            int(amount)),
+            At(
+                img,
+                box_blur(size=2, separation=3),
+                kawase_blur(lod_bias=amount, iteration=2)
+            )
+        )

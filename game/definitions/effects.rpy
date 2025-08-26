@@ -50,7 +50,7 @@ transform phone_anim_leave:
 
 define phone_transiton = MoveTransition(
     delay=2.0, enter=phone_anim_enter, leave=phone_anim_leave,
-    layers=['screens'])
+    layers=['phone'])
 
 
 # Sprite position definitions
@@ -245,6 +245,13 @@ transform box_blur(size, separation):
 
     u_size int(size)
     u_separation float(separation)
+
+transform kawase_blur(lod_bias, iteration):
+    shader "shaders.kawase_blur"
+    mesh True
+
+    u_lod_bias float(lod_bias)
+    u_iteration float(iteration)
 
 
 image snow light starting = LightSnow(prefill=False)

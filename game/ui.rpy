@@ -2618,6 +2618,8 @@ screen say(what, who):
 
 
 screen phone(mode, who=None, time=None, temperature=None):
+    layer "phone"
+    
     python:
         emoji = {
             '\\o/': 'yay',
