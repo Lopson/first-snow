@@ -1,6 +1,8 @@
 # resources.rpy
 # Contains all resources: sprites, backgrounds, characters...
 
+define DEFAULT_BLUR_VALUE = 5.0
+define EILEEN_BLUR_VALUE = 2.2
 
 init:
     # Images and effects.
@@ -34,8 +36,6 @@ init:
     ]
 
     # Images for which to create a blurred version with a custom blur value.
-    # NOTE The blur values are multiplied by 3; these original ones are kept
-    # around due to the scripting relying on them.
     define blur_images = [
         ('bg aptallison outside', 1.0),
         ('bg aptallison outside night', 2.0),
@@ -117,32 +117,47 @@ init 2 python:
     # FWIW the only image that wouldn't play well with not having these
     # alignments was "cg act3 familydinner 1hd.jpg" to my knowledge.
     for image_name in [i for i in renpy.list_images() if i.startswith(("cg", "bg"))]:
-        renpy.image(image_name, Transform(
-            get_base_image(image_name), xalign=0.5, yalign=0.5))
+        renpy.image(
+            image_name,
+            At(
+                get_base_image(image_name),
+                Transform(xalign=0.5, yalign=0.5)
+            )
+        )
     
     # We're creating a blurred variant for every single background image. For
     # retrocompatibility reasons, we're doing this to all of the backgrounds,
     # but in reality we only really need to do this for those that show up in
     # the scripting with the attribute "blur".
     for image_name in [i for i in renpy.list_images() if i.startswith("bg")]:
-        renpy.image(image_name + " blur", At(image_name, box_blur))
+        renpy.image(
+            image_name + " blur",
+            At(
+                im.Blur(get_base_image(image_name), DEFAULT_BLUR_VALUE),
+                Transform(xalign=0.5, yalign=0.5)
+            )
+        )
 
     # Generate all of the sepia variants of the images we've selected. Note how
     # this original piece of code doesn't create these images with align
     # properties like the rest of the CGs and BGs.
-    for img in sepia_images:
-        renpy.image(img + ' sepia', Transform(
-            get_base_image(img), matrixcolor=SepiaMatrix()))
+    for image_name in sepia_images:
+        renpy.image(
+            image_name + ' sepia',
+            At(
+                get_base_image(image_name),
+                Transform(xalign=0.5, yalign=0.5, matrixcolor=SepiaMatrix())
+            )
+        )
 
     # Generate all of the custom blur variants of the images we've selected.
     # Note how this original piece of code doesn't create these images with
     # align properties like the rest of the CGs and BGs.
-    for img, amount in blur_images:
-        renpy.image(img + ' blurred{}'.format(
-            int(amount)),
+    for image_name, amount in blur_images:
+        renpy.image(
+            image_name + ' blurred{}'.format(int(amount)),
             At(
-                img,
-                box_blur(size=2, separation=3),
-                kawase_blur(lod_bias=amount, iteration=2)
+                im.Blur(get_base_image(image_name), amount),
+                Transform(xalign=0.5, yalign=0.5)
             )
         )
