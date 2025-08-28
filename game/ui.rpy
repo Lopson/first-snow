@@ -1348,7 +1348,7 @@ screen extras_scenes():
                         for x in enumerate(act_scenes, 1):
                             # NOTE The variable "scene_label" actually contains the xSy identifier and not the scripting label.
                             $ i, scene_label = x
-                            $ sceneshot = "scripts/sceneshots/" + scene_label + ".webp"
+                            $ sceneshot = "ui/sceneshots/" + scene_label + ".webp"
 
                             if act < cutoff_act or (act == cutoff_act and i < cutoff_scene):
                                 null height 44
@@ -1412,7 +1412,7 @@ screen extras_scenes():
 
         if GameContext.scene_seen(current_label):
             frame:
-                background ("scripts/sceneshots/" + current_label + "_full.webp")
+                background ("ui/sceneshots/" + current_label + "_full.webp")
                 xsize 482
                 ysize 521
 
