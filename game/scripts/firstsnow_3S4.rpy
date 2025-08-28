@@ -498,7 +498,7 @@ show bg colorado hiking2 sepia as bg2:
 show shadow:
     alpha 0.2
     ease 8.0 alpha 0.5
-show eileen_blur hiking_onhip lookawaynarrow angry as eileen2 at center:
+show eileen blur hiking_onhip lookawaynarrow angry as eileen2 at center:
     alpha 0
     ease 8.0 alpha 1
 show eileen hiking_onhip lookawaynarrow angry at center

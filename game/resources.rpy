@@ -161,3 +161,31 @@ init 2 python:
                 Transform(xalign=0.5, yalign=0.5)
             )
         )
+
+    # Generate all of the blurred character sprites that we'll need. Just like
+    # the rest, the reason we're not doing this using the `blur` transform is
+    # because the results of said transform aren't even close to similar to
+    # those of `im.Blur`. By declaring these here, we can then use them in
+    # Layered Image definitions by naming the "[character_name] blur".
+    characters_with_blur: list[str] = [
+        "caprice",
+        "eileen",
+        "eve",
+        "millie",
+        "rose",
+        "wallace"
+    ]
+
+    for character_name in characters_with_blur:
+        for image_name in [i for i in renpy.list_images() if (
+                i.startswith("{}_".format(character_name)) and
+                not i.startswith("{}_right_".format(character_name)))]:
+            
+            blur_value: float = (EILEEN_BLUR_VALUE if character_name == "eileen"
+                else DEFAULT_BLUR_VALUE)
+            
+            renpy.image(
+                image_name.replace(
+                    "{}_".format(character_name), "{}_blur_".format(character_name)),
+                im.Blur(get_base_image(image_name), EILEEN_BLUR_VALUE)
+            )

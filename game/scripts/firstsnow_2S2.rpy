@@ -616,7 +616,7 @@ show rose indoors_smokingmouth smile halfclosed at farright:
 show rose outdoors_smokingmouth smile halfclosed at right2 as rose2:
     xpos 1.0 alpha 0
     ease 1.0 xpos 0.75
-show rose_blur outdoors_smokingmouth normal neutral at right2 as rose3:
+show rose blur outdoors_smokingmouth normal neutral at right2 as rose3:
     xpos 1.0 alpha 1
     ease 1.0 xpos 0.75
 $ phone.message('eileen', '8:51 PM', 'i think that goes both ways.', to=True)

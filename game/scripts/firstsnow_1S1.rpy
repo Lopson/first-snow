@@ -42,16 +42,14 @@ window show dissolve
 
 $ phone.message('caprice', '8:17 AM', "BIG NEWS allie!!! :):):)\\o/\\o/\\o/")
 $ phone.message('caprice', '8:17 AM', "tell you later in bio!!!!!! ;)\\o/\\o/<3<3")
-show screen phone (mode='messages', who='caprice') with phone_transiton
-show bg aptallison livingroom blurred2:
+show bg aptallison livingroom blurred2 with dissolve:
     xalign 0.5 yalign 0.5
-$ renpy.transition(dissolve, layer='master')
-"The idea of big news at this of all times fills me with worry; I'm already too busy just trying to keep up with my new life."
+show screen phone (mode='messages', who='caprice')
+"The idea of big news at this of all times fills me with worry; I'm already too busy just trying to keep up with my new life." with phone_transiton
 
 hide screen phone with phone_transiton
 show bg aptallison livingroom
-$ renpy.transition(dissolve, layer='master')
-"With time marching on, I quickly slip the phone back into my coat and set off for the stairs. I shouldn't have a problem making it to class if I keep a good pace."
+"With time marching on, I quickly slip the phone back into my coat and set off for the stairs. I shouldn't have a problem making it to class if I keep a good pace." with dissolve
 
 window hide dissolve
 scene black with dissolve

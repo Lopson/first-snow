@@ -609,13 +609,13 @@ show bg aptallison livingroom blurred2:
 show eileen indoors_onhip neutral lookaway at offcenterleft:
     zoom 0.6 yoffset -350
     xzoom -1 xpos 0.4
-show eileen_blur indoors_onhip neutral lookaway at offcenterleft:
+show eileen blur indoors_onhip neutral lookaway at offcenterleft:
     zoom 0.6 yoffset -350
     xzoom -1 xpos 0.4
 show millie indoors_tented smile closedhappy raised at centerright:
     zoom 0.6 yoffset -350
     xpos 0.62
-show millie_blur indoors_tented smile closedhappy raised at centerright:
+show millie blur indoors_tented smile closedhappy raised at centerright:
     zoom 0.6 yoffset -350
     xpos 0.62
 $ renpy.transition(dissolve, layer='master')
@@ -661,11 +661,11 @@ voice "Wallace_No2.ogg"
 wallace "No."
 
 show bg aptallison livingroom
-hide eileen_blur
+hide eileen blur
 show eileen indoors_onhip normal angry behind wallace at offcenterleft as eileen2:
     zoom 0.6 yoffset -350
     xzoom -1 xpos 0.4
-hide millie_blur
+hide millie blur
 show millie indoors_tented smile half even at centerright as millie2:
     zoom 0.6 yoffset -350
     xpos 0.62

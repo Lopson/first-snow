@@ -309,7 +309,7 @@ allison "Uh, Eve?"
 
 scene bg colorado town blurred2:
     xalign 0.0 yalign 0.5 alpha 1
-show eileen_blur outdoors_onhip sad sadmouth at left2:
+show eileen blur outdoors_onhip sad sadmouth at left2:
     zoom 0.85 yoffset -100
     xzoom -1 xpos 0.255
 show eve outdoors normal crying at centerright:
@@ -329,13 +329,13 @@ show eve outdoors normal cryingopen at centerright:
 eve "I don't want you to go, Allison! Stay here! I want you to stay!"
 
 $camera_move(-450,-250,450,-0.5,4,'ease')
-show eve_blur outdoors normal crying as eve2 at left2:
+show eve blur outdoors normal crying as eve2 at left2:
     zoom 1.5 yoffset 250
     xpos 0.655 alpha 0.0
     ease 4.0 alpha 1.0
 with None
 
-hide eileen_blur
+hide eileen blur
 show eileen outdoors_onhip sad sadmouth at left2:
     xzoom -1 xpos 0.255 alpha 0.0
     ease 4.0 alpha 1.0
@@ -349,7 +349,7 @@ show eileen outdoors_onhip lookawaysad sadmouth at left2:
 $ renpy.transition(dissolve, layer='master')
 "Glaring at Eileen in frustration, I seem to have made my feelings clear to her as she turns rather sheepish."
 
-show eve_blur outdoors as eve2 at left2:
+show eve blur outdoors as eve2 at left2:
     xpos 0.655 alpha 1.0
     ease 2.0 alpha 0.0
 show eve outdoors normal crying at centerright:

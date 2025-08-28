@@ -25,7 +25,7 @@ $ renpy.music.set_volume(0.5)
 play music "music/night_2.ogg" fadein 4.0
 scene bg aptallison road dusk
 $camera_move(0,0,0,0,0,'dissolve')
-show eileen_blur outdoors_onhip normal neutral at right2:
+show eileen blur outdoors_onhip normal neutral at right2:
     zoom 1.3 yoffset 300
     xpos 0.8
 with smoothDissolve
@@ -44,7 +44,7 @@ show eileen outdoors_onhip normal neutral at right2:
 
 "I'm not sure, but... I don't think these feelings are just friendship, any more."
 
-hide eileen_blur
+hide eileen blur
 scene bg aptallison road dusk
 show eileen outdoors_onhip normal open at rightish
 with fadeInOut

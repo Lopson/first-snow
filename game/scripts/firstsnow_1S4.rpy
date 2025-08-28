@@ -347,7 +347,7 @@ $ renpy.transition(dissolve, layer='master')
 window show
 "Hearing my phone vibrating on the table, I quickly pick it up to see who's messaged me. I quickly force myself to keep a poker face as the name comes into view."
 
-show eileen_blur indoors_onhip normal neutral as eileen2 at offcenterleft:
+show eileen blur indoors_onhip normal neutral as eileen2 at offcenterleft:
     zoom 1.5 yoffset 500 alpha 0
     xzoom -1 xpos 0.45
     ease 1.0 alpha 1
@@ -356,7 +356,7 @@ show screen phone (mode='messages', who='caprice') with phone_transiton
 
 "She must have given up on art out of loneliness if Eileen's avoiding her and I'm here. I'm not terribly hungry, but I should probably get at least a sandwich or something from the cafeteria before classes begin."
 
-show eileen_blur indoors_onhip normal neutral as eileen2 at offcenterleft:
+show eileen blur indoors_onhip normal neutral as eileen2 at offcenterleft:
     zoom 1.5 yoffset 500 alpha 1
     xzoom -1 xpos 0.45
     ease 1.0 alpha 0

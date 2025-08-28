@@ -163,15 +163,15 @@ show eileen indoors_onhip annoyed frown at center:
 
 show wallace:
     alpha 0.0
-show wallace_blur indoors even open neutral at leftside:
+show wallace blur indoors even open neutral as wallace2 at leftside:
     zoom 0.9 xpos 0.18 xzoom -1 yoffset -80
 show eileen:
     alpha 0.0
-show eileen_blur indoors_onhip normal neutral at center:
+show eileen blur indoors_onhip normal neutral as eileen2 at center:
     zoom 0.9 xzoom -1 xpos 0.485 yoffset -80
 show caprice:
     alpha 0.0
-show caprice_blur indoors_behindback raised normal open at rightside:
+show caprice blur indoors_behindback raised normal open as caprice2 at rightside:
     zoom 0.9 xpos 0.84 yoffset -80
 show bg downtown pizzeria blurred2
 $ renpy.transition(midDissolve, layer='master')
@@ -189,15 +189,15 @@ with None
 show bg downtown pizzeria
 $ renpy.transition(dissolve, layer='master')
 pause 0.5
-hide wallace_blur
+hide wallace2
 show wallace indoors even closed smile at leftside:
     alpha 1.0
     xpos 0.18
-hide eileen_blur
+hide eileen2
 show eileen indoors_onhip normal open at center:
     alpha 1.0
     xzoom -1 xpos 0.485
-hide caprice_blur
+hide caprice2
 show caprice indoors_behindback raised normal open at rightside:
     alpha 1.0
     xpos 0.84
