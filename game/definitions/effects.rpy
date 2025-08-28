@@ -253,6 +253,10 @@ transform kawase_blur(lod_bias, iteration):
     u_lod_bias float(lod_bias)
     u_iteration float(iteration)
 
+transform modern_renpy_blur(amount):
+    box_blur(size=3, separation=0)
+    kawase_blur(lod_bias=float(amount) + 1.5, iteration=0)
+
 
 image snow light starting = LightSnow(prefill=False)
 image snow light = LightSnow(prefill=True)
