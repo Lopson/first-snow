@@ -1,5 +1,5 @@
-# 00_config.rpy
-# Basic Ren'Py game options.
+# config.rpy
+# Ren'Py game options.
 
 python early:
     config.save_directory = "FirstSnow"
@@ -16,7 +16,7 @@ init -1 python hide:
 
     # Basic settings.
     config.name = "First Snow"
-    config.version = "1.4.2"
+    config.version = "1.5.0"
     config.patch_version = 5
     config.developer = "auto"
 
@@ -70,7 +70,7 @@ init -1 python hide:
     config.history_length = 100
     gui.history_blocked_tags = [ 'nw' ]
 
-    def toggle_text_log():
+    def toggle_text_log() -> None:
         if not main_menu:
             ToggleScreen('text_log', dissolve)() # type: ignore
 
