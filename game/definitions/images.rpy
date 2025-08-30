@@ -187,5 +187,5 @@ init 2 python:
             renpy.image(
                 image_name.replace(
                     "{}_".format(character_name), "{}_blur_".format(character_name)),
-                im.Blur(get_base_image(image_name), EILEEN_BLUR_VALUE)
+                im.Blur(get_base_image(image_name), blur_value)
             )
