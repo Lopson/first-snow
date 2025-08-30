@@ -86,22 +86,23 @@ show bg colorado town hd blurred4
 show eve blur outdoors neutral normal at left2 as eve2:
     zoom 1.4 yoffset 150
     xzoom -1 xpos 0.18
-$ renpy.transition(dissolve, layer='master')
 window show
-show screen phone (mode='unlock') with phone_transiton
+show screen phone (mode='unlock')
+with {'master': dissolve, 'phone': phonemovein}
 "As we stop for a moment, I pluck my phone from my pocket and unlock it."
 
 stop sound fadeout 1.0
 window hide
 $ phone.message('dad', '11:02 AM', 'Hi Allison')
 $ phone.message('dad', '11:02 AM', 'How are things going')
-show screen phone (mode='messages', who='dad') with dissolve
+show screen phone (mode='messages', who='dad')
+with {'phone': dissolve}
 window show
 eve "Who is it?"
 
 allison "Just my dad asking how I'm doing."
 
-hide screen phone with phone_transiton
+hide screen phone
 window hide
 $ renpy.music.set_volume(0.65, delay=1.0)
 show eve outdoors normal surprised2 at left2:
@@ -115,7 +116,7 @@ show eve blur outdoors neutral normal at left2 as eve2:
     ease 1.0 alpha 0
 with None
 show bg colorado town hd
-$ renpy.transition(dissolve, layer='master')
+with {'master': dissolve, 'phone': phonemoveout}
 "As she stands on tiptoes, trying to look over the phone in curiosity, I get an idea."
 
 $camera_move(-2500,650,-450,0,3,'ease')
@@ -149,11 +150,12 @@ show eve blur outdoors at left2 as eve2:
     ease 4.0 alpha 1.0
 with None
 show bg colorado town hd blurred4
-$ renpy.transition(longDissolve, layer='master')
+with {'master': longDissolve}
 stop sound fadeout 1.0
 $ renpy.pause(3.0, hard=True)
 
-show screen phone (mode='messages', who='dad') with phone_transiton
+show screen phone (mode='messages', who='dad')
+with {'phone': phonemovein}
 $ phone.message('dad', '11:05 AM', 'friend\'s sister is showing me around', to=True)
 $ phone.wait()
 
@@ -182,7 +184,8 @@ $ phone.wait()
 $ phone.message('dad', '11:14 AM', 'Take care, enjoy the last of your trip')
 $ phone.wait()
 window show
-hide screen phone with phone_transiton
+hide screen phone
+with {'phone': phonemoveout}
 
 $ renpy.music.set_volume(0.65, delay=1.0)
 show eve outdoors normal neutral at left2:

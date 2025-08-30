@@ -26,7 +26,8 @@ show bg buildingunion cafeteria snow moreblur as cafeteria_snow_moreblur:
     alpha 0
     ease 0.5 alpha 1
 window show
-show screen phone (mode='unlock') with phone_transiton
+show screen phone (mode='unlock')
+with {'phone': phonemovein}
 "Some smears on the edges of the plate are all that remains of the mostly-cooked pasta served today, what's left of my accompanying soda bubbling away while I pass some time browsing this site and that."
 
 show eileen blur indoors_onhip normal neutral at rightish:
@@ -34,14 +35,13 @@ show eileen blur indoors_onhip normal neutral at rightish:
     ease 1.0 xpos 0.7
 "As I read, a shadow suddenly looms over the other side of the table. Looking up from my phone reveals a very familiar figure."
 
-hide screen phone with phone_transiton
+hide screen phone
 show bg buildingunion cafeteria snow moreblur as cafeteria_snow_moreblur:
     xalign 0.5 yalign 0.5
     alpha 1
     ease 0.5 alpha 0
-show eileen indoors_onhip normal neutral at rightish
-hide eileen blur
-$ renpy.transition(dissolve, layer='master')
+show eileen indoors_onhip normal neutral -blur at rightish
+with {'master': dissolve, 'phone': phonemoveout}
 window hide
 "Eileen peers down as she stands at the opposite side of the table, a large plate of food steaming away in her hand. The fresh pasta sauce is strong enough to smell from here."
 
@@ -94,14 +94,16 @@ show bg buildingunion cafeteria snow moreblur as cafeteria_snow_moreblur:
     xalign 0.5 yalign 0.5
     alpha 0
     ease 0.5 alpha 1
-show eileen blur indoors_onhip normal grumble at rightish with dissolve:
+show eileen blur indoors_onhip normal grumble at rightish:
     yoffset 50
-show screen phone (mode='unlock') with phone_transiton
+show screen phone (mode='unlock')
+with {'master': dissolve, 'phone': phonemovein}
 "As I take my phone to browse some more, and Eileen calmly eats the average-at-best cafeteria food, it feels as though there's no need to chat just to fill the air. That silence between us is becoming more comfortable."
 
 "That is, before I get a message."
 $ phone.message('rose', '1:05 PM', 'Can\'t make dinner, work sucks')
-show screen phone (mode='messages', who='rose') with dissolve
+show screen phone (mode='messages', who='rose')
+with {'phone': dissolve}
 "Flicking away the browser app, I take a quick look."
 
 window hide
@@ -122,15 +124,14 @@ $ phone.wait()
 $ phone.message('rose', '1:14 PM', 'Work needs me, see you later')
 $ phone.wait()
 window show
-hide screen phone with phone_transiton
+hide screen phone
 show bg buildingunion cafeteria snow moreblur as cafeteria_snow_moreblur:
     xalign 0.5 yalign 0.5
     alpha 1
     ease 0.5 alpha 0
-show eileen indoors_onhip disbelief frown at rightish:
+show eileen indoors_onhip disbelief frown -blur at rightish:
     yoffset 50
-hide eileen blur
-$ renpy.transition(dissolve, layer='master')
+with {'master': dissolve, 'phone': phonemoveout}
 window hide
 voice "Allison_Sigh2.ogg"
 "All I can do is sigh and slump down in my seat as I lay my phone on the table."
