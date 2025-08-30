@@ -41,16 +41,22 @@ define circlewipe = ImageDissolve("images/vfx/circlewipe.webp", 2.0, 8)
 define eye_open = ImageDissolve("images/vfx/eye.webp", .8, ramplen=128, reverse=False, time_warp=eyewarp)
 define eye_shut = ImageDissolve("images/vfx/eye.webp", .8, ramplen=128, reverse=True, time_warp=eyewarp)
 
-transform phone_anim_enter:
+transform phone_move:
     yoffset config.screen_height
-    ease 2.0 yoffset 0
 
-transform phone_anim_leave:
-    ease 2.0 yoffset config.screen_height
+define phonemovein = MoveTransition(
+    delay=2.0,
+    layers=['phone'],
+    enter=phone_move,
+    enter_time_warp=_warper.ease,
+)
 
-define phone_transiton = MoveTransition(
-    delay=2.0, enter=phone_anim_enter, leave=phone_anim_leave,
-    layers=['phone'])
+define phonemoveout = MoveTransition(
+    delay=2.0,
+    layers=['phone'],
+    leave=phone_move,
+    leave_time_warp=_warper.ease,
+)
 
 
 # Sprite position definitions
