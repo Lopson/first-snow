@@ -12,6 +12,7 @@ init python hide:
 
     # Patch version management
     if (persistent.patch_version or 1) < config.patch_version:
+        # TODO Remove unnecessary variables from previous patch version.
         store.patch_updated = True
     else:
         store.patch_updated = False
@@ -42,6 +43,6 @@ label splashscreen:
         $ renpy.quit()
 
     # Show a nice intro video.
-    $ renpy.movie_cutscene("vfx/intro.ogv")
+    $ renpy.movie_cutscene("images/vfx/intro.ogv")
     $ renpy.transition(dissolve)
     return

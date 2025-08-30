@@ -23,7 +23,7 @@ class GameContext(NoRollback):
         """
         Gives a list of scene IDs [x]S[y] that have been seen by the player.
         """
-        result: list[str] = []
+        result: set[str] = set()
         scene_labels: list[str] = [
             i for i in get_all_labels() if i.startswith(store.SCENE_LABEL_PREFIX)
         ]
@@ -38,10 +38,10 @@ class GameContext(NoRollback):
 
             for scene_label in specific_scene_labels:
                 if seen_label(scene_label):
-                    result.append(scene_id)
-                    break
+                    scene_id_to_add: str = scene_label.replace(SCENE_LABEL_PREFIX, '') # pyright: ignore[reportUndefinedVariable]
+                    result.add(scene_id_to_add)
         
-        return result
+        return sorted(list(result))
     
     @classmethod
     def scene_seen(cls, scene_id: str) -> bool:

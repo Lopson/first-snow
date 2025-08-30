@@ -61,7 +61,7 @@ $ renpy.transition(dissolve, layer='master')
 "Shrugging it off, I pile my books onto another table and take a couple of pencils from the side of the table which Caprice has commandeered."
 
 show bg buildingart art dusk bustsketch blurred2
-show misc cutins capshading:
+show cutin capshading:
     subpixel True
     xalign 0.8 yoffset 0
 $ renpy.transition(dissolve, layer='master')
@@ -74,18 +74,18 @@ pause 1.0
 "I never really questioned how much Caprice has practiced her art, now that I think of it. I'm left a little chastened for underestimating how much effort she puts into this hobby."
 
 play sound "sfx/ambiance/painting.ogg" fadein 0.1
-show misc cutins capshading:
+show cutin capshading:
     subpixel True
     xalign 0.8 yoffset 0 alpha 1
     ease 1.5 alpha 0
-show misc cutins allisondoodles as misc2:
+show cutin allisondoodles as misc2:
     subpixel True
     xalign 0.8 yoffset -550
     ease 1.5 yoffset -20
 "Motivated to try a bit harder myself, I take a seat and open one of my notebooks. Flipping to a mostly empty page, I ponder for a moment before setting about sketching a cat. They were always a favorite subject to doodle."
 
 play sound "sfx/door_open2.ogg"
-show misc cutins allisondoodles as misc2:
+show cutin allisondoodles as misc2:
     subpixel True
     xalign 0.8 yoffset -20
     ease 1.5 yoffset -600
@@ -540,7 +540,7 @@ window show
 "A loud ping comes from beside me, my hand automatically reaching for the phone sitting on the couch in response. Probably Rose saying she'll be late, dooming me to microwave noodles for dinner again."
 
 $ phone.message('eileen', '8:27 PM', 'Is this Allison?')
-$ phone.show('messages', who='eileen')
+show screen phone (mode='messages', who='eileen') with phone_transiton
 show bg aptallison livingroom blurred2
 $ renpy.transition(fastDissolve, layer='master')
 stop sound fadeout 1.0
@@ -616,7 +616,7 @@ show rose indoors_smokingmouth smile halfclosed at farright:
 show rose outdoors_smokingmouth smile halfclosed at right2 as rose2:
     xpos 1.0 alpha 0
     ease 1.0 xpos 0.75
-show rose outdoors_smokingmouth normal neutral blur at right2 as rose3:
+show rose blur outdoors_smokingmouth normal neutral at right2 as rose3:
     xpos 1.0 alpha 1
     ease 1.0 xpos 0.75
 $ phone.message('eileen', '8:51 PM', 'i think that goes both ways.', to=True)
@@ -626,7 +626,7 @@ window show
 voice "Rose_UhHuh3.ogg"
 rose "I see..."
 
-$ phone.hide()
+hide screen phone with phone_transiton
 show bg aptallison livingroom
 show rose outdoors_smokingmouth smile halfclosed at right2 as rose2:
     xpos 0.75 alpha 1
@@ -651,7 +651,7 @@ show rose outdoors_smokingmouth halfclosed laugh at right2 as rose2:
 
 show bg aptallison livingroom blurred2
 $ renpy.transition(fastDissolve, layer='master')
-$ phone.show('messages', who='eileen')
+show screen phone (mode='messages', who='eileen') with phone_transiton
 pause 1.0
 hide rose2
 hide rose
@@ -663,10 +663,10 @@ $ phone.wait()
 $ phone.message('eileen', '8:55 PM', 'See you.')
 $ phone.wait()
 
-$ phone.show('unlock')
+show screen phone (mode='unlock') with dissolve
 $ renpy.pause(1.0, hard=True)
 window show
-$ phone.hide()
+hide screen phone with phone_transiton
 show bg aptallison livingroom
 $ renpy.transition(dissolve, layer='master')
 

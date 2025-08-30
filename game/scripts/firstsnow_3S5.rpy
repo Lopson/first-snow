@@ -2,7 +2,7 @@ label scene_3S5:
 ######################
 # Act 3, Scene 5
 
-call scene_start("3S6")
+call scene_start("3S5")
 
 stop music fadeout 2.0
 scene bg texture with midDissolve
@@ -57,7 +57,7 @@ letterbox "Maybe some time away from her is for the best. Even people who like e
 
 letterbox "The old wooden storefronts hardly loom over us, being mostly just a couple of stories tall, themselves dwarfed by the forested hills behind. Strolling around is a much nicer way to take it in than clutching to Rose on the back of her bike."
 
-scene bg colorado town HD
+scene bg colorado town hd
 $camera_move(2000,-600,-850,0,0,'dissolve')
 show eve outdoors neutral normal at left2:
     zoom 1.4 yoffset 150
@@ -82,26 +82,26 @@ show eve outdoors normal surprised at left2:
 "My thinking's interrupted by a ping from my pocket."
 
 $ renpy.music.set_volume(0.5, delay=1.0)
-show bg colorado town HD blurred4
-show eve outdoors blurry at left2 as eve2:
+show bg colorado town hd blurred4
+show eve blur outdoors neutral normal at left2 as eve2:
     zoom 1.4 yoffset 150
     xzoom -1 xpos 0.18
 $ renpy.transition(dissolve, layer='master')
 window show
-$ phone.show('unlock')
+show screen phone (mode='unlock') with phone_transiton
 "As we stop for a moment, I pluck my phone from my pocket and unlock it."
 
 stop sound fadeout 1.0
 window hide
 $ phone.message('dad', '11:02 AM', 'Hi Allison')
 $ phone.message('dad', '11:02 AM', 'How are things going')
-$ phone.show(mode='messages', who='dad')
+show screen phone (mode='messages', who='dad') with dissolve
 window show
 eve "Who is it?"
 
 allison "Just my dad asking how I'm doing."
 
-$ phone.hide()
+hide screen phone with phone_transiton
 window hide
 $ renpy.music.set_volume(0.65, delay=1.0)
 show eve outdoors normal surprised2 at left2:
@@ -110,11 +110,11 @@ show eve outdoors normal surprised2 at left2:
     ease 0.5 yoffset 155
     ease 0.5 yoffset 145
     ease 0.2 yoffset 150
-show eve outdoors blurry at left2 as eve2:
+show eve blur outdoors neutral normal at left2 as eve2:
     xpos 0.18 alpha 1.0
     ease 1.0 alpha 0
 with None
-show bg colorado town HD
+show bg colorado town hd
 $ renpy.transition(dissolve, layer='master')
 "As she stands on tiptoes, trying to look over the phone in curiosity, I get an idea."
 
@@ -144,16 +144,16 @@ with flash
 
 $ renpy.music.set_volume(0.5, delay=3.0)
 $camera_move(2000,-600,-850,0,3,'ease')
-show eve outdoors blurry at left2 as eve2:
+show eve blur outdoors at left2 as eve2:
     xpos 0.18 alpha 0.0
     ease 4.0 alpha 1.0
 with None
-show bg colorado town HD blurred4
+show bg colorado town hd blurred4
 $ renpy.transition(longDissolve, layer='master')
 stop sound fadeout 1.0
 $ renpy.pause(3.0, hard=True)
 
-$ phone.show(mode='messages', who='dad')
+show screen phone (mode='messages', who='dad') with phone_transiton
 $ phone.message('dad', '11:05 AM', 'friend\'s sister is showing me around', to=True)
 $ phone.wait()
 
@@ -182,16 +182,16 @@ $ phone.wait()
 $ phone.message('dad', '11:14 AM', 'Take care, enjoy the last of your trip')
 $ phone.wait()
 window show
-$ phone.hide()
+hide screen phone with phone_transiton
 
 $ renpy.music.set_volume(0.65, delay=1.0)
 show eve outdoors normal neutral at left2:
     xpos 0.18
-show eve outdoors blurry at left2 as eve2:
+show eve blur outdoors at left2 as eve2:
     xpos 0.18 alpha 1.0
     ease 1.0 alpha 0
 with None
-show bg colorado town HD
+show bg colorado town hd
 $ renpy.transition(dissolve, layer='master')
 "I smile and lock the phone once more, slipping it back where it belongs."
 
@@ -224,14 +224,14 @@ show eve outdoors grin normal at center:
     xpos 0.5
     ease 1.5 xpos 1.2
 $camera_move(0,0,0,0,20,'ease')
-show bg colorado town HD sepia as bg2:
+show bg colorado town hd sepia as bg2:
     zoom 0.5 xalign 0.0 yalign 0.5 alpha 0
     ease 8.0 alpha 0.3
 show shadow:
     zoom 2.0 alpha 0
     ease 8.0 alpha 0.5
 with None
-show bg colorado town HD blurred4:
+show bg colorado town hd blurred4:
     zoom 0.5
 $ renpy.transition(thelongestDissolve, layer='master')
 $ renpy.sound.set_volume(0.25, channel='ambiance2')
@@ -258,7 +258,7 @@ with midDissolve
 stop ambiance2 fadeout 4.0
 scene bg colorado town:
     xalign 0.0
-show bg colorado town HD blurred4 as bg2:
+show bg colorado town hd blurred4 as bg2:
     zoom 0.5 xalign 0.0 yalign 0.5 alpha 1
 show eve outdoors normal neutral at center:
     zoom 1.4 yoffset 150

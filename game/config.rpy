@@ -93,3 +93,11 @@ init -1 python hide:
     config.image_cache_size = 16
     store._game_menu_screen = "pause_menu"
     config.quit_action = Quit()
+    renpy.add_layer(layer="phone", below="screens")
+
+# Because we now have the phone screen on a separate layer,
+# we must include it in the "Hide UI" action that's triggered
+# when the player hits the corresponding key.
+label hide_windows:
+    hide screen phone
+    return

@@ -7,11 +7,11 @@ call scene_start("1S7")
 stop music fadeout 2.0
 scene bg texture with midDissolve
 play sound "sfx/ambiance/painting.ogg" fadein 0.1
-scene bg downtown pizzeria HD sketch
+scene bg downtown pizzeria hd sketch
 $camera_move(2000,-2000,0,0,0,'dissolve')
 with inkfade
 play ambiance "sfx/ambiance/crowd_cafe.ogg" fadein 5.0
-scene bg downtown pizzeria HD
+scene bg downtown pizzeria hd
 $camera_move(2000,-2000,0,0,0,'dissolve')
 with inkfade2
 stop sound fadeout 0.1
@@ -161,33 +161,45 @@ show eileen indoors_onhip annoyed frown at center:
     linear 0.7 xzoom -1 xpos 0.485
 "The look of pure and unrelenting disdain Eileen gives her at being reminded of the wait goes gleefully ignored, which is probably for the best."
 
-show wallace even open neutral blur at leftside:
-    xpos 0.18
-show eileen normal neutral blur at center:
-    xzoom -1 xpos 0.485
-show caprice indoors_behindback raised normal open blur at rightside:
-    xpos 0.84
+show wallace:
+    alpha 0.0
+show wallace blur indoors even open neutral as wallace2 at leftside:
+    zoom 0.9 xpos 0.18 xzoom -1 yoffset -80
+show eileen:
+    alpha 0.0
+show eileen blur indoors_onhip normal neutral as eileen2 at center:
+    zoom 0.9 xzoom -1 xpos 0.485 yoffset -80
+show caprice:
+    alpha 0.0
+show caprice blur indoors_behindback raised normal open as caprice2 at rightside:
+    zoom 0.9 xpos 0.84 yoffset -80
 show bg downtown pizzeria blurred2
 $ renpy.transition(midDissolve, layer='master')
-show misc cutins pizzas:
+show cutin pizzas:
     xalign 0.5 yoffset -600
     ease 1.5 yoffset -50
 "Our chatter is interrupted by the arrival of a waiter, a weedy young man clad in a plain red and black uniform. It's impressive how well he maneuvers all our pizzas and sides onto the table, all our mouths watering as they steam away."
 
 "With a curt 'please enjoy', he leaves us to our feast."
 
-show misc cutins pizzas:
+show cutin pizzas:
     xalign 0.5 yoffset -50
     ease 1.5 yoffset -600
 with None
 show bg downtown pizzeria
 $ renpy.transition(dissolve, layer='master')
 pause 0.5
+hide wallace2
 show wallace indoors even closed smile at leftside:
+    alpha 1.0
     xpos 0.18
+hide eileen2
 show eileen indoors_onhip normal open at center:
+    alpha 1.0
     xzoom -1 xpos 0.485
+hide caprice2
 show caprice indoors_behindback raised normal open at rightside:
+    alpha 1.0
     xpos 0.84
 with midDissolve
 eileen "Damn, they're fast here."

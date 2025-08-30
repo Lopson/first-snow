@@ -37,7 +37,7 @@ show bg aptallison livingroom blurred5 as bg2:
 
 "I let out a loud yawn before I can stifle it, causing Rose to look over from the couch."
 
-scene bg aptallison livingroom HD:
+scene bg aptallison livingroom hd:
     xalign 0.5 yalign 0.5
 $camera_move(-5000,-1650,-250,0,0,'dissolve')
 show rose indoors_handonhip normal neutral at right2 as rose2:
@@ -227,7 +227,7 @@ $camera_move(2800,-1550,650,0,5,'ease')
 window hide dissolve
 $ renpy.music.set_volume(1.0, delay=0)
 play music "music/caprice_default_m.ogg" fadein 10.0
-scene bg cafe inside HD
+scene bg cafe inside hd
 $camera_move(-8650,-200,-200,0,0,'dissolve')
 show caprice indoors_behindback even closedhappy opensmile at left2:
     xzoom -1
@@ -391,9 +391,9 @@ stop music fadeout 5.0
 $camera_move(3500,-850,650,0,5,'ease')
 pause 2.0
 
-scene bg cafe inside HD:
+scene bg cafe inside hd:
     xalign 0.5 yalign 0.5
-show bg cafe inside HD blurred2 as bg2:
+show bg cafe inside hd blurred2 as bg2:
     xalign 0.5 yalign 0.5 alpha 0.65
 $camera_move(-6500,-850,850,0,0,'dissolve')
 show bg cafe cafe table as cafe_table_full:

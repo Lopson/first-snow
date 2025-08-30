@@ -2,15 +2,15 @@ label scene_3S7:
 ######################
 # Act 3, Scene 7
 
-call scene_start("3S8")
+call scene_start("3S7")
 
 stop music fadeout 2.0
 scene bg texture with midDissolve
 play sound "sfx/ambiance/painting.ogg" fadein 0.1
-scene bg colorado town HD sketch
+scene bg colorado town hd sketch
 $camera_move(9000,-2200,0,0,0,'dissolve')
 with inkfade
-scene bg colorado town HD
+scene bg colorado town hd
 $camera_move(9000,-2200,0,0,0,'dissolve')
 with inkfade2
 stop sound fadeout 0.1
@@ -86,7 +86,7 @@ show eileen narrow angry at rightedge as eileen2:
 $ renpy.transition(dissolve, layer='master')
 "Taking Eve's side doesn't win me any favors, but Eileen knows she's been overruled."
 
-scene bg colorado town HD blurred4:
+scene bg colorado town hd blurred4:
     xzoom -1 xalign 0.0 yalign 0.0
 show bg colorado town bench as town_bench
 show eve outdoors normal neutral at right2:
@@ -221,7 +221,7 @@ show eve outdoors normal annoyed at center with dissolve:
 
 show shadow:
     alpha 0.4
-show bg colorado town HD blurred4 as bg2:
+show bg colorado town hd blurred4 as bg2:
     xzoom -1 yanchor -0.55
     size (1280, 270) crop (300, 200, 1280, 270)
 show eileen outdoors_onhip normal sadmouth as eileen2:
@@ -309,10 +309,7 @@ allison "Uh, Eve?"
 
 scene bg colorado town blurred2:
     xalign 0.0 yalign 0.5 alpha 1
-show eileen outdoors_onhip sad sadmouth at left2:
-    zoom 0.85 yoffset -100
-    xzoom -1 xpos 0.255
-show eileen outdoors onhip blurry2 at left2:
+show eileen blur outdoors_onhip sad sadmouth at left2:
     zoom 0.85 yoffset -100
     xzoom -1 xpos 0.255
 show eve outdoors normal crying at centerright:
@@ -332,25 +329,27 @@ show eve outdoors normal cryingopen at centerright:
 eve "I don't want you to go, Allison! Stay here! I want you to stay!"
 
 $camera_move(-450,-250,450,-0.5,4,'ease')
-show eve outdoors blurry2 as eve2 at left2:
+show eve blur outdoors normal crying as eve2 at left2:
     zoom 1.5 yoffset 250
     xpos 0.655 alpha 0.0
     ease 4.0 alpha 1.0
-show eileen outdoors onhip blurry2 as eileen2 at left2:
-    xzoom -1 xpos 0.255 alpha 1.0
-    ease 4.0 alpha 0.0
+with None
+
+hide eileen blur
 show eileen outdoors_onhip sad sadmouth at left2:
-    xzoom -1 xpos 0.255
-$ renpy.pause(4.0, hard=True)
+    xzoom -1 xpos 0.255 alpha 0.0
+    ease 4.0 alpha 1.0
+with Dissolve(4.0)
+
+# $ renpy.pause(4.0, hard=True)
 "This has gone about as awfully as it could've done."
 
-hide eileen2
 show eileen outdoors_onhip lookawaysad sadmouth at left2:
     xzoom -1 xpos 0.255 alpha 1
 $ renpy.transition(dissolve, layer='master')
 "Glaring at Eileen in frustration, I seem to have made my feelings clear to her as she turns rather sheepish."
 
-show eve outdoors blurry2 as eve2 at left2:
+show eve blur outdoors as eve2 at left2:
     xpos 0.655 alpha 1.0
     ease 2.0 alpha 0.0
 show eve outdoors normal crying at centerright:
@@ -539,7 +538,7 @@ $ renpy.sound.set_volume(0.0, channel='ambiance', delay=10.0)
 hide cg with flash
 $ renpy.sound.set_volume(1.0, channel='sound')
 play sound "sfx/phone-call.ogg"
-$ phone.show('call-in')
+show screen phone (mode='call-in') with phone_transiton
 pause 6.0
 window show dissolve
 "It doesn't go answered."
@@ -580,7 +579,7 @@ show shadow:
 with None
 show bg colorado house livingroom night
 $ renpy.transition(dissolve, layer='master')
-$ phone.hide()
+hide screen phone with phone_transiton
 window hide
 "With that, I end the call."
 

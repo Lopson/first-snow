@@ -170,20 +170,20 @@ play sound "sfx/cell_phone_vibrate.ogg"
 show bg downtown city blurred3 behind rose, allison as bg2:
     xalign 1.0 yalign 0.5 alpha 0
     ease 1.0 alpha 0.9
-show rose outdoors_handonhip halfclosed puzzled blur at right2 as rose2
+show rose blur outdoors_handonhip halfclosed puzzled at right2 as rose2
 $ renpy.transition(dissolve, layer='master')
-$ phone.show('unlock')
+show screen phone (mode='unlock') with phone_transiton
 "A little sheepish, I take my phone from my pocket to check what the message is."
 
 $ phone.clear('eileen')
 $ phone.message('eileen', '2:26 PM', 'Behind you.')
 pause 0.5
-$ phone.show('messages', who='eileen')
+show screen phone (mode='messages', who='eileen') with dissolve
 $ renpy.transition(smoothDissolve, layer='master')
 $ renpy.pause()
 
 window show
-$ phone.hide()
+hide screen phone with phone_transiton
 window hide
 stop sound fadeout 1.0
 hide bg2
@@ -195,7 +195,7 @@ $camera_move(-4050,-1500,750,0,5,'ease')
 pause 2.0
 
 play loopsfx "sfx/ambiance/snowwalk.ogg" fadein 1.0
-scene bg downtown city HD
+scene bg downtown city hd
 show snow light:
     zoom 1.5 xcenter 0.05 ycenter 0.12
 $camera_move(-8500,-3000,-250,0,0,'dissolve')

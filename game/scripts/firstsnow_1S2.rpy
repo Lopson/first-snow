@@ -24,7 +24,7 @@ $ _dismiss_pause = True
 
 window hide dissolve
 play loopsfx "sfx/toolbox-rustling.ogg" fadein 1.0
-scene bg aptallison outside day HD:
+scene bg aptallison outside day hd:
     xzoom -1
 $camera_move(-1000,-2700,500,0,0,'dissolve')
 show rose outdoors_smokingmouth normal neutral at left2:

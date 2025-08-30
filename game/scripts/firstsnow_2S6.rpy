@@ -35,8 +35,7 @@ play music "music/touching.ogg" fadein 1.5
 scene bg downtown park sepia:
     xalign 1.0
 show snow sepia
-show eileen_sepia outdoors_fists lookawaynarrow sadmouth blush at center:
-    ypos 1.525
+show eileen_sepia outdoors_fists lookawaynarrow sadmouth blush at center
 with flash
 "Just thinking about what happened last night makes my heart race, but I have no idea what's supposed to happen after something like that."
 
@@ -362,18 +361,18 @@ caprice "That's why I'm working on the posters!"
 
 # Cutin of art club poster
 show bg buildingart art dusk blurred2
-show eileen indoors_crossed annoyed angry blur at left2 as eileen3:
+show eileen blur indoors_crossed annoyed angry at left2 as eileen3:
     zoom 0.9 yoffset -80
     xzoom -1 xpos 0.28 yoffset -80
 show eileen indoors_crossed frown narrow at left2 as eileen2:
     xzoom -1 alpha 0 xpos 0.28
-show caprice indoors_chintap even normal neutral blur at rightside as caprice2:
+show caprice blur indoors_chintap even normal neutral at rightside as caprice2:
     zoom 0.9 yoffset -80
     xpos 0.8 yoffset -30 rotate 0
 show caprice indoors_chintap even normal neutral at rightside:
     alpha 0 xpos 0.8 rotate 0
 $ renpy.transition(dissolve, layer='master')
-show misc cutins postermulti:
+show cutin postermulti:
     subpixel True
     zoom 0.8 xcenter 0.54 ycenter -0.2
     ease 1.5 ycenter 0.43
@@ -381,7 +380,7 @@ show misc cutins postermulti:
 
 "I walk over and tentatively take a look at the one sitting on top, its sharp graphics and color scheme catching the eye."
 
-show misc cutins postermulti:
+show cutin postermulti:
     subpixel True
     zoom 0.8 xcenter 0.54 ycenter 0.43
     ease 1.5 ycenter -0.2
@@ -450,7 +449,7 @@ show eileen closed at left2 as eileen2:
 play music "music/whimsical_faster_m.ogg" fadein 4.0
 scene bg buildingart art dusk blurred2:
     xalign 1.0
-show eileen indoors_crossed frown narrow blur at centerleft:
+show eileen blur indoors_crossed frown narrow at centerleft:
     zoom 0.6 yoffset -350
     xpos 0.38
 show caprice indoors_behindback neutral normal even at right2:
@@ -481,7 +480,7 @@ scene bg buildingart art dusk:
 show eileen indoors_crossed narrow grumble at centerleft:
     zoom 0.6 yoffset -350
     xpos 0.38
-show caprice indoors_chintap opensmile closedhappy raised blur at right2:
+show caprice blur indoors_chintap opensmile closedhappy raised at right2:
     zoom 1.4 yoffset 315
     xpos 0.75
 $camera_move(600,-400,250,0,0,'dissolve')
@@ -490,7 +489,7 @@ with midDissolve
 
 scene bg buildingart art dusk blurred2:
     xalign 1.0 yalign 0.5
-show eileen indoors_crossed frown narrow blur at centerleft:
+show eileen blur indoors_crossed frown narrow at centerleft:
     zoom 0.6 yoffset -350
     xpos 0.38
 show caprice indoors_pumped grin normal raised at right2:
@@ -518,7 +517,7 @@ scene bg buildingart art dusk:
 show eileen indoors_crossed closed neutral at centerleft:
     zoom 0.6 yoffset -350
     xpos 0.38
-show caprice indoors_behindback pout closedhappy raised blur at right2:
+show caprice blur indoors_behindback pout closedhappy raised at right2:
     zoom 1.4 yoffset 315
     xzoom -1 xpos 0.7
 $camera_move(600,-400,250,0,0,'dissolve')
@@ -930,7 +929,7 @@ $ renpy.music.set_volume(0.4)
 play music "music/touching.ogg" fadein 1.5
 scene black with vpunch
 scene bg buildingart art dusk blur
-show misc cutins hands:
+show cutin hands:
     zoom 0.95 xalign 0.5 yoffset 2
 with longDissolve
 $ camera_reset()

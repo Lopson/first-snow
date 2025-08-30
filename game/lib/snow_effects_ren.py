@@ -159,13 +159,13 @@ def LightSnow(prefill: bool = False) -> MultiBox:
     return Composite(
         (config.screen_width, config.screen_height),
         (0, 0), SnowLayer(
-            "vfx/smallflake.webp", prefill=prefill, spawn_rate=0.10,
+            "images/vfx/smallflake.webp", prefill=prefill, spawn_rate=0.10,
             xspeed=(flake_sin, 100), xmult=5,  xvar=0, ymult=0.5, dir_rate=0).manager,
         (0, 0), SnowLayer(
-            "vfx/medflake.webp", prefill=prefill, spawn_rate=0.04,
+            "images/vfx/medflake.webp", prefill=prefill, spawn_rate=0.04,
             xspeed=(flake_sin, 200), xmult=20, xvar=0, ymult=0.7, dir_rate=0).manager,
         (0, 0), SnowLayer(
-            "vfx/bigflake.webp", prefill=prefill, spawn_rate=0.02,
+            "images/vfx/bigflake.webp", prefill=prefill, spawn_rate=0.02,
             xspeed=(flake_sin, 500), xmult=60, xvar=0, dir_rate=0).manager)
 
 
@@ -179,15 +179,15 @@ def LightSnowSepia(prefill: bool = False) -> MultiBox:
     return Composite(
         (config.screen_width, config.screen_height),
         (0, 0), SnowLayer(
-            Transform("vfx/smallflake.webp", matrixcolor=SepiaMatrix()), # pyright: ignore[reportUndefinedVariable]
+            Transform("images/vfx/smallflake.webp", matrixcolor=SepiaMatrix()), # pyright: ignore[reportUndefinedVariable]
             prefill=prefill, spawn_rate=0.10, xspeed=(flake_sin, 100), xmult=5,
             xvar=0, ymult=0.5, dir_rate=0).manager,
         (0, 0), SnowLayer(
-            Transform("vfx/medflake.webp", matrixcolor=SepiaMatrix()), # pyright: ignore[reportUndefinedVariable]
+            Transform("images/vfx/medflake.webp", matrixcolor=SepiaMatrix()), # pyright: ignore[reportUndefinedVariable]
             prefill=prefill, spawn_rate=0.04, xspeed=(flake_sin, 200), xmult=20,
             xvar=0, ymult=0.7, dir_rate=0).manager,
         (0, 0), SnowLayer(
-            Transform("vfx/bigflake.webp", matrixcolor=SepiaMatrix()), # pyright: ignore[reportUndefinedVariable]
+            Transform("images/vfx/bigflake.webp", matrixcolor=SepiaMatrix()), # pyright: ignore[reportUndefinedVariable]
             prefill=prefill, spawn_rate=0.02, xspeed=(flake_sin, 500), xmult=60,
             xvar=0, dir_rate=0).manager
     )

@@ -12,15 +12,15 @@ stop sound fadeout 0.1
 play ambiance "sfx/ambiance/crowd_inner.ogg" fadein 4.0
 $camera_move(2500,-950,800,0,6,'ease')
 pause 2.0
-window show dissolve
 $ _dismiss_pause = True
 
 play music "music/relaxing.ogg" fadein 4.0
-scene bg buildingart hallway2f dusk HD
-show bg buildingart hallway2f dusk HD blurred2 as bg2:
+scene bg buildingart hallway2f dusk hd
+show bg buildingart hallway2f dusk hd blurred2 as bg2:
     xalign 0.5 yalign 0.5 alpha 0.5
 $camera_move(2500,-3000,800,0,0,'dissolve')
 with fadeInOut
+window show dissolve
 show eileen outdoors_onhip narrow neutral at centerright:
     subpixel True
     zoom 0.42 ypos 0.05 xpos 0.8 alpha 0
@@ -250,7 +250,7 @@ $ renpy.transition(midDissolve, layer='master')
 show bg apteileen livingroom messy norabbit blurred2:
     xalign 0.5 yalign 0.5
 $ renpy.transition(midDissolve, layer='master')
-show misc cutins bunny:
+show cutin bunny:
     subpixel True
     zoom 0.6
     xalign 0.68 yoffset -250
@@ -262,7 +262,7 @@ show misc cutins bunny:
 # scene bg apteileen livingroom messy:
     # subpixel True
     # ease 1.5 xalign 1.0
-# show misc cutins bunny:
+# show cutin bunny:
     # subpixel True
     # xalign 0.5 yoffset 35
     # ease 1.5 xalign 0.4
@@ -274,14 +274,14 @@ show misc cutins bunny:
 show eileen indoors_crossed frown narrow at rightish:
     zoom 0.6 yoffset -310
     xpos 0.85 alpha 0
-show eileen indoors_crossed frown narrow blur at rightside as eileen2:
+show eileen blur indoors_crossed frown narrow at rightside as eileen2:
     zoom 0.6 yoffset -310
     xpos 1.1
     ease 1.5 xpos 0.85
 "Noticing movement out of the corner of my eye, I turn and look up."
 
 $camera_move(2200,250,600,0,3,'ease')
-show misc cutins bunny:
+show cutin bunny:
     subpixel True
     zoom 0.6
     xalign 0.68 yoffset 155
@@ -289,8 +289,8 @@ show misc cutins bunny:
 show eileen indoors_crossed frown narrow at rightish:
     zoom 0.6 yoffset -310
     xpos 0.85 alpha 0
-    ease 1.0 alpha 1
-show eileen indoors_crossed frown narrow blur at rightside as eileen2:
+    ease 0.5 alpha 1
+show eileen blur indoors_crossed frown narrow at rightside as eileen2:
     zoom 0.6 yoffset -310
     xpos 0.85 alpha 1
     ease 1.5 alpha 0
@@ -347,12 +347,12 @@ eileen "My sister gave it to me to keep me company when I moved out."
 
 scene black with dissolve
 $ camera_reset()
-scene bg apteileen livingroom messy HD:
+scene bg apteileen livingroom messy hd:
     subpixel True
     xalign 0.0 yalign 0.5
     size (1600, 900) crop (1080, 500, 1280, 720)
     linear 12.0 crop (1080, 450, 1280, 720)
-show bg apteileen livingroom messy HD blurred4:
+show bg apteileen livingroom messy hd blurred4:
     subpixel True
     xalign 0.0 yalign 0.5 alpha 0.95
     size (1600, 900) crop (1080, 500, 1280, 720)
@@ -368,10 +368,10 @@ with dissolve
 
 "She takes care to set it down gently, with a quick brush of its fur."
 
-show bg apteileen livingroom messy HD:
+show bg apteileen livingroom messy hd:
     xalign 0.0 yalign 0.5
     size (1600, 900) crop (1080, 450, 1280, 720)
-show bg apteileen livingroom messy HD blurred4:
+show bg apteileen livingroom messy hd blurred4:
     xalign 0.0 yalign 0.5 alpha 0.95
     size (1600, 900) crop (1080, 450, 1280, 720)
 show white:

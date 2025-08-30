@@ -7,10 +7,10 @@ call scene_start("3S2")
 stop music fadeout 2.0
 scene bg texture with midDissolve
 play sound "sfx/ambiance/painting.ogg" fadein 0.1
-scene bg colorado town HD sketch
+scene bg colorado town hd sketch
 $camera_move(1800,-5000,200,0,0,'dissolve')
 with inkfade
-scene bg colorado town HD
+scene bg colorado town hd
 $camera_move(1800,-5000,200,0,0,'dissolve')
 with inkfade2
 stop sound fadeout 0.1
@@ -102,7 +102,7 @@ letterbox "My eyes slowly scan around as I slowly make my way down the front gar
 letterbox "I guess being outside the city would make bigger houses a little more affordable."
 
 stop loopsfx
-scene bg colorado house ext HD
+scene bg colorado house ext hd
 $camera_move(-8000,-2500,500,0,0,'dissolve')
 with fadeInOut
 window show dissolve
@@ -219,7 +219,7 @@ eileen "Welcome to the family."
 $ renpy.music.set_volume(0.85)
 scene black with circlewipe
 play music "music/eileen_5_m.ogg" fadein 3.5
-scene cg act3 familydinner 1 HD
+scene cg act3 familydinner 1hd
 $camera_move(600,5200,380,-2,0,'dissolve')
 with circlewipe
 "The smell of freshly-cooked chicken wafts in the air, the skin still steaming away with an appetizing glint. The line of plates down the center of the table hardly lacks for sides, either, with potato salad, coleslaw, lettuce, and other greens."
@@ -402,7 +402,7 @@ scene black with longDissolve
 $ renpy.sound.set_volume(0.4, channel='ambiance')
 play ambiance "sfx/ambiance/fire.ogg" fadein 2.0
 play music "music/dozy_comfy.ogg" fadein 2.0
-scene bg colorado house livingroom night HD
+scene bg colorado house livingroom night hd
 $camera_move(-4000,-2000,-400,0,0,'dissolve')
 with longDissolve
 "I can already feel my eyelids getting heavy as I lean back into the wonderfully soft couch, the exhaustion of the trip and meeting with Eileen's folks finally catching up to me as I rest in the living room."

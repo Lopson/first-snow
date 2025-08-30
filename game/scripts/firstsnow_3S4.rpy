@@ -237,7 +237,7 @@ eileen "The more life experiences you have, the more inspiration you have; hard 
 eileen "You need input to be able to create output. That's how culture works."
 
 $ renpy.sound.set_volume(0.3, channel='ambiance', delay=2.0)
-scene bg colorado hiking1 HD
+scene bg colorado hiking1 hd
 $camera_move(0,-3000,250,0,0,'dissolve')
 with fadeInOut
 "Thinking on her words as I turn and start moving once more, Eileen's voice calls out."
@@ -498,12 +498,10 @@ show bg colorado hiking2 sepia as bg2:
 show shadow:
     alpha 0.2
     ease 8.0 alpha 0.5
-show eileen hiking onhip blurry as eileen2 at center:
+show eileen blur hiking_onhip lookawaynarrow angry as eileen2 at center:
     alpha 0
     ease 8.0 alpha 1
-show eileen hiking_onhip lookawaynarrow angry at center:
-    alpha 1
-    ease 10.0 alpha 0
+show eileen hiking_onhip lookawaynarrow angry at center
 "So this was just stress relief for her. Even now she's not looking at me, probably more busy thinking things over with regards to her family. I open my mouth to try and ask her about it, but I can't work out what to say."
 
 "I'm just here because she feels obligated to invite me. I guess I should have realized she doesn't want me here. She didn't want me here at her home at all."

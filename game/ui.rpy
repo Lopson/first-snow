@@ -881,12 +881,14 @@ screen preferences_voices():
                     for (tag, name, vo, color) in store.voices:
                         python:
                             sample = 'voice/test_' + tag + '.mp3'
-                            event = ExtendableEvent(1.0,
+                            event = ExtendableEvent(
+                                1.0,
                                 start_func=renpy.partial(play_vo_test, tag, sample),
-                                stop_func=renpy.partial(stop_vo_test, tag)
-                            )
-                            voice_adj = ui.adjustment(range=1.0, value=GetCharacterVolume(tag),
-                                changed=renpy.partial(sustain_vo_test, event, tag, 1.0)
+                                stop_func=renpy.partial(stop_vo_test, tag))
+                            voice_adj = ui.adjustment(
+                                range = 1.0,
+                                value=GetCharacterVolume(tag),
+                                changed = renpy.partial(sustain_vo_test, event, tag, 1.0)
                             )
                             topbar = Composite((160, 346),
                                 (0, 0), "ui/preferences/voices/bar_{}.webp".format(tag),
@@ -1346,7 +1348,7 @@ screen extras_scenes():
                         for x in enumerate(act_scenes, 1):
                             # NOTE The variable "scene_label" actually contains the xSy identifier and not the scripting label.
                             $ i, scene_label = x
-                            $ sceneshot = "scripts/sceneshots/" + scene_label + ".webp"
+                            $ sceneshot = "ui/sceneshots/" + scene_label + ".webp"
 
                             if act < cutoff_act or (act == cutoff_act and i < cutoff_scene):
                                 null height 44
@@ -1410,7 +1412,7 @@ screen extras_scenes():
 
         if GameContext.scene_seen(current_label):
             frame:
-                background ("scripts/sceneshots/" + current_label + "_full.webp")
+                background ("ui/sceneshots/" + current_label + "_full.webp")
                 xsize 482
                 ysize 521
 
@@ -2060,7 +2062,7 @@ screen extras_music_player(music_room, needs_unlock=False):
                 if not renpy.music.get_pause(music_room.channel):
                     action [
                         music_room.Stop(),
-                        Delayed(music_room.fadeout, renpy.restart_interaction)
+                        Delayed(music_room.fadeout + 0.01, renpy.restart_interaction)
                     ]
                 else:
                     action [
@@ -2343,6 +2345,70 @@ screen yesno_saveload():
 # HUD elements.
 ########################################################################################
 
+screen cue_overlay():
+    python:
+        for i in reversed(range(len(store._cues))):
+            if store._cues[i].is_active():
+                break
+            store._cues.pop()
+
+    vbox:
+        xalign 1.0
+        spacing 2
+
+        for cue in store._cues:
+            use expression cue.name pass (cue.is_active(), **cue.args)
+
+
+screen cue(active, name, message):
+    fixed:
+        ysize 36
+        if active:
+            text message
+
+
+screen cue_icon(active, which, txt):
+    python:
+        season = get_cue_season()
+        text_color = {
+            'fall':   '#352114',
+            'winter': '#424351'
+        }[season]
+        outline_color = {
+            'fall':   '#f9f8d1',
+            'winter': '#faf6e7'
+        }[season]
+        icon = "ui/hud/cue/icon-{}-{}.webp".format(which, season)
+        bg = Frame("ui/hud/cue/bg-{}.webp".format(season), tile=True, padding=(0, 0), margin=(0, 0))
+
+    frame:
+        background "cue bg"
+        ysize 32
+        xpos 1.0
+        xanchor 1.0
+        margin (0, 0)
+        padding (0, 0)
+
+        if active:
+            hbox:
+                xminimum 200
+
+                add icon
+
+                label txt:
+                    background bg
+                    text_size 20
+                    xminimum 160
+                    ymaximum 32
+                    text_color text_color
+                    text_outlines [(2, outline_color, 0, 0)]
+                    text_yoffset 3
+                    margin (0, 0)
+                    padding (0, 0, 5, 0)
+        else:
+            null width 0
+
+
 # Choice window.
 screen choice(items):
     window:
@@ -2614,31 +2680,26 @@ screen say(what, who):
                 yoffset dialogue_yoffset
                 line_spacing dialogue_spacing
 
-# ugh
-transform phone_anim:
-    on show:
-        yoffset config.screen_height
-        ease 2.0 yoffset 0
-    on hide:
-        ease 2.0 yoffset config.screen_height
 
 screen phone(mode, who=None, time=None, temperature=None):
+    layer "phone"
+    
     python:
         emoji = {
-            '\\o/': __('yay'),
-            ';)': __('wink'),
-            ':>': __('smug'),
-            ':)': __('smile'),
-            '|(': __('sleepy'),
-            ':(': __('sad'),
-            '<3': __('heart'),
-            ':s': __('confused'),
-            'owo': __('blush'),
-            '>:|': __('angry'),
-            ':o': __('surprised'),
+            '\\o/': 'yay',
+            ';)': 'wink',
+            ':>': 'smug',
+            ':)': 'smile',
+            '|(': 'sleepy',
+            ':(': 'sad',
+            '<3': 'heart',
+            ':s': 'confused',
+            'owo': 'blush',
+            '>:|': 'angry',
+            ':o': 'surprised'
         }
 
-    frame at phone_anim:
+    frame:
         background Null()
         xmaximum 580
         ymaximum 631
@@ -2647,7 +2708,7 @@ screen phone(mode, who=None, time=None, temperature=None):
 
         # old save compatibility: phone may not have `waiting` attribute
         if getattr(phone, 'waiting', False):
-            add "vfx/phone/ui-ctc-bg.webp":
+            add "phone ui ctc bg":
                 yalign 1.0
                 yoffset 6
                 xalign 0.5
@@ -2658,15 +2719,15 @@ screen phone(mode, who=None, time=None, temperature=None):
                 yoffset 2
                 xpos 494
 
-        add "vfx/phone/bg.webp":
+        add "phone bg":
             xpos 50
 
         if mode == 'unlock':
-            add "vfx/phone/ui-unlock.webp":
+            add "phone ui unlock":
                 xpos 60
                 ypos 57
         elif mode == 'messages':
-            add "vfx/phone/ui-msg.webp":
+            add "phone ui msg":
                 xpos 66
                 ypos 57
 
@@ -2697,8 +2758,8 @@ screen phone(mode, who=None, time=None, temperature=None):
                                     sw = 'cont'
                             else:
                                 sw = 'fin'
-                            box = 'vfx/phone/ui-msg-box-{}-{}.webp'.format(sn, sw)
-                            ava = 'vfx/phone/ava' + ('-' + who if not to else '') + '.webp'
+                            box = 'phone ui msg box {} {}'.format(sn, sw)
+                            ava = 'phone ava' + (' ' + who if not to else '')
                             avaalign = 1.0 if to else 0.0
                             textoffset = (20, -85) if to else (95, -85)
                             textcolor = "#665f59" if to else "#ebe3d9"
@@ -2709,7 +2770,7 @@ screen phone(mode, who=None, time=None, temperature=None):
                             alpha = 0.8 if to else -0.8
 
                             for txt, img in emoji.items():
-                                message = message.replace(txt, '{image=vfx/phone/emoji/' + img + '.webp}')
+                                message = message.replace(txt, '{image=phone emoji ' + img + '}')
 
                         frame:
                             background None
@@ -2748,25 +2809,25 @@ screen phone(mode, who=None, time=None, temperature=None):
                                     xalign textalign
 
                     $ renpy.run(Scroll('phone_messages', 'vertical increase', 9999999999))
-                    add "vfx/phone/ui-msg-buttons.webp":
+                    add "phone ui msg buttons":
                         xalign 0.5
                         xoffset -10
                         yoffset -14 # + (10 * i)
 
             if len(messages) > 4:
-                add "vfx/phone/ui-msg-fade.webp":
+                add "phone ui msg fade":
                     xpos 75
                     ypos 105
 
         elif mode == 'call-in':
-            add "vfx/phone/ui-call-in.webp":
+            add "phone ui call in":
                 xpos 60
                 ypos 57
 
-        add "vfx/phone/statusbar.webp":
+        add "phone statusbar":
             xpos 67
             ypos 63
-        add "vfx/phone/cracks.webp":
+        add "phone cracks":
             xpos 67
             ypos 58
 

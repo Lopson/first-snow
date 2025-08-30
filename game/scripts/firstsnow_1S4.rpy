@@ -33,8 +33,8 @@ $camera_move(-3400,-1200,800,0,20,'ease')
 "It's only in a far corner of the room that I catch a familiar face, albeit not necessarily a welcome one."
 window hide dissolve
 
-scene bg buildingmisc library HD
-show bg buildingmisc library HD blurred2 as bg2:
+scene bg buildingmisc library hd
+show bg buildingmisc library hd blurred2 as bg2:
     xalign 0.5 yalign 0.5 alpha 0.65
 $camera_move(-1500,-2750,850,0,0,'dissolve')
 show eileen indoors_fists narrow angry at left2:
@@ -347,20 +347,20 @@ $ renpy.transition(dissolve, layer='master')
 window show
 "Hearing my phone vibrating on the table, I quickly pick it up to see who's messaged me. I quickly force myself to keep a poker face as the name comes into view."
 
-show eileen indoors_onhip normal neutral blur as eileen2 at offcenterleft:
+show eileen blur indoors_onhip normal neutral as eileen2 at offcenterleft:
     zoom 1.5 yoffset 500 alpha 0
     xzoom -1 xpos 0.45
     ease 1.0 alpha 1
 $ phone.message('caprice', '12:27 PM', 'hey!!!! wanna grab somethin at the cafeteria???')
-$ phone.show('messages', who='caprice')
+show screen phone (mode='messages', who='caprice') with phone_transiton
 
 "She must have given up on art out of loneliness if Eileen's avoiding her and I'm here. I'm not terribly hungry, but I should probably get at least a sandwich or something from the cafeteria before classes begin."
 
-show eileen indoors_onhip normal neutral blur as eileen2 at offcenterleft:
+show eileen blur indoors_onhip normal neutral as eileen2 at offcenterleft:
     zoom 1.5 yoffset 500 alpha 1
     xzoom -1 xpos 0.45
     ease 1.0 alpha 0
-$ phone.hide()
+hide screen phone with phone_transiton
 window hide
 "Quickly typing in an agreement to meet there, I lock the phone once more."
 voice "Allison_Hey2.ogg"
@@ -420,7 +420,7 @@ scene bg buildingunion cafeteria counter with longDissolve
 "The cafeteria's little less full than the library, the stocks of food behind the counter already running low on all the usual student favorites. With the line for food moving quickly, I manage to grab the last set of sandwiches and move on."
 window hide dissolve
 
-scene bg buildingunion cafeteria snow HD:
+scene bg buildingunion cafeteria snow hd:
     xalign 0.5 yalign 0.5
 $camera_move(-9800,350,-500,0,0,'dissolve')
 show caprice indoors_behindback even normal neutral at leftedge:

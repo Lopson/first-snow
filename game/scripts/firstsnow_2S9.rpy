@@ -268,7 +268,7 @@ caprice "What did you think I was on my phone for? I called over some friends!"
 
 play music "music/diner_2_m2.ogg" fadein 5.5
 play sound "sfx/door_open2.ogg"
-scene bg aptallison livingroom HD
+scene bg aptallison livingroom hd
 $camera_move(-5000,-1650,-250,0,0,'dissolve')
 show millie outdoors_neutral raised normal frown at leftedge:
     zoom 0.85 yoffset -250
@@ -506,7 +506,7 @@ $ renpy.transition(dissolve, layer='master')
 
 allison "Make yourselves at home..."
 
-scene bg aptallison livingroom HD
+scene bg aptallison livingroom hd
 $camera_move(4500,-1000,-650,0,0,'dissolve')
 show wallace indoors neutral open even at leftedge:
     zoom 1.05 yoffset -80
@@ -606,10 +606,16 @@ millie "Always up for a challenge."
 
 show bg aptallison livingroom blurred2:
     xalign 1.0 yalign 1.0
-show eileen indoors_onhip neutral lookaway blur at offcenterleft:
+show eileen indoors_onhip neutral lookaway at offcenterleft:
     zoom 0.6 yoffset -350
     xzoom -1 xpos 0.4
-show millie indoors_tented smile closedhappy raised blur at centerright:
+show eileen blur indoors_onhip neutral lookaway at offcenterleft:
+    zoom 0.6 yoffset -350
+    xzoom -1 xpos 0.4
+show millie indoors_tented smile closedhappy raised at centerright:
+    zoom 0.6 yoffset -350
+    xpos 0.62
+show millie blur indoors_tented smile closedhappy raised at centerright:
     zoom 0.6 yoffset -350
     xpos 0.62
 $ renpy.transition(dissolve, layer='master')
@@ -655,9 +661,11 @@ voice "Wallace_No2.ogg"
 wallace "No."
 
 show bg aptallison livingroom
+hide eileen blur
 show eileen indoors_onhip normal angry behind wallace at offcenterleft as eileen2:
     zoom 0.6 yoffset -350
     xzoom -1 xpos 0.4
+hide millie blur
 show millie indoors_tented smile half even at centerright as millie2:
     zoom 0.6 yoffset -350
     xpos 0.62

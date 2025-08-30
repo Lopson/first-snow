@@ -34,16 +34,28 @@ define thelongestDissolve = Dissolve(7.0, old_widget=None, new_widget=None, alph
 define thefinalDissolve = Dissolve(20.0, old_widget=None, new_widget=None, alpha=True)
 define fadeInOut = Fade(1.0, 0, 1.0)
 define menuFade = Fade(2,0,1, color="#f0f0f0")
-define inkfade = ImageDissolve(Tile("vfx/inkfade.webp"), 2.8, 15)
-define inkfade2 = ImageDissolve(Tile("vfx/inkfade.webp"), 2.2, 15)
+define inkfade = ImageDissolve(Tile("images/vfx/inkfade.webp"), 2.8, 15)
+define inkfade2 = ImageDissolve(Tile("images/vfx/inkfade.webp"), 2.2, 15)
 define flash = Fade(0.6, 0.0, 1.0, color="#fff")
-define circlewipe = ImageDissolve("vfx/circlewipe.webp", 2.0, 8)
-define eye_open = ImageDissolve("vfx/eye.webp", .8, ramplen=128, reverse=False, time_warp=eyewarp)
-define eye_shut = ImageDissolve("vfx/eye.webp", .8, ramplen=128, reverse=True, time_warp=eyewarp)
+define circlewipe = ImageDissolve("images/vfx/circlewipe.webp", 2.0, 8)
+define eye_open = ImageDissolve("images/vfx/eye.webp", .8, ramplen=128, reverse=False, time_warp=eyewarp)
+define eye_shut = ImageDissolve("images/vfx/eye.webp", .8, ramplen=128, reverse=True, time_warp=eyewarp)
+
+transform phone_anim_enter:
+    yoffset config.screen_height
+    ease 2.0 yoffset 0
+
+transform phone_anim_leave:
+    ease 2.0 yoffset config.screen_height
+
+define phone_transiton = MoveTransition(
+    delay=2.0, enter=phone_anim_enter, leave=phone_anim_leave,
+    layers=['phone'])
 
 
 # Sprite position definitions
 init -2 python:
+    # TODO Convert these to transforms.
     leftoffscreen = Position(xpos=0.0,xanchor=1.0,ypos=1.0,yanchor=1.0)
     leftedge = Position(xpos=0.05,xanchor=0.5,ypos=1.0,yanchor=1.0)
     leftside = Position(xpos=0.15,xanchor=0.5,ypos=1.0,yanchor=1.0)
@@ -227,28 +239,26 @@ transform nod2_repeat:
     ease 0.2 xoffset 0
     repeat
 
+transform box_blur(size, separation):
+    shader "shaders.box_blur"
+    mesh True
+
+    u_size int(size)
+    u_separation float(separation)
+
+transform kawase_blur(lod_bias, iteration):
+    shader "shaders.kawase_blur"
+    mesh True
+
+    u_lod_bias float(lod_bias)
+    u_iteration float(iteration)
+
+transform modern_renpy_blur(amount):
+    box_blur(size=3, separation=0)
+    kawase_blur(lod_bias=float(amount) + 1.5, iteration=0)
+
 
 image snow light starting = LightSnow(prefill=False)
 image snow light = LightSnow(prefill=True)
 image snow light switch = LightSnow(prefill=True)
 image snow sepia = LightSnowSepia(prefill=True)
-
-# Image effects
-init python:
-    def vblur(name: str, img):
-        """
-        Returns a displayable with the blur effect applied to it.
-
-        @param name: The name of the displayable that's to be manipulated. This
-        is here so that we can specifically apply a different blur value to
-        Eileen's sprites.
-        @param img: The displayable that we want blurred.
-        @return: A blurred displayable.
-        """
-        
-        # fixes the scary eyes
-        if name.startswith('eileen'):
-            radius = 2.2
-        else:
-            radius = 5.0
-        return im.Blur(img, radius)

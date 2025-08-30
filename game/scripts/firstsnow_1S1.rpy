@@ -42,16 +42,14 @@ window show dissolve
 
 $ phone.message('caprice', '8:17 AM', "BIG NEWS allie!!! :):):)\\o/\\o/\\o/")
 $ phone.message('caprice', '8:17 AM', "tell you later in bio!!!!!! ;)\\o/\\o/<3<3")
-$ phone.show('messages', who='caprice')
-show bg aptallison livingroom blurred2:
+show bg aptallison livingroom blurred2 with dissolve:
     xalign 0.5 yalign 0.5
-$ renpy.transition(dissolve, layer='master')
-"The idea of big news at this of all times fills me with worry; I'm already too busy just trying to keep up with my new life."
+show screen phone (mode='messages', who='caprice')
+"The idea of big news at this of all times fills me with worry; I'm already too busy just trying to keep up with my new life." with phone_transiton
 
-$ phone.hide()
+hide screen phone with phone_transiton
 show bg aptallison livingroom
-$ renpy.transition(dissolve, layer='master')
-"With time marching on, I quickly slip the phone back into my coat and set off for the stairs. I shouldn't have a problem making it to class if I keep a good pace."
+"With time marching on, I quickly slip the phone back into my coat and set off for the stairs. I shouldn't have a problem making it to class if I keep a good pace." with dissolve
 
 window hide dissolve
 scene black with dissolve
@@ -630,7 +628,7 @@ show bg buildingart art dusk siren blurred1:
     xalign 0.5 yalign 0.5
 $camera_move(-200,820,650,0,0,'dissolve')
 with dissolve
-show misc cutins siren:
+show cutin siren:
     subpixel True
     zoom 0.75
     xalign 0.5 yoffset -250
@@ -958,13 +956,13 @@ window show dissolve
 show bg aptallison livingroom blurred2:
     xalign 0.5 yalign 0.5
 $ renpy.transition(dissolve, layer='master')
-$ phone.show('unlock')
+show screen phone (mode='unlock') with phone_transiton
 "Plucking my phone from my pocket after dropping my bag on the cushion beside me, I take quick note of the time. I guess Rose got stuck in traffic."
 stop sound fadeout 1.0
 
 show bg aptallison livingroom
 $ renpy.transition(dissolve, layer='master')
-$ phone.hide()
+hide screen phone with phone_transiton
 "An annoying train of thought starts up once again as I put it away. One that's crept up on me occasionally ever since moving out, just waiting for when nothing's around to distract me."
 
 "I can cope with the schoolwork easily enough; it's mostly just review right now. People like Caprice might be a handful, but they do liven up the day's routine. It's a fair distance to campus from here, but the walk helps keep me fit."
@@ -982,7 +980,7 @@ $camera_move(0,0,0,0,5,'ease')
 show bg aptallison livingroom blurred2:
     xalign 0.5 yalign 0.5
 $ renpy.transition(dissolve, layer='master')
-$ phone.show('unlock')
+show screen phone (mode='unlock') with phone_transiton
 "My fingers roll over the screen in thought as it brings up the lock screen, mindlessly tracing out the cracks in the bottom corner. I could easily call them right now; my mom and dad both made it clear I could ring any time at all."
 
 "But as I stare at the screen, a deep apathy strikes me. Before college, I'd thought that with my family and old friends just a phone call away, nothing would feel all that different."
@@ -992,7 +990,7 @@ $ phone.show('unlock')
 show bg aptallison livingroom:
     xalign 0.5 yalign 0.5
 $ renpy.transition(dissolve, layer='master')
-$ phone.hide()
+hide screen phone with phone_transiton
 $ camera_move(1550,-200,650,0,4,'ease')
 
 "Admitting defeat, the phone ends up on the couch beside me as I watch television. The news is interesting today, so at least it's some distraction from all this."
