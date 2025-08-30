@@ -540,9 +540,9 @@ window show
 "A loud ping comes from beside me, my hand automatically reaching for the phone sitting on the couch in response. Probably Rose saying she'll be late, dooming me to microwave noodles for dinner again."
 
 $ phone.message('eileen', '8:27 PM', 'Is this Allison?')
-show screen phone (mode='messages', who='eileen') with phone_transiton
+show screen phone (mode='messages', who='eileen')
 show bg aptallison livingroom blurred2
-$ renpy.transition(fastDissolve, layer='master')
+with {'master': fastDissolve, 'phone': phonemovein}
 stop sound fadeout 1.0
 "...Or perhaps not. I don't recognize the number or user avatar at all."
 
@@ -626,11 +626,11 @@ window show
 voice "Rose_UhHuh3.ogg"
 rose "I see..."
 
-hide screen phone with phone_transiton
+hide screen phone
 show bg aptallison livingroom
 show rose outdoors_smokingmouth smile halfclosed at right2 as rose2:
     xpos 0.75 alpha 1
-$ renpy.transition(fastDissolve, layer='master')
+with {'master': fastDissolve, 'phone': phonemoveout}
 hide rose3
 with vpunch
 window hide
@@ -650,8 +650,8 @@ show rose outdoors_smokingmouth halfclosed laugh at right2 as rose2:
 "I let out a long breath to steady myself as my heart slowly returns to its normal pace. Rose just grins churlishly as she walks off to hang up her coat."
 
 show bg aptallison livingroom blurred2
-$ renpy.transition(fastDissolve, layer='master')
-show screen phone (mode='messages', who='eileen') with phone_transiton
+show screen phone (mode='messages', who='eileen')
+with {'master': fastDissolve, 'phone': phonemovein}
 pause 1.0
 hide rose2
 hide rose
@@ -663,12 +663,13 @@ $ phone.wait()
 $ phone.message('eileen', '8:55 PM', 'See you.')
 $ phone.wait()
 
-show screen phone (mode='unlock') with dissolve
+show screen phone (mode='unlock')
+with {'phone': dissolve}
 $ renpy.pause(1.0, hard=True)
 window show
-hide screen phone with phone_transiton
+hide screen phone
 show bg aptallison livingroom
-$ renpy.transition(dissolve, layer='master')
+with {'master': dissolve, 'phone': phonemoveout}
 
 "With that, I tap the side button to lock the phone once more, putting it on the counter beside me."
 

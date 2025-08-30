@@ -171,24 +171,24 @@ show bg downtown city blurred3 behind rose, allison as bg2:
     xalign 1.0 yalign 0.5 alpha 0
     ease 1.0 alpha 0.9
 show rose blur outdoors_handonhip halfclosed puzzled at right2 as rose2
-$ renpy.transition(dissolve, layer='master')
-show screen phone (mode='unlock') with phone_transiton
+show screen phone (mode='unlock')
+with {'master': dissolve, 'phone': phonemovein}
 "A little sheepish, I take my phone from my pocket to check what the message is."
 
 $ phone.clear('eileen')
 $ phone.message('eileen', '2:26 PM', 'Behind you.')
 pause 0.5
-show screen phone (mode='messages', who='eileen') with dissolve
-$ renpy.transition(smoothDissolve, layer='master')
+show screen phone (mode='messages', who='eileen')
+with {'master': smoothDissolve, 'phone': dissolve}
 $ renpy.pause()
 
 window show
-hide screen phone with phone_transiton
+hide screen phone
 window hide
 stop sound fadeout 1.0
 hide bg2
 hide rose2
-$ renpy.transition(dissolve, layer='master')
+with {'master': dissolve, 'phone': phonemoveout}
 "Confused, I stop walking and turn about."
 play music "music/anxiety_2_m.ogg" fadein 5.0
 $camera_move(-4050,-1500,750,0,5,'ease')
