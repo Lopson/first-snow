@@ -25,20 +25,6 @@ class Phone:
         self.messages[who] = []
         restart_interaction()
 
-    def show(self, mode: str, **kwargs) -> None:
-        # TODO No longer necessary, remove when possible, see 2S1
-        if not isinstance(mode, str) or mode not in ["unlock", "messages", "call-in"]:
-            raise ValueError
-        
-        show_screen('phone', mode=mode, **kwargs)
-        if showing('phone', layer='screens'):
-            transition(dissolve, layer='screens') # pyright: ignore[reportUndefinedVariable]
-
-    def hide(self) -> None:
-        # TODO No longer necessary, remove when possible
-        if not in_rollback():
-            hide_screen('phone')
-
     def wait(self) -> None:
         self.waiting = True
         pause()
