@@ -2586,7 +2586,7 @@ screen say(what, who):
 
                 sprite = context.scene_lists.get_displayable_by_tag('master', sprite_tag)
                 attributes = context.images.get_attributes('master', sprite_tag)
-                phone = context.scene_lists.get_displayable_by_tag('screens', 'phone')
+                phone = context.scene_lists.get_displayable_by_tag('phone', 'phone')
 
                 if tb_base + tag + '.webp' in renpy.list_files():
                     tb = tb_base + tag + '.webp'
