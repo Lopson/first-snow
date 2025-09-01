@@ -2120,7 +2120,7 @@ screen saveload(save):
                     $ extra = renpy.slot_json(name)
                     $ outdated = extra.get('patch_version', 1) < config.patch_version
                     $ ttitle = GameContext.get_scene_title(extra['scene'])
-                    $ ttime = int(extra['_game_runtime']) // 60
+                    $ ttime = int(extra['_game_runtime'] if not outdated else extra['playtime']) // 60
                     frame:
                         background "ui/saveload/slot.webp"
                         xysize (654, 125)
