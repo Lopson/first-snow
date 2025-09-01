@@ -158,7 +158,10 @@ init 2 python:
             image_name + ' blurred{}'.format(int(amount)),
             At(
                 im.Blur(get_base_image(image_name), amount),
-                Transform(xalign=0.5, yalign=0.5)
+                # Transform(xalign=0.5, yalign=0.5) # NOTE disabled because
+                # the original scripting isn't expecting this transform as
+                # the original code base didn't apply it to blurred images
+                # for some reason (possibly an oversight).
             )
         )
 
