@@ -126,12 +126,10 @@ class GameContext(NoRollback):
     @staticmethod
     def store_scene(info: SaveFileInfo) -> None:
         """
-        Adds the current scene and total game runtime to the save file.
+        Adds the current scene to the save file.
         """
         
         info['scene'] = store.current_scene
-        # TODO Do we even need this? This is already stored in "_game_runtime".
-        info['playtime'] = get_game_runtime()
     
     @staticmethod
     def store_patch_version(info: SaveFileInfo) -> None:
