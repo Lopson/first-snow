@@ -2545,13 +2545,18 @@ screen multiple_say(what, who, multiple):
                     ypos 100
 
 
+transform rotate_who_label:
+    rotate 4
+    rotate_pad True
+    transform_anchor True
+
 # The saybox.
 screen say(what, who):
     python:
         bg = None
-        tb = Null()
-        bg_base = 'ui/textbar/' + get_ui_season() + '/'
-        tb_base = 'ui/textbar/names/' + GameContext.get_language() + '/'
+        tb: str = ""
+        tb_properties: dict[str, str] = {'color': '#ffffff'}
+        bg_base: str = 'ui/textbar/' + get_ui_season() + '/'
 
         vinfo = store._get_voice_info()
         speaking = speaking_flavour = False
@@ -2575,11 +2580,12 @@ screen say(what, who):
                 else:
                     speaking_flavour = True
 
-            who = who.split('{', 1)[0]
+            if sprite_tag in characters:
+                tb = characters[sprite_tag].name
+                tb_properties = characters[sprite_tag].properties
 
             if bg_base + who.lower() + '.webp' in renpy.list_files():
                 bg = bg_base + who.lower() + '.webp'
-                tb = tb_base + who.lower() + '.webp'
             else:
                 # Don't ask. Just don't.
                 context = renpy.game.context()
@@ -2587,9 +2593,6 @@ screen say(what, who):
                 sprite = context.scene_lists.get_displayable_by_tag('master', sprite_tag)
                 attributes = context.images.get_attributes('master', sprite_tag)
                 phone = context.scene_lists.get_displayable_by_tag('phone', 'phone')
-
-                if tb_base + tag + '.webp' in renpy.list_files():
-                    tb = tb_base + tag + '.webp'
 
                 if sprite is not None:
                     pos = renpy.get_placement(sprite)
@@ -2647,21 +2650,32 @@ screen say(what, who):
 
     window id "window":
         background bg
-        yoffset 456
+        # yoffset 456
+        xalign 0.5
+        yalign 1.0
+        xsize 1280
+        ysize 264
+        padding (0, 0, 0, 0)
 
-        frame:
+        frame at rotate_who_label:
             background Null()
-            add tb:
-                xpos 143
-                ypos 28
-            if speaking:
-                add "ui/textbar/voice.webp":
-                    xpos (160 + 11 * len(who))
-                    ypos 0
-            elif speaking_flavour:
-                add "ui/textbar/voice-flavour.webp":
-                    xpos (160 + 11 * len(who))
-                    ypos 0
+            xpos 0.127
+            ypos 0.135
+            anchor (0.0, 0.0)
+            padding (0, 0, 0, 0)
+
+            hbox:
+                spacing 2.5
+                label tb:
+                    text_color tb_properties['color']
+                    text_outlines [(2, '#292d34', 0, 0)]
+                    text_size 30
+                if speaking:
+                    add "ui/textbar/voice.webp":
+                        yoffset -35
+                elif speaking_flavour:
+                    add "ui/textbar/voice-flavour.webp":
+                        yoffset -35
 
         frame:
             background Null()
@@ -2869,7 +2883,6 @@ screen text_log():
                     for entry in _history_list:
                         python:
                             who: str = entry.who or ''
-                            print(entry.who)
 
                             for char in characters:
                                 if (renpy.filter_text_tags(
