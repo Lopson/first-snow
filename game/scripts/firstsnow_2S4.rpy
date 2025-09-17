@@ -683,7 +683,7 @@ allison "Why?"
 show eileen outdoors_crossed lookawaynarrow open at center:
     zoom 1.2 ypos 1.28 xpos 0.52
 $ renpy.transition(dissolve, layer='master')
-voice "scene_2S4_en_1ea54d8d.ogg"
+voice "scene_2S4_1ea54d8d.ogg"
 eileen "To be honest, I had you pegged as some spoiled little delicate flower when I first met you. You know, the kind who coasts along on their parent's attention, before the real world punches them in the face."
 
 show eileen normal at center:
@@ -829,7 +829,7 @@ rose "Believe me, I'm not in any position to call someone weird."
 show cg act2 balconychat talk 2 with midDissolve
 allison "Yeah."
 
-voice "scene_2S4_en_62fc89aa.ogg"
+voice "scene_2S4_62fc89aa.ogg"
 rose "Hey, that's not what you're supposed to say!"
 
 $ renpy.transition(hpunch, layer='master')
@@ -887,7 +887,7 @@ show cg act2 balconychat talk 3 with midDissolve
 
 "I'm glad I have Rose here for me. In many ways, I feel like we can't relate to each other, but we can still have this kind of conversation and understand each other. We're just two girls, talking about love."
 
-voice "scene_2S4_en_f3f2d29e.ogg"
+voice "scene_2S4_f3f2d29e.ogg"
 rose "You're a good girl, Allison. I promise that whatever happens, you can call on me. Okay?"
 
 allison "Thanks."
