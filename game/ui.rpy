@@ -1150,7 +1150,7 @@ screen preferences_accessibility():
             selected_xpos 724
             action ToggleField(game.preferences, 'self_voicing')
 
-        add "ui/preferences/icons/fullscreen.webp":
+        add "ui/preferences/icons/mono.webp":
             xpos 45
             ypos 425
 
