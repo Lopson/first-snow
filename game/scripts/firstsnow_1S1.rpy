@@ -275,7 +275,7 @@ $camera_move(0,0,300,0,5,'ease')
 "With that, I consider the matter settled as I nod and begin to walk away. Only as I leave, do I realise my heart's racing after having to deal with her."
 
 $camera_move(500,0,300,0,3,'ease')
-voice "scene_1S1_en_2f4de9bd.ogg"
+voice "scene_1S1_2f4de9bd.ogg"
 play sound "sfx/door_open.ogg"
 show eileen normal open at left2:
     xzoom 1 xpos 0.25

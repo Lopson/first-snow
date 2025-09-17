@@ -550,7 +550,7 @@ show wallace even closed neutral at center:
 $ renpy.transition(dissolve, layer='master')
 "Wallace simply shrugs."
 
-voice "scene_1S3_en_fb73c78a.ogg"
+voice "scene_1S3_fb73c78a.ogg"
 wallace "Not the first time clubs have been pushy about scouting members. I was actually thinking the whole thing might be good for Eileen; her single-mindedness is her best and worst trait, really."
 
 show wallace upturned neutral at center:
