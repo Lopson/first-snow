@@ -1091,7 +1091,7 @@ screen preferences_accessibility():
             xpos 45
             ypos 320
 
-        text __("Music Cues"):
+        text __("Music cues"):
             color "#faf6e7"
             size 24
             xpos 85
@@ -1112,7 +1112,7 @@ screen preferences_accessibility():
             xpos 45
             ypos 355
 
-        text __("Sound Cues"):
+        text __("Sound cues"):
             color "#faf6e7"
             size 24
             xpos 85
@@ -1150,23 +1150,44 @@ screen preferences_accessibility():
             selected_xpos 724
             action ToggleField(game.preferences, 'self_voicing')
 
-        add "ui/preferences/divider.webp":
-            xpos 40
-            ypos 431
-
-        add "ui/preferences/icons/theme.webp":
+        add "ui/preferences/icons/fullscreen.webp":
             xpos 45
-            ypos 444
+            ypos 425
 
-        text __("Cues Theme"):
+        text __("Monaural sound"):
             color "#faf6e7"
             size 24
             xpos 85
-            ypos 444
+            ypos 425
+        
+        imagebutton:
+            idle "ui/preferences/checkbox.webp"
+            hover "ui/preferences/checkbox-hover.webp"
+            selected_idle "ui/preferences/checkbox-checked.webp"
+            selected_hover "ui/preferences/checkbox-checked-hover.webp"
+            xpos 725
+            ypos 421
+            hover_xpos 724
+            selected_xpos 724
+            action Preference("mono audio", "toggle")
+
+        add "ui/preferences/divider.webp":
+            xpos 40
+            ypos 466
+
+        add "ui/preferences/icons/theme.webp":
+            xpos 45
+            ypos 479
+
+        text __("Cues theme"):
+            color "#faf6e7"
+            size 24
+            xpos 85
+            ypos 479
 
         textbutton __("Story"):
             xpos 527
-            ypos 442
+            ypos 477
             text_size 24
             left_padding 3
             background Null()
@@ -1183,7 +1204,7 @@ screen preferences_accessibility():
 
         textbutton __("Fall"):
             xpos 617
-            ypos 442
+            ypos 477
             text_size 24
             left_padding 3
             background Null()
@@ -1200,7 +1221,7 @@ screen preferences_accessibility():
 
         textbutton __("Winter"):
             xpos 675
-            ypos 438
+            ypos 477
             text_size 24
             left_padding 3
             top_padding 4
