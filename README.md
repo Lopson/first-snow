@@ -11,6 +11,11 @@ This is a fork of the original source code of First Snow. The purpose of this fo
 
 To achieve this dual purpose, a significant chunk of the code base has been modified. By code base, I mean internal game logic as well as some modifications to the presentation logic of the gameplay scripts. Many of the artistic resources have also been reorganized or removed. Finally, all of the installer logic has been removed as that's outside of the scope of this fork.
 
+## Compliance
+
+* This fork is a derivative work of First Snow.
+* This is not an official release of First Snow by Salty Salty Studios.
+
 ## Requirements
 
 * A PC running either:
