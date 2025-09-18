@@ -16,6 +16,8 @@ To achieve this dual purpose, a significant chunk of the code base has been modi
 * This fork is a derivative work of First Snow.
 * This is not an official release of First Snow by Salty Salty Studios.
 
+I've done my best to comply with the license laid out in the original code base. If you think I've handled this part incorrectly, please open an Issue in this repository and I'll do my best to address it promptly.
+
 ## Requirements
 
 * A PC running either:
