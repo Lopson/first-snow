@@ -7,9 +7,11 @@ init -1 python hide:
 
     # What not to pack.
     build.classify('README.md', None)
-    build.classify('errors.txt', None)
-    build.classify('log.txt', None)
-    build.classify('traceback.txt', None)
+    build.classify('**/errors.txt', None)
+    build.classify('**/log.txt', None)
+    build.classify('**/traceback.txt', None)
+    build.classify('**/lint.txt', None)
+    build.classify('**/files.txt', None)
     build.classify('**-e', None)
     build.classify('**~', None)
     build.classify('**.bak', None)
@@ -20,8 +22,11 @@ init -1 python hide:
     build.classify('**.rpy', None)
     build.classify('game/build.rpyc', None)  # VIRTUAL SELF
     build.classify('game/saves/**', None)
-    build.classify('patches/**', None)
-    build.classify('installer/**', None)
+    build.classify('game/cache', None)
+    build.classify('game/secret-unlock.marker', None)
+    build.classify('VoiceLineUpdater.ps1', None)
+    build.classify('sourcecode.png', None)
+    build.classify('project.json', None)
 
     # Need this outside the archives.
     build.classify('game/presplash.png', 'all')
