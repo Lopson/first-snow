@@ -325,7 +325,6 @@ define cg_art = [
 define guest_art = [
     GalleryItem(
         author='Szmitten',
-        url='https://x.com/szmitten',
         file=['cg guest szmitten'],
         thumb=['cg guest szmitten thumb'],
         native=['cg guest szmitten native']
@@ -340,7 +339,6 @@ define guest_art = [
 
     GalleryItem(
         author='adirosa',
-        url='https://x.com/adirosette',
         file=['cg guest adirosa'],
         thumb=['cg guest adirosa thumb'],
         native=['cg guest adirosa native']
@@ -355,7 +353,6 @@ define guest_art = [
     
     GalleryItem(
         author='VCR',
-        url='https://x.com/Hachisame',
         file=['cg guest vcr'],
         thumb=['cg guest vcr thumb'],
         native=['cg guest vcr native']
@@ -363,7 +360,6 @@ define guest_art = [
     
     GalleryItem(
         author='rtil',
-        url='https://x.com/rtil',
         file=['cg guest rtil'],
         thumb=['cg guest rtil thumb'],
         native=['cg guest rtil native']
@@ -371,15 +367,13 @@ define guest_art = [
     
     GalleryItem(
         author='umujacha',
-        url='https://x.com/umujacha',
         file=['cg guest umujacha'],
         thumb=['cg guest umujacha thumb'],
         native=['cg guest umujacha native']
     ),
 
     GalleryItem(
-        author='minute',
-        url='https://x.com/theominute',
+        author='Theo',
         file=['cg guest minute'],
         thumb=['cg guest minute thumb'],
         native=['cg guest minute native']
@@ -387,7 +381,6 @@ define guest_art = [
     
     GalleryItem(
         author='TopHat',
-        url='https://x.com/ToppeHatte',
         file=['cg guest tophat'],
         thumb=['cg guest tophat thumb'],
         native=['cg guest tophat native']
@@ -395,7 +388,6 @@ define guest_art = [
 
     GalleryItem(
         author='AcoTan',
-        url='https://x.com/AcoTan2194',
         file=['cg guest acotan'],
         thumb=['cg guest acotan thumb'],
         native=['cg guest acotan native']
@@ -403,7 +395,6 @@ define guest_art = [
 
     GalleryItem(
         author='Skrats',
-        url='https://x.com/Skratsu',
         file=['cg guest skrats'],
         thumb=['cg guest skrats thumb'],
         native=['cg guest skrats native']
@@ -423,8 +414,7 @@ define guest_art = [
     ),
 
     GalleryItem(
-        author='Chiru',
-        url='https://x.com/guy_kun',
+        author='Guy',
         file=['cg guest chiru'],
         thumb=['cg guest chiru thumb'],
         native=['cg guest chiru native']
@@ -439,15 +429,13 @@ define guest_art = [
 
     GalleryItem(
         author='Anna',
-        url='https://x.com/ripandtir',
         file=['cg guest anna'],
         thumb=['cg guest anna thumb'],
         native=['cg guest anna native']
     ),
 
     GalleryItem(
-        author='Cura & tentakl',
-        url='https://x.com/cura_chan',
+        author='Cura Sylfaen & tentakl',
         file=['cg guest cura tentakl'],
         thumb=['cg guest cura tentakl thumb'],
         native=['cg guest cura tentakl native']
@@ -455,7 +443,6 @@ define guest_art = [
 
     GalleryItem(
         author='All-Maker',
-        url='https://x.com/AllMaker',
         file=['cg guest all-maker'],
         thumb=['cg guest all-maker thumb'],
         native=['cg guest all-maker native']
