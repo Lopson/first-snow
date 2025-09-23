@@ -49,6 +49,8 @@ Another important aspect is the way DLC graphical assets are loaded. In `game/de
 
 Please keep in mind this fork's scope before contributing new code! It should focus on increasing this code base's overall longevity. New features should stick to accessibility.
 
+In order for overall typing and autocompletion information to work on Python in Ren'Py files, be sure to set the path of the environment variable `PYTHONPATH` to that of the root of the Ren'Py SDK. It's recommended that you set this via the included `.env` file.
+
 ## Building distributions
 
 The original repository of this game contained code to enable people to build the game and easily redistribute it. More specifically, it had code to build Windows and macOS installers, as well as Linux packages. All of this has been removed in this fork as it's outside the scope. Having said that, don't forget that Ren'Py's SDK can build distributables of games out-of-the-box!
